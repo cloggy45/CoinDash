@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "../components/App";
+import Graph from "../components/Graph";
 
-describe("App", () => {
+describe("Graph", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Graph />, div);
   });
 });

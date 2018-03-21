@@ -7,6 +7,8 @@
   "main": "src/index.js",
   "dependencies": {
     "ccxt": "1.11.148",
+    "d3": "4.13.0",
+    "enzyme": "3.3.0",
     "jest": "22.4.2",
     "react": "16.2.0",
     "react-dom": "16.2.0",

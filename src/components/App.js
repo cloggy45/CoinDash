@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import ccxt from "ccxt";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -11,6 +12,6 @@ export default class App extends Component {
     super(props);
   }
   render() {
-    return <h1>App</h1>;
+    return <h1>Code:Dash</h1>;
   }
 }
