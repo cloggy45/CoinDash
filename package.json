@@ -6,13 +6,17 @@
   "homepage": "https://codesandbox.io/s/new",
   "main": "src/index.js",
   "dependencies": {
+    "axios": "0.18.0",
+    "axios-mock-adapter": "1.14.1",
     "ccxt": "1.11.148",
     "chart.js": "2.7.2",
     "enzyme": "3.3.0",
     "jest": "22.4.2",
     "react": "16.2.0",
+    "react-chartjs-2": "2.7.0",
     "react-dom": "16.2.0",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "react-test-renderer": "16.2.0"
   },
   "devDependencies": {},
   "scripts": {
