@@ -10,20 +10,14 @@ import Graph from "../components/Graph";
 
 const mock = new MockAdapter(axios);
 
-const setup = (type = "none", data = {}, options = {}) => {
-  const props = {
-    type: type,
-    data: data,
-    options: options
-  };
-
+const setup = (type = "none") => {
   const renderer = createRenderer();
-  renderer.render(<Graph {...props} />);
+  renderer.render(<Graph data={data} />);
 
   let output = renderer.getRenderOutput();
 
   return {
-    props: props,
+    data: data,
     output: output,
     renderer: renderer
   };
@@ -33,9 +27,5 @@ describe("<Graph />", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(<Graph />, div);
-  });
-  it("renders html canvas element", () => {
-    const { output } = setup("line");
-    expect(output.type).toBe("line");
   });
 });

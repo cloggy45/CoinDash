@@ -11,6 +11,7 @@
     "ccxt": "1.11.148",
     "chart.js": "2.7.2",
     "enzyme": "3.3.0",
+    "has-cors": "1.1.0",
     "jest": "22.4.2",
     "react": "16.2.0",
     "react-chartjs-2": "2.7.0",
