@@ -8,10 +8,20 @@ import ccxt from "ccxt";
 import Graph from "./Graph";
 import Input from "./Input";
 import Overview from "./Overview";
+import Select from "./Select";
 
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "center"
+};
+
+const Panel = props => {
+  <article>
+    <header>
+      <h3>{props.label}</h3>
+    </header>
+    <section>{props.content}</section>
+  </article>;
 };
 
 export default class App extends Component {
@@ -25,16 +35,16 @@ export default class App extends Component {
     };
   }
 
-  // getData = async () => {
-  //   try {
-  //     let kraken = new ccxt.kraken();
-  //     kraken.proxy = "https://cors-anywhere.herokuapp.com/";
-  //     console.log(kraken);
-  //     console.log(kraken.id, await kraken.fetchOHLCV('BTC/USD','1m'));
-  //   } catch (error) {
-  //     console.log("Error", error);
-  //   }
-  // };
+  getData = async () => {
+    try {
+      let kraken = new ccxt.kraken();
+      kraken.proxy = "https://cors-anywhere.herokuapp.com/";
+      console.log(kraken);
+      console.log(kraken.id, await kraken.fetchOHLCV("BTC/USD", "1m"));
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
 
   getOverviewData() {
     axios
@@ -54,7 +64,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // this.getData();
+    this.getData();
     this.getOverviewData();
   }
 
@@ -64,13 +74,6 @@ export default class App extends Component {
       <div>
         <h1>Coin:Dash</h1>
         <Overview {...this.state.overview} />
-
-        <label>Exchange</label>
-        <select>
-          <option>Kraken</option>
-          <option>Bitfinex</option>
-          <option>Binance</option>
-        </select>
 
         <label>Currency</label>
         <select>
