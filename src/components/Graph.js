@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Line } from "react-chartjs-2";
+import ErrorBoundary from "./ErrorBoundary";
 
 export default class Graph extends Component {
   constructor(props) {
@@ -9,11 +10,7 @@ export default class Graph extends Component {
   render() {
     let { labels, content } = this.props;
 
-    let dataset = content.map(data => {
-      return data["time"];
-    });
-
-    console.log(dataset);
+    console.log(content);
 
     const data = {
       labels: labels,
@@ -41,6 +38,10 @@ export default class Graph extends Component {
         }
       ]
     };
-    return <Line data={data} />;
+    return (
+      <ErrorBoundary>
+        <Line data={data} />
+      </ErrorBoundary>
+    );
   }
 }
