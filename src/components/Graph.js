@@ -7,13 +7,19 @@ export default class Graph extends Component {
     super(props);
   }
   render() {
-    const { dataset, label } = this.props;
+    let { labels, content } = this.props;
+
+    let dataset = content.map(data => {
+      return data["time"];
+    });
+
+    console.log(dataset);
 
     const data = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: labels,
       datasets: [
         {
-          label: label,
+          label: labels,
           fill: false,
           lineTension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
@@ -31,7 +37,7 @@ export default class Graph extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: []
         }
       ]
     };
