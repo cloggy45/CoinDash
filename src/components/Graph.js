@@ -11,14 +11,39 @@ export default class Graph extends Component {
     let { labels, content } = this.props;
 
     console.log(content);
+    const options = {
+      legend: {
+        fontColor: "#2D8490"
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              fontColor: "#2D8490",
+              beginAtZero: true
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: "#2D8490",
+              fontSize: 14,
+              stepSize: 1,
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    };
 
     const data = {
-      labels: labels,
+      labels: [1, 2, 3, 4, 5, 6],
       datasets: [
         {
-          label: labels,
-          fill: false,
-          lineTension: 0.1,
+          label: "Stuff",
+          fill: true,
+          lineTension: 0.5,
           backgroundColor: "rgba(75,192,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
           borderCapStyle: "butt",
@@ -34,13 +59,13 @@ export default class Graph extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: []
+          data: [1, 20, 6, 4, 2, 10]
         }
       ]
     };
     return (
       <ErrorBoundary>
-        <Line data={data} />
+        <Line data={data} options={options} />
       </ErrorBoundary>
     );
   }

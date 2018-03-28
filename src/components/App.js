@@ -111,16 +111,16 @@ export default class App extends Component {
       border-radius: 5px;
     `;
 
+    const Title = styled.h1`
+      text-align: center;
+      color: #eadf5a;
+    `;
+
     return (
       <div>
-        <h1>Coin:Dash</h1>
+        <Title>Coin:Dash</Title>
         <Overview {...this.state.overview} />
-        <Select
-          label={"Exchanges"}
-          list={["Kraken", "Binance", "cryptopia"]}
-          handleChange={this.handleChange}
-        />
-        <Select label={"Tickers"} list={[]} handleChange={this.handleChange} />
+        <Input placeholder={"Search Currencies..."} />
         <Panel>
           <Header>Volume</Header>
           <Content>
@@ -132,6 +132,10 @@ export default class App extends Component {
           <Content>
             <Graph label={"Volume"} content={this.state.data} />
           </Content>
+        </Panel>
+        <Panel>
+          <Header>Social Media</Header>
+          <Content>Stuff</Content>
         </Panel>
       </div>
     );
