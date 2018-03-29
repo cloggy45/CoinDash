@@ -8,9 +8,10 @@ export default class Graph extends Component {
     super(props);
   }
   render() {
-    let { labels, content } = this.props;
+    let { labels, dataset, label } = this.props;
 
-    console.log(content);
+    console.log(dataset);
+
     const options = {
       legend: {
         fontColor: "#2D8490"
@@ -38,12 +39,12 @@ export default class Graph extends Component {
     };
 
     const data = {
-      labels: [1, 2, 3, 4, 5, 6],
+      labels: labels,
       datasets: [
         {
-          label: "Stuff",
-          fill: true,
-          lineTension: 0.5,
+          label: label,
+          fill: false,
+          lineTension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
           borderCapStyle: "butt",
@@ -59,7 +60,7 @@ export default class Graph extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [1, 20, 6, 4, 2, 10]
+          data: dataset
         }
       ]
     };
