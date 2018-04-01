@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import axios from "axios";
 
 import Graph from "./Graph";
-import Input from "./Input";
 import Overview from "./Overview";
 import Select from "./Select";
-import ErrorBoundary from "./ErrorBoundary";
+import Filter from "./Filter";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -29,39 +28,26 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticker: "",
+      current: "BTC",
+      history: [],
+      tickers: [],
       currency: "USD",
-      data: []
+      overview: []
     };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ exchange: event.target.value });
-    // this.getData(this.state.exchange);
-    console.log("Inside handleChange", this.state.exchange);
-  }
-
-  getHistory(from = "", to = "") {
-    axios
-      .get(
-        `https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG`
-      )
-      .then(response => {
-        const [data] = response;
-        this.setState({ history: data.Data });
-      })
-      .catch(error => {
-        console.log("Failed to get history", error);
-      });
+    this.setState({ current: event.target.value }, () => {
+      console.log("handle", this.state.current);
+    });
   }
 
   getTickers() {
     axios
-      .get(`http://api.coinmarketcap.com/v1/ticker/`)
+      .get(`https://api.coinmarketcap.com/v1/ticker/`)
       .then(response => {
-        console.log(response);
+        this.setState({ tickers: response.data });
       })
       .catch(error => {
         console.log("Failed to get tickers", error);
@@ -76,9 +62,7 @@ export default class App extends Component {
         }`
       )
       .then(response => {
-        let overview = { ...this.state.overview };
-        overview.data = response.data;
-        this.setState({ overview });
+        this.setState({ overview: response.data });
       })
       .catch(error => {
         console.log("Failed to get overview data", error);
@@ -86,11 +70,23 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // this.getOverviewData();
-    // this.getHistory();
+    this.getTickers();
+    this.getOverviewData();
   }
+
+  filterDataset(filter = "", dataset = []) {
+    return dataset.map(datum => {
+      return datum[filter];
+    });
+  }
+
   render() {
     const colorContentPanel = "#265566";
+    const Container = styled.div`
+      input:focus,
+      select:focus,
+      textarea:focus,
+    `;
 
     const Panel = styled.article`
       grid-area: panel-container;
@@ -102,13 +98,10 @@ export default class App extends Component {
     const Header = styled.header`
       background-color: #78c9cf;
       padding: 10px;
-      margin: 0 0 5px 0;
-      border-radius: 5px;
     `;
 
     const Content = styled.section`
       background-color: ${colorContentPanel};
-      border-radius: 5px;
     `;
 
     const Title = styled.h1`
@@ -116,28 +109,59 @@ export default class App extends Component {
       color: #eadf5a;
     `;
 
+    const LightSpan = styled.span`
+      font-weight: 200;
+    `;
+
     return (
-      <div>
-        <Title>Coin:Dash</Title>
+      <Container>
+        <Title>
+          Coin:<LightSpan>Dash</LightSpan>
+        </Title>
         <Overview {...this.state.overview} />
-        <Input placeholder={"Search Currencies..."} />
+        <Select
+          selected={this.state.current}
+          label={"Select Currency"}
+          value={this.state.tickers.map(data => {
+            return data.symbol;
+          })}
+          list={this.state.tickers.map(data => {
+            return data.id;
+          })}
+          handleChange={this.handleChange}
+        />
+        <Filter filters={["Day", "Week", "Month", "Year"]} />
         <Panel>
-          <Header>Volume</Header>
+          <Header>Close Price</Header>
           <Content>
-            <Graph label={"Volume"} content={this.state.data} />
+            <Graph
+              graphType={"line"}
+              label={"Close"}
+              labels={this.filterDataset("time", this.state.history)}
+              dataset={this.filterDataset("close", this.state.history)}
+            />
           </Content>
         </Panel>
         <Panel>
-          <Header>Price Action</Header>
+          <Header>Open Price</Header>
           <Content>
-            <Graph label={"Volume"} content={this.state.data} />
+            <Graph
+              graphType={"bar"}
+              label={"Open"}
+              labels={this.state.history.map(data => {
+                return data.time;
+              })}
+              dataset={this.state.history.map(data => {
+                return data.open;
+              })}
+            />
           </Content>
         </Panel>
         <Panel>
           <Header>Social Media</Header>
           <Content>Stuff</Content>
         </Panel>
-      </div>
+      </Container>
     );
   }
 }

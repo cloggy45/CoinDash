@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { Line } from "react-chartjs-2";
-import ErrorBoundary from "./ErrorBoundary";
+import { Line, Doughnut, Bar } from "react-chartjs-2";
 
 export default class Graph extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    let { labels, content } = this.props;
-
-    console.log(content);
+    let { labels, dataset, label, graphType } = this.props;
     const options = {
       legend: {
         fontColor: "#2D8490"
@@ -38,12 +35,12 @@ export default class Graph extends Component {
     };
 
     const data = {
-      labels: [1, 2, 3, 4, 5, 6],
+      labels: labels,
       datasets: [
         {
-          label: "Stuff",
-          fill: true,
-          lineTension: 0.5,
+          label: label,
+          fill: false,
+          lineTension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
           borderCapStyle: "butt",
@@ -59,14 +56,20 @@ export default class Graph extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [1, 20, 6, 4, 2, 10]
+          data: dataset
         }
       ]
     };
-    return (
-      <ErrorBoundary>
-        <Line data={data} options={options} />
-      </ErrorBoundary>
-    );
+
+    switch (graphType) {
+      case "line":
+        return <Line data={data} options={options} />;
+      case "doughnut":
+        return <Doughnut data={data} options={options} />;
+      case "bar":
+        return <Bar data={data} options={options} />;
+      default:
+        return <h4>No Data Supplied</h4>;
+    }
   }
 }

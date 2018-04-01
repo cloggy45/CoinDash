@@ -3,13 +3,17 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 
 const Select = props => {
-  const { handleChange } = props;
+  const { handleChange, value, selected, label, list } = props;
   return (
     <section>
-      <label>{props.label}</label>
-      <select onChange={handleChange}>
-        {props.list.map((data, index) => {
-          return <option key={index}>{data}</option>;
+      <label>{label}</label>
+      <select value={selected} onChange={handleChange}>
+        {list.map((data, index) => {
+          return (
+            <option value={value[index]} key={data.toString()}>
+              {data}
+            </option>
+          );
         })}
       </select>
     </section>
@@ -18,7 +22,8 @@ const Select = props => {
 
 Select.propTypes = {
   label: PropTypes.string,
-  list: PropTypes.array
+  list: PropTypes.array,
+  selected: PropTypes.string
 };
 
 export default Select;
