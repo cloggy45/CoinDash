@@ -51,16 +51,6 @@ const Overview = props => {
         </tbody>
       </Table>
     </Wrapper>
-    // <section>
-    //   <h4>Total Cryptocurrencies</h4>
-    //   <h3>{active_currencies}</h3>
-    //   <h4>Active Markets</h4>
-    //   <h3>{active_markets}</h3>
-    //   <h4>Total Market Capitalization</h4>
-    //   <h3>{total_market_cap_usd}</h3>
-    //   <h4>24 Hour Volume</h4>
-    //   <h3>{total_24h_volume_usd}</h3>
-    // </section>
   );
 };
 

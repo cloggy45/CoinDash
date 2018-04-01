@@ -1,17 +1,51 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Line } from "react-chartjs-2";
-import ErrorBoundary from "./ErrorBoundary";
+
+import axios from "axios";
 
 export default class Graph extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      label: "",
+      dataset: [],
+      labels: []
+    };
+  }
+
+  filterDataset(filter = "", dataset = []) {
+    return dataset.map(datum => {
+      return datum[filter];
+    });
+  }
+
+  async getHistoryData(ticker) {
+    try {
+      let response = await fetch(
+        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=USD&limit=60&aggregate=3&e=CCCAGG`
+      );
+      const responseJson = await response.json();
+      const dataset = responseJson.Data.map(data => {
+        return data.open;
+      });
+      let labels = responseJson.Data.map(data => {
+        return data.time;
+      });
+
+      this.setState({ dataset: dataset });
+      this.setState({ labels: labels });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  componentDidMount() {
+    this.getHistoryData(this.props.ticker);
   }
   render() {
-    let { labels, dataset, label } = this.props;
-
-    console.log(dataset);
-
+    const { label } = this.props;
+    const { dataset, labels } = this.state;
     const options = {
       legend: {
         fontColor: "#2D8490"
@@ -64,10 +98,6 @@ export default class Graph extends Component {
         }
       ]
     };
-    return (
-      <ErrorBoundary>
-        <Line data={data} options={options} />
-      </ErrorBoundary>
-    );
+    return <Line data={data} options={options} />;
   }
 }
