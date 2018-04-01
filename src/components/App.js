@@ -39,9 +39,9 @@ export default class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ exchange: event.target.value });
-    // this.getData(this.state.exchange);
-    console.log("Inside handleChange", this.state.exchange);
+    this.setState({ exchange: event.target.value }, () => {
+      console.log("Inside handleChange", this.state.exchange);
+    });
   }
 
   getHistory() {
@@ -89,7 +89,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.getTickers();
-    this.getOverviewData();
+    // this.getOverviewData();
     this.getHistory();
   }
   render() {
