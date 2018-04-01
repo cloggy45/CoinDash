@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { Line } from "react-chartjs-2";
 
-import axios from "axios";
-
 export default class Graph extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +27,7 @@ export default class Graph extends Component {
       const dataset = responseJson.Data.map(data => {
         return data.open;
       });
-      let labels = responseJson.Data.map(data => {
+      const labels = responseJson.Data.map(data => {
         return data.time;
       });
 

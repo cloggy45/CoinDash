@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import axios from "axios";
 
 import Graph from "./Graph";
 import Overview from "./Overview";
@@ -39,30 +38,24 @@ export default class App extends Component {
     this.setState({ selectedTicker: event.target.value });
   }
 
-  getTickers() {
-    axios
-      .get(`https://api.coinmarketcap.com/v1/ticker/`)
-      .then(response => {
-        this.setState({ tickers: response.data });
-      })
-      .catch(error => {
-        console.log("Failed to get tickers", error);
-      });
+  async getTickers() {
+    try {
+      const response = await fetch('https://api.coinmarketcap.com/v1/ticker/')
+      const responseJSON = await response.json();
+      this.setState({tickers: responseJSON});
+    } catch (error) {
+      console.log("App getTickers() ", error);
+    }
   }
 
-  getOverviewData() {
-    axios
-      .get(
-      `https://api.coinmarketcap.com/v1/global/?convert=${
-      this.state.currency
-      }`
-      )
-      .then(response => {
-        this.setState({ overview: response.data });
-      })
-      .catch(error => {
-        console.log("App Component: Failed to get overview data", error);
-      });
+  async getOverviewData() {
+    try {
+      const response = await fetch(`https://api.coinmarketcap.com/v1/global/?convert=${this.state.currency}`)
+      const responseJSON = await response.json();
+      this.setState({ overview: responseJSON });
+    } catch (error) {
+      console.log("App getOverviewData() ", error);
+    }
   }
 
   componentDidMount() {
