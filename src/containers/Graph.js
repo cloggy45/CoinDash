@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { Line } from "react-chartjs-2";
+import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
 
 export default class Graph extends Component {
@@ -22,7 +22,7 @@ export default class Graph extends Component {
   async getHistoryData(ticker = "BTC", currency = "USD") {
     try {
       let response = await fetch(
-        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=USD&limit=60&aggregate=3&e=CCCAGG`
+        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
       );
       const responseJson = await response.json();
       const dataset = responseJson.Data.map(data => {
@@ -40,7 +40,7 @@ export default class Graph extends Component {
   }
 
   componentDidMount() {
-    this.getHistoryData(this.props.ticker);
+    this.getHistoryData(this.props.ticker, this.props.currency);
   }
 
   render() {
@@ -98,6 +98,19 @@ export default class Graph extends Component {
         }
       ]
     };
-    return <Line data={data} options={options} />;
+
+    switch (this.props.graphType) {
+      case "line":
+        return <Line data={data} options={options} />;
+        break;
+      case "bar":
+        return <Bar data={data} options={options} />;
+        break;
+      case "doughnut":
+        return <Doughnut data={data} options={options} />;
+        break;
+      default:
+        return <Line data={data} options={options} />;
+    }
   }
 }

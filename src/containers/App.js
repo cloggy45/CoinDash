@@ -8,7 +8,6 @@ import Select from "../components/Select";
 
 import Graph from "./Graph";
 
-
 const Panel = props => {
   <article>
     <header>
@@ -23,8 +22,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       selectedTicker: "BTC",
-      tickers: [],
       currency: "USD",
+      tickers: [],
       overview: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -120,7 +119,8 @@ export default class App extends Component {
           <Content>
             <Graph
               ticker={this.state.selectedTicker}
-              graphType={"line"}
+              currency={this.state.currency}
+              graphType={"bar"}
               label={"Close"}
             />
           </Content>
