@@ -105,7 +105,7 @@ export default class App extends Component {
         <Overview {...this.state.overview} />
         <Select
           selected={this.state.selectedTicker}
-          label={"Select Currency"}
+          label={"Select Crypto"}
           value={this.state.tickers.map(data => {
             return data.symbol;
           })}
@@ -113,6 +113,12 @@ export default class App extends Component {
             return data.id;
           })}
           handleChange={this.handleChange}
+        />
+        <Select 
+        selected={"USD"}
+        label={"Select Currency"}
+        value={['USD', 'GBP']}
+        list={['USD', 'GBP']} 
         />
         <Panel>
           <Header>Close Price</Header>

@@ -63,7 +63,7 @@ export default class Graph extends Component {
           {
             ticks: {
               fontColor: "#2D8490",
-              fontSize: 14,
+              fontSize: 10,
               stepSize: 1,
               beginAtZero: true
             }
