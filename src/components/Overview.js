@@ -28,17 +28,23 @@ const Overview = props => {
     border-bottom: #234558 solid 0.1px;
   `;
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0
+  });
+
   return (
     <Wrapper>
       <Table>
         <tbody>
           <tr>
             <TableData>Total Market Cap</TableData>
-            <TableData>{total_market_cap_usd}</TableData>
+            <TableData>{formatter.format(total_market_cap_usd)}</TableData>
           </tr>
           <tr>
             <TableData>Total 24 Volume</TableData>
-            <TableData>{total_24h_volume_usd}</TableData>
+            <TableData>{formatter.format(total_24h_volume_usd)}</TableData>
           </tr>
           <tr>
             <TableData>Active Markets</TableData>

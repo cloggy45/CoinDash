@@ -8,10 +8,6 @@ import Select from "../components/Select";
 
 import Graph from "./Graph";
 
-const styles = {
-  fontFamily: "sans-serif",
-  textAlign: "center"
-};
 
 const Panel = props => {
   <article>

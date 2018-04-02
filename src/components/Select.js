@@ -9,15 +9,15 @@ const Section = styled.section`
   padding: 5px;
   margin: 10px;
   background: #265566;
-  color: #2d8490;
+  color: #21364a;
 `;
 
 const SelectBox = styled.select`
   align: flex-end;
   background: #21364a;
-  color: #265566;
+  color: #78c9cf;
   border: none;
-  margin: 0 10px;
+  margin: 0 1px;
 `;
 
 const Select = props => {
