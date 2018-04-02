@@ -3,10 +3,10 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
+import Overview from "../components/Overview";
+import Select from "../components/Select";
 
 import Graph from "./Graph";
-import Overview from "./Overview";
-import Select from "./Select";
 
 const styles = {
   fontFamily: "sans-serif",

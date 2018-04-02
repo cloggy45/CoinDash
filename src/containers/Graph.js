@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Line } from "react-chartjs-2";
+import moment from "moment";
 
 export default class Graph extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class Graph extends Component {
     });
   }
 
-  async getHistoryData(ticker) {
+  async getHistoryData(ticker = "BTC", currency = "USD") {
     try {
       let response = await fetch(
         `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=USD&limit=60&aggregate=3&e=CCCAGG`
@@ -28,7 +29,7 @@ export default class Graph extends Component {
         return data.open;
       });
       const labels = responseJson.Data.map(data => {
-        return data.time;
+        return moment(new Date(data.time * 1000)).format("MMM Do YY");
       });
 
       this.setState({ dataset: dataset });
@@ -41,6 +42,7 @@ export default class Graph extends Component {
   componentDidMount() {
     this.getHistoryData(this.props.ticker);
   }
+
   render() {
     const { label } = this.props;
     const { dataset, labels } = this.state;
