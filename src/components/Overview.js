@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import styleConstants from "../misc/style_constants.js";
 
 const Overview = props => {
   const {
@@ -12,8 +13,8 @@ const Overview = props => {
   } = props;
 
   const Wrapper = styled.section`
-    color: #78c9cf;
-    margin: 20px 5px;
+    color: ${styleConstants.get("Light")};
+    margin: 20px 0;
   `;
 
   const Table = styled.table`

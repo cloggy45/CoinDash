@@ -19,14 +19,17 @@ export default class Graph extends Component {
     });
   }
 
-  async getHistoryData(ticker = "BTC", currency = "USD") {
+  /**
+   * https://min-api.cryptocompare.com/ for documentation
+   */
+  async getHistoryData(ticker = "BTC", currency = "USD", filter = "close") {
     try {
       let response = await fetch(
         `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
       );
       const responseJson = await response.json();
       const dataset = responseJson.Data.map(data => {
-        return data.open;
+        return data[filter];
       });
       const labels = responseJson.Data.map(data => {
         return moment(new Date(data.time * 1000)).format("MMM Do YY");
@@ -40,7 +43,9 @@ export default class Graph extends Component {
   }
 
   componentDidMount() {
-    this.getHistoryData(this.props.ticker, this.props.currency);
+    const { ticker, currency, filter } = this.props;
+    console.log(filter);
+    this.getHistoryData(ticker, currency, filter);
   }
 
   render() {

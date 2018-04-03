@@ -21,6 +21,7 @@ export default class App extends Component {
       overview: []
     };
     this.updateTicker = this.updateTicker.bind(this);
+    this.createGraph = this.createGraph.bind(this);
   }
 
   updateTicker(selectedValue) {
@@ -53,33 +54,29 @@ export default class App extends Component {
     this.getOverviewData();
   }
 
+  createGraph(ticker = "", currency = "", graphType = "", label = "", filter = "") {
+    return (
+      <Graph
+        filter={filter}
+        ticker={ticker}
+        currency={currency}
+        graphType={graphType}
+        label={label}
+      />
+    )
+  }
+
   render() {
-    const colorContentPanel = "#265566";
+    const { selectedTicker, currency } = this.state;
     const Container = styled.div`
       input:focus,
       select:focus,
       textarea:focus,
     `;
 
-    const Panel = styled.article`
-      grid-area: panel-container;
-      display: flex;
-      flex-direction: column;
-      margin: 20px 0;
-      color: white;
-    `;
-    const Header = styled.header`
-      background-color: #78c9cf;
-      padding: 10px;
-    `;
-
-    const Content = styled.section`
-      background-color: ${colorContentPanel};
-    `;
-
     const Title = styled.h1`
       text-align: center;
-      color: #eadf5a;
+      color: ${styleConstants.get('Yellow')};
     `;
 
     const LightSpan = styled.span`
@@ -103,22 +100,10 @@ export default class App extends Component {
             })
           }
           updateTicker={this.updateTicker} />
-        <Panel>
-          <Header>Close Price</Header>
-          <Content>
-            <Graph
-              ticker={this.state.selectedTicker}
-              currency={this.state.currency}
-              graphType={"bar"}
-              label={"Close"}
-            />
-          </Content>
-        </Panel>
-
-        <Panel>
-          <Header>Social Media</Header>
-          <Content>Stuff</Content>
-        </Panel>
+        <Panel label={"Closing Price"} content={this.createGraph(selectedTicker, currency, 'bar', "Close", "volumeto")} />
+        <Panel label={"Opening Price"} content={this.createGraph(selectedTicker, currency, 'line', "Open", "open")} />
+        <Panel label={"Highest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "High", "high")} />
+        <Panel label={"Lowest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "Low", "low")} />
       </Container>
     );
   }
