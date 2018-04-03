@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import Overview from "../components/Overview";
-import Select from "../components/Select";
+import Options from "./Options";
 
 import Graph from "./Graph";
 
@@ -26,18 +26,19 @@ export default class App extends Component {
       tickers: [],
       overview: []
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.updateTicker = this.updateTicker.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ selectedTicker: event.target.value });
+  updateTicker(selectedValue) {
+    const { value } = selectedValue;
+    this.setState({ selectedTicker: value });
   }
 
   async getTickers() {
     try {
       const response = await fetch('https://api.coinmarketcap.com/v1/ticker/')
       const responseJSON = await response.json();
-      this.setState({tickers: responseJSON});
+      this.setState({ tickers: responseJSON });
     } catch (error) {
       console.log("App getTickers() ", error);
     }
@@ -58,12 +59,6 @@ export default class App extends Component {
     this.getOverviewData();
   }
 
-  filterDataset(filter = "", dataset = []) {
-    return dataset.map(datum => {
-      return datum[filter];
-    });
-  }
-
   render() {
     const colorContentPanel = "#265566";
     const Container = styled.div`
@@ -76,7 +71,7 @@ export default class App extends Component {
       grid-area: panel-container;
       display: flex;
       flex-direction: column;
-      margin: 0 10px 20px 10px;
+      margin: 20px 0;
       color: white;
     `;
     const Header = styled.header`
@@ -103,23 +98,17 @@ export default class App extends Component {
           Coin:<LightSpan>Dash</LightSpan>
         </Title>
         <Overview {...this.state.overview} />
-        <Select
-          selected={this.state.selectedTicker}
-          label={"Select Crypto"}
-          value={this.state.tickers.map(data => {
+        <Options
+          selectedValue={this.state.selectedTicker}
+          values={this.state.tickers.map(data => {
             return data.symbol;
           })}
-          list={this.state.tickers.map(data => {
-            return data.id;
-          })}
-          handleChange={this.handleChange}
-        />
-        <Select 
-        selected={"USD"}
-        label={"Select Currency"}
-        value={['USD', 'GBP']}
-        list={['USD', 'GBP']} 
-        />
+          labels={
+            this.state.tickers.map(data => {
+              return data.id;
+            })
+          }
+          updateTicker={this.updateTicker} />
         <Panel>
           <Header>Close Price</Header>
           <Content>
@@ -131,7 +120,7 @@ export default class App extends Component {
             />
           </Content>
         </Panel>
-    
+
         <Panel>
           <Header>Social Media</Header>
           <Content>Stuff</Content>
