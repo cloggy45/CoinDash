@@ -3,19 +3,13 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
+import styleConstants from "../misc/style_constants.js";
+
 import Overview from "../components/Overview";
+import Panel from "../components/Panel";
+
 import Options from "./Options";
-
 import Graph from "./Graph";
-
-const Panel = props => {
-  <article>
-    <header>
-      <h3>{props.label}</h3>
-    </header>
-    <section>{props.content}</section>
-  </article>;
-};
 
 export default class App extends Component {
   constructor(props) {
