@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
 
-export default class Graph extends Component {
+export default class GraphContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
