@@ -101,7 +101,7 @@ export default class App extends Component {
             })
           }
           updateTicker={this.updateTicker} />
-        <Panel label={"Opening Price"} content={this.createGraph(selectedTicker, currency, 'line', "Open", "open")} />
+        <Panel label={"Price Action"} content={this.createGraph(selectedTicker, currency, 'line', "Close", "close")} />
         <Panel label={"Highest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "High", "high")} />
         <Panel label={"Lowest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "Low", "low")} />
         <Panel label={"Top Ten List"} content={

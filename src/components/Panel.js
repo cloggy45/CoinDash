@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 import styled from "styled-components";
+import PropTypes from "prop-types";
+
 import styleConstants from "../misc/style_constants.js";
 
 const Wrapper = styled.section`
@@ -34,6 +36,16 @@ const Panel = props => {
       <Section>{content}</Section>
     </Wrapper>
   );
+};
+
+Panel.propTypes = {
+  label: PropTypes.string,
+  content: PropTypes.element
+};
+
+Panel.defaultProps = {
+  label: "Not Loaded",
+  content: "No Content"
 };
 
 export default Panel;
