@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 import styleConstants from "../misc/style_constants.js";
 
@@ -9,16 +10,10 @@ export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      label: "",
+      label: "default",
       dataset: [],
       labels: []
     };
-  }
-
-  filterDataset(filter = "", dataset = []) {
-    return dataset.map(datum => {
-      return datum[filter];
-    });
   }
 
   /**
@@ -50,8 +45,9 @@ export default class Graph extends Component {
   }
 
   render() {
-    const { label } = this.props;
+    const { label, graphType } = this.props;
     const { dataset, labels } = this.state;
+
     const options = {
       legend: {
         fontColor: styleConstants.get("Dark")
@@ -113,8 +109,7 @@ export default class Graph extends Component {
         }
       ]
     };
-
-    switch (this.props.graphType) {
+    switch (graphType) {
       case "line":
         return <Line data={data} options={options} />;
         break;
@@ -125,7 +120,17 @@ export default class Graph extends Component {
         return <Doughnut data={data} options={options} />;
         break;
       default:
-        return <Line data={data} options={options} />;
+        return null;
     }
   }
 }
+
+Graph.propTypes = {
+  label: PropTypes.string,
+  graphType: PropTypes.string
+};
+
+Graph.defaultProps = {
+  label: "Default String",
+  graphType: "Default String"
+};

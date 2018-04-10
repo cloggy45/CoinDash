@@ -2,6 +2,7 @@ import React from "react";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "../misc/react-select-custom.css";
+import PropTypes from "prop-types";
 
 class Options extends React.Component {
   state = {
@@ -36,5 +37,17 @@ class Options extends React.Component {
     );
   }
 }
+
+Options.propTypes = {
+  values: PropTypes.string,
+  labels: PropTypes.array,
+  selectedValue: PropTypes.string
+};
+
+Options.defaultTypes = {
+  values: "Default String",
+  labels: ["Default Array"],
+  selectedValue: "Default String"
+};
 
 export default Options;
