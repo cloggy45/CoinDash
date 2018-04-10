@@ -5,7 +5,7 @@ import moment from "moment";
 
 import styleConstants from "../misc/style_constants.js";
 
-export default class GraphContainer extends Component {
+export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {

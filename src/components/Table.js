@@ -45,19 +45,21 @@ const Table = props => {
       <Table>
         <thead>
           <TableRow>
-            {header.map(title => {
-              return <TableHeader>{title}</TableHeader>;
-            })}
+            {
+              header.map(title => {
+                return <TableHeader key={title}>{title}</TableHeader>;
+            })
+            }
           </TableRow>
         </thead>
         <tbody>
-          {collection.map(data => {
+          {collection.map((data, i) => {
             return (
-              <TableRow>
-                <TableData key={data._id}>{data.rank}</TableData>
-                <TableData key={data._id}>{data.name}</TableData>
-                <TableData key={data._id}>{formatter.format(data.price_usd)}</TableData>
-                <TableData key={data._id}>{data.percent_change_24h}</TableData>
+              <TableRow key={i}>
+                <TableData key={data.rank}>{data.rank}</TableData>
+                <TableData key={data.name}>{data.name}</TableData>
+                <TableData key={data.price_usd}>{formatter.format(data.price_usd)}</TableData>
+                <TableData key={data.percent_change_24h}>{data.percent_change_24h}</TableData>
               </TableRow>
             );
           })}
