@@ -11,9 +11,13 @@ const Wrapper = styled.section`
   color: white;
 `;
 
+const Title = styled.h4`
+  font-weight: 300;
+`;
+
 const Header = styled.header`
   background-color: ${styleConstants.get("Light")};
-  padding: 10px;
+  padding: 5px 10px;
 `;
 
 const Section = styled.section`
@@ -25,7 +29,7 @@ const Panel = props => {
   return (
     <Wrapper>
       <Header>
-        <h4>{label}</h4>
+        <Title>{label}</Title>
       </Header>
       <Section>{content}</Section>
     </Wrapper>

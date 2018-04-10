@@ -3,6 +3,8 @@ import { render } from "react-dom";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
 
+import styleConstants from "../misc/style_constants.js";
+
 export default class GraphContainer extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,6 @@ export default class GraphContainer extends Component {
 
   componentDidMount() {
     const { ticker, currency, filter } = this.props;
-    console.log(filter);
     this.getHistoryData(ticker, currency, filter);
   }
 
@@ -53,21 +54,30 @@ export default class GraphContainer extends Component {
     const { dataset, labels } = this.state;
     const options = {
       legend: {
-        fontColor: "#2D8490"
+        fontColor: styleConstants.get("Dark")
       },
       scales: {
         yAxes: [
           {
             ticks: {
-              fontColor: "#2D8490",
-              beginAtZero: true
+              fontColor: styleConstants.get("Light"),
+              beginAtZero: true,
+              callback: function(value, index, values) {
+                if (parseInt(value) >= 1000) {
+                  return (
+                    "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  );
+                } else {
+                  return "$" + value;
+                }
+              }
             }
           }
         ],
         xAxes: [
           {
             ticks: {
-              fontColor: "#2D8490",
+              fontColor: styleConstants.get("Light"),
               fontSize: 10,
               stepSize: 1,
               beginAtZero: true
@@ -82,15 +92,15 @@ export default class GraphContainer extends Component {
       datasets: [
         {
           label: label,
-          fill: false,
+          fill: true,
           lineTension: 0.1,
-          backgroundColor: "rgba(75,192,192,0.4)",
-          borderColor: "rgba(75,192,192,1)",
+          backgroundColor: styleConstants.get("Medium"),
+          borderColor: styleConstants.get("Medium"),
           borderCapStyle: "butt",
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: "miter",
-          pointBorderColor: "rgba(75,192,192,1)",
+          pointBorderColor: styleConstants.get("Light"),
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
           pointHoverRadius: 5,

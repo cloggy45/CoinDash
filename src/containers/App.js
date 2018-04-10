@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import PropTypes from "prop-types";
+
 import styled, { css } from "styled-components";
 
 import styleConstants from "../misc/style_constants.js";
@@ -101,12 +101,12 @@ export default class App extends Component {
             })
           }
           updateTicker={this.updateTicker} />
-        <Panel label={"Closing Price"} content={this.createGraph(selectedTicker, currency, 'bar', "Close", "volumeto")} />
         <Panel label={"Opening Price"} content={this.createGraph(selectedTicker, currency, 'line', "Open", "open")} />
         <Panel label={"Highest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "High", "high")} />
         <Panel label={"Lowest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "Low", "low")} />
         <Panel label={"Top Ten List"} content={
           <Table header={["Rank", "Name", "Price", "Change(24 Hour)"]} collection={this.state.tickers} />
+            
         } />
         
       </Container>

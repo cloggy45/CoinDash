@@ -56,7 +56,7 @@ const Table = props => {
               <TableRow>
                 <TableData key={data._id}>{data.rank}</TableData>
                 <TableData key={data._id}>{data.name}</TableData>
-                <TableData key={data._id}>{data.price_usd}</TableData>
+                <TableData key={data._id}>{formatter.format(data.price_usd)}</TableData>
                 <TableData key={data._id}>{data.percent_change_24h}</TableData>
               </TableRow>
             );

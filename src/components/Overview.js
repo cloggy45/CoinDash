@@ -12,6 +12,8 @@ const Overview = props => {
     total_24h_volume_usd
   } = props;
 
+  console.log(active_currencies);
+
   const Wrapper = styled.section`
     color: ${styleConstants.get("Light")};
     margin: 20px 0;
@@ -59,6 +61,13 @@ const Overview = props => {
       </Table>
     </Wrapper>
   );
+};
+
+Overview.propTypes = {
+  active_currencies: PropTypes.number,
+  active_markets: PropTypes.number,
+  total_market_cap_usd: PropTypes.number,
+  total_24h_volume_usd: PropTypes.number
 };
 
 export default Overview;
