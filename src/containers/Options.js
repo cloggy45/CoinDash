@@ -39,13 +39,13 @@ class Options extends React.Component {
 }
 
 Options.propTypes = {
-  values: PropTypes.string,
+  values: PropTypes.array,
   labels: PropTypes.array,
   selectedValue: PropTypes.string
 };
 
 Options.defaultTypes = {
-  values: "Default String",
+  values: ["Default Array"],
   labels: ["Default Array"],
   selectedValue: "Default String"
 };

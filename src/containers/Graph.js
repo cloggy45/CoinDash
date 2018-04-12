@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import styleConstants from "../misc/style_constants.js";
 
-export default class Graph extends Component {
+class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -109,19 +109,20 @@ export default class Graph extends Component {
         }
       ]
     };
-    switch (graphType) {
-      case "line":
-        return <Line data={data} options={options} />;
-        break;
-      case "bar":
-        return <Bar data={data} options={options} />;
-        break;
-      case "doughnut":
-        return <Doughnut data={data} options={options} />;
-        break;
-      default:
-        return null;
-    }
+    return <Line data={data} options={options} />;
+    // switch (graphType) {
+    //   case "line":
+    //     return <Line data={data} options={options} />;
+    //     break;
+    //   case "bar":
+    //     return <Bar data={data} options={options} />;
+    //     break;
+    //   case "doughnut":
+    //     return <Doughnut data={data} options={options} />;
+    //     break;
+    //   default:
+    //     return null;
+    // }
   }
 }
 
@@ -134,3 +135,5 @@ Graph.defaultProps = {
   label: "Default String",
   graphType: "Default String"
 };
+
+export default Graph;

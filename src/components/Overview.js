@@ -4,6 +4,29 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import styleConstants from "../misc/style_constants.js";
 
+const Wrapper = styled.section`
+  color: ${styleConstants.get("Light")};
+  margin: 20px 0;
+`;
+
+const Table = styled.table`
+  width: 100%;
+`;
+
+const TableData = styled.td`
+  &:nth-child(even) {
+    text-align: right;
+  }
+  padding: 5px;
+  border-bottom: #234558 solid 0.1px;
+`;
+
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0
+});
+
 const Overview = props => {
   const {
     active_currencies,
@@ -11,31 +34,6 @@ const Overview = props => {
     total_market_cap_usd,
     total_24h_volume_usd
   } = props;
-
-  console.log(active_currencies);
-
-  const Wrapper = styled.section`
-    color: ${styleConstants.get("Light")};
-    margin: 20px 0;
-  `;
-
-  const Table = styled.table`
-    width: 100%;
-  `;
-
-  const TableData = styled.td`
-    &:nth-child(even) {
-      text-align: right;
-    }
-    padding: 5px;
-    border-bottom: #234558 solid 0.1px;
-  `;
-
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0
-  });
 
   return (
     <Wrapper>

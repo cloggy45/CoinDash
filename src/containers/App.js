@@ -12,6 +12,21 @@ import Table from "../components/Table";
 import Options from "./Options";
 import Graph from "./Graph";
 
+const Container = styled.div`
+      input:focus,
+      select:focus,
+      textarea:focus,
+    `;
+
+const Title = styled.h1`
+      text-align: center;
+      color: ${styleConstants.get('Yellow')};
+    `;
+
+const LightSpan = styled.span`
+      font-weight: 200;
+    `;
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -101,14 +116,14 @@ export default class App extends Component {
             })
           }
           updateTicker={this.updateTicker} />
-        <Panel label={"Price Action"} content={this.createGraph(selectedTicker, currency, 'line', "Close", "close")} />
-        <Panel label={"Highest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "High", "high")} />
-        <Panel label={"Lowest Price"} content={this.createGraph(selectedTicker, currency, 'bar', "Low", "low")} />
-        <Panel label={"Top Ten List"} content={
-          <Table header={["Rank", "Name", "Price", "Change(24 Hour)"]} collection={this.state.tickers} />
-            
-        } />
-        
+        <Graph
+          filter={"close"}
+          ticker={selectedTicker}
+          currency={currency}
+          graphType={"line"}
+          label={"Close"}
+        />
+
       </Container>
     );
   }

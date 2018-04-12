@@ -4,42 +4,41 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import styleConstants from "../misc/style_constants.js";
 
-const Table = props => {
-  let { header } = props;
-  let collection = props.collection.slice(0, 10);
-
-  const Wrapper = styled.section`
+const Wrapper = styled.section`
     color: ${styleConstants.get("Light")};
     margin: 20px 0;
   `;
 
-  const Table = styled.table`
+const Table = styled.table`
     width: 100%;
   `;
 
-  const TableRow = styled.tr`
+const TableRow = styled.tr`
 
   `;
 
-  const TableData = styled.td`
+const TableData = styled.td`
     text-align: center;
     padding: 5px;
     border-bottom: ${styleConstants.get("Medium")} solid 0.02px;
   `;
 
-  const TableHeader = styled.td`
+const TableHeader = styled.td`
     color: ${styleConstants.get("Light")}
     font-weight: 600;
     text-align: center;
     border-bottom: ${styleConstants.get("Light")} solid 0.5px;
   `;
 
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0
-  });
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0
+});
 
+const TableList = props => {
+  let { header } = props;
+  let collection = props.collection.slice(0, 10);
   return (
     <Wrapper>
       <Table>
@@ -69,4 +68,4 @@ const Table = props => {
   );
 };
 
-export default Table;
+export default TableList;

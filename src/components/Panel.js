@@ -44,8 +44,8 @@ Panel.propTypes = {
 };
 
 Panel.defaultProps = {
-  label: "Not Loaded",
-  content: "No Content"
+  label: "Default String",
+  content: "Default Element"
 };
 
 export default Panel;
