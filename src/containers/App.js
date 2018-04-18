@@ -48,16 +48,6 @@ class App extends Component {
     this.setState({ selectedTicker: value });
   }
 
-  // async getTickers() {
-  //   try {
-  //     const response = await fetch('https://api.coinmarketcap.com/v1/ticker/')
-  //     const responseJSON = await response.json();
-  //     this.setState({ tickers: responseJSON });
-  //   } catch (error) {
-  //     console.log("App getTickers() ", error);
-  //   }
-  // }
-
   async getOverviewData() {
     try {
       const response = await fetch(`https://api.coinmarketcap.com/v1/global/?convert=${this.state.currency}`)
@@ -95,21 +85,6 @@ class App extends Component {
 
   render() {
     const { selectedTicker, currency } = this.state;
-    const Container = styled.div`
-      input:focus,
-      select:focus,
-      textarea:focus,
-    `;
-
-    const Title = styled.h1`
-      text-align: center;
-      color: ${styleConstants.get('Yellow')};
-    `;
-
-    const LightSpan = styled.span`
-      font-weight: 200;
-    `;
-
     return (
       <Container>
         <Title>
