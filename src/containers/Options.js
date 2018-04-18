@@ -4,10 +4,25 @@ import "react-select/dist/react-select.css";
 import "../misc/react-select-custom.css";
 import PropTypes from "prop-types";
 
+import { connect } from "react-redux";
+import { receiveTickers, fetchCoinData } from "../actions/action";
+
 class Options extends React.Component {
   state = {
     selectedOption: ""
   };
+
+  componentDidMount() {
+    this.props.fetchCoinData;
+  }
+
+  componentWillUnmount() {
+    console.log("Options Unmounted");
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("Receiving Props", nextProps);
+  }
 
   handleChange = selectedOption => {
     this.setState({ selectedOption }, () => {
@@ -15,23 +30,16 @@ class Options extends React.Component {
     });
   };
 
-  createOptions = (values, labels) => {
-    return values.map((value, index) => {
-      return { value: value, label: labels[index] };
-    });
-  };
-
   render() {
     const { selectedOption } = this.state;
-    const { values, labels, selectedValue } = this.props;
+    const { Options, selectedValue } = this.props;
     const value = selectedOption && selectedOption.value;
-
     return (
       <Select
         name="form-field-name"
         value={selectedValue}
         onChange={this.handleChange}
-        options={this.createOptions(values, labels)}
+        options={Options}
         clearable={false}
       />
     );
@@ -39,15 +47,29 @@ class Options extends React.Component {
 }
 
 Options.propTypes = {
+  tickers: PropTypes.array,
   values: PropTypes.array,
   labels: PropTypes.array,
   selectedValue: PropTypes.string
 };
 
 Options.defaultTypes = {
-  values: ["Default Array"],
-  labels: ["Default Array"],
-  selectedValue: "Default String"
+  tickers: [],
+  values: [],
+  labels: [],
+  selectedValue: ""
 };
 
-export default Options;
+const mapStateToProps = (state, ownProps) => {
+  const options = state.Options.tickers;
+  return {
+    Options: options
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetch: dispatch(fetchCoinData())
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Options);

@@ -40,8 +40,13 @@ class Graph extends Component {
   }
 
   componentDidMount() {
+    console.log("Graph is mounted", this);
     const { ticker, currency, filter } = this.props;
     this.getHistoryData(ticker, currency, filter);
+  }
+
+  componentWillUnmount() {
+    console.log("Graph is Unmounted");
   }
 
   render() {

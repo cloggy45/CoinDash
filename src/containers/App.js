@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-
 import styled, { css } from "styled-components";
 
+import { connect } from "react-redux";
+import { fetchCoinData } from "../actions/action"
 import styleConstants from "../misc/style_constants.js";
 
 import Overview from "../components/Overview";
 import Panel from "../components/Panel";
 import Table from "../components/Table";
+
+import { bindActionCreators } from 'redux'
 
 import Options from "./Options";
 import Graph from "./Graph";
@@ -27,7 +30,7 @@ const LightSpan = styled.span`
       font-weight: 200;
     `;
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,15 +48,15 @@ export default class App extends Component {
     this.setState({ selectedTicker: value });
   }
 
-  async getTickers() {
-    try {
-      const response = await fetch('https://api.coinmarketcap.com/v1/ticker/')
-      const responseJSON = await response.json();
-      this.setState({ tickers: responseJSON });
-    } catch (error) {
-      console.log("App getTickers() ", error);
-    }
-  }
+  // async getTickers() {
+  //   try {
+  //     const response = await fetch('https://api.coinmarketcap.com/v1/ticker/')
+  //     const responseJSON = await response.json();
+  //     this.setState({ tickers: responseJSON });
+  //   } catch (error) {
+  //     console.log("App getTickers() ", error);
+  //   }
+  // }
 
   async getOverviewData() {
     try {
@@ -66,8 +69,16 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getTickers();
-    this.getOverviewData();
+    console.log("App is Mounted")
+  }
+
+  componentWillUnmount() {
+    console.log("App is Unmounted");
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("App: componentWillReceiveProps")
+    console.log(nextProps);
   }
 
   createGraph(ticker = "", currency = "", graphType = "", label = "", filter = "") {
@@ -107,24 +118,12 @@ export default class App extends Component {
         <Overview {...this.state.overview} />
         <Options
           selectedValue={this.state.selectedTicker}
-          values={this.state.tickers.map(data => {
-            return data.symbol;
-          })}
-          labels={
-            this.state.tickers.map(data => {
-              return data.id;
-            })
-          }
           updateTicker={this.updateTicker} />
-        <Graph
-          filter={"close"}
-          ticker={selectedTicker}
-          currency={currency}
-          graphType={"line"}
-          label={"Close"}
-        />
-
       </Container>
     );
   }
 }
+
+
+
+export default connect()(App);
