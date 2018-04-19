@@ -16,28 +16,18 @@ class Options extends React.Component {
     this.props.fetchCoinData;
   }
 
-  componentWillUnmount() {
-    console.log("Options Unmounted");
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("Receiving Props", nextProps);
-  }
-
   handleChange = selectedOption => {
-    this.setState({ selectedOption }, () => {
-      this.props.updateTicker(selectedOption);
-    });
+    this.setState({ selectedOption: selectedOption });
   };
 
   render() {
     const { selectedOption } = this.state;
-    const { Options, selectedValue } = this.props;
+    const { Options } = this.props;
     const value = selectedOption && selectedOption.value;
     return (
       <Select
         name="form-field-name"
-        value={selectedValue}
+        value={selectedOption}
         onChange={this.handleChange}
         options={Options}
         clearable={false}
@@ -61,7 +51,7 @@ Options.defaultTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const options = state.Options.tickers;
+  const options = state.options.tickers;
   return {
     Options: options
   };

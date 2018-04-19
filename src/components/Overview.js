@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import styleConstants from "../misc/style_constants.js";
 
+import { connect } from "react-redux";
+import { receiveOverviewData, fetchOverviewData } from "../actions/action";
+
 const Wrapper = styled.section`
   color: ${styleConstants.get("Light")};
   margin: 20px 0;
@@ -27,52 +30,71 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 0
 });
 
-const Overview = props => {
-  const {
-    active_currencies,
-    active_markets,
-    total_market_cap_usd,
-    total_24h_volume_usd
-  } = props;
+class Overview extends Component {
+  state = {
+    isLoading: false,
+    overview: {}
+  };
+  componentDidMount() {
+    this.props.fetchOverviewData;
+  }
 
-  return (
-    <Wrapper>
-      <Table>
-        <tbody>
-          <tr>
-            <TableData>Total Market Cap</TableData>
-            <TableData>{formatter.format(total_market_cap_usd)}</TableData>
-          </tr>
-          <tr>
-            <TableData>Total 24 Volume</TableData>
-            <TableData>{formatter.format(total_24h_volume_usd)}</TableData>
-          </tr>
-          <tr>
-            <TableData>Active Markets</TableData>
-            <TableData>{active_markets}</TableData>
-          </tr>
-          <tr>
-            <TableData>Active Currencies</TableData>
-            <TableData>{active_currencies}</TableData>
-          </tr>
-        </tbody>
-      </Table>
-    </Wrapper>
-  );
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.overview === this.state.overview) {
+      this.setState({ isLoading: true });
+    } else {
+      this.setState({ overview: nextProps.overview });
+    }
+  }
+
+  render() {
+    const {
+      active_currencies,
+      active_markets,
+      total_market_cap_usd,
+      total_24h_volume_usd
+    } = this.state.overview;
+    return (
+      <Wrapper>
+        {this.state.isLoading ? (
+          <h3>Is Loading</h3>
+        ) : (
+          <Table>
+            <tbody>
+              <tr>
+                <TableData>Total Market Cap</TableData>
+                <TableData>{formatter.format(total_market_cap_usd)}</TableData>
+              </tr>
+              <tr>
+                <TableData>Total 24 Volume</TableData>
+                <TableData>{formatter.format(total_24h_volume_usd)}</TableData>
+              </tr>
+              <tr>
+                <TableData>Active Markets</TableData>
+                <TableData>{active_markets}</TableData>
+              </tr>
+              <tr>
+                <TableData>Active Currencies</TableData>
+                <TableData>{active_currencies}</TableData>
+              </tr>
+            </tbody>
+          </Table>
+        )}
+      </Wrapper>
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const overview = state.overview.overview;
+  return {
+    overview
+  };
 };
 
-Overview.propTypes = {
-  active_currencies: PropTypes.number,
-  active_markets: PropTypes.number,
-  total_market_cap_usd: PropTypes.number,
-  total_24h_volume_usd: PropTypes.number
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetch: dispatch(fetchOverviewData())
+  };
 };
-
-Overview.defaultProps = {
-  active_currencies: 0,
-  active_markets: 0,
-  total_market_cap_usd: 0,
-  total_24h_volume_usd: 0
-};
-
-export default Overview;
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

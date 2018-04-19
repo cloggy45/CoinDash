@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { click } from "../actions/action";
 
-const Options = (currentState = {}, action) => {
+const options = (currentState = {}, action) => {
   switch (action.type) {
     case "SELECT_CURRENCY":
       return Object.assign({}, currentState, {
@@ -10,6 +10,17 @@ const Options = (currentState = {}, action) => {
     case "RECEIVE_TICKERS":
       return Object.assign({}, currentState, {
         tickers: action.payload
+      });
+    default:
+      return currentState;
+  }
+};
+
+const overview = (currentState = {}, action) => {
+  switch (action.type) {
+    case "RECEIVE_OVERVIEW":
+      return Object.assign({}, currentState, {
+        overview: action.payload
       });
     default:
       return currentState;
@@ -33,7 +44,8 @@ const graph = (currentState = {}, action) => {
 };
 
 const rootReducer = combineReducers({
-  Options,
+  options,
+  overview,
   graph
 });
 

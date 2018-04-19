@@ -33,43 +33,11 @@ const LightSpan = styled.span`
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedTicker: "BTC",
-      currency: "USD",
-      tickers: [],
-      overview: []
-    };
-    this.updateTicker = this.updateTicker.bind(this);
+
     this.createGraph = this.createGraph.bind(this);
   }
 
-  updateTicker(selectedValue) {
-    const { value } = selectedValue;
-    this.setState({ selectedTicker: value });
-  }
 
-  async getOverviewData() {
-    try {
-      const response = await fetch(`https://api.coinmarketcap.com/v1/global/?convert=${this.state.currency}`)
-      const responseJSON = await response.json();
-      this.setState({ overview: responseJSON });
-    } catch (error) {
-      console.log("App getOverviewData() ", error);
-    }
-  }
-
-  componentDidMount() {
-    console.log("App is Mounted")
-  }
-
-  componentWillUnmount() {
-    console.log("App is Unmounted");
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("App: componentWillReceiveProps")
-    console.log(nextProps);
-  }
 
   createGraph(ticker = "", currency = "", graphType = "", label = "", filter = "") {
     return (
@@ -84,16 +52,13 @@ class App extends Component {
   }
 
   render() {
-    const { selectedTicker, currency } = this.state;
     return (
       <Container>
         <Title>
           Coin:<LightSpan>Dash</LightSpan>
         </Title>
-        <Overview {...this.state.overview} />
-        <Options
-          selectedValue={this.state.selectedTicker}
-          updateTicker={this.updateTicker} />
+        <Overview  />
+        <Options />
       </Container>
     );
   }
