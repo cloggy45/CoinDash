@@ -4,55 +4,36 @@ import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
 import PropTypes from "prop-types";
 
+import { connect } from "react-redux";
+import { fetchCoinHistory } from "../actions/action";
+
 import styleConstants from "../misc/style_constants.js";
 
 class Graph extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      label: "default",
-      dataset: [],
-      labels: []
-    };
-  }
-
-  /**
-   * https://min-api.cryptocompare.com/ for documentation
-   */
-  async getHistoryData(ticker = "BTC", currency = "USD", filter = "close") {
-    try {
-      let response = await fetch(
-        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
-      );
-      const responseJson = await response.json();
-      const dataset = responseJson.Data.map(data => {
-        return data[filter];
-      });
-      const labels = responseJson.Data.map(data => {
-        return moment(new Date(data.time * 1000)).format("MMM Do YY");
-      });
-
-      this.setState({ dataset: dataset });
-      this.setState({ labels: labels });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  state = {
+    isLoading: true,
+    labels: [],
+    dataset: []
+  };
 
   componentDidMount() {
-    console.log("Graph is mounted", this);
-    const { ticker, currency, filter } = this.props;
-    this.getHistoryData(ticker, currency, filter);
+    this.props.fetchCoinHistory;
   }
 
-  componentWillUnmount() {
-    console.log("Graph is Unmounted");
+  componentWillReceiveProps(nextProps) {
+    const dataset = nextProps.data.map(data => {
+      return data["close"];
+    });
+
+    const labels = nextProps.data.map(data => {
+      return moment(new Date(data.time * 1000)).format("MMM Do YY");
+    });
+
+    this.setState({ labels: labels, dataset: dataset });
   }
 
   render() {
-    const { label, graphType } = this.props;
-    const { dataset, labels } = this.state;
-
+    const { labels, dataset } = this.state;
     const options = {
       legend: {
         fontColor: styleConstants.get("Dark")
@@ -92,7 +73,7 @@ class Graph extends Component {
       labels: labels,
       datasets: [
         {
-          label: label,
+          label: "TEST",
           fill: true,
           lineTension: 0.1,
           backgroundColor: styleConstants.get("Medium"),
@@ -115,30 +96,18 @@ class Graph extends Component {
       ]
     };
     return <Line data={data} options={options} />;
-    // switch (graphType) {
-    //   case "line":
-    //     return <Line data={data} options={options} />;
-    //     break;
-    //   case "bar":
-    //     return <Bar data={data} options={options} />;
-    //     break;
-    //   case "doughnut":
-    //     return <Doughnut data={data} options={options} />;
-    //     break;
-    //   default:
-    //     return null;
-    // }
   }
 }
 
-Graph.propTypes = {
-  label: PropTypes.string,
-  graphType: PropTypes.string
+const mapStateToProps = (state, ownProps) => {
+  return {
+    data: state.graph.history
+  };
 };
 
-Graph.defaultProps = {
-  label: "Default String",
-  graphType: "Default String"
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetch: dispatch(fetchCoinHistory())
+  };
 };
-
-export default Graph;
+export default connect(mapStateToProps, mapDispatchToProps)(Graph);

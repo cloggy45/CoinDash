@@ -3,6 +3,7 @@ import axios from "axios";
 export const SELECT_CURRENCY = "SELECT_CURRENCY";
 export const RECEIVE_TICKERS = "RECEIVE_TICKERS";
 export const RECEIVE_OVERVIEW = "RECEIVE_OVERVIEW";
+export const RECEIVE_HISTORY = "RECEIVE_HISTORY";
 
 export const selectCurrency = currency => {
   return {
@@ -26,6 +27,28 @@ export const receiveOverviewData = json => {
     payload: json
   };
 };
+
+export const receiveHistoryData = json => {
+  return {
+    type: RECEIVE_HISTORY,
+    payload: json.Data.map(data => data)
+  };
+};
+
+export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
+  return dispatch => {
+    return axios
+      .get(
+        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
+      )
+      .then(response => {
+        dispatch(receiveHistoryData(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
 
 export function fetchCoinData(ticker = "") {
   return dispatch => {

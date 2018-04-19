@@ -29,15 +29,10 @@ const overview = (currentState = {}, action) => {
 
 const graph = (currentState = {}, action) => {
   switch (action.type) {
-    case "IS_LOADED":
-      const nextState = [
-        ...currentState,
-        {
-          isLoaded: action.isLoaded
-        }
-      ];
-      return nextState;
-      break;
+    case "RECEIVE_HISTORY":
+      return Object.assign({}, currentState, {
+        history: action.payload
+      });
     default:
       return currentState;
   }
