@@ -7,9 +7,17 @@ const options = (currentState = {}, action) => {
       return Object.assign({}, currentState, {
         currency: action.payload
       });
+    case "SET_SELECTED":
+      return Object.assign({}, currentState, {
+        selected: action.payload
+      });
     case "RECEIVE_TICKERS":
       return Object.assign({}, currentState, {
         tickers: action.payload
+      });
+    case "RECEIVE_SELECTED":
+      return Object.assign({}, currentState, {
+        ticker: action.payload
       });
     default:
       return currentState;

@@ -4,7 +4,7 @@ import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
 import PropTypes from "prop-types";
 
-import { connect } from "react-redux";
+import { connect, store } from "react-redux";
 import { fetchCoinHistory } from "../actions/action";
 
 import styleConstants from "../misc/style_constants.js";
@@ -12,15 +12,18 @@ import styleConstants from "../misc/style_constants.js";
 class Graph extends Component {
   state = {
     isLoading: true,
+    ticker: "BTC",
     labels: [],
     dataset: []
   };
 
   componentDidMount() {
-    this.props.fetchCoinHistory;
+    this.props.fetch(this.state.ticker, "USD");
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.data === undefined) return null;
+
     const dataset = nextProps.data.map(data => {
       return data["close"];
     });
@@ -29,7 +32,10 @@ class Graph extends Component {
       return moment(new Date(data.time * 1000)).format("MMM Do YY");
     });
 
-    this.setState({ labels: labels, dataset: dataset });
+    return {
+      labels: labels,
+      datasets: dataset
+    };
   }
 
   render() {
@@ -101,13 +107,13 @@ class Graph extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: state.graph.history
+    data: state.graph.history,
+    selected: state.options.selected
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    fetch: dispatch(fetchCoinHistory())
-  };
-};
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetch: (ticker, currency) => dispatch(fetchCoinHistory(ticker, currency))
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(Graph);

@@ -4,6 +4,14 @@ export const SELECT_CURRENCY = "SELECT_CURRENCY";
 export const RECEIVE_TICKERS = "RECEIVE_TICKERS";
 export const RECEIVE_OVERVIEW = "RECEIVE_OVERVIEW";
 export const RECEIVE_HISTORY = "RECEIVE_HISTORY";
+export const SET_SELECTED = "SET_SELECTED";
+
+export const setSelected = option => {
+  return {
+    type: SET_SELECTED,
+    payload: option
+  };
+};
 
 export const selectCurrency = currency => {
   return {
