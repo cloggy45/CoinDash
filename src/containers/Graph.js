@@ -12,7 +12,6 @@ import styleConstants from "../misc/style_constants.js";
 class Graph extends Component {
   state = {
     isLoading: true,
-    labels: [],
     dataset: []
   };
 
@@ -31,12 +30,8 @@ class Graph extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data === undefined) return null;
 
-    const dataset = nextProps.data.map(data => {
-      return data["close"];
-    });
-
     return {
-      dataset: dataset
+      dataset: nextProps.data
     };
   }
 
@@ -46,14 +41,28 @@ class Graph extends Component {
     }
   }
 
-  getLabels = dataset => {
+  getData = (dataset, filter) => {
     return dataset.map(data => {
-      return moment(new Date(data.time * 1000)).format("MMM Do YY");
+      return data[filter];
     });
   };
 
+  formatTime = times => {
+    return times.map(time => {
+      return moment(new Date(time * 1000)).format("MMM Do YY");
+    });
+  };
+
+  // getLabels = dataset => {
+  //   return dataset.map(data => {
+  //     return moment(new Date(data.time * 1000)).format("MMM Do YY");
+  //   });
+  // };
+
   render() {
-    const { labels, dataset } = this.state;
+    const { dataset } = this.state;
+    const { filter } = this.props;
+
     const options = {
       legend: {
         fontColor: styleConstants.get("Dark")
@@ -90,7 +99,7 @@ class Graph extends Component {
     };
 
     const data = {
-      labels: this.getLabels(dataset),
+      labels: this.formatTime(this.getData(dataset, "time")),
       datasets: [
         {
           label: this.props.filter,
@@ -111,7 +120,7 @@ class Graph extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: dataset
+          data: this.getData(dataset, filter)
         }
       ]
     };

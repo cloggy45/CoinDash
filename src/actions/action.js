@@ -43,6 +43,7 @@ export const receiveHistoryData = json => {
   };
 };
 
+// https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
   return dispatch => {
     return axios

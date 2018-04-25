@@ -39,6 +39,7 @@ const App = () => {
         <Options />
         <Graph filter={"close"} />
         <Graph filter={"open"} />
+        <Graph filter={"high"} />
       </Container>
   )
   }
