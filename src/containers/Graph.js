@@ -18,13 +18,15 @@ class Graph extends Component {
   static propTypes = {
     filter: PropTypes.string,
     data: PropTypes.array,
-    selected: PropTypes.string
+    selected: PropTypes.string,
+    fetch: PropTypes.function
   };
 
   static defaultProps = {
     filter: "close",
     data: [],
-    selected: "BTC"
+    selected: "BTC",
+    fetch: null
   };
 
   componentDidMount() {
@@ -59,7 +61,7 @@ class Graph extends Component {
 
   render() {
     const { dataset } = this.state;
-    const { filter } = this.props;
+    const { filter, graphType } = this.props;
 
     const options = {
       legend: {
@@ -122,7 +124,20 @@ class Graph extends Component {
         }
       ]
     };
-    return <Line data={data} options={options} />;
+
+    switch (graphType) {
+      case "Line":
+        return <Line data={data} options={options} />;
+        break;
+      case "Doughnut":
+        return <Doughnut data={data} options={options} />;
+        break;
+      case "Bar":
+        return <Bar data={data} options={options} />;
+        break;
+      default:
+        return <h4>Please Select Graph Type</h4>;
+    }
   }
 }
 
