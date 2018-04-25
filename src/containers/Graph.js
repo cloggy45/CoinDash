@@ -30,16 +30,12 @@ class Graph extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data === undefined) return null;
+
     const dataset = nextProps.data.map(data => {
       return data["close"];
     });
 
-    const labels = nextProps.data.map(data => {
-      return moment(new Date(data.time * 1000)).format("MMM Do YY");
-    });
-
     return {
-      labels: labels,
       dataset: dataset
     };
   }
@@ -49,6 +45,12 @@ class Graph extends Component {
       this.props.fetch(this.props.selected);
     }
   }
+
+  getLabels = dataset => {
+    return dataset.map(data => {
+      return moment(new Date(data.time * 1000)).format("MMM Do YY");
+    });
+  };
 
   render() {
     const { labels, dataset } = this.state;
@@ -88,7 +90,7 @@ class Graph extends Component {
     };
 
     const data = {
-      labels: labels,
+      labels: this.getLabels(dataset),
       datasets: [
         {
           label: this.props.filter,
