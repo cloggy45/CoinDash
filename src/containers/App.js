@@ -37,8 +37,8 @@ const App = () => {
         </Title>
         <Overview  />
         <Options />
-        <Graph />
-        <Graph />
+        <Graph filter={"close"} />
+        <Graph filter={"open"} />
       </Container>
   )
   }

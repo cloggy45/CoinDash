@@ -12,18 +12,24 @@ import styleConstants from "../misc/style_constants.js";
 class Graph extends Component {
   state = {
     isLoading: true,
-    ticker: "BTC",
     labels: [],
     dataset: []
   };
 
+  static propTypes = {
+    filter: PropTypes.string
+  };
+
+  static defaultProps = {
+    filter: "close"
+  };
+
   componentDidMount() {
-    this.props.fetch(this.state.ticker, "USD");
+    this.props.fetch(this.props.selected, "USD");
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data === undefined) return null;
-
     const dataset = nextProps.data.map(data => {
       return data["close"];
     });
@@ -31,16 +37,21 @@ class Graph extends Component {
     const labels = nextProps.data.map(data => {
       return moment(new Date(data.time * 1000)).format("MMM Do YY");
     });
-    console.log("getDerivedState", dataset);
+
     return {
       labels: labels,
       dataset: dataset
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selected !== this.props.selected) {
+      this.props.fetch(this.props.selected);
+    }
+  }
+
   render() {
     const { labels, dataset } = this.state;
-    console.log(dataset);
     const options = {
       legend: {
         fontColor: styleConstants.get("Dark")
@@ -80,7 +91,7 @@ class Graph extends Component {
       labels: labels,
       datasets: [
         {
-          label: "TEST",
+          label: this.props.filter,
           fill: true,
           lineTension: 0.1,
           backgroundColor: styleConstants.get("Medium"),
