@@ -26,7 +26,7 @@ class Graph extends Component {
     filter: "close",
     data: [],
     selected: "BTC",
-    fetch: null
+    fetch: () => {}
   };
 
   componentDidMount() {
