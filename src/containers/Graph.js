@@ -16,11 +16,15 @@ class Graph extends Component {
   };
 
   static propTypes = {
-    filter: PropTypes.string
+    filter: PropTypes.string,
+    data: PropTypes.array,
+    selected: PropTypes.string
   };
 
   static defaultProps = {
-    filter: "close"
+    filter: "close",
+    data: [],
+    selected: "BTC"
   };
 
   componentDidMount() {
@@ -52,12 +56,6 @@ class Graph extends Component {
       return moment(new Date(time * 1000)).format("MMM Do YY");
     });
   };
-
-  // getLabels = dataset => {
-  //   return dataset.map(data => {
-  //     return moment(new Date(data.time * 1000)).format("MMM Do YY");
-  //   });
-  // };
 
   render() {
     const { dataset } = this.state;
