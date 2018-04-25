@@ -31,15 +31,16 @@ class Graph extends Component {
     const labels = nextProps.data.map(data => {
       return moment(new Date(data.time * 1000)).format("MMM Do YY");
     });
-
+    console.log("getDerivedState", dataset);
     return {
       labels: labels,
-      datasets: dataset
+      dataset: dataset
     };
   }
 
   render() {
     const { labels, dataset } = this.state;
+    console.log(dataset);
     const options = {
       legend: {
         fontColor: styleConstants.get("Dark")
