@@ -141,7 +141,7 @@ class Graph extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     data: state.graph.history,
     selected: state.options.selected

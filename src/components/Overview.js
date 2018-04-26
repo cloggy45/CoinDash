@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import styleConstants from "../misc/style_constants.js";
-
 import { connect } from "react-redux";
 import { receiveOverviewData, fetchOverviewData } from "../actions/action";
 
@@ -30,35 +29,35 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 0
 });
 
-class Overview extends Component {
+export class Overview extends Component {
   state = {
-    isLoading: false,
+    isLoading: true,
     overview: {}
   };
   componentDidMount() {
     this.props.fetchOverviewData;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.overview === this.state.overview) {
-      this.setState({ isLoading: true });
-    } else {
-      this.setState({ overview: nextProps.overview });
-    }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.overview === undefined) return null;
+    return {
+      isLoading: false,
+      overview: nextProps.overview
+    };
   }
 
   render() {
-    const {
-      active_currencies,
-      active_markets,
-      total_market_cap_usd,
-      total_24h_volume_usd
-    } = this.state.overview;
-    return (
-      <Wrapper>
-        {this.state.isLoading ? (
-          <h3>Is Loading</h3>
-        ) : (
+    if (this.state.isLoading === true) {
+      return <h1>Loading</h1>;
+    } else {
+      const {
+        active_currencies,
+        active_markets,
+        total_market_cap_usd,
+        total_24h_volume_usd
+      } = this.state.overview;
+      return (
+        <Wrapper>
           <Table>
             <tbody>
               <tr>
@@ -79,22 +78,20 @@ class Overview extends Component {
               </tr>
             </tbody>
           </Table>
-        )}
-      </Wrapper>
-    );
+        </Wrapper>
+      );
+    }
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const overview = state.overview.overview;
+const mapStateToProps = state => {
   return {
-    overview
+    overview: state.overview.overview
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    fetch: dispatch(fetchOverviewData())
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  fetch: dispatch(fetchOverviewData())
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(Overview);
