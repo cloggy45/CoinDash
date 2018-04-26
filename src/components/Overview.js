@@ -31,9 +31,17 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 export class Overview extends Component {
   state = {
-    isLoading: true,
+    isLoading: true
+  };
+
+  static propTypes = {
+    overview: PropTypes.object
+  };
+
+  static defaultProps = {
     overview: {}
   };
+
   componentDidMount() {
     this.props.fetchOverviewData;
   }
@@ -41,8 +49,7 @@ export class Overview extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.overview === undefined) return null;
     return {
-      isLoading: false,
-      overview: nextProps.overview
+      isLoading: false
     };
   }
 
@@ -55,7 +62,7 @@ export class Overview extends Component {
         active_markets,
         total_market_cap_usd,
         total_24h_volume_usd
-      } = this.state.overview;
+      } = this.props.overview;
       return (
         <Wrapper>
           <Table>

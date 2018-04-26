@@ -11,15 +11,14 @@ import styleConstants from "../misc/style_constants.js";
 
 class Graph extends Component {
   state = {
-    isLoading: true,
-    dataset: []
+    isLoading: true
   };
 
   static propTypes = {
     filter: PropTypes.string,
     data: PropTypes.array,
     selected: PropTypes.string,
-    fetch: PropTypes.function
+    fetch: PropTypes.func
   };
 
   static defaultProps = {
@@ -34,10 +33,9 @@ class Graph extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.data === undefined) return null;
-
+    if (nextProps.dataset === undefined) return null;
     return {
-      dataset: nextProps.data
+      isLoading: false
     };
   }
 
@@ -60,90 +58,93 @@ class Graph extends Component {
   };
 
   render() {
-    const { dataset } = this.state;
-    const { filter, graphType } = this.props;
-
-    const options = {
-      legend: {
-        fontColor: styleConstants.get("Dark")
-      },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              fontColor: styleConstants.get("Light"),
-              beginAtZero: true,
-              callback: function(value, index, values) {
-                if (parseInt(value) >= 1000) {
-                  return (
-                    "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  );
-                } else {
-                  return "$" + value;
+    if (!this.state.isLoading) {
+      const { filter, graphType, dataset } = this.props;
+      const options = {
+        legend: {
+          fontColor: styleConstants.get("Dark")
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                fontColor: styleConstants.get("Light"),
+                beginAtZero: true,
+                callback: function(value, index, values) {
+                  if (parseInt(value) >= 1000) {
+                    return (
+                      "$" +
+                      value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    );
+                  } else {
+                    return "$" + value;
+                  }
                 }
               }
             }
-          }
-        ],
-        xAxes: [
-          {
-            ticks: {
-              fontColor: styleConstants.get("Light"),
-              fontSize: 10,
-              stepSize: 1,
-              beginAtZero: true
+          ],
+          xAxes: [
+            {
+              ticks: {
+                fontColor: styleConstants.get("Light"),
+                fontSize: 10,
+                stepSize: 1,
+                beginAtZero: true
+              }
             }
+          ]
+        }
+      };
+
+      const data = {
+        labels: this.formatTime(this.getData(dataset, "time")),
+        datasets: [
+          {
+            label: this.props.filter,
+            fill: true,
+            lineTension: 0.1,
+            backgroundColor: styleConstants.get("Medium"),
+            borderColor: styleConstants.get("Medium"),
+            borderCapStyle: "butt",
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: "miter",
+            pointBorderColor: styleConstants.get("Light"),
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: this.getData(dataset, filter)
           }
         ]
+      };
+
+      switch (graphType) {
+        case "Line":
+          return <Line data={data} options={options} />;
+          break;
+        case "Doughnut":
+          return <Doughnut data={data} options={options} />;
+          break;
+        case "Bar":
+          return <Bar data={data} options={options} />;
+          break;
+        default:
+          return <h4>Please Select Graph Type</h4>;
       }
-    };
-
-    const data = {
-      labels: this.formatTime(this.getData(dataset, "time")),
-      datasets: [
-        {
-          label: this.props.filter,
-          fill: true,
-          lineTension: 0.1,
-          backgroundColor: styleConstants.get("Medium"),
-          borderColor: styleConstants.get("Medium"),
-          borderCapStyle: "butt",
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: "miter",
-          pointBorderColor: styleConstants.get("Light"),
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: this.getData(dataset, filter)
-        }
-      ]
-    };
-
-    switch (graphType) {
-      case "Line":
-        return <Line data={data} options={options} />;
-        break;
-      case "Doughnut":
-        return <Doughnut data={data} options={options} />;
-        break;
-      case "Bar":
-        return <Bar data={data} options={options} />;
-        break;
-      default:
-        return <h4>Please Select Graph Type</h4>;
+    } else {
+      return <h1>Is Loading</h1>;
     }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    data: state.graph.history,
+    dataset: state.graph.history,
     selected: state.options.selected
   };
 };
