@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import moment from "moment";
 import PropTypes from "prop-types";
-
+import { ScaleLoader } from "halogenium";
 import { connect, store } from "react-redux";
 import { fetchCoinHistory } from "../actions/action";
 
@@ -137,7 +137,13 @@ class Graph extends Component {
           return <h4>Please Select Graph Type</h4>;
       }
     } else {
-      return <h1>Is Loading</h1>;
+      return (
+        <ScaleLoader
+          color={styleConstants.get("Light")}
+          size="16px"
+          margin="4px"
+        />
+      );
     }
   }
 }

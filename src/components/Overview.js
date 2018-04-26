@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { ScaleLoader } from "halogenium";
+
 import styleConstants from "../misc/style_constants.js";
+
 import { connect } from "react-redux";
 import { receiveOverviewData, fetchOverviewData } from "../actions/action";
 
@@ -54,8 +57,14 @@ export class Overview extends Component {
   }
 
   render() {
-    if (this.state.isLoading === true) {
-      return <h1>Loading</h1>;
+    if (this.state.isLoading) {
+      return (
+        <ScaleLoader
+          color={styleConstants.get("Light")}
+          size="16px"
+          margin="4px"
+        />
+      );
     } else {
       const {
         active_currencies,
