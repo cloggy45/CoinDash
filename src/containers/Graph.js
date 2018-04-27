@@ -5,7 +5,8 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import { ScaleLoader } from "halogenium";
 import { connect, store } from "react-redux";
-import { fetchCoinHistory } from "../actions/action";
+
+import { fetchCoinHistory } from "../actions/api";
 
 import styleConstants from "../misc/style_constants.js";
 

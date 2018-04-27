@@ -7,7 +7,9 @@ import { ScaleLoader } from "halogenium";
 import styleConstants from "../misc/style_constants.js";
 
 import { connect } from "react-redux";
-import { receiveOverviewData, fetchOverviewData } from "../actions/action";
+
+import { fetchOverviewData } from "../actions/api";
+import { receiveOverviewData } from "../actions/overview";
 
 const Wrapper = styled.section`
   color: ${styleConstants.get("Light")};

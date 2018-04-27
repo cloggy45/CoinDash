@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { click } from "../actions/action";
 
 const options = (currentState = {}, action) => {
   switch (action.type) {

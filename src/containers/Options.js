@@ -5,7 +5,9 @@ import "../misc/react-select-custom.css";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { receiveTickers, fetchCoinData, setSelected } from "../actions/action";
+
+import { receiveTickers, setSelected } from "../actions/option";
+import { fetchCoinData } from "../actions/api";
 
 class Options extends React.Component {
   state = {

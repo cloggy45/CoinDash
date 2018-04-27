@@ -8,11 +8,6 @@ import App from "./containers/App";
 
 import configureStore from "./store/configureStore";
 import rootReducer from "./reducers/reducers";
-import {
-  selectCurrency,
-  fetchCoinData,
-  receiveTickers
-} from "./actions/action";
 
 const store = configureStore();
 

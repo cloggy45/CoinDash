@@ -1,49 +1,9 @@
 import axios from "axios";
+import { receiveHistoryData } from "/graph";
+import { receiveOverviewData } from "./overview";
+import { receiveTickers } from "./option";
 
-export const SELECT_CURRENCY = "SELECT_CURRENCY";
-export const RECEIVE_TICKERS = "RECEIVE_TICKERS";
-export const RECEIVE_OVERVIEW = "RECEIVE_OVERVIEW";
-export const RECEIVE_HISTORY = "RECEIVE_HISTORY";
-export const SET_SELECTED = "SET_SELECTED";
-
-export const setSelected = option => {
-  return {
-    type: SET_SELECTED,
-    payload: option
-  };
-};
-
-export const selectCurrency = currency => {
-  return {
-    type: SELECT_CURRENCY,
-    payload: currency
-  };
-};
-
-export const receiveTickers = json => {
-  return {
-    type: RECEIVE_TICKERS,
-    payload: json.map(data => {
-      return { value: data.symbol, label: data.name };
-    })
-  };
-};
-
-export const receiveOverviewData = json => {
-  return {
-    type: RECEIVE_OVERVIEW,
-    payload: json
-  };
-};
-
-export const receiveHistoryData = json => {
-  return {
-    type: RECEIVE_HISTORY,
-    payload: json.Data.map(data => data)
-  };
-};
-
-// https://min-api.cryptocompare.com/
+// Documentation  https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
   return dispatch => {
     return axios
@@ -59,6 +19,7 @@ export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
   };
 }
 
+// Documentation https://coinmarketcap.com/api/
 export function fetchCoinData(ticker = "") {
   return dispatch => {
     return axios
