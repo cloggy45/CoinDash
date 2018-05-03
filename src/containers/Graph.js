@@ -10,7 +10,7 @@ import { fetchCoinHistory } from "../actions/api";
 
 import styleConstants from "../misc/style_constants.js";
 
-class Graph extends Component {
+export class Graph extends Component {
   state = {
     isLoading: true
   };

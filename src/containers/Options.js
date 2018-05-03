@@ -11,7 +11,7 @@ import { fetchCoinData } from "../actions/api";
 
 class Options extends React.Component {
   state = {
-    selectedOption: ""
+    selectedOption: "BTC"
   };
 
   componentDidMount() {

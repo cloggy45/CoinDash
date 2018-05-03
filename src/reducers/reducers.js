@@ -2,6 +2,10 @@ import { combineReducers } from "redux";
 
 const options = (currentState = {}, action) => {
   switch (action.type) {
+    case "REQUEST_DATA":
+      return Object.assign({}, currentState, {
+        requestData: action.payload
+      });
     case "SELECT_CURRENCY":
       return Object.assign({}, currentState, {
         currency: action.payload

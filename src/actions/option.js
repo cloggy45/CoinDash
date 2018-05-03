@@ -1,4 +1,4 @@
-import { SET_SELECTED, RECEIVE_TICKERS } from "./actionTypes";
+import { SET_SELECTED, RECEIVE_TICKERS, REQUEST_DATA } from "./actionTypes";
 
 export const setSelected = option => {
   return {
@@ -13,5 +13,12 @@ export const receiveTickers = json => {
     payload: json.map(data => {
       return { value: data.symbol, label: data.name };
     })
+  };
+};
+
+export const requestData = (requesting = false) => {
+  return {
+    type: REQUEST_DATA,
+    payload: requesting
   };
 };

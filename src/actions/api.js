@@ -1,5 +1,5 @@
 import axios from "axios";
-import { receiveHistoryData } from "/graph";
+import { receiveHistoryData } from "./graph";
 import { receiveOverviewData } from "./overview";
 import { receiveTickers } from "./option";
 
@@ -38,7 +38,6 @@ export function fetchOverviewData(currency = "") {
     return axios
       .get(`https://api.coinmarketcap.com/v1/global/?convert=${currency}`)
       .then(response => {
-        console.log(response.data);
         dispatch(receiveOverviewData(response.data));
       })
       .catch(error => {

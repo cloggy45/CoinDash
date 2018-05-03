@@ -1,5 +1,5 @@
-import { SET_SELECTED, RECEIVE_TICKERS } from "./actionTypes";
-import { setSelected, receiveTickers } from "./option";
+import { SET_SELECTED, RECEIVE_TICKERS, REQUEST_DATA } from "./actionTypes";
+import { setSelected, receiveTickers, requestData } from "./option";
 
 describe("Overview actions", () => {
   it("should create an action to set selected options", () => {
@@ -20,5 +20,14 @@ describe("Overview actions", () => {
       })
     };
     expect(receiveTickers(payload)).toEqual(expectedAction);
+  });
+
+  it("should create an action that indicates that were requesting data", () => {
+    const payload = true;
+    const expectedAction = {
+      type: REQUEST_DATA,
+      payload: payload
+    };
+    expect(requestData(payload)).toEqual(expectedAction);
   });
 });

@@ -2,6 +2,7 @@ import React, { Component, StrictMode } from "react";
 import { render } from "react-dom";
 import styled, { css } from "styled-components";
 import { connect } from "react-redux";
+
 import { fetchCoinData } from "../actions/api"
 import styleConstants from "../misc/style_constants.js";
 
