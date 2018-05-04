@@ -2,6 +2,21 @@ import axios from "axios";
 import { receiveHistoryData } from "./graph";
 import { receiveOverviewData } from "./overview";
 import { receiveTickers } from "./option";
+import { REQUEST_FAILED, REQUEST_SUCCESSFUL } from "./actionTypes";
+
+export const requestSuccessful = () => {
+  return {
+    type: "REQUEST_SUCCESSFUL",
+    payload: true
+  };
+};
+
+export const requestFailed = () => {
+  return {
+    type: "REQUEST_FAILED",
+    payload: true
+  };
+};
 
 // Documentation  https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
@@ -11,10 +26,12 @@ export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
         `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
       )
       .then(response => {
+        dispatch(requestSuccessful);
         dispatch(receiveHistoryData(response.data));
       })
       .catch(error => {
         console.log(error);
+        dispatch(requestFailed);
       });
   };
 }

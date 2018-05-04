@@ -12,7 +12,8 @@ import styleConstants from "../misc/style_constants.js";
 
 export class Graph extends Component {
   state = {
-    isLoading: true
+    isLoading: true,
+    dataset: []
   };
 
   static propTypes = {
@@ -35,9 +36,16 @@ export class Graph extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.dataset === undefined) return null;
-    return {
-      isLoading: false
-    };
+    else if (nextProps.dataset === prevState.dataset) {
+      return {
+        isLoading: true
+      };
+    } else {
+      return {
+        isLoading: false,
+        dataset: nextProps.dataset
+      };
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -151,6 +159,7 @@ export class Graph extends Component {
 
 const mapStateToProps = state => {
   return {
+    requestingData: state.options.requesting,
     dataset: state.graph.history,
     selected: state.options.selected
   };

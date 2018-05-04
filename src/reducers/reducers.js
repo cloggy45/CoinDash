@@ -1,11 +1,22 @@
 import { combineReducers } from "redux";
 
-const options = (currentState = {}, action) => {
+const apiInitState = {
+  requesting: false
+};
+
+const api = (currentState = apiInitState, action) => {
   switch (action.type) {
     case "REQUEST_DATA":
       return Object.assign({}, currentState, {
-        requestData: action.payload
+        requesting: action.payload
       });
+    default:
+      return currentState;
+  }
+};
+
+const options = (currentState = {}, action) => {
+  switch (action.type) {
     case "SELECT_CURRENCY":
       return Object.assign({}, currentState, {
         currency: action.payload
@@ -50,6 +61,7 @@ const graph = (currentState = {}, action) => {
 };
 
 const rootReducer = combineReducers({
+  api,
   options,
   overview,
   graph

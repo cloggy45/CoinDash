@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
-import { receiveTickers, setSelected } from "../actions/option";
+import { receiveTickers, setSelected, requestData } from "../actions/option";
 import { fetchCoinData } from "../actions/api";
 
 class Options extends React.Component {
@@ -19,6 +19,7 @@ class Options extends React.Component {
   }
 
   handleChange = selectedOption => {
+    this.props.requestData(true);
     this.props.setOption(selectedOption.value);
     this.setState({ selectedOption: selectedOption });
   };
@@ -40,14 +41,14 @@ class Options extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const options = state.options.tickers;
   return {
-    Options: options
+    Options: state.options.tickers
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setOption: option => dispatch(setSelected(option)),
-  fetchTickers: () => dispatch(fetchCoinData())
+  fetchTickers: () => dispatch(fetchCoinData()),
+  requestData: requesting => dispatch(requestData(requesting))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Options);
