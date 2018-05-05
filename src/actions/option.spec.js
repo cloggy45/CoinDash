@@ -22,7 +22,7 @@ describe("Overview actions", () => {
     expect(receiveTickers(payload)).toEqual(expectedAction);
   });
 
-  it("should create an action that indicates that were requesting data", () => {
+  it("should create an action that indicates that we are requesting data", () => {
     const payload = true;
     const expectedAction = {
       type: REQUEST_DATA,
