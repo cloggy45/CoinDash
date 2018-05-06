@@ -1,20 +1,28 @@
 import axios from "axios";
-import { receiveHistoryData } from "./graph";
-import { receiveOverviewData } from "./overview";
-import { receiveTickers } from "./option";
-import { REQUEST_FAILED, REQUEST_SUCCESSFUL } from "./actionTypes";
+import {
+  RECEIVE_COIN_DATA,
+  RECEIVE_MARKET_OVERVIEW_DATA,
+  RECEIVE_COIN_HISTORY_DATA
+} from "./actionTypes";
 
-export const requestSuccessful = () => {
+export const receiveMarketOverviewData = json => {
   return {
-    type: "REQUEST_SUCCESSFUL",
-    payload: true
+    type: RECEIVE_MARKET_OVERVIEW_DATA,
+    payload: json
   };
 };
 
-export const requestFailed = () => {
+export const receiveCoinHistoryData = json => {
   return {
-    type: "REQUEST_FAILED",
-    payload: true
+    type: RECEIVE_COIN_HISTORY_DATA,
+    payload: json
+  };
+};
+
+export const receiveCoinData = json => {
+  return {
+    type: RECEIVE_COIN_DATA,
+    payload: json
   };
 };
 
@@ -26,23 +34,7 @@ export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
         `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
       )
       .then(response => {
-        dispatch(requestSuccessful);
-        dispatch(receiveHistoryData(response.data));
-      })
-      .catch(error => {
-        console.log(error);
-        dispatch(requestFailed);
-      });
-  };
-}
-
-// Documentation https://coinmarketcap.com/api/
-export function fetchCoinData(ticker = "") {
-  return dispatch => {
-    return axios
-      .get(`https://api.coinmarketcap.com/v1/ticker/${ticker}`)
-      .then(response => {
-        dispatch(receiveTickers(response.data));
+        dispatch(receiveCoinHistoryData(response.data));
       })
       .catch(error => {
         console.log(error);
@@ -50,12 +42,26 @@ export function fetchCoinData(ticker = "") {
   };
 }
 
-export function fetchOverviewData(currency = "") {
+// Documentation https://api.coinmarketcap.com/v2/ticker/?limit=10
+export function fetchCoinData() {
   return dispatch => {
     return axios
-      .get(`https://api.coinmarketcap.com/v1/global/?convert=${currency}`)
+      .get(`https://api.coinmarketcap.com/v2/ticker/`)
       .then(response => {
-        dispatch(receiveOverviewData(response.data));
+        dispatch(receiveCoinData(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+export function fetchMarketOverviewData(currency = "") {
+  return dispatch => {
+    return axios
+      .get(`https://api.coinmarketcap.com/v2/global/`)
+      .then(response => {
+        dispatch(receiveMarketOverviewData(response.data));
       })
       .catch(error => {
         console.log(error);

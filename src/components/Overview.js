@@ -8,8 +8,8 @@ import styleConstants from "../misc/style_constants.js";
 
 import { connect } from "react-redux";
 
-import { fetchOverviewData } from "../actions/api";
-import { receiveOverviewData } from "../actions/overview";
+import { fetchMarketOverviewData } from "../actions/api";
+import { getMarketOverviewData } from "../reducers/selectors";
 
 const Wrapper = styled.section`
   color: ${styleConstants.get("Light")};
@@ -104,12 +104,12 @@ export class Overview extends Component {
 
 const mapStateToProps = state => {
   return {
-    overview: state.overview.overview
+    overview: getMarketOverviewData(state)
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetch: dispatch(fetchOverviewData())
+  fetch: dispatch(fetchMarketOverviewData())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Overview);

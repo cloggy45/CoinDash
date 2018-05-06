@@ -9,7 +9,14 @@ import App from "./containers/App";
 import configureStore from "./store/configureStore";
 import rootReducer from "./reducers/reducers";
 
-const store = configureStore();
+const store = configureStore({
+  api: {
+    requesting: false,
+    coinData: [],
+    coinHistoryData: [],
+    marketOverviewData: []
+  }
+});
 
 render(
   <Provider store={store}>

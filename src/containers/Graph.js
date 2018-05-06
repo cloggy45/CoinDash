@@ -159,9 +159,9 @@ export class Graph extends Component {
 
 const mapStateToProps = state => {
   return {
-    requestingData: state.options.requesting,
-    dataset: state.graph.history,
-    selected: state.options.selected
+    // requestingData: state.options.requesting,
+    // dataset: state.graph.history,
+    // selected: state.options.selected
   };
 };
 
