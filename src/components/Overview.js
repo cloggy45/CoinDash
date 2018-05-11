@@ -9,7 +9,6 @@ import styleConstants from "../misc/style_constants.js";
 import { connect } from "react-redux";
 
 import { fetchMarketOverviewData } from "../actions/api";
-import { getMarketOverviewData } from "../reducers/selectors";
 
 const Wrapper = styled.section`
   color: ${styleConstants.get("Light")};
@@ -43,16 +42,15 @@ export class Overview extends Component {
     overview: PropTypes.object
   };
 
-  static defaultProps = {
-    overview: {}
-  };
+  static defaultProps = {};
 
   componentDidMount() {
-    this.props.fetchOverviewData;
+    this.props.fetch;
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.overview === undefined) return null;
+    console.log("next Props", nextProps);
     return {
       isLoading: false
     };
@@ -69,22 +67,22 @@ export class Overview extends Component {
       );
     } else {
       const {
-        active_currencies,
+        active_cryptocurrencies,
         active_markets,
-        total_market_cap_usd,
-        total_24h_volume_usd
+        quotes
       } = this.props.overview;
+      const { total_market_cap, total_volume_24h } = quotes.USD;
       return (
         <Wrapper>
           <Table>
             <tbody>
               <tr>
                 <TableData>Total Market Cap</TableData>
-                <TableData>{formatter.format(total_market_cap_usd)}</TableData>
+                <TableData>{formatter.format(total_market_cap)}</TableData>
               </tr>
               <tr>
                 <TableData>Total 24 Volume</TableData>
-                <TableData>{formatter.format(total_24h_volume_usd)}</TableData>
+                <TableData>{formatter.format(total_volume_24h)}</TableData>
               </tr>
               <tr>
                 <TableData>Active Markets</TableData>
@@ -92,7 +90,7 @@ export class Overview extends Component {
               </tr>
               <tr>
                 <TableData>Active Currencies</TableData>
-                <TableData>{active_currencies}</TableData>
+                <TableData>{active_cryptocurrencies}</TableData>
               </tr>
             </tbody>
           </Table>
@@ -103,8 +101,9 @@ export class Overview extends Component {
 }
 
 const mapStateToProps = state => {
+  const { data } = state.api.marketOverviewData;
   return {
-    overview: getMarketOverviewData(state)
+    overview: data
   };
 };
 
