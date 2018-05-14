@@ -10,16 +10,16 @@ import { connect } from "react-redux";
 
 import { fetchMarketOverviewData } from "../actions/api";
 
-const Wrapper = styled.section`
+export const Wrapper = styled.section`
   color: ${styleConstants.get("Light")};
   margin: 20px 0;
 `;
 
-const Table = styled.table`
+export const Table = styled.table`
   width: 100%;
 `;
 
-const TableData = styled.td`
+export const TableData = styled.td`
   &:nth-child(even) {
     text-align: right;
   }
@@ -27,7 +27,7 @@ const TableData = styled.td`
   border-bottom: #234558 solid 0.1px;
 `;
 
-const formatter = new Intl.NumberFormat("en-US", {
+export const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   minimumFractionDigits: 0
