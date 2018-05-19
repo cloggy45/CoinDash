@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import configureStore from "redux-mock-store/dist/index-umd";
 import { shallow, mount, render, configure } from "enzyme";
 import renderer from "react-test-renderer";
 import { store } from "../index";
@@ -8,11 +7,12 @@ import Adapter from "enzyme-adapter-react-16";
 import { Overview } from "../components/Overview";
 
 configure({ adapter: new Adapter() });
-let wrapper;
-beforeEach(() => {
-  wrapper = mount(<Overview />);
-});
+
 describe("Overview Component", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(<Overview />);
+  });
   it("Renders a scaleloader when loading data", () => {
     expect(wrapper.find("ScaleLoader").length).toBeGreaterThan(0);
   });
@@ -32,6 +32,5 @@ describe("Overview Component", () => {
     const wrapper = mount(<Overview overview={props} />);
     wrapper.setState({ isLoading: false });
     expect(wrapper.find("table").length).toBeGreaterThan(0);
-    console.log(wrapper.debug());
   });
 });

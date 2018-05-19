@@ -50,7 +50,7 @@ export class Overview extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.overview === undefined) return null;
-    console.log("next Props", nextProps);
+
     return {
       isLoading: false
     };

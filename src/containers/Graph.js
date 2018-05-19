@@ -55,6 +55,7 @@ export class Graph extends Component {
   }
 
   getData = (dataset, filter) => {
+    console.log("getData:", dataset);
     return dataset.map(data => {
       return data[filter];
     });
