@@ -4,6 +4,10 @@ export const api = (currentState = {}, action) => {
       return Object.assign({}, currentState, {
         requesting: action.payload
       });
+    case "RECEIVE_TICKERS":
+      return Object.assign({}, currentState, {
+        tickers: action.payload
+      });
     case "RECEIVE_COIN_DATA":
       return Object.assign({}, currentState, {
         coinData: action.payload

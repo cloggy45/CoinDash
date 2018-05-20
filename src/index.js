@@ -14,7 +14,8 @@ export const store = configureStore({
     requesting: false,
     coinData: [],
     coinHistoryData: [],
-    marketOverviewData: []
+    marketOverviewData: [],
+    tickers: []
   }
 });
 

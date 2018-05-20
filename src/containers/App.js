@@ -37,6 +37,7 @@ const App = () => {
           Coin:<LightSpan>Dash</LightSpan>
         </Title>
         <Overview  />
+        <Options />
         <Graph filter={"close"} graphType={"Line"} />
         
         {/*

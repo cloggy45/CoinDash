@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  RECEIVE_TICKERS,
   RECEIVE_COIN_DATA,
   RECEIVE_MARKET_OVERVIEW_DATA,
   RECEIVE_COIN_HISTORY_DATA
@@ -25,6 +26,29 @@ export const receiveCoinData = json => {
     payload: json
   };
 };
+
+export const receiveTickers = json => {
+  return {
+    type: RECEIVE_TICKERS,
+    payload: json.map(data => {
+      return { value: data.symbol, label: data.name };
+    })
+  };
+};
+
+// Documentation https://coinmarketcap.com/api/#endpoint_listings
+export function fetchTickers() {
+  return dispatch => {
+    return axios
+      .get(`https://api.coinmarketcap.com/v2/listings/`)
+      .then(response => {
+        dispatch(receiveTickers(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
 
 // Documentation  https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker = "BTC", currency = "USD") {

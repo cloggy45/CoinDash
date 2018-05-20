@@ -1,9 +1,11 @@
 import {
   fetchMarketOverviewData,
   fetchCoinData,
-  fetchCoinHistory
+  fetchCoinHistory,
+  fetchTickers
 } from "./api";
 import {
+  RECEIVE_TICKERS,
   RECEIVE_COIN_DATA,
   RECEIVE_COIN_HISTORY_DATA,
   RECEIVE_MARKET_OVERVIEW_DATA
@@ -26,7 +28,7 @@ describe("Test Async Actions", () => {
     store.clearActions();
   });
 
-  it("Fetch markver overview data", () => {
+  it("Fetch market overview data", () => {
     const url = `https://api.coinmarketcap.com/v2/global/`;
     const payload = [
       {
@@ -60,6 +62,44 @@ describe("Test Async Actions", () => {
     ];
     mock.onGet(url).reply(200, payload);
     return store.dispatch(fetchMarketOverviewData()).then(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+  });
+
+  it("Fetch tickers", () => {
+    const url = `https://api.coinmarketcap.com/v2/listings/`;
+    const payload = [
+      {
+        id: 1,
+        name: "Bitcoin",
+        symbol: "BTC",
+        website_slug: "bitcoin"
+      },
+      {
+        id: 2,
+        name: "Litecoin",
+        symbol: "LTC",
+        website_slug: "litecoin"
+      },
+      {
+        id: 3,
+        name: "Namecoin",
+        symbol: "NMC",
+        website_slug: "namecoin"
+      }
+    ];
+
+    const expectedAction = [
+      {
+        type: RECEIVE_TICKERS,
+        payload: payload.map(data => {
+          return { value: data.symbol, label: data.name };
+        })
+      }
+    ];
+    mock.onGet(url).reply(200, payload);
+
+    return store.dispatch(fetchTickers()).then(() => {
       expect(store.getActions()).toEqual(expectedAction);
     });
   });
