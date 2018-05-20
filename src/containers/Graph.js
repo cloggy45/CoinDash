@@ -158,9 +158,10 @@ export class Graph extends Component {
 }
 
 const mapStateToProps = state => {
+  const { Data } = state.api.coinHistoryData;
   return {
-    // requestingData: state.options.requesting,
-    // dataset: state.graph.history,
+    requestingData: state.api.requesting,
+    dataset: Data
     // selected: state.options.selected
   };
 };
