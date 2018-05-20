@@ -24,22 +24,22 @@ export class Options extends React.Component {
     this.setState({ selectedOption: selectedOption });
   };
 
-  formatOptions = (values, labels) => {
-    return values.map((value, index) => {
-      return { value: value, label: labels[index] };
+  formatOptions = (options = []) => {
+    return options.map(data => {
+      return { value: data.symbol, label: data.name };
     });
   };
 
   render() {
     const { selectedOption } = this.state;
-    const { Options } = this.props;
     const value = selectedOption && selectedOption.value;
+    const options = this.formatOptions(this.props.options);
     return (
       <Select
         name="form-field-name"
         value={selectedOption}
         onChange={this.handleChange}
-        options={Options}
+        options={options}
         clearable={false}
       />
     );
@@ -48,7 +48,7 @@ export class Options extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    Options: state.api.tickers
+    options: state.api.tickers.data
   };
 };
 

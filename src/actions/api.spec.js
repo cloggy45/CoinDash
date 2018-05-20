@@ -92,9 +92,7 @@ describe("Test Async Actions", () => {
     const expectedAction = [
       {
         type: RECEIVE_TICKERS,
-        payload: payload.map(data => {
-          return { value: data.symbol, label: data.name };
-        })
+        payload: payload
       }
     ];
     mock.onGet(url).reply(200, payload);
