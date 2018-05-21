@@ -31,7 +31,7 @@ export class Graph extends Component {
   };
 
   componentDidMount() {
-    this.props.fetch(this.props.selected, "USD");
+    this.props.fetch(this.props.selected);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -161,13 +161,15 @@ const mapStateToProps = state => {
   const { Data } = state.api.coinHistoryData;
   return {
     requestingData: state.api.requesting,
-    dataset: Data
-    // selected: state.options.selected
+    dataset: Data,
+    selected: state.option.selected
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetch: (ticker, currency) => dispatch(fetchCoinHistory(ticker, currency))
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetch: ticker => dispatch(fetchCoinHistory(ticker))
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Graph);

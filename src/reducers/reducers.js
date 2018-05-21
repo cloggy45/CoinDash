@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import { api } from "./api";
+import { option } from "./option";
 
 const rootReducer = combineReducers({
-  api
+  api,
+  option
 });
 
 export default rootReducer;

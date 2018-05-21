@@ -49,11 +49,11 @@ export function fetchTickers() {
 }
 
 // Documentation  https://min-api.cryptocompare.com/
-export function fetchCoinHistory(ticker = "BTC", currency = "USD") {
+export function fetchCoinHistory(ticker) {
   return dispatch => {
     return axios
       .get(
-        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
+        `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=USD&limit=60&aggregate=3&e=CCCAGG`
       )
       .then(response => {
         dispatch(receiveCoinHistoryData(response.data));

@@ -9,7 +9,7 @@ import { Options } from "../containers/Options";
 describe("Options Component", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = mount(<Options />);
+    wrapper = render(<Options />);
   });
   it("Should render", () => {
     expect(wrapper.find("div").length).toBeGreaterThan(0);

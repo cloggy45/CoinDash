@@ -40,13 +40,6 @@ const App = () => {
         <Options />
         <Graph filter={"close"} graphType={"Line"} />
         <Graph filter={"open"} graphType={"Bar"} />
-        {/*
-        <Options />
-        <Graph filter={"close"} graphType={"Line"} />
-        <Graph filter={"open"} graphType={"Bar"} />
-        <Graph filter={"high"} graphType={"Bar"}/> 
-        */
-        }
       </Container>
   )
   }

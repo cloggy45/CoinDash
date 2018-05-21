@@ -27,7 +27,9 @@ describe("Test Async Actions", () => {
     mock.reset();
     store.clearActions();
   });
-
+  afterAll(() => {
+    mock.restore();
+  });
   it("Fetch market overview data", () => {
     const url = `https://api.coinmarketcap.com/v2/global/`;
     const payload = [
@@ -144,7 +146,7 @@ describe("Test Async Actions", () => {
 
     mock.onGet(url).reply(200, payload);
 
-    return store.dispatch(fetchCoinHistory()).then(() => {
+    return store.dispatch(fetchCoinHistory("BTC")).then(() => {
       expect(store.getActions()).toEqual(expectedAction);
     });
   });

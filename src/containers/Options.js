@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
-import { receiveTickers, setSelected, requestData } from "../actions/option";
-import { fetchTickers } from "../actions/api";
+import { setSelected } from "../actions/option";
+import { fetchTickers, fetchCoinHistory } from "../actions/api";
 
 export class Options extends React.Component {
   state = {
@@ -15,13 +15,14 @@ export class Options extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchTickers;
+    this.props.getTickers();
+    this.props.setOption("BTC");
   }
 
   handleChange = selectedOption => {
-    this.props.requestData(true);
-    this.props.setOption(selectedOption.value);
-    this.setState({ selectedOption: selectedOption });
+    this.setState({ selectedOption: selectedOption.value }, () => {
+      this.props.setOption(this.state.selectedOption);
+    });
   };
 
   formatOptions = (options = []) => {
@@ -52,9 +53,15 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  setOption: option => dispatch(setSelected(option)),
-  fetchTickers: dispatch(fetchTickers()),
-  requestData: requesting => dispatch(requestData(requesting))
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    setOption: option => {
+      dispatch(setSelected(option));
+    },
+    getTickers: () => {
+      dispatch(fetchTickers());
+    }
+  };
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Options);
