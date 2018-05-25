@@ -48,6 +48,19 @@ export function fetchTickers() {
   };
 }
 
+export function fetchTopTen() {
+  return dispatch => {
+    return axios
+      .get(`https://api.coinmarketcap.com/v2/ticker/?limit=10`)
+      .then(response => {
+        dispatch(receiveTopTenData(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
 // Documentation  https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker) {
   return dispatch => {
