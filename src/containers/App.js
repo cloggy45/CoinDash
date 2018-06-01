@@ -15,6 +15,7 @@ import { bindActionCreators } from 'redux';
 import Options from "./Options";
 import Graph from "./Graph";
 
+
 const Container = styled.div`
       input:focus,
       select:focus,
@@ -40,6 +41,7 @@ const App = () => {
         <Options />
         <Graph filter={"close"} graphType={"Line"} />
         <Graph filter={"open"} graphType={"Bar"} />
+        <Table />
       </Container>
   )
   }

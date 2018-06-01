@@ -2,70 +2,38 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { ScaleLoader } from "halogenium";
+
 import styleConstants from "../misc/style_constants.js";
 
-const Wrapper = styled.section`
-    color: ${styleConstants.get("Light")};
-    margin: 20px 0;
-  `;
+import { connect } from "react-redux";
 
-const Table = styled.table`
-    width: 100%;
-  `;
+export class Table extends Component {
+  state = {
+    isLoading: true
+  };
 
-const TableRow = styled.tr`
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <ScaleLoader
+          color={styleConstants.get("Light")}
+          size="16px"
+          margin="4px"
+        />
+      );
+    } else {
+      return (
+        <div>
+          <h1>Hello</h1>
+        </div>
+      );
+    }
+  }
+}
 
-  `;
+const mapStateToProps = state => {};
 
-const TableData = styled.td`
-    text-align: center;
-    padding: 5px;
-    border-bottom: ${styleConstants.get("Medium")} solid 0.02px;
-  `;
+const mapDispatchToProps = dispatch => ({});
 
-const TableHeader = styled.td`
-    color: ${styleConstants.get("Light")}
-    font-weight: 600;
-    text-align: center;
-    border-bottom: ${styleConstants.get("Light")} solid 0.5px;
-  `;
-
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0
-});
-
-const TableList = props => {
-  let { header } = props;
-  let collection = props.collection.slice(0, 10);
-  return (
-    <Wrapper>
-      <Table>
-        <thead>
-          <TableRow>
-            {
-              header.map(title => {
-                return <TableHeader key={title}>{title}</TableHeader>;
-            })
-            }
-          </TableRow>
-        </thead>
-        <tbody>
-          {collection.map((data, i) => {
-            return (
-              <TableRow key={i}>
-                <TableData key={data.rank}>{data.rank}</TableData>
-                <TableData key={data.name}>{data.name}</TableData>
-                <TableData key={data.price_usd}>{formatter.format(data.price_usd)}</TableData>
-                <TableData key={data.percent_change_24h}>{data.percent_change_24h}</TableData>
-              </TableRow>
-            );
-          })}
-        </tbody>
-      </Table>
-    </Wrapper>
-  );
-};
-
-export default TableList;
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

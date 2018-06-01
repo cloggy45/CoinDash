@@ -29,9 +29,11 @@ describe("Test Async Actions", () => {
     mock.reset();
     store.clearActions();
   });
+
   afterAll(() => {
     mock.restore();
   });
+
   it("Fetch market overview data", () => {
     const url = `https://api.coinmarketcap.com/v2/global/`;
     const payload = [

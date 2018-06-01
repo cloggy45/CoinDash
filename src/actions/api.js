@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  RECEIVE_TOP_TEN,
   RECEIVE_TICKERS,
   RECEIVE_COIN_DATA,
   RECEIVE_MARKET_OVERVIEW_DATA,
@@ -30,6 +31,13 @@ export const receiveCoinData = json => {
 export const receiveTickers = json => {
   return {
     type: RECEIVE_TICKERS,
+    payload: json
+  };
+};
+
+export const receiveTopTenData = json => {
+  return {
+    type: RECEIVE_TOP_TEN,
     payload: json
   };
 };
