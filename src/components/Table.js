@@ -8,9 +8,26 @@ import styleConstants from "../misc/style_constants.js";
 
 import { connect } from "react-redux";
 
+export const Wrapper = styled.section`
+  color: ${styleConstants.get("Light")};
+  margin: 20px 0;
+`;
+
+export const MainTable = styled.table`
+  width: 100%;
+`;
+
+export const TableData = styled.td`
+  &:nth-child(even) {
+    text-align: right;
+  }
+  padding: 5px;
+  border-bottom: #234558 solid 0.1px;
+`;
+
 export class Table extends Component {
   state = {
-    isLoading: true
+    isLoading: false
   };
 
   render() {
@@ -24,9 +41,24 @@ export class Table extends Component {
       );
     } else {
       return (
-        <div>
-          <h1>Hello</h1>
-        </div>
+        <Wrapper>
+          <MainTable>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Change (24 Hour)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <TableData>Bitcoin</TableData>
+                <TableData>100</TableData>
+                <TableData>2%</TableData>
+              </tr>
+            </tbody>
+          </MainTable>
+        </Wrapper>
       );
     }
   }

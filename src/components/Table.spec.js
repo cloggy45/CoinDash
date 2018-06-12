@@ -16,6 +16,15 @@ describe("Table Component", () => {
   });
 
   it("Renders a scaleloader when loading data", () => {
+    wrapper.setState({ isLoading: true });
     expect(wrapper.find("ScaleLoader").length).toBeGreaterThan(0);
+  });
+
+  it("Renders a section, table, th, td", () => {
+    wrapper.setState({ isLoading: false });
+    expect(wrapper.find("section").length).toBeGreaterThan(0);
+    expect(wrapper.find("table").length).toBeGreaterThan(0);
+    expect(wrapper.find("th").length).toBeGreaterThan(0);
+    expect(wrapper.find("td").length).toBeGreaterThan(0);
   });
 });
