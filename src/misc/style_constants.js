@@ -5,7 +5,8 @@ const styleConstants = new Map([
   ["Light", "#78C9CF"],
   ["Yellow", "#EADF5A"],
   ["Red", "#F15354"],
-  ["Grey", "#857879"]
+  ["Grey", "#857879"],
+  ["Green", "#69F153"]
 ]);
 
 export default styleConstants;

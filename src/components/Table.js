@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 
 import { fetchTopTen } from "../actions/api";
 
+import Panel from "../components/Panel";
+
 export const Wrapper = styled.section`
   color: ${styleConstants.get("Light")};
   margin: 20px 0;
@@ -68,6 +70,10 @@ export class Table extends Component {
     return list.sort((a, b) => a.rank > b.rank);
   };
 
+  isNegativePercent = percent => {
+    return Math.sign(percent) === -1 ? true : false;
+  };
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -80,32 +86,46 @@ export class Table extends Component {
     } else {
       const { list } = this.state;
       return (
-        <Wrapper>
-          <MainTable>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Change (24 Hour)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.sortList(list).map(data => {
-                return (
-                  <tr key={data.id}>
-                    <TableData>{data.rank}</TableData>
-                    <TableData>{data.name}</TableData>
-                    <TableData>
-                      {formatter.format(data.quotes.USD.price)}
-                    </TableData>
-                    <TableData>{data.quotes.USD.percent_change_24h}</TableData>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </MainTable>
-        </Wrapper>
+        <Panel label={"Top Ten"}>
+          <Wrapper>
+            <MainTable>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Change (24 Hour)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.sortList(list).map(data => {
+                  return (
+                    <tr key={data.id}>
+                      <TableData>{data.rank}</TableData>
+                      <TableData>{data.name}</TableData>
+                      <TableData>
+                        {formatter.format(data.quotes.USD.price)}
+                      </TableData>
+                      {this.isNegativePercent(
+                        data.quotes.USD.percent_change_24h
+                      ) ? (
+                        <TableData style={{ color: styleConstants.get("Red") }}>
+                          {data.quotes.USD.percent_change_24h}
+                        </TableData>
+                      ) : (
+                        <TableData
+                          style={{ color: styleConstants.get("Green") }}
+                        >
+                          {data.quotes.USD.percent_change_24h}
+                        </TableData>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </MainTable>
+          </Wrapper>
+        </Panel>
       );
     }
   }

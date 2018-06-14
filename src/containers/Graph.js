@@ -7,6 +7,7 @@ import { ScaleLoader } from "halogenium";
 import { connect, store } from "react-redux";
 
 import { fetchCoinHistory } from "../actions/api";
+import Panel from "../components/Panel";
 
 import styleConstants from "../misc/style_constants.js";
 
@@ -134,24 +135,38 @@ export class Graph extends Component {
 
       switch (graphType) {
         case "Line":
-          return <Line data={data} options={options} />;
+          return (
+            <Panel label={this.props.filter}>
+              <Line data={data} options={options} />
+            </Panel>
+          );
           break;
         case "Doughnut":
-          return <Doughnut data={data} options={options} />;
+          return (
+            <Panel label={this.props.filter}>
+              <Doughnut data={data} options={options} />
+            </Panel>
+          );
           break;
         case "Bar":
-          return <Bar data={data} options={options} />;
+          return (
+            <Panel label={this.props.filter}>
+              <Bar data={data} options={options} />
+            </Panel>
+          );
           break;
         default:
           return <h4>Please Select Graph Type</h4>;
       }
     } else {
       return (
-        <ScaleLoader
-          color={styleConstants.get("Light")}
-          size="16px"
-          margin="4px"
-        />
+        <Panel label={"Loading"}>
+          <ScaleLoader
+            color={styleConstants.get("Light")}
+            size="16px"
+            margin="4px"
+          />
+        </Panel>
       );
     }
   }

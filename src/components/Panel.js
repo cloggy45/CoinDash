@@ -26,26 +26,24 @@ const Section = styled.section`
   background-color: ${styleConstants.get("Medium-Light")};
 `;
 
-const Panel = props => {
-  const { label, content } = props;
+export const Panel = props => {
+  const { label } = props;
   return (
     <Wrapper>
       <Header>
         <Title>{label}</Title>
       </Header>
-      <Section>{content}</Section>
+      <Section>{props.children}</Section>
     </Wrapper>
   );
 };
 
 Panel.propTypes = {
-  label: PropTypes.string,
-  content: PropTypes.element
+  label: PropTypes.string
 };
 
 Panel.defaultProps = {
-  label: "Default String",
-  content: "Default Element"
+  label: "Default String"
 };
 
 export default Panel;
