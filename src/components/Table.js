@@ -110,13 +110,13 @@ export class Table extends Component {
                         data.quotes.USD.percent_change_24h
                       ) ? (
                         <TableData style={{ color: styleConstants.get("Red") }}>
-                          {data.quotes.USD.percent_change_24h}
+                          {data.quotes.USD.percent_change_24h}%
                         </TableData>
                       ) : (
                         <TableData
                           style={{ color: styleConstants.get("Green") }}
                         >
-                          {data.quotes.USD.percent_change_24h}
+                          {data.quotes.USD.percent_change_24h}%
                         </TableData>
                       )}
                     </tr>
