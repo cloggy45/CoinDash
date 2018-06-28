@@ -8,7 +8,8 @@ import styleConstants from "../misc/style_constants.js";
 
 import Overview from "../components/Overview";
 import Panel from "../components/Panel";
-import Table from "../components/Table";
+import TopTenOverview from "../components/TopTenOverview";
+import withTableWrapper from "../helpers/withTable";
 
 import { bindActionCreators } from 'redux';
 
@@ -31,6 +32,8 @@ const LightSpan = styled.span`
       font-weight: 200;
     `;
 
+const TopTenOverviewWithTable = withTableWrapper(TopTenOverview, ["Rank", "Name", "Price", "Change (24 Hours)"]);
+
 const App = () => {
   return(
       <Container>
@@ -41,8 +44,9 @@ const App = () => {
         <Options />
         <Graph filter={"close"} graphType={"Line"} />
         <Graph filter={"open"} graphType={"Bar"} />
-        <Table />
+        <TopTenOverviewWithTable />
       </Container>
+
   )
   }
 

@@ -36,7 +36,6 @@ export const receiveTickers = json => {
 };
 
 export const receiveTopTenData = json => {
-  console.log(json);
   return {
     type: RECEIVE_TOP_TEN,
     payload: json

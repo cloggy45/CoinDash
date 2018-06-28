@@ -31,7 +31,7 @@ export const Panel = props => {
   return (
     <Wrapper>
       <Header>
-        <Title>{label}</Title>
+        <Title>{label.replace(/^\w/, c => c.toUpperCase())}</Title>
       </Header>
       <Section>{props.children}</Section>
     </Wrapper>
