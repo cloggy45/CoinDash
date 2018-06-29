@@ -9,7 +9,7 @@ import styleConstants from "../misc/style_constants.js";
 import Overview from "../components/Overview";
 import Panel from "../components/Panel";
 import TopTenOverview from "../components/TopTenOverview";
-import withTableWrapper from "../helpers/withTable";
+import Table from "../components/Table";
 
 import { bindActionCreators } from 'redux';
 
@@ -32,23 +32,20 @@ const LightSpan = styled.span`
       font-weight: 200;
     `;
 
-const TopTenOverviewWithTable = withTableWrapper(TopTenOverview, ["Rank", "Name", "Price", "Change (24 Hours)"]);
-
 const App = () => {
   return(
-      <Container>
-        <Title>
-          Coin:<LightSpan>Dash</LightSpan>
-        </Title>
-        <Overview  />
-        <Options />
-        <Graph filter={"close"} graphType={"Line"} />
-        <Graph filter={"open"} graphType={"Bar"} />
-        <TopTenOverviewWithTable />
-      </Container>
-
-  )
-  }
+    <Container>
+      <Title>
+        Coin:<LightSpan>Dash</LightSpan>
+      </Title>
+      <Overview  />
+      <Options />
+      <Graph filter={"close"} graphType={"Line"} />
+      <Graph filter={"open"} graphType={"Bar"} />
+      <Table headers={["Rank", "Name","Value", "Change"]}><TopTenOverview /></Table>
+    </Container>
+  );
+}
 
 
 

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import styled from "styled-components";
 
-import withTable from "../helpers/withTable";
 import { fetchTopTen } from "../actions/api";
 
 import styleConstants from "../misc/style_constants.js";
@@ -15,9 +14,13 @@ export const TableData = styled.td`
   text-align: center;
 `;
 
-const Fragment = React.Fragment;
+export const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0
+});
 
-class TopTenOverview extends Component {
+export class TopTenOverview extends Component {
   state = {
     isLoading: true,
     list: []
@@ -54,11 +57,28 @@ class TopTenOverview extends Component {
   };
 
   render() {
-    console.log("TopTen", this.props);
+    const { list } = this.state;
     return (
-      <Fragment>
-        <h1>Hello</h1>
-      </Fragment>
+      <React.Fragment>
+        {this.sortList(list).map(data => {
+          return (
+            <tr key={data.id}>
+              <TableData>{data.rank}</TableData>
+              <TableData>{data.name}</TableData>
+              <TableData>{formatter.format(data.quotes.USD.price)}</TableData>
+              {this.isNegativePercent(data.quotes.USD.percent_change_24h) ? (
+                <TableData style={{ color: styleConstants.get("Red") }}>
+                  {data.quotes.USD.percent_change_24h}%
+                </TableData>
+              ) : (
+                <TableData style={{ color: styleConstants.get("Green") }}>
+                  {data.quotes.USD.percent_change_24h}%
+                </TableData>
+              )}
+            </tr>
+          );
+        })}
+      </React.Fragment>
     );
   }
 }
@@ -73,6 +93,4 @@ const mapDispatchToProps = dispatch => ({
   fetch: dispatch(fetchTopTen())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withTable(TopTenOverview)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(TopTenOverview);

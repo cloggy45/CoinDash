@@ -26,7 +26,7 @@ const Section = styled.section`
   background-color: ${styleConstants.get("Medium-Light")};
 `;
 
-export const Panel = props => {
+const Panel = props => {
   const { label } = props;
   return (
     <Wrapper>
