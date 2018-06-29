@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import styled from "styled-components";
+import { ScaleLoader } from "halogenium";
 
 import { fetchTopTen } from "../actions/api";
 
@@ -58,28 +59,39 @@ export class TopTenOverview extends Component {
 
   render() {
     const { list } = this.state;
-    return (
-      <React.Fragment>
-        {this.sortList(list).map(data => {
-          return (
-            <tr key={data.id}>
-              <TableData>{data.rank}</TableData>
-              <TableData>{data.name}</TableData>
-              <TableData>{formatter.format(data.quotes.USD.price)}</TableData>
-              {this.isNegativePercent(data.quotes.USD.percent_change_24h) ? (
-                <TableData style={{ color: styleConstants.get("Red") }}>
-                  {data.quotes.USD.percent_change_24h}%
-                </TableData>
-              ) : (
-                <TableData style={{ color: styleConstants.get("Green") }}>
-                  {data.quotes.USD.percent_change_24h}%
-                </TableData>
-              )}
-            </tr>
-          );
-        })}
-      </React.Fragment>
-    );
+
+    if (this.state.isLoading) {
+      return (
+        <ScaleLoader
+          color={styleConstants.get("Light")}
+          size="16px"
+          margin="4px"
+        />
+      );
+    } else {
+      return (
+        <React.Fragment>
+          {this.sortList(list).map(data => {
+            return (
+              <tr key={data.id}>
+                <TableData>{data.rank}</TableData>
+                <TableData>{data.name}</TableData>
+                <TableData>{formatter.format(data.quotes.USD.price)}</TableData>
+                {this.isNegativePercent(data.quotes.USD.percent_change_24h) ? (
+                  <TableData style={{ color: styleConstants.get("Red") }}>
+                    {data.quotes.USD.percent_change_24h}%
+                  </TableData>
+                ) : (
+                  <TableData style={{ color: styleConstants.get("Green") }}>
+                    {data.quotes.USD.percent_change_24h}%
+                  </TableData>
+                )}
+              </tr>
+            );
+          })}
+        </React.Fragment>
+      );
+    }
   }
 }
 
