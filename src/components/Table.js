@@ -28,7 +28,7 @@ const Table = props => {
         <thead>
           <tr>
             {props.headers.map(header => {
-              return <td>{header}</td>;
+              return <td key={header}>{header}</td>;
             })}
           </tr>
         </thead>

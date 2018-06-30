@@ -62,35 +62,39 @@ export class TopTenOverview extends Component {
 
     if (this.state.isLoading) {
       return (
-        <ScaleLoader
-          color={styleConstants.get("Light")}
-          size="16px"
-          margin="4px"
-        />
-      );
-    } else {
-      return (
         <React.Fragment>
-          {this.sortList(list).map(data => {
-            return (
-              <tr key={data.id}>
-                <TableData>{data.rank}</TableData>
-                <TableData>{data.name}</TableData>
-                <TableData>{formatter.format(data.quotes.USD.price)}</TableData>
-                {this.isNegativePercent(data.quotes.USD.percent_change_24h) ? (
-                  <TableData style={{ color: styleConstants.get("Red") }}>
-                    {data.quotes.USD.percent_change_24h}%
-                  </TableData>
-                ) : (
-                  <TableData style={{ color: styleConstants.get("Green") }}>
-                    {data.quotes.USD.percent_change_24h}%
-                  </TableData>
-                )}
-              </tr>
-            );
-          })}
+          <tr>
+            <td>
+              <ScaleLoader
+                color={styleConstants.get("Light")}
+                size="16px"
+                margin="4px"
+              />
+            </td>
+          </tr>
         </React.Fragment>
       );
+    } else {
+      return this.sortList(list).map(data => {
+        return (
+          <React.Fragment key={data.id}>
+            <tr>
+              <TableData>{data.rank}</TableData>
+              <TableData>{data.name}</TableData>
+              <TableData>{formatter.format(data.quotes.USD.price)}</TableData>
+              {this.isNegativePercent(data.quotes.USD.percent_change_24h) ? (
+                <TableData style={{ color: styleConstants.get("Red") }}>
+                  {data.quotes.USD.percent_change_24h}%
+                </TableData>
+              ) : (
+                <TableData style={{ color: styleConstants.get("Green") }}>
+                  {data.quotes.USD.percent_change_24h}%
+                </TableData>
+              )}
+            </tr>
+          </React.Fragment>
+        );
+      });
     }
   }
 }
