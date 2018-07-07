@@ -20,17 +20,21 @@ const TableData = styled.td`
   text-align: center;
 `;
 
+const TableRow = styled.tr`
+  text-align: center;
+`;
+
 const Table = props => {
   const { headers } = props;
   return (
     <Wrapper>
       <MainTable>
         <thead>
-          <tr>
+          <TableRow>
             {props.headers.map(header => {
               return <td key={header}>{header}</td>;
             })}
-          </tr>
+          </TableRow>
         </thead>
         <tbody>{props.children}</tbody>
       </MainTable>
