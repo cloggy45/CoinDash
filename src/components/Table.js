@@ -42,4 +42,12 @@ const Table = props => {
   );
 };
 
+Table.propTypes = {
+  headers: PropTypes.array
+};
+
+Table.defaultProps = {
+  headers: []
+};
+
 export default Table;
