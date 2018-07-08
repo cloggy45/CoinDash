@@ -42,7 +42,7 @@ const App = () => {
       <Options />
       <Graph filter={"close"} graphType={"Line"} />
       <Graph filter={"open"} graphType={"Bar"} />
-      <Table headers={["Rank", "Name","Value", "Change"]}><TopTenOverview /></Table>
+      <Table title={"Top Ten Cryptocurrencies"} headers={["Rank", "Name","Value", "Change"]}><TopTenOverview /></Table>
     </Container>
   );
 }

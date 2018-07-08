@@ -5,12 +5,11 @@ import PropTypes from "prop-types";
 
 import styleConstants from "../misc/style_constants.js";
 
-const Wrapper = styled.section`
-  color: ${styleConstants.get("Light")};
-  margin: 20px 0;
-`;
+import Panel from "../components/Panel";
 
 const MainTable = styled.table`
+  color: ${styleConstants.get("Light")};
+  margin: 20px 0;
   width: 100%;
 `;
 
@@ -25,9 +24,9 @@ const TableRow = styled.tr`
 `;
 
 const Table = props => {
-  const { headers } = props;
+  const { headers, title } = props;
   return (
-    <Wrapper>
+    <Panel label={title}>
       <MainTable>
         <thead>
           <TableRow>
@@ -38,7 +37,7 @@ const Table = props => {
         </thead>
         <tbody>{props.children}</tbody>
       </MainTable>
-    </Wrapper>
+    </Panel>
   );
 };
 

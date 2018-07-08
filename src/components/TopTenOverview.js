@@ -13,6 +13,7 @@ export const TableData = styled.td`
   padding: 5px;
   border-bottom: #234558 solid 0.1px;
   text-align: center;
+  font-weight: 100;
 `;
 
 export const formatter = new Intl.NumberFormat("en-US", {
