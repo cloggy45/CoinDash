@@ -1,6 +1,8 @@
 import axios from "axios";
 import {
-  RECEIVE_TOP_TEN,
+  FETCH_TOP_TEN_REQUEST,
+  FETCH_TOP_TEN_SUCCESS,
+  FETCH_TOP_TEN_FAILED,
   RECEIVE_TICKERS,
   RECEIVE_COIN_DATA,
   RECEIVE_MARKET_OVERVIEW_DATA,
@@ -35,13 +37,6 @@ export const receiveTickers = json => {
   };
 };
 
-export const receiveTopTenData = json => {
-  return {
-    type: RECEIVE_TOP_TEN,
-    payload: json
-  };
-};
-
 // Documentation https://coinmarketcap.com/api/#endpoint_listings
 export function fetchTickers() {
   return dispatch => {
@@ -56,18 +51,51 @@ export function fetchTickers() {
   };
 }
 
-export function fetchTopTen() {
-  return dispatch => {
-    return axios
-      .get(`https://api.coinmarketcap.com/v2/ticker/?limit=10`)
-      .then(response => {
-        dispatch(receiveTopTenData(response.data));
+export const fetchTopTen = () => dispatch => {
+  dispatch({
+    type: FETCH_TOP_TEN_REQUEST,
+    isFetching: true
+  });
+
+  const request = axios({
+    method: "GET",
+    url: "https://api.coinmarketcap.com/v2/ticker/?limit=10",
+    header: []
+  });
+
+  return request.then(
+    response =>
+      dispatch({
+        type: FETCH_TOP_TEN_SUCCESS,
+        payload: response.data,
+        isFetching: false
+      }),
+    error =>
+      dispatch({
+        type: FETCH_TOP_TEN_FAILED,
+        payload: error || "Failed to fetch top ten",
+        isFetching: false
       })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-}
+  );
+};
+// return dispatch => {
+//   return axios
+//     .get(`https://api.coinmarketcap.com/v2/ticker/?limit=10`)
+//     .then(response => {
+//       dispatch({
+//         type: FETCH_TOP_TEN_SUCCESS,
+//         payload: response.data,
+//         isFetching: false
+//       });
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: FETCH_TOP_TEN_FAILED,
+//         payload: error || "Error fetching top ten",
+//         isFetching: false
+//       });
+//     });
+// };
 
 // Documentation  https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker) {

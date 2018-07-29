@@ -6,11 +6,14 @@ import {
   fetchTickers
 } from "./api";
 import {
+  FETCH_TOP_TEN_REQUEST,
+  FETCH_TOP_TEN_SUCCESS,
+  FETCH_TOP_TEN_FAILED,
   RECEIVE_TICKERS,
   RECEIVE_COIN_DATA,
   RECEIVE_COIN_HISTORY_DATA,
-  RECEIVE_TOP_TEN,
-  RECEIVE_MARKET_OVERVIEW_DATA
+  RECEIVE_MARKET_OVERVIEW_DATA,
+  REQUEST_FAILED
 } from "./actionTypes";
 
 import axios from "axios";
@@ -155,9 +158,9 @@ describe("Test Async Actions", () => {
     });
   });
 
-  it("Fetch top ten coins", () => {
+  describe("Fetch top ten actions", () => {
     const url = `https://api.coinmarketcap.com/v2/ticker/?limit=10`;
-
+    const error = { error: "Unable to fetch top ten" };
     const payload = [
       {
         data: {
@@ -380,16 +383,34 @@ describe("Test Async Actions", () => {
       }
     ];
 
-    const expectedAction = [
-      {
-        type: RECEIVE_TOP_TEN,
-        payload: payload
-      }
-    ];
+    const actionRequest = {
+      type: FETCH_TOP_TEN_REQUEST,
+      isFetching: true
+    };
 
-    mock.onGet(url).reply(200, payload);
-    return store.dispatch(fetchTopTen()).then(() => {
-      expect(store.getActions()).toEqual(expectedAction);
+    const actionSuccess = {
+      type: FETCH_TOP_TEN_SUCCESS,
+      payload: payload,
+      isFetching: false
+    };
+
+    const actionFailed = {
+      type: FETCH_TOP_TEN_FAILED,
+      payload: new Error("Network Error"),
+      isFetching: false
+    };
+
+    it("should fail to fetch top ten", () => {
+      mock.onGet(url).networkError();
+      return store.dispatch(fetchTopTen()).then(() => {
+        expect(store.getActions()).toEqual([actionRequest, actionFailed]);
+      });
+    });
+    it("should successfully fetch top ten", () => {
+      mock.onGet(url).reply(200, payload);
+      return store.dispatch(fetchTopTen()).then(() => {
+        expect(store.getActions()).toEqual([actionRequest, actionSuccess]);
+      });
     });
   });
 
