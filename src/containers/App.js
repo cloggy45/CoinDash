@@ -1,20 +1,20 @@
-import React, { Component, StrictMode } from "react";
-import { render } from "react-dom";
-import styled, { css } from "styled-components";
-import { connect } from "react-redux";
+import React, { Component, StrictMode } from 'react';
+import { render } from 'react-dom';
+import styled, { css } from 'styled-components';
+import { connect } from 'react-redux';
 
-import { fetchCoinData } from "../actions/api";
-import styleConstants from "../misc/style_constants.js";
+import { fetchCoinData } from '../actions/api';
+import styleConstants from '../misc/style_constants.js';
 
-import Overview from "../components/Overview";
-import Panel from "../components/Panel";
-import TopTenOverview from "../containers/TopTenOverview";
-import Table from "../components/Table";
+import Overview from '../components/Overview';
+import Panel from '../components/Panel';
 
-import { bindActionCreators } from "redux";
+import TopTenOverview from '../containers/TopTenOverview';
 
-import Options from "./Options";
-import Graph from "./Graph";
+import { bindActionCreators } from 'redux';
+
+import Options from './Options';
+import Graph from './Graph';
 
 const Container = styled.div`
       input:focus,
@@ -24,7 +24,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
       text-align: center;
-      color: ${styleConstants.get("Yellow")};
+      color: ${styleConstants.get('Yellow')};
     `;
 
 const LightSpan = styled.span`
@@ -37,12 +37,7 @@ const App = () => {
       <Title>
         Coin:<LightSpan>Dash</LightSpan>
       </Title>
-      <Table
-        title={"Top Ten Cryptocurrencies"}
-        headers={["Rank", "Name", "Value", "Change"]}
-      >
-        <TopTenOverview />
-      </Table>
+      <TopTenOverview />
     </Container>
   );
 };

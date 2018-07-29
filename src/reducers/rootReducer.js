@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
-import * as fromApi from "./api";
-import * as fromTopTen from "./topTen";
+import { combineReducers } from 'redux';
+import * as fromApi from './api';
+import * as fromTopTen from './topTen';
 
-import { option } from "./option";
+import { option } from './option';
 
-const [API, TOP_TEN, OPTION] = ["API", "TOP_TEN", "OPTION"];
+const [API, TOP_TEN, OPTION] = ['API', 'TOP_TEN', 'OPTION'];
 
 export const rootReducer = combineReducers({
   [API]: fromApi.api,

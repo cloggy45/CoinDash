@@ -1,106 +1,75 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { compose } from "redux";
-import styled from "styled-components";
-import { ScaleLoader } from "halogenium";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { fetchTopTen } from '../actions/api';
 
-import { fetchTopTen } from "../actions/api";
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import {
   getTopTen,
   isFetchingTopTenList,
   getErrorMessage
-} from "../reducers/rootReducer";
+} from '../reducers/rootReducer';
 
-import styleConstants from "../misc/style_constants.js";
+import styleConstants from '../misc/style_constants.js';
 
-export const TableData = styled.td`
-  padding: 5px;
-  border-bottom: #234558 solid 0.1px;
-  text-align: center;
-  font-weight: 100;
-`;
-
-export const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto'
+  },
+  table: {
+    minWidth: 700
+  }
 });
 
 export class TopTenOverview extends Component {
-  state = {
-    isLoading: true,
-    list: []
-  };
-
-  ComponentDidMount() {
+  componentDidMount() {
     this.props.fetch;
   }
-
-  static defaultProps = {
-    topTen: undefined
-  };
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.topTen === undefined) return null;
-    else if (nextProps.topTen === prevState.list) {
-      return {
-        isLoading: true
-      };
-    } else {
-      return {
-        isLoading: false,
-        list: Object.entries(nextProps.topTen.data).map(data => data[1])
-      };
-    }
-  }
-
-  sortList = list => {
-    return list.sort((a, b) => a.rank > b.rank);
-  };
-
-  isNegativePercent = percent => {
-    return Math.sign(percent) === -1 ? true : false;
-  };
-
   render() {
-    const { list } = this.state;
-
-    if (this.props.isFetching) {
-      return (
-        <React.Fragment>
-          <tr>
-            <td>
-              <ScaleLoader
-                color={styleConstants.get("Light")}
-                size="16px"
-                margin="4px"
-              />
-            </td>
-          </tr>
-        </React.Fragment>
-      );
+    const { classes, topTen, isFetching } = this.props;
+    if (isFetching || topTen === undefined) {
+      return <CircularProgress className={classes.progress} />;
     } else {
-      return this.sortList(list).map(data => {
-        return (
-          <React.Fragment key={data.id}>
-            <tr>
-              <TableData>{data.rank}</TableData>
-              <TableData>{data.name}</TableData>
-              <TableData>{formatter.format(data.quotes.USD.price)}</TableData>
-              {this.isNegativePercent(data.quotes.USD.percent_change_24h) ? (
-                <TableData style={{ color: styleConstants.get("Red") }}>
-                  {data.quotes.USD.percent_change_24h}%
-                </TableData>
-              ) : (
-                <TableData style={{ color: styleConstants.get("Green") }}>
-                  {data.quotes.USD.percent_change_24h}%
-                </TableData>
-              )}
-            </tr>
-          </React.Fragment>
-        );
-      });
+      return (
+        <Paper className={classes.root}>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Rank</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell numeric>Value</TableCell>
+                <TableCell numeric>Change (24 Hour)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {topTen.map(element => {
+                const { USD } = element.quotes;
+                return (
+                  <TableRow key={element.id}>
+                    <TableCell component="th" scope="row">
+                      {element.rank}
+                    </TableCell>
+                    <TableCell>{element.name}</TableCell>
+                    <TableCell numeric>{USD.price}</TableCell>
+                    <TableCell numeric>{USD.percent_change_24h}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
+      );
     }
   }
 }
@@ -120,4 +89,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TopTenOverview);
+)(withStyles(styles)(TopTenOverview));

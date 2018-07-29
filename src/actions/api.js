@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   FETCH_TOP_TEN_REQUEST,
   FETCH_TOP_TEN_SUCCESS,
@@ -7,7 +7,7 @@ import {
   RECEIVE_COIN_DATA,
   RECEIVE_MARKET_OVERVIEW_DATA,
   RECEIVE_COIN_HISTORY_DATA
-} from "./actionTypes";
+} from './actionTypes';
 
 export const receiveMarketOverviewData = json => {
   return {
@@ -58,8 +58,8 @@ export const fetchTopTen = () => dispatch => {
   });
 
   const request = axios({
-    method: "GET",
-    url: "https://api.coinmarketcap.com/v2/ticker/?limit=10",
+    method: 'GET',
+    url: 'https://api.coinmarketcap.com/v2/ticker/?limit=10',
     header: []
   });
 
@@ -73,7 +73,7 @@ export const fetchTopTen = () => dispatch => {
     error =>
       dispatch({
         type: FETCH_TOP_TEN_FAILED,
-        payload: error || "Failed to fetch top ten",
+        payload: error || 'Failed to fetch top ten',
         isFetching: false
       })
   );
@@ -109,7 +109,7 @@ export function fetchCoinData() {
   };
 }
 
-export function fetchMarketOverviewData(currency = "") {
+export function fetchMarketOverviewData(currency = '') {
   return dispatch => {
     return axios
       .get(`https://api.coinmarketcap.com/v2/global/`)
