@@ -3,13 +3,13 @@ import * as types from "../actions/actionTypes";
 
 describe("Fetch Top Ten Reducer", () => {
   it("should return the initial state", () => {
-    expect(topTen(undefined, {})).toEqual(const initState = {
+    expect(topTen(undefined, {})).toEqual({
       isFetching: true,
       topTen: undefined,
       errorMessage: undefined
-    };);
+    });
   });
-  
+
   it("should handle FETCH_TOP_TEN_REQUEST", () => {
     const someAction = {
       type: types.FETCH_TOP_TEN_REQUEST,
