@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import App from "./containers/App";
 
 import configureStore from "./store/configureStore";
-import rootReducer from "./reducers/reducers";
+import rootReducer from "./reducers/rootReducer";
 
 export const store = configureStore({
   api: {

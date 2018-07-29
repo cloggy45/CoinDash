@@ -8,7 +8,7 @@ import styleConstants from "../misc/style_constants.js";
 
 import Overview from "../components/Overview";
 import Panel from "../components/Panel";
-import TopTenOverview from "../components/TopTenOverview";
+import TopTenOverview from "../containers/TopTenOverview";
 import Table from "../components/Table";
 
 import { bindActionCreators } from "redux";
