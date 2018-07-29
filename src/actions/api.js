@@ -78,24 +78,6 @@ export const fetchTopTen = () => dispatch => {
       })
   );
 };
-// return dispatch => {
-//   return axios
-//     .get(`https://api.coinmarketcap.com/v2/ticker/?limit=10`)
-//     .then(response => {
-//       dispatch({
-//         type: FETCH_TOP_TEN_SUCCESS,
-//         payload: response.data,
-//         isFetching: false
-//       });
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: FETCH_TOP_TEN_FAILED,
-//         payload: error || "Error fetching top ten",
-//         isFetching: false
-//       });
-//     });
-// };
 
 // Documentation  https://min-api.cryptocompare.com/
 export function fetchCoinHistory(ticker) {
