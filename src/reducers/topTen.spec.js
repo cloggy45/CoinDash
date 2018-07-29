@@ -250,9 +250,13 @@ describe('Fetch Top Ten Reducer', () => {
     };
 
     const expectedResult = {
-      list: Object.entries(payload.data).map(datum => {
-        return datum[1];
-      }),
+      list: Object.entries(payload.data)
+        .map(datum => {
+          return datum[1];
+        })
+        .sort((a, b) => {
+          return a.rank > b.rank;
+        }),
       isFetching: false
     };
     expect(topTen({}, someAction)).toEqual(expectedResult);

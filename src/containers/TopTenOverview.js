@@ -38,7 +38,7 @@ export class TopTenOverview extends Component {
   }
   render() {
     const { classes, topTen, isFetching } = this.props;
-    if (isFetching || topTen === undefined) {
+    if (isFetching || topTen.length === 0) {
       return <CircularProgress className={classes.progress} />;
     } else {
       return (

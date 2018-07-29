@@ -8,9 +8,13 @@ export const topTen = (currentState = initState, action) => {
   switch (action.type) {
     case 'FETCH_TOP_TEN_SUCCESS':
       return Object.assign({}, currentState, {
-        list: Object.entries(action.payload.data).map(datum => {
-          return datum[1];
-        }),
+        list: Object.entries(action.payload.data)
+          .map(datum => {
+            return datum[1];
+          })
+          .sort((a, b) => {
+            return a.rank > b.rank;
+          }),
         isFetching: action.isFetching
       });
     case 'FETCH_TOP_TEN_FAILED':
