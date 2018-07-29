@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import styled, { css } from "styled-components";
 import { connect } from "react-redux";
 
-import { fetchCoinData } from "../actions/api"
+import { fetchCoinData } from "../actions/api";
 import styleConstants from "../misc/style_constants.js";
 
 import Overview from "../components/Overview";
@@ -11,11 +11,10 @@ import Panel from "../components/Panel";
 import TopTenOverview from "../components/TopTenOverview";
 import Table from "../components/Table";
 
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from "redux";
 
 import Options from "./Options";
 import Graph from "./Graph";
-
 
 const Container = styled.div`
       input:focus,
@@ -25,7 +24,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
       text-align: center;
-      color: ${styleConstants.get('Yellow')};
+      color: ${styleConstants.get("Yellow")};
     `;
 
 const LightSpan = styled.span`
@@ -33,21 +32,23 @@ const LightSpan = styled.span`
     `;
 
 const App = () => {
-  return(
+  return (
     <Container>
       <Title>
         Coin:<LightSpan>Dash</LightSpan>
       </Title>
-      <Overview  />
+      <Overview />
       <Options />
       <Graph filter={"close"} graphType={"Line"} />
       <Graph filter={"open"} graphType={"Bar"} />
-      <Table title={"Top Ten Cryptocurrencies"} headers={["Rank", "Name","Value", "Change"]}><TopTenOverview /></Table>
+      <Table
+        title={"Top Ten Cryptocurrencies"}
+        headers={["Rank", "Name", "Value", "Change"]}
+      >
+        <TopTenOverview />
+      </Table>
     </Container>
   );
-}
-
-
-
+};
 
 export default connect()(App);

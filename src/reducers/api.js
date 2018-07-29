@@ -16,9 +16,9 @@ export const api = (currentState = {}, action) => {
       return Object.assign({}, currentState, {
         coinHistoryData: action.payload
       });
-    case "RECEIVE_TOP_TEN":
+    case "FETCH_TOP_TEN_REQUEST":
       return Object.assign({}, currentState, {
-        topTen: action.payload
+        isFetching: action.payload
       });
     case "RECEIVE_MARKET_OVERVIEW_DATA":
       return Object.assign({}, currentState, {
