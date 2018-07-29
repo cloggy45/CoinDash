@@ -16,6 +16,16 @@ export const api = (currentState = {}, action) => {
       return Object.assign({}, currentState, {
         coinHistoryData: action.payload
       });
+    case "FETCH_TOP_TEN_SUCCESS":
+      return Object.assign({}, currentState, {
+        topTen: action.payload,
+        isFetching: action.isFetching
+      });
+    case "FETCH_TOP_TEN_FAILED":
+      return Object.assign({}, currentState, {
+        errorMessage: action.payload,
+        isFetching: false
+      });
     case "FETCH_TOP_TEN_REQUEST":
       return Object.assign({}, currentState, {
         isFetching: action.payload
