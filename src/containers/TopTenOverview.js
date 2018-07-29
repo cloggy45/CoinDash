@@ -29,12 +29,27 @@ const styles = theme => ({
   },
   table: {
     minWidth: 700
+  },
+  positive: {
+    color: '#4CAF50'
+  },
+  negative: {
+    color: '#F44336'
   }
+});
+
+export const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 0
 });
 
 export class TopTenOverview extends Component {
   componentDidMount() {
     this.props.fetch;
+  }
+  isNegativePercent(percent) {
+    return Math.sign(percent) === -1 ? true : false;
   }
   render() {
     const { classes, topTen, isFetching } = this.props;
@@ -61,8 +76,16 @@ export class TopTenOverview extends Component {
                       {element.rank}
                     </TableCell>
                     <TableCell>{element.name}</TableCell>
-                    <TableCell numeric>{USD.price}</TableCell>
-                    <TableCell numeric>{USD.percent_change_24h}</TableCell>
+                    <TableCell numeric>{formatter.format(USD.price)}</TableCell>
+                    {this.isNegativePercent(USD.percent_change_24h) ? (
+                      <TableCell className={classes.negative} numeric>
+                        {USD.percent_change_24h}%
+                      </TableCell>
+                    ) : (
+                      <TableCell className={classes.positive} numeric>
+                        {USD.percent_change_24h}%
+                      </TableCell>
+                    )}
                   </TableRow>
                 );
               })}
