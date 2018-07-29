@@ -6,6 +6,11 @@ import styled from "styled-components";
 import { ScaleLoader } from "halogenium";
 
 import { fetchTopTen } from "../actions/api";
+import {
+  getTopTen,
+  isFetchingTopTenList,
+  getErrorMessage
+} from "../reducers/rootReducer";
 
 import styleConstants from "../misc/style_constants.js";
 
@@ -61,7 +66,7 @@ export class TopTenOverview extends Component {
   render() {
     const { list } = this.state;
 
-    if (this.state.isLoading) {
+    if (this.props.isFetching) {
       return (
         <React.Fragment>
           <tr>
@@ -100,9 +105,11 @@ export class TopTenOverview extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(store) {
   return {
-    topTen: state.api.topTen
+    topTen: getTopTen(store),
+    isFetching: isFetchingTopTenList(store),
+    errorMessage: getErrorMessage(store)
   };
 }
 

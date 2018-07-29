@@ -37,10 +37,6 @@ const App = () => {
       <Title>
         Coin:<LightSpan>Dash</LightSpan>
       </Title>
-      <Overview />
-      <Options />
-      <Graph filter={"close"} graphType={"Line"} />
-      <Graph filter={"open"} graphType={"Bar"} />
       <Table
         title={"Top Ten Cryptocurrencies"}
         headers={["Rank", "Name", "Value", "Change"]}
