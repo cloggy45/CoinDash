@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { fetchTopTen } from '../actions/api';
+
+import { addFavourite, fetchTopTen } from '../actions/api';
 
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -47,6 +48,7 @@ export const formatter = new Intl.NumberFormat('en-US', {
 export class TopTenOverview extends Component {
   componentDidMount() {
     this.props.fetch;
+    this.props.addFavourite("THIS IS A TEST");
   }
   isNegativePercent(percent) {
     return Math.sign(percent) === -1 ? true : false;
@@ -106,7 +108,8 @@ function mapStateToProps(store) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetch: dispatch(fetchTopTen())
+  fetch: dispatch(fetchTopTen()),
+  addFavourite: (coin) => dispatch(addFavourite(coin))
 });
 
 export default connect(

@@ -9,6 +9,16 @@ import {
   RECEIVE_COIN_HISTORY_DATA
 } from './actionTypes';
 
+
+import { favouritesRef } from '../firebase.js';
+
+export const addFavourite = (coin, uid) => {
+  return dispatch => {
+    favouritesRef.child(uid).push().set(coin);
+  }
+}
+
+
 export const receiveMarketOverviewData = json => {
   return {
     type: RECEIVE_MARKET_OVERVIEW_DATA,
@@ -52,10 +62,12 @@ export function fetchTickers() {
 }
 
 export const fetchTopTen = () => dispatch => {
+ 
   dispatch({
     type: FETCH_TOP_TEN_REQUEST,
     isFetching: true
   });
+ 
 
   const request = axios({
     method: 'GET',

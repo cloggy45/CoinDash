@@ -4,42 +4,49 @@ import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
 import { fetchCoinData } from '../actions/api';
+import { fetchUser } from '../actions/auth';
 import styleConstants from '../misc/style_constants.js';
+import { withRouter } from 'react-router-dom';
 
-import Overview from '../components/Overview';
-import Panel from '../components/Panel';
-
-import TopTenOverview from '../containers/TopTenOverview';
+import {
+  Switch,
+  Route
+} from 'react-router-dom';
 
 import { bindActionCreators } from 'redux';
+
+import Header from '../components/header/Header';
+import Overview from '../components/Overview';
+import Panel from '../components/Panel';
+import TopTenOverview from '../containers/TopTenOverview';
+import { history } from '../history';
+
 
 import Options from './Options';
 import Graph from './Graph';
 
-const Container = styled.div`
-      input:focus,
-      select:focus,
-      textarea:focus,
-    `;
-
-const Title = styled.h1`
-      text-align: center;
-      color: ${styleConstants.get('Yellow')};
-    `;
-
-const LightSpan = styled.span`
-      font-weight: 200;
-    `;
-
-const App = () => {
-  return (
-    <Container>
-      <Title>
-        Coin:<LightSpan>Dash</LightSpan>
-      </Title>
-      <TopTenOverview />
-    </Container>
-  );
+class App extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Header />
+        <Switch>
+          <Route exact path="/" render={() => <h1>Profile</h1>} />
+          <Route exact path="/logout" render={() => <h1>Logout</h1>} />
+          <Route exact path="/favourites" render={() => <h1>Favourites</h1>} />
+        </Switch>
+      </React.Fragment>
+    );
+  }
 };
-
-export default connect()(App);
+  
+const mapDispatchToProps = dispatch => ({
+  fetchUser: dispatch(fetchUser())
+})
+  
+export default withRouter(
+  connect(
+    null, 
+    mapDispatchToProps,
+  )(App)
+);

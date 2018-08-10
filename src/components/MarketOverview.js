@@ -14,7 +14,7 @@ class TopTenOverview extends Component {
     list: []
   };
 
-  ComponenTableDataidMount() {
+  ComponentDidMount() {
     this.props.fetch;
   }
 
@@ -62,7 +62,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetch: dispatch(fetchTopTen())
+  fetch: dispatch(fetchTopTen()),
+  test: (favorite) => dispatch(addFavourite(favourite))
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withTable)(
