@@ -8,6 +8,7 @@ yarn-error.log*
 /build
 
 firebase-config.js
+.idea/
 
 # Runtime data
 pids
