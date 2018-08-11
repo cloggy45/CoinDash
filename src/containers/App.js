@@ -21,6 +21,7 @@ import Panel from '../components/Panel';
 import TopTenOverview from './topTenOverview/TopTenOverview';
 import { history } from '../history';
 
+import Graph from '../containers/graph/Graph'
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
           <Route exact path="/logout" render={() => <h1>Logout</h1>} />
           <Route exact path="/favourites" render={() => <h1>Favourites</h1>} />
         </Switch>
+      <Graph filter={"close"} graphType={"bar"} />
       </React.Fragment>
     );
   }

@@ -1,7 +1,7 @@
 export const auth = (currentState = {
   user: {
     user: {
-      uid: '213'
+      uid: null
     }
   },
   isAuthorised: false,
