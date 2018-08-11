@@ -3,11 +3,10 @@ import {
 } from "react-redux";
 
 import {
-  setSelected
-} from "../../../actions/option";
+  setSelectedCoin
+} from "../../../actions/selected";
 import {
   fetchTickers,
-  fetchCoinHistory
 } from "../../../actions/api";
 
 import {getTickers} from "../../../reducers/rootReducer";
@@ -25,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     setOption: option => {
-      dispatch(setSelected(option));
+      dispatch(setSelectedCoin(option));
     },
     getTickers: () => {
       dispatch(fetchTickers());

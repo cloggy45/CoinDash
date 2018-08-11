@@ -1,6 +1,6 @@
 import expect from 'expect';
 
-import {coinHistoryReducer} from './coinHistoryReducer';
+import {coinHistory} from './coinHistory';
 
 import {
     FETCH_COIN_HISTORY_FAILED,
@@ -11,7 +11,7 @@ import {
 
 describe('Coin History Reducer', () => {
     it('should return the initial state', () => {
-        expect(coinHistoryReducer(undefined, {})).toEqual({
+        expect(coinHistory(undefined, {})).toEqual({
             isFetching: false,
             error: null,
             coinHistory: null
@@ -24,7 +24,7 @@ describe('Coin History Reducer', () => {
             isFetching: true
         };
 
-        expect(coinHistoryReducer({}, action)).toEqual({
+        expect(coinHistory({}, action)).toEqual({
             isFetching: true
         })
     });
@@ -37,7 +37,7 @@ describe('Coin History Reducer', () => {
             },
             isFetching: false
         };
-        expect(coinHistoryReducer({}, action)).toEqual({
+        expect(coinHistory({}, action)).toEqual({
             isFetching: false,
             coinHistory: {
                 "Some Data":"Some Value"
@@ -54,7 +54,7 @@ describe('Coin History Reducer', () => {
             isFetching: false,
             payload: error
         };
-        expect(coinHistoryReducer({}, action)).toEqual({
+        expect(coinHistory({}, action)).toEqual({
             isFetching: false,
             error: error,
             coinHistory: {}

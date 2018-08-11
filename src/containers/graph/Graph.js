@@ -1,20 +1,20 @@
-import {fetchCoinHistory} from "../../actions/api";
-// import connect from "react-redux/es/connect/connect";
 import Graph from "./GraphView";
-import { connect, store } from "react-redux";
+import {connect, store} from "react-redux";
+import {getCoinHistory, getError, getLoadingStatus, getSelectedCoin} from '../../reducers/rootReducer';
+import {fetchCoinHistory} from "../../actions/api";
 
-const mapStateToProps = state => {
-    const { Data } = state.api.coinHistoryData;
+const mapStateToProps = store => {
     return {
-        requestingData: state.api.requesting,
-        dataset: Data,
-        selected: state.option.selected
+        coinHistory: getCoinHistory(store),
+        error : getError(store),
+        isLoading: getLoadingStatus(store),
+        selectedCoin: getSelectedCoin(store)
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetch: ticker => dispatch(fetchCoinHistory(ticker))
+        fetchCoinHistory: ticker => dispatch(fetchCoinHistory(ticker))
     };
 };
 

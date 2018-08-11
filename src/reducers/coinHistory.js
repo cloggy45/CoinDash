@@ -5,7 +5,7 @@ const initialState = {
 };
 
 
-export const coinHistoryReducer = (currentState = initialState, action) => {
+export const coinHistory = (currentState = initialState, action) => {
     switch (action.type) {
         case "FETCH_COIN_HISTORY_REQUEST":
             return {
@@ -15,7 +15,7 @@ export const coinHistoryReducer = (currentState = initialState, action) => {
         case "FETCH_COIN_HISTORY_SUCCESS":
             return {
                 ...currentState,
-                coinHistory: action.payload,
+                coinHistory: action.payload.Data,
                 isFetching: false,
             };
         case "FETCH_COIN_HISTORY_FAILED":
@@ -29,3 +29,9 @@ export const coinHistoryReducer = (currentState = initialState, action) => {
             return currentState;
     }
 };
+
+export const getCoinHistory = store => store.coinHistory;
+
+export const getLoadingStatus = store => store.isLoading;
+
+export const getError = store => store.error;
