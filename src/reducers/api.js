@@ -1,7 +1,8 @@
 export const api = (currentState = {
   tickers: {
     data: null
-  }
+  },
+
 }, action) => {
   switch (action.type) {
     case "REQUEST_DATA":
