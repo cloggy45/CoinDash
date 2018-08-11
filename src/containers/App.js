@@ -18,12 +18,8 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/header/Header';
 import Overview from '../components/Overview';
 import Panel from '../components/Panel';
-import TopTenOverview from '../containers/TopTenOverview';
+import TopTenOverview from './topTenOverview/TopTenOverview';
 import { history } from '../history';
-
-
-import Options from './Options';
-import Graph from './Graph';
 
 class App extends Component {
   render() {
