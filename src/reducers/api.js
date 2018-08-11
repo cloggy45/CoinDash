@@ -1,4 +1,8 @@
-export const api = (currentState = {}, action) => {
+export const api = (currentState = {
+  tickers: {
+    data: null
+  }
+}, action) => {
   switch (action.type) {
     case "REQUEST_DATA":
       return Object.assign({}, currentState, {
@@ -24,3 +28,7 @@ export const api = (currentState = {}, action) => {
       return currentState;
   }
 };
+
+export function getTickers(store) {
+  return store.tickers.data
+}

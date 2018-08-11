@@ -1,15 +1,9 @@
-import React from "react";
+import React, { Component} from "react";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "../misc/react-select-custom.css";
-import PropTypes from "prop-types";
 
-import { connect } from "react-redux";
-
-import { setSelected } from "../actions/option";
-import { fetchTickers, fetchCoinHistory } from "../actions/api";
-
-export class Options extends React.Component {
+class Options extends Component {
   state = {
     selectedOption: "BTC"
   };
@@ -47,21 +41,4 @@ export class Options extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    options: state.api.tickers.data
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setOption: option => {
-      dispatch(setSelected(option));
-    },
-    getTickers: () => {
-      dispatch(fetchTickers());
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Options);
+export default Options;

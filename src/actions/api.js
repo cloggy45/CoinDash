@@ -13,6 +13,7 @@ import {
 import { favouritesRef } from '../firebase.js';
 
 export const addFavourite = (coin, uid) => {
+  console.log(coin, uid);
   return dispatch => {
     favouritesRef.child(uid).push().set(coin);
   }

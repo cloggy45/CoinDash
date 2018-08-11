@@ -7,17 +7,30 @@ import { option } from './option';
 
 const [API, TOP_TEN, OPTION, AUTH] = ['API', 'TOP_TEN', 'OPTION', 'AUTH'];
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   [AUTH]: fromAuth.auth,
   [API]: fromApi.api,
   [TOP_TEN]: fromTopTen.topTen,
   [OPTION]: option,
 });
 
+// Auth Selectors
+
+export function getUserId(store) {
+  return fromAuth.getUserId(store[AUTH]);
+}
 
 export function isUserAuthorised(store) {
   return fromAuth.getAuthStatus(store[AUTH]);
 }
+
+// API Selectors
+
+export function getTickers(store) {
+  return fromApi.getTickers(store[API]);
+}
+
+// Top Ten Overview Selectors
 
 export function getTopTen(store) {
   return fromTopTen.getTopTen(store[TOP_TEN]);

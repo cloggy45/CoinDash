@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
+import Options from './options/SearchCurrency';
 
 export const styles = {
   root: {
@@ -40,13 +41,12 @@ class Header extends Component {
             <Typography variant="title" color="inherit" className={classes.flex}>
               Coin Dash
             </Typography>
-            
+            <Options className={classes.flex} />
             { authorisedUser === true ? ( 
               <Button color="inherit" onClick={this.handleLogoutClick}>Log Out</Button>
     ) : (<Button onClick={this.handleLoginClick} color="inherit">Login</Button>)
            }
               
-            
           </Toolbar>
         </AppBar>
       </div>

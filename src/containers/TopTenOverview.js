@@ -17,7 +17,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   getTopTen,
   isFetchingTopTenList,
-  getErrorMessage
+  getErrorMessage,
+  getUserId,
+  isUserAuthorised
 } from '../reducers/rootReducer';
 
 import styleConstants from '../misc/style_constants.js';
@@ -48,13 +50,16 @@ export const formatter = new Intl.NumberFormat('en-US', {
 export class TopTenOverview extends Component {
   componentDidMount() {
     this.props.fetch;
-    this.props.addFavourite("THIS IS A TEST");
   }
   isNegativePercent(percent) {
     return Math.sign(percent) === -1 ? true : false;
   }
   render() {
     const { classes, topTen, isFetching } = this.props;
+    if(this.props.authStatus) {
+      this.props.addFavourite("THIS IS A TEST", this.props.userUID);
+    }
+    
     if (isFetching || topTen.length === 0) {
       return <CircularProgress className={classes.progress} />;
     } else {
@@ -101,6 +106,8 @@ export class TopTenOverview extends Component {
 
 function mapStateToProps(store) {
   return {
+    authStatus: isUserAuthorised(store),
+    userUID: getUserId(store),
     topTen: getTopTen(store),
     isFetching: isFetchingTopTenList(store),
     errorMessage: getErrorMessage(store)
@@ -109,7 +116,7 @@ function mapStateToProps(store) {
 
 const mapDispatchToProps = dispatch => ({
   fetch: dispatch(fetchTopTen()),
-  addFavourite: (coin) => dispatch(addFavourite(coin))
+  addFavourite: (coin, uid) => dispatch(addFavourite(coin, uid)) 
 });
 
 export default connect(

@@ -31,7 +31,7 @@ class App extends Component {
       <React.Fragment>
         <Header />
         <Switch>
-          <Route exact path="/" render={() => <h1>Profile</h1>} />
+          <Route exact path="/" component={TopTenOverview} />
           <Route exact path="/logout" render={() => <h1>Logout</h1>} />
           <Route exact path="/favourites" render={() => <h1>Favourites</h1>} />
         </Switch>

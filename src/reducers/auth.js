@@ -1,8 +1,12 @@
 export const auth = (currentState = {
-  user: null,
+  user: {
+    user: {
+      uid: '213'
+    }
+  },
   isAuthorised: false,
   isLoading: false,
-  error: null
+  error: null,
 }, action) => {
   switch (action.type) {
     case "LOGIN_REQUESTED":
@@ -35,6 +39,10 @@ export const auth = (currentState = {
       return currentState;
   }
 };
+
+export function getUserId(store) {
+  return store.user.user.uid
+}
 
 export function getAuthStatus(store) {
   return store.isAuthorised;
