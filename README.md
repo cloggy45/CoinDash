@@ -1,6 +1,6 @@
-#Coin:Dash
+# Coin:Dash
 
-#####To install
+##### To install
 - run `npm install`
 - create a copy of `firebase-config-EXAMPLE` inside `/src`
 - Rename your copy to `firebase-config.js` and fill in the firebase account details
