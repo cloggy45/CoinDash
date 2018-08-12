@@ -7,35 +7,17 @@ import {
     FETCH_COIN_HISTORY_SUCCESS,
     FETCH_COIN_HISTORY_FAILED,
     RECEIVE_TICKERS,
-    RECEIVE_COIN_DATA,
-    RECEIVE_MARKET_OVERVIEW_DATA,
-    RECEIVE_COIN_HISTORY_DATA
+    RECEIVE_COIN_DATA
 } from './actionTypes';
 
 
 import {favouritesRef} from '../firebase.js';
-
 export const addFavourite = (coin, uid) => {
-    console.log(coin, uid);
     return dispatch => {
         favouritesRef.child(uid).push().set(coin);
     }
-}
-
-
-export const receiveMarketOverviewData = json => {
-    return {
-        type: RECEIVE_MARKET_OVERVIEW_DATA,
-        payload: json
-    };
 };
 
-export const receiveCoinHistoryData = json => {
-    return {
-        type: RECEIVE_COIN_HISTORY_DATA,
-        payload: json
-    };
-};
 
 export const receiveCoinData = json => {
     return {
@@ -139,15 +121,3 @@ export function fetchCoinData() {
     };
 }
 
-export function fetchMarketOverviewData(currency = '') {
-    return dispatch => {
-        return axios
-            .get(`https://api.coinmarketcap.com/v2/global/`)
-            .then(response => {
-                dispatch(receiveMarketOverviewData(response.data));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-}

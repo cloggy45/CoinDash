@@ -18,14 +18,9 @@ import {
     REQUEST_FAILED
 } from './actionTypes';
 
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import configureMockStore from 'redux-mock-store/dist/index-umd';
-import thunk from 'redux-thunk';
-
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
-const mock = new MockAdapter(axios);
+import {
+    mock, mockStore
+} from './setupAsyncTests'
 
 describe('Test Async Actions', () => {
     let store = mockStore({api: []});
@@ -153,7 +148,7 @@ describe('Test Async Actions', () => {
         };
 
         const actionSuccess = {
-            type:FETCH_COIN_HISTORY_SUCCESS,
+            type: FETCH_COIN_HISTORY_SUCCESS,
             payload: payload,
             isFetching: false
         };
