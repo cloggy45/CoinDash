@@ -36,7 +36,7 @@ class App extends Component {
   
 const mapDispatchToProps = dispatch => ({
   fetchUser: dispatch(fetchUser())
-})
+});
   
 export default withRouter(
   connect(

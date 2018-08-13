@@ -1,17 +1,23 @@
-import MarketOverview, { styles } from './MarketOverviewView';
+import MarketOverview, {styles} from './MarketOverviewView';
 import {withStyles} from "@material-ui/core/styles";
-import {fetchMarketOverviewData} from "../../actions/api";
+import {fetchMarketOverview} from "../../actions/marketOverview";
 import {withRouter} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 
-const mapStateToProps = state => {
+import {fetchStatus, getErrorMessage, getMarketOverview} from '../../reducers/marketOverview/marketOverviewSelectors';
+
+
+
+const mapStateToProps = store => {
     return {
-        overview: state
+        overview: getMarketOverview(store),
+        errorMessage: getErrorMessage(store),
+        isFetching: fetchStatus(store)
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchMarketOverview: () => {}
+    fetchOverview : () => dispatch(fetchMarketOverview())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MarketOverview)));

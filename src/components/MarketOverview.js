@@ -6,7 +6,6 @@ import { compose } from "redux";
 import withTable from "../helpers/withTable";
 import { fetchTopTen } from "../actions/api";
 
-import styleConstants from "../misc/style_constants.js";
 
 class TopTenOverview extends Component {
   state = {

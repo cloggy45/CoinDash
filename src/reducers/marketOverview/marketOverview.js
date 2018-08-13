@@ -1,6 +1,6 @@
 const initState = {
     isFetching: true,
-    marketOverview: [],
+    marketOverview: null,
     error: null
 };
 
@@ -23,8 +23,12 @@ export const marketOverview = ( currentState = initState, action ) => {
                 ...currentState,
                 isFetching: false,
                 error: action.payload
-            }
+            };
         default:
             return currentState;
     }
 };
+
+export const isFetching = store => store.isFetching;
+export const error = store => store.error;
+export const currentMarketOverview = store => store.marketOverview;

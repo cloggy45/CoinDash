@@ -16,7 +16,7 @@ export const fetchMarketOverview = () => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: 'https://api.coinmarketcap.com/v2/ticker/',
+        url: 'https://api.coinmarketcap.com/v2/global/',
         header: []
     });
 

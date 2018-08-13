@@ -32,7 +32,7 @@ const Overview = props => (
             <Typography className={props.classes.title} color="textSecondary">
                 {props.title}
             </Typography>
-            <Typography>
+            <Typography ariant="display4"    >
                 {props.data}
             </Typography>
         </CardContent>
@@ -40,22 +40,34 @@ const Overview = props => (
 );
 
 class MarketOverview extends Component {
+    componentDidMount() {
+        this.props.fetchOverview();
+    }
+
     render() {
-        const {classes } = this.props;
+        const {classes} = this.props;
+
+        if (this.props.overview !== null) {
+            var {active_markets, active_cryptocurrencies } = this.props.overview.data;
+            const { quotes } = this.props.overview.data;
+            console.log(quotes);
+            var { total_market_cap, total_volume_24h } = quotes.USD;
+        }
+
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total Market Cap"}/>
+                        <Overview {...this.props} title={"Total Market Cap"} data={total_market_cap}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Active Markets"}/>
+                        <Overview {...this.props} title={"Active Markets"} data={active_markets}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Active Currencies"}/>
+                        <Overview {...this.props} title={"Active Currencies"} data={active_cryptocurrencies}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total 24 Volume"}/>
+                        <Overview {...this.props} title={"Total 24 Volume"} data={total_volume_24h}/>
                     </Grid>
                 </Grid>
             </div>
