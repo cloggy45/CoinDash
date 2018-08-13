@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { formatter } from '../../misc/helpers';
 
 export const styles = {
     root: {
@@ -32,7 +33,7 @@ const Overview = props => (
             <Typography className={props.classes.title} color="textSecondary">
                 {props.title}
             </Typography>
-            <Typography ariant="display4"    >
+            <Typography variant="headline">
                 {props.data}
             </Typography>
         </CardContent>
@@ -48,7 +49,7 @@ class MarketOverview extends Component {
         const {classes} = this.props;
 
         if (this.props.overview !== null) {
-            var {active_markets, active_cryptocurrencies } = this.props.overview.data;
+            var {active_markets, active_cryptocurrencies, last_updated } = this.props.overview.data;
             const { quotes } = this.props.overview.data;
             console.log(quotes);
             var { total_market_cap, total_volume_24h } = quotes.USD;
@@ -58,7 +59,7 @@ class MarketOverview extends Component {
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total Market Cap"} data={total_market_cap}/>
+                        <Overview {...this.props} title={"Total Market Cap"} data={formatter.format(total_market_cap)}/>
                     </Grid>
                     <Grid item xs>
                         <Overview {...this.props} title={"Active Markets"} data={active_markets}/>
@@ -67,7 +68,7 @@ class MarketOverview extends Component {
                         <Overview {...this.props} title={"Active Currencies"} data={active_cryptocurrencies}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total 24 Volume"} data={total_volume_24h}/>
+                        <Overview {...this.props} title={"Total 24 Volume"} data={formatter.format(total_volume_24h)}/>
                     </Grid>
                 </Grid>
             </div>
