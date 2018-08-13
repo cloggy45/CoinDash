@@ -1,8 +1,6 @@
 export const auth = (currentState = {
   user: {
-    user: {
-      uid: null
-    }
+    additionalUserInfo : {}
   },
   isAuthorised: false,
   isLoading: false,
@@ -40,10 +38,14 @@ export const auth = (currentState = {
   }
 };
 
-export function getUserId(store) {
-  return store.user.user.uid
+export function user(store) {
+  return store.user.additionalUserInfo;
 }
 
-export function getAuthStatus(store) {
+export function loadingStatus(store) {
+  return store.isLoading;
+}
+
+export function authStatus(store) {
   return store.isAuthorised;
 }

@@ -1,17 +1,18 @@
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-
 import {withStyles} from '@material-ui/core/styles';
 
 import Header, {styles} from './HeaderView';
 
 import { signIn, signOut, fetchUser } from '../../actions/auth';
 
-import { isUserAuthorised } from '../../reducers/rootReducer';
+import { getAuthStatus, getLoadingStatus, getUserProfile } from '../../reducers/auth/authSelectors';
 
-const mapStateToProps = state => {
+const mapStateToProps = store => {
     return {
-        authorisedUser : isUserAuthorised(state)
+        userProfile : getUserProfile(store),
+        isAuthorisedUser : getAuthStatus(store),
+        isLoading : getLoadingStatus(store)
     }
 };
 

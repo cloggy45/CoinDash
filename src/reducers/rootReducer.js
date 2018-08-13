@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import * as fromApi from './api';
 import * as fromTopTen from './topTen';
-import * as fromAuth from './auth';
+import * as fromAuth from './auth/auth';
 import * as fromCoinHistory from './coinHistory';
 import * as fromSelected from './selected';
 import * as fromMarketOverview from './marketOverview/marketOverview';
@@ -41,16 +41,6 @@ export function getLoadingStatus(store) {
 
 export function getError(store) {
     return fromCoinHistory.getError(store[COIN_HISTORY]);
-}
-
-// Auth Selectors
-
-export function getUserId(store) {
-    return fromAuth.getUserId(store[AUTH]);
-}
-
-export function isUserAuthorised(store) {
-    return fromAuth.getAuthStatus(store[AUTH]);
 }
 
 // API Selectors
