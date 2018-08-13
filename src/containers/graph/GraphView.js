@@ -1,8 +1,32 @@
 import {Component} from "react";
 import moment from "moment";
 import {Bar, Doughnut, Line} from "react-chartjs-2";
-import {ScaleLoader} from "halogenium";
 import React from "react";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+
+export const styles = {
+    card: {
+        marginTop: '1em',
+        minWidth: 275,
+    },
+    title: {
+        marginBottom: 16,
+        fontSize: 14,
+    }
+};
+
+const GraphHolder = props => (
+    <Card className={props.classes.card}>
+        <CardContent>
+            <Typography variant={"subheading"}>
+                {props.title}
+            </Typography>
+            {props.children}
+        </CardContent>
+    </Card>
+);
 
 class Graph extends Component {
     componentDidMount() {
@@ -29,8 +53,7 @@ class Graph extends Component {
 
     setupOptions = () => {
         return {
-            legend: {
-            },
+            legend: {},
             scales: {
                 yAxes: [
                     {
@@ -85,9 +108,27 @@ class Graph extends Component {
     };
 
     render() {
-        const {isLoading, coinHistory} = this.props;
+        const {isLoading, coinHistory, graphType, filter, title} = this.props;
+        let GraphComponent;
+
+        const data = this.setupDataset(coinHistory, filter);
+        const options = this.setupOptions();
+
+
+        if(graphType === 'bar') {
+            GraphComponent = <Bar data={data} options={options} />
+        } else if(graphType === 'line') {
+            GraphComponent = <Line data={data} options={options} />
+        } else {
+            GraphComponent = <Doughnut data={data} options={options} />
+        }
+
+
         return (
-            isLoading ? (<h1>Loading...</h1>) : (<Bar data={this.setupDataset(coinHistory, 'close')} options={this.setupOptions()}/>)
+            isLoading ? (<h1>Loading...</h1>) : (
+                <GraphHolder {...this.props} title={title}>
+                    {GraphComponent}
+                </GraphHolder>)
         )
     }
 };

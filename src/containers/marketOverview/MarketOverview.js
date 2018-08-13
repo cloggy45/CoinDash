@@ -6,8 +6,6 @@ import connect from "react-redux/es/connect/connect";
 
 import {fetchStatus, getErrorMessage, getMarketOverview} from '../../reducers/marketOverview/marketOverviewSelectors';
 
-
-
 const mapStateToProps = store => {
     return {
         overview: getMarketOverview(store),

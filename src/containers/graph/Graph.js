@@ -1,5 +1,6 @@
-import Graph from "./GraphView";
+import Graph, { styles }  from "./GraphView";
 import {connect, store} from "react-redux";
+import {withStyles} from "@material-ui/core/styles";
 import {getCoinHistory, getError, getLoadingStatus, getSelectedCoin} from '../../reducers/rootReducer';
 import {fetchCoinHistory} from "../../actions/api";
 
@@ -18,4 +19,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Graph);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Graph));
