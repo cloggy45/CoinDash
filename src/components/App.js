@@ -3,26 +3,27 @@ import {connect} from 'react-redux';
 
 import {fetchUser} from '../actions/auth';
 import {withRouter} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 import {
-    Switch,
-    Route
+Switch,
+Route
 } from 'react-router-dom';
 
 
-import Header from '../components/header/Header';
-import MarketOverview from '../containers/marketOverview/MarketOverview';
-
+import Header from './header/Header';
+import MarketOverview from './marketOverview/MarketOverview';
 import TopTenOverview from './topTenOverview/TopTenOverview';
-import Grid from '@material-ui/core/Grid';
+import SimpleCard from './coinOverview/coinOverviewView';
 
-import Graph from '../containers/graph/Graph'
+import Graph from './graph/Graph'
 
-class App extends Component {
+class App extends Component {1
     render() {
         return (
             <React.Fragment>
                 <Header/>
+                <SimpleCard/>
                 <MarketOverview/>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={6}>

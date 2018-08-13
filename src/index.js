@@ -6,7 +6,7 @@ import {
   Router,
 } from 'react-router-dom'
 
-import App from "./containers/App";
+import App from "./components/App";
 import { history } from "./history";
 
 import configureStore from "./store/configureStore";
