@@ -59,16 +59,16 @@ class MarketOverview extends Component {
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total Market Cap"} data={formatter.format(total_market_cap)}/>
+                        <Overview {...this.props} title={"Volume 24 Hour"} data={formatter.format(total_market_cap)}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Active Markets"} data={active_markets}/>
+                        <Overview {...this.props} title={"Market Cap"} data={active_markets}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Active Currencies"} data={active_cryptocurrencies}/>
+                        <Overview {...this.props} title={"Circulating Supply"} data={active_cryptocurrencies}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total 24 Volume"} data={formatter.format(total_volume_24h)}/>
+                        <Overview {...this.props} title={"Total Supply"} data={formatter.format(total_volume_24h)}/>
                     </Grid>
                 </Grid>
             </div>
