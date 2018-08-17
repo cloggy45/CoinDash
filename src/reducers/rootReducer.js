@@ -49,18 +49,4 @@ export function getTickers(store) {
     return fromApi.getTickers(store[API]);
 }
 
-// Top Ten Overview Selectors
-
-export function getTopTen(store) {
-    return fromTopTen.getTopTen(store[TOP_TEN]);
-}
-
-export function getErrorMessage(store) {
-    return fromTopTen.getErrorMessage(store[TOP_TEN]);
-}
-
-export function isFetchingTopTenList(store) {
-    return fromTopTen.isFetchingTopTen(store[TOP_TEN]);
-}
-
 export default rootReducer;

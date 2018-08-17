@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect, compose } from 'react-redux';
 import { addFavourite, fetchTopTen } from '../../actions/api';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,7 +8,7 @@ import {
   getTopTen,
   isFetchingTopTenList,
   getErrorMessage,
-} from '../../reducers/rootReducer';
+} from '../../reducers/topTen/topTenSelectors';
 
 function mapStateToProps(store) {
   return {
