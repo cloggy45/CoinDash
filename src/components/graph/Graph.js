@@ -1,7 +1,8 @@
 import Graph, { styles }  from "./GraphView";
 import {connect, store} from "react-redux";
 import {withStyles} from "@material-ui/core/styles";
-import {getCoinHistory, getError, getLoadingStatus, getSelectedCoin} from '../../reducers/rootReducer';
+import {getCoinHistory, getError, getLoadingStatus } from '../../reducers/coinHistory/coinHistorySelectors';
+import {getSelectedCoin} from '../../reducers/rootReducer';
 import {fetchCoinHistory} from "../../actions/api";
 
 const mapStateToProps = store => {

@@ -2,6 +2,10 @@ import * as fromAuth from './auth';
 
 const AUTH = 'AUTH';
 
+export function getUserID(store) {
+    return fromAuth.userid(store[AUTH]);
+}
+
 export function getUserProfile(store) {
     return fromAuth.user(store[AUTH]);
 }

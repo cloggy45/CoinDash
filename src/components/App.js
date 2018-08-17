@@ -10,20 +10,19 @@ Switch,
 Route
 } from 'react-router-dom';
 
-
 import Header from './header/Header';
 import MarketOverview from './marketOverview/MarketOverview';
 import TopTenOverview from './topTenOverview/TopTenOverview';
-import SimpleCard from './coinOverview/coinOverviewView';
+import CoinOverview from './coinOverview/CoinOverview';
 
 import Graph from './graph/Graph'
 
-class App extends Component {1
+class App extends Component {
     render() {
         return (
             <React.Fragment>
                 <Header/>
-                <SimpleCard/>
+                <CoinOverview/>
                 <MarketOverview/>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={6}>

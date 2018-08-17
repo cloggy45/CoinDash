@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 
-const styles = {
+export const styles = {
     card: {
         marginTop: '1em',
         minWidth: 275,
@@ -35,9 +35,8 @@ const styles = {
     },
 };
 
-function SimpleCard(props) {
-    const {classes} = props;
-    const bull = <span className={classes.bullet}>•</span>;
+function CoinOverview (props) {
+    const {classes, uid, isAuthorised } = props;
 
     return (
         <div>
@@ -72,7 +71,9 @@ function SimpleCard(props) {
                                     <Button size="small">Explorer</Button>
                                     <Button size="small">Reddit</Button>
                                     <Button size="small">Twitter</Button>
-                                    <Button size="small">Add to Watchlist</Button>
+                                    {
+                                        isAuthorised &&  <Button size="small" onClick={() => props.addCoinToWatchList('BTC', uid )}>Add to Watchlist</Button>
+                                    }
                                 </CardActions>
                             </Grid>
                         </Grid>
@@ -99,15 +100,13 @@ function SimpleCard(props) {
                     {/*</Grid>*/}
 
                 </Grid>
-
             </Card>
         </div>
     )
-        ;
 }
 
-SimpleCard.propTypes = {
+CoinOverview .propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleCard);
+export default CoinOverview;

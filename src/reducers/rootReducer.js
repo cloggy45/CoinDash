@@ -29,20 +29,6 @@ export function getSelectedCoin(store) {
     return fromSelected.selectedCoin(store[SELECTED]);
 }
 
-// Coin History Selectors
-
-export function getCoinHistory(store) {
-    return fromCoinHistory.getCoinHistory(store[COIN_HISTORY]);
-}
-
-export function getLoadingStatus(store) {
-    return fromCoinHistory.getLoadingStatus(store[COIN_HISTORY]);
-}
-
-export function getError(store) {
-    return fromCoinHistory.getError(store[COIN_HISTORY]);
-}
-
 // API Selectors
 
 export function getTickers(store) {

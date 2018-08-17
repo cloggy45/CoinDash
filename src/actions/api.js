@@ -12,7 +12,8 @@ import {
 
 
 import {favouritesRef} from '../firebase.js';
-export const addFavourite = (coin, uid) => {
+
+export const addToWatchList = (coin, uid) => {
     return dispatch => {
         favouritesRef.child(uid).push().set(coin);
     }

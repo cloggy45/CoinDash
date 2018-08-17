@@ -1,6 +1,6 @@
-import React from 'react';
+import React  from 'react';
 import { connect, compose } from 'react-redux';
-import { addFavourite, fetchTopTen } from '../../actions/api';
+import { fetchTopTen } from '../../actions/api';
 import { withStyles } from '@material-ui/core/styles';
 import TopTenOverview, { styles } from './TopTenOverviewView';
 
@@ -19,8 +19,7 @@ function mapStateToProps(store) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetch: dispatch(fetchTopTen()),
-  addFavourite: (coin, uid) => dispatch(addFavourite(coin, uid)) 
+  fetch: dispatch(fetchTopTen())
 });
 
 export default connect(

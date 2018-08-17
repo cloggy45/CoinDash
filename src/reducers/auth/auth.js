@@ -1,6 +1,9 @@
 export const auth = (currentState = {
   user: {
-    additionalUserInfo : {}
+    additionalUserInfo : {},
+    user : {
+      uid: null
+    }
   },
   isAuthorised: false,
   isLoading: false,
@@ -37,6 +40,10 @@ export const auth = (currentState = {
       return currentState;
   }
 };
+
+export function userid(store) {
+  return store.user.user.uid
+}
 
 export function user(store) {
   return store.user.additionalUserInfo;
