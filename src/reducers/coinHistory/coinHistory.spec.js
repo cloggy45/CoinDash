@@ -6,7 +6,7 @@ import {
     FETCH_COIN_HISTORY_FAILED,
     FETCH_COIN_HISTORY_SUCCESS,
     FETCH_COIN_HISTORY_REQUEST
-} from '../actions/actionTypes';
+} from '../../actions/actionTypes';
 
 
 describe('Coin History Reducer', () => {
@@ -33,7 +33,9 @@ describe('Coin History Reducer', () => {
         const action = {
             type: FETCH_COIN_HISTORY_SUCCESS,
             payload: {
-                "Some Data":"Some Value"
+                Data : {
+                    "Some Data": "Some Value"
+                }
             },
             isFetching: false
         };
@@ -57,7 +59,7 @@ describe('Coin History Reducer', () => {
         expect(coinHistory({}, action)).toEqual({
             isFetching: false,
             error: error,
-            coinHistory: {}
+            coinHistory: null
         });
     });
 });

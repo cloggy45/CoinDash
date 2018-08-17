@@ -47,6 +47,7 @@ class Header extends Component {
 
                             isAuthorisedUser === true ? (
                                 <React.Fragment>
+                                    <Button color={"inherit"}>View Watchlist</Button>
                                     <Avatar
                                         alt="Users Icon"
                                         src={userProfile.profile.picture}

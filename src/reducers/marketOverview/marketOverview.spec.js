@@ -6,7 +6,7 @@ describe('Market Overview Reducer', () => {
     it('should return the initial state', () => {
         expect(marketOverview(undefined, {})).toEqual({
             isFetching: true,
-            marketOverview: [],
+            marketOverview: null,
             error: null
         });
     });

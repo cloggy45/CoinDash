@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 import * as fromApi from './api';
-import * as fromTopTen from './topTen';
+import * as fromTopTen from './topTen/topTen';
 import * as fromAuth from './auth/auth';
-import * as fromCoinHistory from './coinHistory';
-import * as fromSelected from './selected';
+import * as fromCoinHistory from './coinHistory/coinHistory';
+import * as fromSelected from './selected/selected';
 import * as fromMarketOverview from './marketOverview/marketOverview';
 
 const API = 'API';

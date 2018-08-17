@@ -1,5 +1,5 @@
 import { topTen } from './topTen';
-import * as types from '../actions/actionTypes';
+import * as types from '../../actions/actionTypes';
 
 describe('Fetch Top Ten Reducer', () => {
   it('should return the initial state', () => {

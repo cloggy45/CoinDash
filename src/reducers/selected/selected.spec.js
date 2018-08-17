@@ -1,6 +1,6 @@
 import { selected } from './selected';
 import expect from 'expect';
-import { SELECT_COIN } from '../actions/actionTypes';
+import { SELECT_COIN } from '../../actions/actionTypes';
 
 describe('Selected Reducer', () => {
     it('should return the initial state', () => {
