@@ -33,8 +33,7 @@ class Options extends React.Component {
   render() {
     const {options, classes} = this.props;
     const { selectedOption } = this.state;
-    const value = selectedOption && selectedOption.value;
-    
+
     if(options === null) {
       return <p>Loading....</p>
     } else {

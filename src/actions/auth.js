@@ -1,9 +1,7 @@
 import {
     FETCH_USER,
-    LOGIN_REQUESTED,
     LOGIN_SUCCESSFUL,
     LOGIN_FAILED,
-    LOGOUT_REQUESTED,
     LOGOUT_SUCCESSFUL
 } from './actionTypes';
 

@@ -49,7 +49,7 @@ class MarketOverview extends Component {
         const {classes} = this.props;
 
         if (this.props.overview !== null) {
-            var {active_markets, active_cryptocurrencies, last_updated } = this.props.overview.data;
+            var {active_markets, active_cryptocurrencies} = this.props.overview.data;
             const { quotes } = this.props.overview.data;
             console.log(quotes);
             var { total_market_cap, total_volume_24h } = quotes.USD;

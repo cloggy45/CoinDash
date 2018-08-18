@@ -33,7 +33,7 @@ export const formatter = new Intl.NumberFormat('en-US', {
 
 class TopTenOverview extends Component {
   componentDidMount() {
-    this.props.fetch;
+    this.props.fetch();
   }
   isNegativePercent(percent) {
     return Math.sign(percent) === -1 ? true : false;

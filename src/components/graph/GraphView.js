@@ -59,8 +59,8 @@ class Graph extends Component {
                     {
                         ticks: {
                             beginAtZero: true,
-                            callback: function (value, index, values) {
-                                if (parseInt(value) >= 1000) {
+                            callback: function (value) {
+                                if (parseInt(value, 10) >= 1000) {
                                     return (
                                         "$" +
                                         value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -104,9 +103,5 @@ function CoinOverview (props) {
         </div>
     )
 }
-
-CoinOverview .propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default CoinOverview;

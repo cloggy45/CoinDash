@@ -1,5 +1,5 @@
 import Graph, { styles }  from "./GraphView";
-import {connect, store} from "react-redux";
+import {connect} from "react-redux";
 import {withStyles} from "@material-ui/core/styles";
 import {getCoinHistory, getError, getLoadingStatus } from '../../reducers/coinHistory/coinHistorySelectors';
 import {getSelectedCoin} from '../../reducers/rootReducer';

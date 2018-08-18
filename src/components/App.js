@@ -1,4 +1,4 @@
-import React, {Component, StrictMode} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {fetchUser} from '../actions/auth';
