@@ -7,17 +7,34 @@ import {
     FETCH_COIN_HISTORY_SUCCESS,
     FETCH_COIN_HISTORY_FAILED,
     RECEIVE_TICKERS,
-    RECEIVE_COIN_DATA
+    RECEIVE_COIN_DATA,
+    FETCH_WATCHLIST_SUCCESS,
+    FETCH_WATCHLIST_REQUEST
 } from './actionTypes';
 
 
-import {favouritesRef} from '../firebase.js';
+import {watchListRef} from '../firebase.js';
 
 export const addToWatchList = (coin, uid) => {
     return dispatch => {
-        favouritesRef.child(uid).push().set(coin);
+        watchListRef.child(uid).push().set(coin);
     }
 };
+
+export const fetchWatchList = uid => {
+    return dispatch => {
+        dispatch({
+            type: FETCH_WATCHLIST_REQUEST,
+            isFetching: true
+        });
+        watchListRef.child(uid).on("value", snapshot => {
+            dispatch({
+                type: FETCH_WATCHLIST_SUCCESS,
+                payload: snapshot.val()
+            })
+        })
+    }
+}
 
 
 export const receiveCoinData = json => {
