@@ -119,7 +119,7 @@ export const fetchCoinHistory = (ticker) => dispatch => {
         error =>
             dispatch({
                 type: FETCH_COIN_HISTORY_FAILED,
-                payload: error.response.data || 'Failed to fetch coin history',
+                payload: error,
                 isFetching: false
             })
     )

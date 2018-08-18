@@ -1,5 +1,4 @@
 import {
-    fetchMarketOverviewData,
     fetchTopTen,
     fetchCoinData,
     fetchCoinHistory,
@@ -15,7 +14,6 @@ import {
     RECEIVE_TICKERS,
     RECEIVE_COIN_DATA,
     RECEIVE_MARKET_OVERVIEW_DATA,
-    REQUEST_FAILED
 } from './actionTypes';
 
 import {
@@ -32,44 +30,6 @@ describe('Test Async Actions', () => {
 
     afterAll(() => {
         mock.restore();
-    });
-
-    it('Fetch market overview data', () => {
-        const url = `https://api.coinmarketcap.com/v2/global/`;
-        const payload = [
-            {
-                status: {
-                    timestamp: 1525566342,
-                    error: null
-                },
-                data: {
-                    active_cryptocurrencies: 1614,
-                    active_markets: 10773,
-                    bitcoin_percentage_of_market_cap: 35.8,
-                    quotes: {
-                        USD: {
-                            total_market_cap: 469453311242.0,
-                            total_volume_24h: 25434259865.0
-                        }
-                    },
-                    last_updated: 1525566272
-                },
-                metadata: {
-                    timestamp: 1525566342,
-                    error: null
-                }
-            }
-        ];
-        const expectedAction = [
-            {
-                type: RECEIVE_MARKET_OVERVIEW_DATA,
-                payload: payload
-            }
-        ];
-        mock.onGet(url).reply(200, payload);
-        return store.dispatch(fetchMarketOverviewData()).then(() => {
-            expect(store.getActions()).toEqual(expectedAction);
-        });
     });
 
     it('Fetch tickers', () => {
