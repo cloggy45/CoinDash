@@ -8,7 +8,6 @@ yarn-error.log*
 /build
 *.env
 
-firebase-config.js
 .idea/
 
 # Runtime data
