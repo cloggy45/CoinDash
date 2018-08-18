@@ -1,7 +1,8 @@
 # Coin:Dash
 
+[![CircleCI](https://circleci.com/gh/cloggy45/CoinDash.svg?style=svg)](https://circleci.com/gh/cloggy45/CoinDash)
+
 ##### To install
-- run `npm install`
-- create a copy of `firebase-config-EXAMPLE` inside `/src`
-- Rename your copy to `firebase-config.js` and fill in the firebase account details
+- Run `npm install`
+- Add Firebase keys to your `.env` file, then include them to your `firebase-config`
 - For a development build `npm start`
