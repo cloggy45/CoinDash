@@ -43,4 +43,6 @@ jobs:
         prefix: coverage
     - store_test_results:
         path: ./coverage/clover.xml
+        
+    - run: bash <(curl -s https://codecov.io/bash)       
 
