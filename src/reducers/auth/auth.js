@@ -40,7 +40,7 @@ export const auth = (currentState = {
                 },
                 isAuthorised: false,
                 isLoading: false
-            }
+            };
         default:
             return currentState;
     }
