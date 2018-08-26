@@ -31,7 +31,7 @@ const MenuItems = props => {
     })
 };
 
-class Header extends Component {
+export class Header extends Component {
     state = {
         anchorEl: null,
     };
