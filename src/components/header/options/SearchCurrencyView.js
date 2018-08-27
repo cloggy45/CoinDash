@@ -15,12 +15,6 @@ export class Options extends React.Component {
         selectedOption: "BTC"
     };
 
-    static  defaultProps = {
-        options : [],
-        classes : {},
-        getTickers: () => {},
-        setOption : () => {}
-    }
     componentDidMount() {
         this.props.getTickers();
         this.props.setOption("BTC");
@@ -66,5 +60,11 @@ Options.propTypes = {
     classes : PropTypes.object
 };
 
+Options.defaultProps = {
+    options : [],
+    classes : {},
+    getTickers: () => {},
+    setOption : () => {}
+};
 
 export default Options;

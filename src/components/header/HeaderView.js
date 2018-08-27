@@ -25,7 +25,7 @@ export const styles = {
     }
 };
 
-const MenuItems = props => {
+export const MenuItems = props => {
     return props.items.map((item, index) => {
         return <MenuItem key={index} onClick={props.handleClose}>{item}</MenuItem>
     })
@@ -66,6 +66,7 @@ export class Header extends Component {
                         {
 
                             isAuthorisedUser === true ? (
+
                                 <React.Fragment>
                                     <Button
                                         aria-owns={anchorEl ? 'simple-menu' : null}
@@ -80,10 +81,10 @@ export class Header extends Component {
                                         src={userProfile.profile.picture}
                                         className={classes.avatar}
                                     />
-                                    <Button color="inherit" onClick={this.handleLogoutClick}>Log Out</Button>
+                                    <Button color="inherit" onClick={this.handleLogoutClick} name="logout">Log Out</Button>
                                 </React.Fragment>
                         ) : (
-                            <Button onClick={this.handleLoginClick} color="inherit">Login</Button>)
+                            <Button onClick={this.handleLoginClick} color="inherit" name="Login">Login</Button>)
                         }
                         <Menu
                             id="simple-menu"
