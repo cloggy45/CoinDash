@@ -1,3 +1,4 @@
+import { FETCH_WATCHLIST_REQUEST, FETCH_WATCHLIST_SUCCESS } from '../actions/actionTypes';
 
 import {watchListRef} from '../firebase.js';
 

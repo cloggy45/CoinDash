@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 import CoinOverview, {styles} from './CoinOverviewView';
 
-import { addToWatchList} from '../../actions/api';
+import { addToWatchList} from '../../actions/firebase';
 import { getUserID, getAuthStatus } from '../../reducers/auth/authSelectors';
 
 const mapStateToProps = store => {

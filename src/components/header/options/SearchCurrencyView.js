@@ -41,7 +41,7 @@ export class Options extends React.Component {
         } else {
             return (
                 <Select
-                    className={classes.flex}
+                    className={`${classes.flex}`}
                     name="Search Currency"
                     value={selectedOption}
                     onChange={this.handleChange}
