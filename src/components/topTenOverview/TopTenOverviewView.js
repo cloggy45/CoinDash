@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types';
 
 export const styles = theme => ({
   root: {
@@ -85,4 +86,15 @@ export class TopTenOverview extends Component {
   }
 }
 
+TopTenOverview.propTypes = {
+    topTen: PropTypes.array,
+    isFetching: PropTypes.bool,
+    classes: PropTypes.func
+};
+
+TopTenOverview.defaultProps = {
+    topTen: [],
+    isFetching: true,
+    classes : () => {}
+};
 export default TopTenOverview;

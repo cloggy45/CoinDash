@@ -84,7 +84,7 @@ describe('TopTenOverview Component', () => {
     });
 
     it('Should render Circular progress bar when fetching data', () => {
-        const tree = renderer.create(<TopTenOverview classes={styles} isFetching={true} topTen={payload} fetch={fetchMock}/>);
+        const tree = renderer.create(<TopTenOverview classes={styles} isFetching={true} topTen={[payload]} fetch={fetchMock}/>);
         expect(tree).toMatchSnapshot();
     });
 });
