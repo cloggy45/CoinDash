@@ -17,7 +17,7 @@ export const styles = {
     }
 };
 
-const GraphHolder = props => (
+export const GraphHolder = props => (
     <Card className={props.classes.card}>
         <CardContent>
             <Typography variant={"subheading"}>
@@ -28,7 +28,7 @@ const GraphHolder = props => (
     </Card>
 );
 
-class Graph extends Component {
+export class Graph extends Component {
     componentDidMount() {
         this.props.fetchCoinHistory(this.props.selectedCoin);
     };

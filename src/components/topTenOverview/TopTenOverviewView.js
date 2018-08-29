@@ -31,7 +31,7 @@ export const formatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0
 });
 
-class TopTenOverview extends Component {
+export class TopTenOverview extends Component {
   componentDidMount() {
     this.props.fetch();
   }
@@ -40,10 +40,7 @@ class TopTenOverview extends Component {
   }
   render() {
     const { classes, topTen, isFetching } = this.props;
-    if(this.props.authStatus) {
-      this.props.addFavourite("THIS IS A TEST", this.props.userUID);
-    }
-    
+
     if (isFetching || topTen.length === 0) {
       return <CircularProgress className={classes.progress} />;
     } else {

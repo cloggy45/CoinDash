@@ -64,6 +64,7 @@ describe('TopTenOverview Component', () => {
 
     afterEach(() => {
         fetchMock.mockClear();
+        addFavouritesMock.mockClear();
     });
 
     it('Should render', () => {

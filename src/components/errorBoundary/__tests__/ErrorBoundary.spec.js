@@ -8,7 +8,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe('Error Boundary', () => {
     let Component;
-    beforeAll(() => {
+    beforeEach(() => {
         Component = () => {
             throw "Error";
         };
@@ -17,7 +17,7 @@ describe('Error Boundary', () => {
         const wrapper = mount(
             <ErrorBoundary render={() => <h1>Error Encountered</h1>}>
                 <Component/>
-            </ErrorBoundary>)
+            </ErrorBoundary>);
         expect(wrapper.text()).toEqual("Error Encountered")
     });
 });
