@@ -37,11 +37,11 @@ export class Header extends Component {
     };
 
     handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
+        this.setState({anchorEl: event.currentTarget});
     };
 
     handleClose = () => {
-        this.setState({ anchorEl: null });
+        this.setState({anchorEl: null});
     };
 
     handleLoginClick = () => {
@@ -52,8 +52,33 @@ export class Header extends Component {
         this.props.logout();
     };
 
+    renderLoggedOutMenu = () => (
+        <Button onClick={this.handleLoginClick} color="inherit" name="Login">Login</Button>
+    );
+
+    renderLoggedInMenu = () => {
+        const {userProfile, classes} = this.props;
+        const { anchorEl } = this.state;
+        return (<React.Fragment>
+            <Button
+                aria-owns={anchorEl ? 'simple-menu' : null}
+                aria-haspopup="true"
+                onClick={this.handleClick}
+                color="inherit"
+            >
+                View Watchlist
+            </Button>
+            <Avatar
+                alt="Users Icon"
+                src={userProfile.profile.picture}
+                className={classes.avatar}
+            />
+            <Button color="inherit" onClick={this.handleLogoutClick} name="logout">Log Out</Button>
+        </React.Fragment>)
+    };
+
     render() {
-        const {classes, isAuthorisedUser, userProfile} = this.props;
+        const {classes, isAuthorisedUser } = this.props;
         const { anchorEl } = this.state;
         return (
             <div className={classes.root}>
@@ -64,27 +89,7 @@ export class Header extends Component {
                         </Typography>
                         <Options className={classes.flex}/>
                         {
-
-                            isAuthorisedUser === true ? (
-
-                                <React.Fragment>
-                                    <Button
-                                        aria-owns={anchorEl ? 'simple-menu' : null}
-                                        aria-haspopup="true"
-                                        onClick={this.handleClick}
-                                        color="inherit"
-                                    >
-                                        View Watchlist
-                                    </Button>
-                                    <Avatar
-                                        alt="Users Icon"
-                                        src={userProfile.profile.picture}
-                                        className={classes.avatar}
-                                    />
-                                    <Button color="inherit" onClick={this.handleLogoutClick} name="logout">Log Out</Button>
-                                </React.Fragment>
-                        ) : (
-                            <Button onClick={this.handleLoginClick} color="inherit" name="Login">Login</Button>)
+                            isAuthorisedUser === true ? this.renderLoggedInMenu() : this.renderLoggedOutMenu()
                         }
                         <Menu
                             id="simple-menu"
@@ -92,7 +97,7 @@ export class Header extends Component {
                             open={Boolean(anchorEl)}
                             onClose={this.handleClose}
                         >
-                            <MenuItems onClick={this.handleClose} items={["Hello","World"]}/>
+                            <MenuItems onClick={this.handleClose} items={["Hello", "World"]}/>
                         </Menu>
                     </Toolbar>
                 </AppBar>
