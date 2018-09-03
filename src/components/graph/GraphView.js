@@ -5,6 +5,8 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 export const styles = {
     card: {
@@ -28,6 +30,7 @@ export const GraphHolder = props => (
     </Card>
 );
 
+
 export class Graph extends Component {
     componentDidMount() {
         this.props.fetchCoinHistory(this.props.selectedCoin);
@@ -50,6 +53,22 @@ export class Graph extends Component {
             return moment(new Date(time * 1000)).format("MMM Do YY");
         });
     };
+
+    createGraph = (type, dataset, filter) => {
+        const graphProps = {
+            data:this.setupDataset(dataset, filter),
+            options:this.setupOptions()
+        };
+        if (type === 'Bar') {
+            return <Bar {...graphProps} />
+        } else if (type === 'Line') {
+            return <Line {...graphProps} />
+        } else {
+            return <Doughnut {...graphProps}  />
+        }
+    };
+
+
 
     setupOptions = () => {
         return {
@@ -109,25 +128,13 @@ export class Graph extends Component {
 
     render() {
         const {isLoading, coinHistory, graphType, filter, title} = this.props;
-        let GraphComponent;
 
-        const data = this.setupDataset(coinHistory, filter);
-        const options = this.setupOptions();
-
-
-        if(graphType === 'bar') {
-            GraphComponent = <Bar data={data} options={options} />
-        } else if(graphType === 'line') {
-            GraphComponent = <Line data={data} options={options} />
-        } else {
-            GraphComponent = <Doughnut data={data} options={options} />
-        }
-
+        const Chart = this.createGraph(graphType, coinHistory, filter);
 
         return (
-            isLoading ? (<h1>Loading...</h1>) : (
+            isLoading ? (<CircularProgress /> ) : (
                 <GraphHolder {...this.props} title={title}>
-                    {GraphComponent}
+                    { Chart }
                 </GraphHolder>)
         )
     }

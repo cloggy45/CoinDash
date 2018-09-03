@@ -26,10 +26,10 @@ class App extends Component {
                 <MarketOverview/>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={6}>
-                        <Graph title={'Highest Price'} filter={"high"} graphType={"bar"}/>
+                        <Graph title={'Highest Price'} filter={"high"} graphType={"Bar"}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Graph title={'Lowest Price'} filter={"low"} graphType={"line"}/>
+                        <Graph title={'Lowest Price'} filter={"low"} graphType={"Line"}/>
                     </Grid>
                 </Grid>
                 <Switch>
