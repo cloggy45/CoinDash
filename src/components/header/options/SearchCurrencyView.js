@@ -47,6 +47,7 @@ export class Options extends React.Component {
                     onChange={this.handleChange}
                     options={this.formatOptions(options)}
                     clearable={false}
+                    data-cy="select"
                 />
             );
         }

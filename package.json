@@ -32,7 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --silent",
     "eject": "react-scripts eject",
-    "coverage": "react-scripts test --env=jsdom --coverage"
+    "coverage": "react-scripts test --env=jsdom --coverage",
+    "cypress:open": "cypress open"
   },
   "devDependencies": {
     "enzyme": "^3.5.0",
