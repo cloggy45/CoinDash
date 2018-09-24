@@ -10,7 +10,7 @@ import {
     mock, mockStore
 } from './setupAsyncTests';
 
-describe('coinOverview actions', () => {
+describe('coinMetaInfo actions', () => {
     let store = mockStore({coinOverview: []});
 
     afterEach(() => {
