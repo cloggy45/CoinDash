@@ -16,7 +16,7 @@ export const fetchCoinMetaInfo = () => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: 'https://pro-api.coinmarketcap.com',
+        url: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info',
         header: {'X-CMC_PRO_API_KEY':CoinMarketConfig.apiKey}
     });
 

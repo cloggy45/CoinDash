@@ -22,7 +22,7 @@ describe('coinOverview actions', () => {
         mock.restore();
     });
 
-    const url = "https://pro-api.coinmarketcap.com";
+    const url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info";
     const payload = [
         {
             "data": {
