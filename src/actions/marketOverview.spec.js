@@ -72,7 +72,7 @@ describe('marketOverview actions', () => {
         })
     });
 
-    it('should successfully to fetch market overview', () => {
+    it('should successfully fetch market overview', () => {
         mock.onGet(url).reply(200, payload);
         return store.dispatch(fetchMarketOverview()).then(() => {
             expect(store.getActions()).toEqual([actionRequest, actionSuccess]);
