@@ -26,3 +26,6 @@ export const coinMetaInfo = (currentState = intialState, action) => {
             return currentState;
     }
 };
+
+export const currentCoinMetaInfo = store => store.coinMetaInfo;
+export const fetchStatus = store => store.isFetching;

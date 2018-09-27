@@ -27,3 +27,7 @@ export const coinPriceInfo = (currentState = initState, action) => {
             return currentState;
     }
 };
+
+export const isFetching = store => store.isFetching;
+export const currentCoinPriceInfo = store => store.coinPriceInfo;
+export const error = store => store.error;
