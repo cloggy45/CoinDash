@@ -1,6 +1,6 @@
 import { marketOverview } from './marketOverview';
 import expect from 'expect';
-import { FETCH_MARKET_OVERVIEW_FAILED, FETCH_MARKET_OVERVIEW_REQUEST, FETCH_MARKET_OVERVIEW_SUCCESS } from '../../actions/actionTypes';
+import { FETCH_MARKET_OVERVIEW_REQUEST, FETCH_MARKET_OVERVIEW_SUCCESS } from '../../actions/actionTypes';
 
 describe('Market Overview Reducer', () => {
     it('should return the initial state', () => {

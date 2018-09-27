@@ -5,7 +5,7 @@ import { CoinMarketConfig } from "../coinmarket-config";
 import {
     FETCH_COIN_PRICE_INFO_FAILED,
     FETCH_COIN_PRICE_INFO_SUCCESS,
-    FETCH_COIN_PRICE_INFO_REQUEST, FETCH_COIN_META_INFO_SUCCESS, FETCH_COIN_META_INFO_FAILED
+    FETCH_COIN_PRICE_INFO_REQUEST
 } from "./actionTypes";
 
 export const fetchCoinPriceInfo = () => dispatch => {
