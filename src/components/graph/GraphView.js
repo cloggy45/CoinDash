@@ -6,7 +6,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import PropTypes from 'prop-types';
 
 export const styles = {
     card: {
@@ -29,7 +29,6 @@ export const GraphHolder = props => (
         </CardContent>
     </Card>
 );
-
 
 export class Graph extends Component {
     componentDidMount() {
@@ -137,6 +136,14 @@ export class Graph extends Component {
         )
     }
 };
+          
+Graph.propTypes = {
+  isLoading:PropTypes.string,
+  graphType:PropTypes.string,
+  filter:PropTypes.string,
+  title: PropTypes.string,
+  coinHistory:PropTypes.array
+}
           
 
 export default Graph;
