@@ -68,8 +68,6 @@ export class Graph extends Component {
         }
     };
 
-
-
     setupOptions = () => {
         return {
             legend: {},
@@ -139,5 +137,6 @@ export class Graph extends Component {
         )
     }
 };
+          
 
 export default Graph;
