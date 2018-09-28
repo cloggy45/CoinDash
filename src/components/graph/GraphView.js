@@ -145,5 +145,13 @@ Graph.propTypes = {
   coinHistory:PropTypes.array
 }
           
+Graph.defaultProps = {
+  isLoading: false,
+  graphType: 'Bar',
+  filter: 'close',
+  title: 'Closing Price',
+  coinHistory: []
+}
+          
 
 export default Graph;
