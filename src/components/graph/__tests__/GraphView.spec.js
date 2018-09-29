@@ -9,6 +9,14 @@ Enzyme.configure({adapter: new Adapter()});
 
 import {Graph, styles, GraphHolder} from '../GraphView';
 
+describe('Graph Component', () => {  
+
+  it('Should render bar graph without error', () => {
+    const wrapper = shallow(<Graph fetchCoinHistory={jest.fn()} classes={styles.card} />);
+    expect(wrapper.dive().find('Bar').exists()).toBe(true);
+  });
+});
+
 describe('Graph Holder Component', () => {
   
   it('Should render without error', () => {
