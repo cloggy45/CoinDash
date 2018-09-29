@@ -3,6 +3,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+
 import { formatter } from '../../misc/helpers';
 
 export const styles = {
@@ -47,7 +49,7 @@ class MarketOverview extends Component {
 
     render() {
         const {classes} = this.props;
-
+        
         if (this.props.overview !== null) {
             var {active_markets, active_cryptocurrencies} = this.props.overview.data;
             const { quotes } = this.props.overview.data;
@@ -74,6 +76,18 @@ class MarketOverview extends Component {
             </div>
         );
     }
+}
+
+MarketOverview.propTypes = {
+  classes: PropTypes.object,
+  overview: PropTypes.object,
+  fetchOverview: PropTypes.func
+}
+
+MarketOverview.defaultProps = {
+  classes: {},
+  overview: {},
+  fetchOverview: () => { return; }
 }
 
 
