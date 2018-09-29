@@ -138,7 +138,7 @@ export class Graph extends Component {
 };
           
 Graph.propTypes = {
-  isLoading:PropTypes.string,
+  isLoading:PropTypes.bool,
   graphType:PropTypes.string,
   filter:PropTypes.string,
   title: PropTypes.string,

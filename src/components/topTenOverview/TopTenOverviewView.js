@@ -89,12 +89,12 @@ export class TopTenOverview extends Component {
 TopTenOverview.propTypes = {
     topTen: PropTypes.array,
     isFetching: PropTypes.bool,
-    classes: PropTypes.func
+    classes: PropTypes.object
 };
 
 TopTenOverview.defaultProps = {
     topTen: [],
     isFetching: true,
-    classes : () => {}
+    classes : {}
 };
 export default TopTenOverview;

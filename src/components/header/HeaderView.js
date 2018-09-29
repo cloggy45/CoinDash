@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
 
 import Options from './options/SearchCurrency';
 
@@ -104,6 +105,22 @@ export class Header extends Component {
             </div>
         );
     }
+}
+
+Header.propTypes = {
+  isAuthorisedUser : PropTypes.bool,
+  classes: PropTypes.object,
+  userProfile: PropTypes.object,
+  logout: PropTypes.func,
+  logon: PropTypes.func,
+}
+
+Header.defaultProps = {
+  isAuthorisedUser : false,
+  classes: {},
+  userProfile: {},
+  logout: () => { return; },
+  logon: () => { return; }
 }
 
 export default Header;
