@@ -14,6 +14,11 @@ describe('Graph Component', () => {
   function setupComponent(type="") {
     return shallow(<Graph graphType={type} fetchCoinHistory={jest.fn()} classes={styles.card} />);
   }
+
+  it('Should render loading spinner', () => {
+  const wrapper = shallow(<Graph isLoading={true} fetchCoinHistory={jest.fn()} classes={styles.card} />);
+  expect(wrapper.dive().find('CircularProgress').exists()).toBe(true);
+})
     
   it('Should render Bar graph without error', () => {
     const wrapper = setupComponent('Bar');
@@ -21,12 +26,12 @@ describe('Graph Component', () => {
   });
   
   it('Should render Line graph without error', () => {
-    const wrapper = shallow(<Graph graphType={'Line'} fetchCoinHistory={jest.fn()} classes={styles.card} />);
+    const wrapper = setupComponent('Line');
     expect(wrapper.dive().find('Line').exists()).toBe(true);
   });
   
     it('Should render Doughnut graph without error', () => {
-    const wrapper = shallow(<Graph graphType={'Doughnut'} fetchCoinHistory={jest.fn()} classes={styles.card} />);
+    const wrapper = setupComponent('Doughnut');
     expect(wrapper.dive().find('Doughnut').exists()).toBe(true);
   });
   

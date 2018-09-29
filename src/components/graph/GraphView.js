@@ -142,7 +142,8 @@ Graph.propTypes = {
   graphType:PropTypes.string,
   filter:PropTypes.string,
   title: PropTypes.string,
-  coinHistory:PropTypes.array
+  coinHistory:PropTypes.array,
+  selectedCoin: PropTypes.string
 }
           
 Graph.defaultProps = {
@@ -150,7 +151,8 @@ Graph.defaultProps = {
   graphType: 'Bar',
   filter: 'close',
   title: 'Closing Price',
-  coinHistory: []
+  coinHistory: [],
+  selectedCoin: "BTC"
 }
           
 
