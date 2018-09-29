@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
+import PropTypes from 'prop-types';
 
 export const styles = {
     card: {
@@ -103,5 +104,18 @@ function CoinOverview (props) {
         </div>
     )
 }
+
+CoinOverview.propTypes = {
+  uid: PropTypes.string,
+  isAuthorised: PropTypes.bool,
+  classes: PropTypes.object
+}
+
+CoinOverview.defaultProps = {
+  uid: '',
+  isAuthorised: false,
+  classes: {}
+}
+
 
 export default CoinOverview;
