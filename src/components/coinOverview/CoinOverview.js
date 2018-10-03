@@ -7,17 +7,21 @@ import CoinOverview, {styles} from './CoinOverviewView';
 import { addToWatchList} from '../../actions/firebase';
 import { getUserID, getAuthStatus } from '../../reducers/auth/authSelectors';
 import { getFetchStatus, getCoinMetaInfo } from '../../reducers/coinMetaInfo/coinMetaInfoSelectors';
+import {getSelectedCoin} from "../../reducers/rootReducer";
+import {fetchCoinMetaInfo} from "../../actions/coinMetaInfo";
 
 const mapStateToProps = store => {
     return {
         uid : getUserID(store),
         isAuthorised : getAuthStatus(store),
-        metaInfoFetchStatus : getFetchStatus(store),
-        coinMetaInfo : getCoinMetaInfo(store)
+        isFetchingMetaInfo : getFetchStatus(store),
+        coinMetaInfo : getCoinMetaInfo(store),
+        selectedCoin : getSelectedCoin(store)
     }
 };
 
 const mapDispatchToProps = dispatch => ({
+    fetchCoinMetaInfo : (coin) => dispatch(fetchCoinMetaInfo(coin)),
     addCoinToWatchList : (coin, uid) => dispatch(addToWatchList(coin, uid))
 });
 
