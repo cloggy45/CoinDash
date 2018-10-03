@@ -11,7 +11,9 @@ import { getFetchStatus, getCoinMetaInfo } from '../../reducers/coinMetaInfo/coi
 const mapStateToProps = store => {
     return {
         uid : getUserID(store),
-        isAuthorised : getAuthStatus(store)
+        isAuthorised : getAuthStatus(store),
+        metaInfoFetchStatus : getFetchStatus(store),
+        coinMetaInfo : getCoinMetaInfo(store)
     }
 };
 
