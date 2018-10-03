@@ -49,7 +49,8 @@ class MarketOverview extends Component {
 
     render() {
         const {classes} = this.props;
-        
+
+        // TODO: refactor
         if (this.props.overview !== null) {
             var {active_markets, active_cryptocurrencies} = this.props.overview.data;
             const { quotes } = this.props.overview.data;
