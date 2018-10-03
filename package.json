@@ -12,6 +12,7 @@
     "chart.js": "2.7.2",
     "firebase": "5.3.1",
     "history": "^4.7.2",
+    "lodash.isempty": "^4.4.0",
     "moment": "2.21.0",
     "react": "16.3.0",
     "react-chartjs-2": "2.7.0",
