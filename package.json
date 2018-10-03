@@ -26,10 +26,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --silent",
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --env=jsdom --coverage",
-    "cypress:open": "cypress open"
+    "cypress:open": "npx cypress open"
   },
   "devDependencies": {
     "redux-logger": "3.0.6",

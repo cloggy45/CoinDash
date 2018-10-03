@@ -1,14 +1,12 @@
 import axios from 'axios';
 
-import { CoinMarketConfig} from "../coinmarket-config";
-
 import {
     FETCH_COIN_META_INFO_FAILED,
     FETCH_COIN_META_INFO_SUCCESS,
     FETCH_COIN_META_INFO_REQUEST,
 } from "./actionTypes";
 
-export const fetchCoinMetaInfo = () => dispatch => {
+export const fetchCoinMetaInfo = id => dispatch => {
     dispatch({
         type: FETCH_COIN_META_INFO_REQUEST,
         isFetching: true
@@ -16,8 +14,7 @@ export const fetchCoinMetaInfo = () => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info',
-        header: {'X-CMC_PRO_API_KEY':CoinMarketConfig.apiKey}
+        url: `https://www.cryptocompare.com/api/data/socialstats/?id=${id}`
     });
 
     return request.then(

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { CoinMarketConfig } from "../coinmarket-config";
 
 import {
     FETCH_COIN_PRICE_INFO_FAILED,
@@ -8,7 +7,7 @@ import {
     FETCH_COIN_PRICE_INFO_REQUEST
 } from "./actionTypes";
 
-export const fetchCoinPriceInfo = () => dispatch => {
+export const fetchCoinPriceInfo = ticker => dispatch => {
     dispatch({
         type: FETCH_COIN_PRICE_INFO_REQUEST,
         isFetching: true
@@ -16,8 +15,7 @@ export const fetchCoinPriceInfo = () => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
-        header: {'X-CMC_PRO_API_KEY':CoinMarketConfig.apiKey}
+        url: `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${ticker}&tsyms=USD`,
     });
 
     return request.then(
