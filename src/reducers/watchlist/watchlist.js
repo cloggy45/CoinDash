@@ -21,3 +21,7 @@ export const watchlist = (currentState = initState, action) => {
             return currentState;
     }
 };
+
+export const isFetchingWatchList = store => store.isFetching;
+export const userWatchList = store => store.list;
+export const errorMessage = store => store.errorMessage;
