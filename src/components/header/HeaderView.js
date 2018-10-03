@@ -59,7 +59,7 @@ export class Header extends Component {
 
     renderLoggedInMenu = () => {
         const {userProfile, classes} = this.props;
-        const { anchorEl } = this.state;
+        const {anchorEl} = this.state;
         return (<React.Fragment>
             <Button
                 aria-owns={anchorEl ? 'simple-menu' : null}
@@ -79,8 +79,8 @@ export class Header extends Component {
     };
 
     render() {
-        const {classes, isAuthorisedUser } = this.props;
-        const { anchorEl } = this.state;
+        const {classes, isAuthorisedUser} = this.props;
+        const {anchorEl} = this.state;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -108,19 +108,34 @@ export class Header extends Component {
 }
 
 Header.propTypes = {
-  isAuthorisedUser : PropTypes.bool,
-  classes: PropTypes.object,
-  userProfile: PropTypes.object,
-  logout: PropTypes.func,
-  logon: PropTypes.func,
-}
+    isAuthorisedUser: PropTypes.bool,
+    classes: PropTypes.object,
+    userProfile: PropTypes.object,
+    watchListErrorMessage: PropTypes.string,
+    watchListFetchStatus: PropTypes.bool,
+    userWatchList: PropTypes.object,
+    logout: PropTypes.func,
+    logon: PropTypes.func,
+    fetchUser: PropTypes.func,
+    fetchWatchList: PropTypes.func,
+
+};
 
 Header.defaultProps = {
-  isAuthorisedUser : false,
-  classes: {},
-  userProfile: {},
-  logout: () => { return; },
-  logon: () => { return; }
-}
+    isAuthorisedUser: false,
+    classes: {},
+    userProfile: {},
+    watchListErrorMessage: "",
+    watchListFetchStatus: true,
+    userWatchList: {},
+    logout: () => {
+    },
+    logon: () => {
+    },
+    fetchUser: () => {
+    },
+    fetchWatchList: () => {
+    }
+};
 
 export default Header;
