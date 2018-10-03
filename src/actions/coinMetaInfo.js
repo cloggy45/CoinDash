@@ -12,9 +12,15 @@ export const fetchCoinMetaInfo = id => dispatch => {
         isFetching: true
     });
 
+    const corsProxy = "https://cors-anywhere.herokuapp.com/";
+
     const request = axios({
         method: 'GET',
-        url: `https://www.cryptocompare.com/api/data/socialstats/?id=${id}`
+        url: corsProxy+`https://www.cryptocompare.com/api/data/socialstats/?id=${id}`,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true
+        }
     });
 
     return request.then(
