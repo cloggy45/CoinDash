@@ -55,21 +55,6 @@ const Title = props => (
     </CardContent>
 );
 
-const Menu = props => (
-    <CardActions>
-        <Button size="small" href={props.website}>Website</Button>
-        <Button size="small" href={props.reddit}>Reddit</Button>
-        <Button size="small" href={props.twitter}>Twitter</Button>
-        <Button size="small" href={props.facebook}>Facebook</Button>
-        {
-            props.isAuthorised &&
-            <Button size="small"
-                    onClick={() => props.addCoinToWatchList(props.selectedCoin, props.uid)}>Add
-                to Watchlist</Button>
-        }
-    </CardActions>
-);
-
 const Price = props => (
     <CardContent>
         <Typography variant="display1" component="h2">
@@ -90,6 +75,26 @@ class CoinOverview extends React.Component {
     }
 
     renderCoinOverview = () => {
+        const {uid, isAuthorised, coinMetaInfo, selectedCoin} = this.props;
+
+        const overview = {
+            name: "",
+            links: {
+                'facebook': "",
+                'reddit': "",
+                'twitter': ""
+            }
+        };
+
+        // TODO: Research alternative methods
+        if (coinMetaInfo !== null) {
+            overview.name = coinMetaInfo.General.Name;
+            overview.links.facebook = coinMetaInfo.Facebook.link;
+            overview.links.reddit = coinMetaInfo.Reddit.link;
+            overview.links.twitter = coinMetaInfo.Twitter.link;
+
+        }
+
         return (
             <React.Fragment>
                 <Grid item xs={12}>
@@ -105,9 +110,18 @@ class CoinOverview extends React.Component {
                           justify="space-around"
                           alignItems="baseline">
                         <Grid item xs>
-
-                            <Title variant={"display1"} headerType={"h2"} classes={styles.bigAvatar}/>
-                            <Menu/>
+                            <Title title={overview.name} variant={"display1"} headerType={"h2"} classes={styles.bigAvatar}/>
+                            <CardActions>
+                                <Button size="small" href={overview.links.reddit}>Reddit</Button>
+                                <Button size="small" href={overview.links.twitter}>Twitter</Button>
+                                <Button size="small" href={overview.links.facebook}>Facebook</Button>
+                                {
+                                    isAuthorised &&
+                                    <Button size="small"
+                                            onClick={() => this.props.addCoinToWatchList(selectedCoin, uid)}>Add
+                                        to Watchlist</Button>
+                                }
+                            </CardActions>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -123,7 +137,7 @@ class CoinOverview extends React.Component {
     };
 
     render() {
-        const {classes, uid, isAuthorised, isFetchingMetaInfo} = this.props;
+        const {classes, isFetchingMetaInfo} = this.props;
         return (
             <div>
                 <Card className={classes.card}>
