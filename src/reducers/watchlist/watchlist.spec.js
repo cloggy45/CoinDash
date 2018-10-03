@@ -24,11 +24,8 @@ describe('Watchlist Reducer', () => {
         const action = {
             type: FETCH_WATCHLIST_SUCCESS,
             isFetching: false,
-            payload: {
-                data: {
-                    "some": "data"
-                }
-            }
+            payload: {"some": "data"}
+
         };
         expect(watchlist({}, action)).toEqual({
             isFetching: false,

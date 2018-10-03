@@ -15,7 +15,7 @@ export const watchlist = (currentState = initState, action) => {
             return {
                 ...currentState,
                 isFetching: false,
-                list: action.payload.data
+                list: action.payload
             };
         default:
             return currentState;

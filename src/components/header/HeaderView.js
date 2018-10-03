@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
-
+import isEmpty from 'lodash.isempty';
 import Options from './options/SearchCurrency';
 
 export const styles = {
@@ -39,6 +39,8 @@ export class Header extends Component {
 
     handleClick = event => {
         this.setState({anchorEl: event.currentTarget});
+        this.props.fetchWatchList(this.props.userId);
+        console.log(this.props);
     };
 
     handleClose = () => {
@@ -79,7 +81,7 @@ export class Header extends Component {
     };
 
     render() {
-        const {classes, isAuthorisedUser} = this.props;
+        const {classes, isAuthorisedUser, userWatchList} = this.props;
         const {anchorEl} = this.state;
         return (
             <div className={classes.root}>
@@ -98,7 +100,7 @@ export class Header extends Component {
                             open={Boolean(anchorEl)}
                             onClose={this.handleClose}
                         >
-                            <MenuItems onClick={this.handleClose} items={["Hello", "World"]}/>
+                            <MenuItems onClick={this.handleClose} items={isEmpty(userWatchList) ? ['Loading..'] : Object.values(userWatchList)}/>
                         </Menu>
                     </Toolbar>
                 </AppBar>
