@@ -35,81 +35,84 @@ export const styles = {
     },
 };
 
-function CoinOverview (props) {
-    const {classes, uid, isAuthorised } = props;
-
-    return (
-        <div>
-            <Card className={classes.card}>
-                <Grid container spacing={0} alignItems="center">
-                    <Grid item xs={12}>
-                        <Grid container spacing={0} alignItems="center" justify={"flex-start"}>
-                            <Grid item xs={2}>
-                            <CardContent>
-                                <Avatar
-                                    alt="Adelle Charles"
-                                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-                                    className={classes.bigAvatar}
-                                />
-                            </CardContent>
+class CoinOverview extends React.Component {
+    render() {
+        const {classes, uid, isAuthorised} = this.props;
+        return (
+            <div>
+                <Card className={classes.card}>
+                    <Grid container spacing={0} alignItems="center">
+                        <Grid item xs={12}>
+                            <Grid container spacing={0} alignItems="center" justify={"flex-start"}>
+                                <Grid item xs={2}>
+                                    <CardContent>
+                                        <Avatar
+                                            alt="Adelle Charles"
+                                            src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+                                            className={classes.bigAvatar}
+                                        />
+                                    </CardContent>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Grid container
-                              direction="column"
-                              justify="space-around"
-                              alignItems="baseline">
-                            <Grid item xs>
-                                <CardContent>
-                                    <Typography variant="display1" component="h2">
-                                        Bitcoin
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small">Website</Button>
-                                    <Button size="small">Explorer</Button>
-                                    <Button size="small">Reddit</Button>
-                                    <Button size="small">Twitter</Button>
-                                    {
-                                        isAuthorised &&  <Button size="small" onClick={() => props.addCoinToWatchList('BTC', uid )}>Add to Watchlist</Button>
-                                    }
-                                </CardActions>
+                        <Grid item xs={12}>
+                            <Grid container
+                                  direction="column"
+                                  justify="space-around"
+                                  alignItems="baseline">
+                                <Grid item xs>
+                                    <CardContent>
+                                        <Typography variant="display1" component="h2">
+                                            Bitcoin
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">Website</Button>
+                                        <Button size="small">Explorer</Button>
+                                        <Button size="small">Reddit</Button>
+                                        <Button size="small">Twitter</Button>
+                                        {
+                                            isAuthorised &&
+                                            <Button size="small" onClick={() => this.props.addCoinToWatchList('BTC', uid)}>Add
+                                                to Watchlist</Button>
+                                        }
+                                    </CardActions>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                        <Grid container spacing={0} alignItems="center" justify={"flex-end"}>
-                            <Grid item xs>
-                                <CardContent>
-                                    <Typography variant="display1" component="h2">
-                                        $6247.59772423
-                                    </Typography>
-                                </CardContent>
+                        <Grid item xs={9}>
+                            <Grid container spacing={0} alignItems="center" justify={"flex-end"}>
+                                <Grid item xs>
+                                    <CardContent>
+                                        <Typography variant="display1" component="h2">
+                                            $6247.59772423
+                                        </Typography>
+                                    </CardContent>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    {/*<Grid item xs={1}>*/}
+                        {/*<Grid item xs={1}>*/}
                         {/*<Grid container spacing={0} alignItems="center" justify={"flex-start"}>*/}
-                            {/*<CardContent>*/}
-                                {/*<Typography variant="display1" component="h2">*/}
-                                    {/*0.52%*/}
-                                {/*</Typography>*/}
-                            {/*</CardContent>*/}
+                        {/*<CardContent>*/}
+                        {/*<Typography variant="display1" component="h2">*/}
+                        {/*0.52%*/}
+                        {/*</Typography>*/}
+                        {/*</CardContent>*/}
                         {/*</Grid>*/}
-                    {/*</Grid>*/}
+                        {/*</Grid>*/}
 
-                </Grid>
-            </Card>
-        </div>
-    )
+                    </Grid>
+                </Card>
+            </div>
+        )
+    }
 }
 
 CoinOverview.propTypes = {
   uid: PropTypes.string,
   isAuthorised: PropTypes.bool,
   classes: PropTypes.object
-}
+};
 
 CoinOverview.defaultProps = {
   uid: '',
