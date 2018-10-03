@@ -30,7 +30,8 @@
     "test": "react-scripts test --env=jsdom --silent",
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --env=jsdom --coverage",
-    "cypress:open": "npx cypress open"
+    "cypress:open": "npx cypress open",
+    "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
     "redux-logger": "3.0.6",
