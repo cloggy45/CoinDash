@@ -8,6 +8,7 @@ import * as fromMarketOverview from './marketOverview/marketOverview';
 import * as fromCoinHistory from './coinHistory/coinHistory';
 import * as fromCoinPriceInfo from './coinPriceInfo/coinPriceInfo';
 import * as fromCoinMetaInfo from './coinMetaInfo/coinMetaInfo';
+import * as fromWatchList from './watchlist/watchlist';
 
 const API = 'API';
 const TOP_TEN = 'TOP_TEN';
@@ -17,6 +18,7 @@ const SELECTED = 'SELECTED';
 const MARKET_OVERVIEW = 'MARKET_OVERVIEW';
 const COIN_META_INFO = 'COIN_META_INFO';
 const COIN_PRICE_INFO = 'COIN_PRICE_INFO';
+const WATCHLIST_INFO = 'WATCHLIST_INFO';
 
 
 const rootReducer = combineReducers({
@@ -27,7 +29,8 @@ const rootReducer = combineReducers({
     [MARKET_OVERVIEW] : fromMarketOverview.marketOverview,
     [COIN_HISTORY]: fromCoinHistory.coinHistory,
     [COIN_PRICE_INFO] : fromCoinPriceInfo.coinPriceInfo,
-    [COIN_META_INFO] : fromCoinMetaInfo.coinMetaInfo
+    [COIN_META_INFO] : fromCoinMetaInfo.coinMetaInfo,
+    [WATCHLIST_INFO] : fromWatchList.watchlist,
 });
 
 
