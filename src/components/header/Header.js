@@ -7,6 +7,7 @@ import Header, {styles} from './HeaderView';
 import {signIn, signOut, fetchUser} from '../../actions/auth';
 
 import {getAuthStatus, getLoadingStatus, getUserProfile} from '../../reducers/auth/authSelectors';
+import {getWatchList, getWatchListErrorMessage, getWatchListFetchStatus} from '../../reducers/watchlist/watchlistSelectors';
 
 import {fetchWatchList} from '../../actions/firebase';
 
@@ -14,7 +15,10 @@ const mapStateToProps = store => {
     return {
         userProfile: getUserProfile(store),
         isAuthorisedUser: getAuthStatus(store),
-        isLoading: getLoadingStatus(store)
+        isLoading: getLoadingStatus(store),
+        userWatchList: getWatchList(store),
+        watchListFetchStatus: getWatchListFetchStatus(store),
+        watchListErrorMessage: getWatchListErrorMessage(store)
     }
 };
 
