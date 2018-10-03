@@ -22,7 +22,9 @@ describe('coinMetaInfo actions', () => {
         mock.restore();
     });
 
-    const url = "https://www.cryptocompare.com/api/data/socialstats/?id=1182";
+    const corsProxy = "https://cors-anywhere.herokuapp.com/";
+
+    const url = corsProxy+"https://www.cryptocompare.com/api/data/socialstats/?id=1182";
     const payload = [
 
         {
