@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 const Price = props => (
     <CardContent>
         <Typography variant="display1" component="h2">
-            {props.value}
+            {props.amount}
         </Typography>
     </CardContent>
 );
 
 Price.propTypes = {
-    value: PropTypes.number
+    amount: PropTypes.number
 };
 
 Price.defaultProps = {
-    value: 100
+    amount: 100
 };
 
 export default Price;
