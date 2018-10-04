@@ -3,24 +3,24 @@ import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
 import PropTypes from 'prop-types';
 
-const Title = props => (
+const Specific = props => (
     <CardContent>
         <Typography variant={props.variant} component={props.headerType}>
-            {props.title}
+            {props.content}
         </Typography>
     </CardContent>
 );
 
-Title.propTypes = {
+Specific.propTypes = {
     variant: PropTypes.string,
     headerType: PropTypes.string,
     title: PropTypes.string
 };
 
-Title.defaultProps = {
-    variant: "",
-    headerType: "",
+Specific.defaultProps = {
+    variant: "display 4",
+    headerType: "h2",
     title: ""
 };
 
-export default Title;
+export default Specific;

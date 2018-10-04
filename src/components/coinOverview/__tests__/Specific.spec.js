@@ -3,11 +3,11 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {createShallow} from "@material-ui/core/test-utils";
 
-import Price from "../Price";
+import Specific from "../Price";
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe('Price Component', () => {
+describe('Specific Component', () => {
     let hocShallow;
     let component;
 
@@ -17,7 +17,7 @@ describe('Price Component', () => {
 
 
     beforeEach(() => {
-        component = hocShallow(<Price />);
+        component = hocShallow(<Specific />);
     });
 
     it('Should render without errors', () => {
@@ -32,15 +32,6 @@ describe('Price Component', () => {
         expect(component.dive().children().dive().find('Typography').exists()).toBe(true);
     });
 
-    it('Default value prop should be 200', () => {
-        const typography = component.dive().children().dive();
-        expect(typography.props().children).toBe(100);
-    });
 
-    it('value prop should 150', () => {
-        const customPriceComponent = hocShallow(<Price amount={2500} /> );
-        const typography = customPriceComponent.dive().children().dive();
-        expect(typography.props().children).toBe(2500);
-    });
 
 });

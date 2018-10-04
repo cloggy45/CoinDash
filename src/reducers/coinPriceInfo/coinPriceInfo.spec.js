@@ -6,7 +6,7 @@ import {
     FETCH_COIN_PRICE_INFO_SUCCESS
 } from "../../actions/actionTypes";
 
-describe('Coin Price Info Reducer', () => {
+describe('Coin Specific Info Reducer', () => {
     it('should return the initial state', () => {
         expect(coinPriceInfo(undefined, {})).toEqual({
             isFetching: true,

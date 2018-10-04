@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import Hero from './Hero';
 import Price from './Price';
-import Title from './Title';
+import Specific from './Specific';
 
 
 export const styles = {
@@ -87,7 +87,7 @@ class CoinOverview extends React.Component {
                           justify="space-around"
                           alignItems="baseline">
                         <Grid item xs>
-                            <Title title={overview.name} variant={"display1"} headerType={"h2"} classes={styles.bigAvatar}/>
+                            <Specific title={overview.name} variant={"display1"} headerType={"h2"} classes={styles.bigAvatar}/>
                             <CardActions>
                                 <Button size="small" href={overview.links.reddit}>Reddit</Button>
                                 <Button size="small" href={overview.links.twitter}>Twitter</Button>

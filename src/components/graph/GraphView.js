@@ -150,7 +150,7 @@ Graph.defaultProps = {
   isLoading: false,
   graphType: 'Bar',
   filter: 'close',
-  title: 'Closing Price',
+  title: 'Closing Specific',
   coinHistory: [],
   selectedCoin: "BTC"
 }
