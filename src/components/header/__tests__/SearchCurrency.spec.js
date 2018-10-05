@@ -17,7 +17,7 @@ describe('SearchCurrency Component', () => {
 
     it('Should render without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<Options  classes={styles} getTickers={getTickers} setOption={setOptions}/>, div);
+        ReactDOM.render(<Options classes={styles} getTickers={getTickers} setSelectedCoin={setOptions}/>, div);
     });
 
     it('Should call getTickers initially when loading', () => {

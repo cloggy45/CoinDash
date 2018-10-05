@@ -1,8 +1,9 @@
-import { SELECT_COIN } from "./actionTypes";
+import {SELECT_COIN} from "./actionTypes";
 
-export const setSelectedCoin = coin => {
-  return {
-    type: SELECT_COIN,
-    payload: coin
-  };
+export const setSelectedCoin = (symbol, id) => {
+    return {
+        type: SELECT_COIN,
+        payload: symbol,
+        id: id
+    };
 };

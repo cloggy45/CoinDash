@@ -23,8 +23,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setOption: option => {
-            dispatch(setSelectedCoin(option));
+        setSelectedCoin: (symbol, id) => {
+            dispatch(setSelectedCoin(symbol, id));
         },
         getTickers: () => {
             dispatch(fetchTickers());

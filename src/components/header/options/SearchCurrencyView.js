@@ -10,21 +10,25 @@ export const styles = {
     }
 };
 
+// TODO Set initial option state, maybe just use default props
 export class Options extends React.Component {
     state = {
-        selectedOption: "BTC",
-        selectedId: 0
+        coinName: "BTC",
+        coinSymbol: "BTC",
+        coinId: 0,
+        selectedOption: "4432"
     };
 
     componentDidMount() {
         this.props.getTickers();
-        this.props.setOption("BTC");
+        // this.props.setSelectedCoin(4432);
     }
 
     handleChange = selectedOption => {
-        console.log(selectedOption);
-        this.setState({selectedOption: selectedOption.symbol, selectedId: selectedOption.value}, () => {
-            this.props.setOption(this.state.selectedOption);
+        const {value, label, symbol} = selectedOption;
+
+        this.setState({coinSymbol: symbol, coinId: value, coinName: label }, () => {
+            this.props.setSelectedCoin(symbol, Number(value));
         });
     };
 
@@ -36,7 +40,7 @@ export class Options extends React.Component {
 
     render() {
         const {options, classes} = this.props;
-        const {selectedId} = this.state;
+        const {coinId} = this.state;
 
         if (options === null) {
             return <p>Loading....</p>
@@ -45,7 +49,7 @@ export class Options extends React.Component {
                 <Select
                     className={`${classes.flex}`}
                     name="Search Currency"
-                    value={selectedId}
+                    value={coinId}
                     onChange={this.handleChange}
                     options={this.formatOptions(options)}
                     clearable={false}
@@ -58,7 +62,7 @@ export class Options extends React.Component {
 
 Options.propTypes = {
     getTickers : PropTypes.func,
-    setOption : PropTypes.func,
+    setSelectedCoin : PropTypes.func,
     options : PropTypes.array,
     classes : PropTypes.object
 };

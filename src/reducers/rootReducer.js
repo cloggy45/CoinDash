@@ -40,6 +40,10 @@ export function getSelectedCoin(store) {
     return fromSelected.selectedCoin(store[SELECTED]);
 }
 
+export function getSelectedCoinId(store) {
+    return fromSelected.selectedCoinId(store[SELECTED]);
+}
+
 // API Selectors
 
 export function getTickers(store) {

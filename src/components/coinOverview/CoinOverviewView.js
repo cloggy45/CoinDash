@@ -43,12 +43,12 @@ export const styles = {
 
 class CoinOverview extends React.Component {
     componentDidMount() {
-        this.props.fetchCoinMetaInfo(4432);
+        this.props.fetchCoinMetaInfo(this.props.selectedCoinId);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.selectedCoin !== this.props.selectedCoin) {
-            this.props.fetchCoinMetaInfo(4432);
+        if (prevProps.selectedCoinId !== this.props.selectedCoinId) {
+            this.props.fetchCoinMetaInfo(this.props.selectedCoinId);
         }
     }
 
@@ -134,7 +134,7 @@ CoinOverview.propTypes = {
     uid: PropTypes.string,
     isAuthorised: PropTypes.bool,
     classes: PropTypes.object,
-    selectedCoin: PropTypes.string,
+    selectedCoinId: PropTypes.string,
     coinMetaInfo: PropTypes.object,
     isFetchingMetaInfo: PropTypes.bool
 };

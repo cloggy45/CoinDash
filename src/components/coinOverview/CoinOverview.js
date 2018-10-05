@@ -7,7 +7,7 @@ import CoinOverview, {styles} from './CoinOverviewView';
 import { addToWatchList} from '../../actions/firebase';
 import { getUserID, getAuthStatus } from '../../reducers/auth/authSelectors';
 import { getFetchStatus, getCoinMetaInfo } from '../../reducers/coinMetaInfo/coinMetaInfoSelectors';
-import {getSelectedCoin} from "../../reducers/rootReducer";
+import {getSelectedCoin, getSelectedCoinId} from "../../reducers/rootReducer";
 import {fetchCoinMetaInfo} from "../../actions/coinMetaInfo";
 
 const mapStateToProps = store => {
@@ -16,7 +16,8 @@ const mapStateToProps = store => {
         isAuthorised : getAuthStatus(store),
         isFetchingMetaInfo : getFetchStatus(store),
         coinMetaInfo : getCoinMetaInfo(store),
-        selectedCoin : getSelectedCoin(store)
+        selectedCoin : getSelectedCoin(store),
+        selectedCoinId : getSelectedCoinId(store)
     }
 };
 
