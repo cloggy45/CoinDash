@@ -6,7 +6,7 @@ import {
     setSelectedCoin
 } from "../../../actions/selected";
 import {
-    fetchTickers,
+    fetchCoinList,
 } from "../../../actions/api";
 
 import {getTickers } from "../../../reducers/rootReducer";
@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(setSelectedCoin(symbol, id));
         },
         getTickers: () => {
-            dispatch(fetchTickers());
+            dispatch(fetchCoinList());
         }
     };
 };

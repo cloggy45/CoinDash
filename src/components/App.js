@@ -20,8 +20,6 @@ import Graph from './graph/Graph'
 global.fetch = require('node-fetch');
 
 class App extends Component {
-
-
     render() {
         return (
             <React.Fragment>
@@ -38,8 +36,8 @@ class App extends Component {
                 </Grid>
                 <Switch>
                     <Route exact path="/" component={TopTenOverview}/>
-                    <Route exact path="/logout" render={() => <h1>Logout</h1>}/>
-                    <Route exact path="/favourites" render={() => <h1>Favourites</h1>}/>
+                    {/*<Route exact path="/logout" render={() => <h1>Logout</h1>}/>*/}
+                    {/*<Route exact path="/favourites" render={() => <h1>Favourites</h1>}/>*/}
                 </Switch>
             </React.Fragment>
         );

@@ -13,15 +13,15 @@ export const styles = {
 // TODO Set initial option state, maybe just use default props
 export class Options extends React.Component {
     state = {
-        coinName: "BTC",
-        coinSymbol: "BTC",
-        coinId: 0,
-        selectedOption: "4432"
+        coinName: "Doge Coin",
+        coinSymbol: "DOGE",
+        coinId: 4432,
+        selectedOption: 4432
     };
 
     componentDidMount() {
         this.props.getTickers();
-        // this.props.setSelectedCoin(4432);
+        this.props.setSelectedCoin('DOGE', 4432);
     }
 
     handleChange = selectedOption => {

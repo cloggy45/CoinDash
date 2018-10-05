@@ -1,5 +1,6 @@
 export const selected = (currentState = {
-    selectedCoin: 'BTC'
+    selectedCoin: 'DOGE',
+    selectedId: 4432
 }, action) => {
     switch (action.type) {
         case "SELECT_COIN":

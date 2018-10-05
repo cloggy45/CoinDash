@@ -19,6 +19,7 @@ export const styles = {
     }
 };
 
+// TODO Move to own file
 export const GraphHolder = props => (
     <Card className={props.classes.card}>
         <CardContent>
@@ -53,6 +54,7 @@ export class Graph extends Component {
         });
     };
 
+    // TODO Refactor
     createGraph = (type, dataset, filter) => {
         const graphProps = {
             data:this.setupDataset(dataset, filter),
@@ -144,7 +146,7 @@ Graph.propTypes = {
   title: PropTypes.string,
   coinHistory:PropTypes.array,
   selectedCoin: PropTypes.string
-}
+};
           
 Graph.defaultProps = {
   isLoading: false,
@@ -152,8 +154,8 @@ Graph.defaultProps = {
   filter: 'close',
   title: 'Closing Specific',
   coinHistory: [],
-  selectedCoin: "BTC"
-}
+  selectedCoin: "DOGE"
+};
           
 
 export default Graph;

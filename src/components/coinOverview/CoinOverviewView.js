@@ -41,7 +41,6 @@ export const styles = {
 };
 
 
-// TODO Add Specifics into their relative place
 class CoinOverview extends React.Component {
     state = {
         imageBaseUrl : 'https://www.cryptocompare.com',
@@ -63,9 +62,15 @@ class CoinOverview extends React.Component {
         }
     }
 
+    // TODO Refactor
     renderCoinOverview = () => {
-        const {uid, isAuthorised, coinMetaInfo, selectedCoin} = this.props;
-        const { imageBaseUrl, coinLogoUrl } = this.state;
+        const {uid, isAuthorised, coinMetaInfo, selectedCoin, coinList, isFetchingMetaInfo} = this.props;
+        let { imageBaseUrl, coinLogoUrl } = this.state;
+
+
+        if(!isEmpty(coinList)) {
+             coinLogoUrl = coinList[selectedCoin].ImageUrl;
+        }
 
         const overview = {
             name: "",
@@ -89,7 +94,9 @@ class CoinOverview extends React.Component {
                 <Grid item xs={12}>
                     <Grid container spacing={0} alignItems="center" justify={"flex-start"}>
                         <Grid item xs={2}>
-                            <Hero alt={"logo"} src={imageBaseUrl+coinLogoUrl}/>
+                            {
+                                isFetchingMetaInfo ? <CircularProgress /> : <Hero alt={"logo"} src={imageBaseUrl+coinLogoUrl}/>
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
@@ -134,7 +141,7 @@ class CoinOverview extends React.Component {
                 <Card className={classes.card}>
                     <Grid container spacing={0} alignItems="center">
                         {
-                            isFetchingMetaInfo ? <CircularProgress/> : this.renderCoinOverview()
+                            this.renderCoinOverview()
                         }
                     </Grid>
                 </Card>

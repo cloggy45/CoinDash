@@ -37,7 +37,7 @@ export const receiveCoinList = json => {
 };
 
 // endpoint https://min-api.cryptocompare.com/data/all/coinlist
-export function fetchTickers() {
+export function fetchCoinList() {
     return dispatch => {
         return cc.coinList()
             .then(response => {

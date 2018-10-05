@@ -2,7 +2,7 @@ import {
     fetchTopTen,
     fetchCoinData,
     fetchCoinHistory,
-    fetchTickers
+    fetchCoinList
 } from '../api';
 import {
     FETCH_TOP_TEN_REQUEST,
@@ -63,7 +63,7 @@ describe('Test Async Actions', () => {
         ];
         mock.onGet(url).reply(200, payload);
 
-        return store.dispatch(fetchTickers()).then(() => {
+        return store.dispatch(fetchCoinList()).then(() => {
             expect(store.getActions()).toEqual(expectedAction);
         });
     });
