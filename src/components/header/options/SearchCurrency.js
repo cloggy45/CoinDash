@@ -9,7 +9,7 @@ import {
     fetchTickers,
 } from "../../../actions/api";
 
-import {getTickers} from "../../../reducers/rootReducer";
+import {getTickers } from "../../../reducers/rootReducer";
 
 import {withStyles} from '@material-ui/core/styles';
 

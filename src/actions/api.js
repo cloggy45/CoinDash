@@ -8,6 +8,7 @@ import {
     FETCH_COIN_HISTORY_FAILED,
     RECEIVE_TICKERS,
     RECEIVE_COIN_DATA,
+    RECEIVE_COIN_LIST,
 } from './actionTypes';
 
 
@@ -28,12 +29,20 @@ export const receiveTickers = json => {
     };
 };
 
+export const receiveCoinList = json => {
+    return {
+        type: RECEIVE_COIN_LIST,
+        payload: json
+    }
+};
+
 // endpoint https://min-api.cryptocompare.com/data/all/coinlist
 export function fetchTickers() {
     return dispatch => {
         return cc.coinList()
             .then(response => {
                 dispatch(receiveTickers(response.Data));
+                dispatch(receiveCoinList(response.Data));
             })
             .catch(error => {
                 console.log(error);

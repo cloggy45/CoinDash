@@ -39,21 +39,33 @@ export const styles = {
     },
 };
 
-// TODO Add Specifics into their relative place
 
+// TODO Add Specifics into their relative place
 class CoinOverview extends React.Component {
+    state = {
+        imageBaseUrl : 'https://www.cryptocompare.com',
+        coinLogoUrl : ""
+    };
+
     componentDidMount() {
         this.props.fetchCoinMetaInfo(this.props.selectedCoinId);
+
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.selectedCoinId !== this.props.selectedCoinId) {
             this.props.fetchCoinMetaInfo(this.props.selectedCoinId);
+
+            const { ImageUrl } = this.props.coinList[this.props.selectedCoin];
+
+            this.setState({ coinLogoUrl: ImageUrl })
+
         }
     }
 
     renderCoinOverview = () => {
         const {uid, isAuthorised, coinMetaInfo, selectedCoin} = this.props;
+        const { imageBaseUrl, coinLogoUrl } = this.state;
 
         const overview = {
             name: "",
@@ -78,7 +90,7 @@ class CoinOverview extends React.Component {
                 <Grid item xs={12}>
                     <Grid container spacing={0} alignItems="center" justify={"flex-start"}>
                         <Grid item xs={2}>
-                            <Hero alt={"logo"} src={"https://via.placeholder.com/350x150"}/>
+                            <Hero alt={"logo"} src={imageBaseUrl+coinLogoUrl}/>
                         </Grid>
                     </Grid>
                 </Grid>

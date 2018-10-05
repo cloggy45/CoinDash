@@ -50,4 +50,8 @@ export function getTickers(store) {
     return fromApi.getTickers(store[API]);
 }
 
+export function getCoinList(store) {
+    return fromApi.getCoinList(store[API]);
+}
+
 export default rootReducer;
