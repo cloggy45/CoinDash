@@ -4,13 +4,20 @@ import {fetchMarketOverview} from "../../actions/marketOverview";
 import {withRouter} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 
+import {getCoinPriceInfo, getCoinPriceInfoError, getCoinPriceInfoFetchStatus} from '../../reducers/coinPriceInfo/coinPriceInfoSelectors';
+
 import {fetchStatus, getErrorMessage, getMarketOverview} from '../../reducers/marketOverview/marketOverviewSelectors';
+import { getSelectedCoin } from '../../reducers/rootReducer';
+
 
 const mapStateToProps = store => {
     return {
         overview: getMarketOverview(store),
         errorMessage: getErrorMessage(store),
-        isFetching: fetchStatus(store)
+        isFetching: fetchStatus(store),
+        coinPriceInfo: getCoinPriceInfo(store),
+        isFetchingCoinPriceInfo: getCoinPriceInfoFetchStatus(store),
+        selectedCoin : getSelectedCoin(store)
     };
 };
 

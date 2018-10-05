@@ -5,6 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 
+import has from 'lodash.has';
+import map from 'lodash.map';
+import foreach from 'lodash.foreach';
+
 import { formatter } from '../../misc/helpers';
 
 export const styles = {
@@ -48,30 +52,37 @@ class MarketOverview extends Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes, coinPriceInfo, isFetchingCoinPriceInfo, selectedCoin} = this.props;
+        let prices;
 
-        // TODO: refactor
-        if (this.props.overview !== null) {
-            var {active_markets, active_cryptocurrencies} = this.props.overview.data;
-            const { quotes } = this.props.overview.data;
-            console.log(quotes);
-            var { total_market_cap, total_volume_24h } = quotes.USD;
+        const error = 'No Info Available...';
+        const priceInformation = new Map();
+
+        if(!isFetchingCoinPriceInfo) {
+            if(has(coinPriceInfo, 'DISPLAY')) {
+                foreach(coinPriceInfo['DISPLAY'][selectedCoin]['USD'], (value, key) => {
+                    priceInformation.set(key, value);
+                });
+            } else {
+
+            }
         }
 
+        // TODO refactor
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Volume 24 Hour"} data={formatter.format(total_market_cap)}/>
+                        <Overview {...this.props} title={"Volume 24 Hour"} data={priceInformation.get('TOTALVOLUME24H') || error}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Market Cap"} data={active_markets}/>
+                        <Overview {...this.props} title={"Market Cap"} data={priceInformation.get('MKTCAP') || error}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Circulating Supply"} data={active_cryptocurrencies}/>
+                        <Overview {...this.props} title={"Supply"} data={priceInformation.get('SUPPLY') || error}/>
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Total Supply"} data={formatter.format(total_volume_24h)}/>
+                        <Overview {...this.props} title={"Highest Price (Today)"} data={priceInformation.get('HIGHDAY') || error}/>
                     </Grid>
                 </Grid>
             </div>
