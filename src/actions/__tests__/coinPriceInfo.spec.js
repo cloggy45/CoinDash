@@ -2,12 +2,12 @@ import {
     FETCH_COIN_PRICE_INFO_SUCCESS,
     FETCH_COIN_PRICE_INFO_REQUEST,
     FETCH_COIN_PRICE_INFO_FAILED,
-} from './actionTypes';
+} from '../actionTypes';
 
 import {
     mock, mockStore
-} from './setupAsyncTests';
-import {fetchCoinPriceInfo} from "./coinPriceInfo";
+} from '../setupAsyncTests';
+import {fetchCoinPriceInfo} from "../coinPriceInfo";
 
 describe('coinPriceInfo actions', () => {
     let store = mockStore({coinPriceInfo: []});

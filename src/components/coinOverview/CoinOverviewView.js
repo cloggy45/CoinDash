@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
 
 import Hero from './Hero';
-import Price from './Price';
 import Specific from './Specific';
 
 

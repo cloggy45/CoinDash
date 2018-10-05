@@ -1,14 +1,14 @@
-import {fetchCoinMetaInfo} from './coinMetaInfo';
+import {fetchCoinMetaInfo} from '../coinMetaInfo';
 
 import {
     FETCH_COIN_META_INFO_FAILED,
     FETCH_COIN_META_INFO_REQUEST,
     FETCH_COIN_META_INFO_SUCCESS
-} from './actionTypes';
+} from '../actionTypes';
 
 import {
     mock, mockStore
-} from './setupAsyncTests';
+} from '../setupAsyncTests';
 
 describe('coinMetaInfo actions', () => {
     let store = mockStore({coinOverview: []});

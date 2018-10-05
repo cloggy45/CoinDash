@@ -3,7 +3,7 @@ import {
     fetchCoinData,
     fetchCoinHistory,
     fetchTickers
-} from './api';
+} from '../api';
 import {
     FETCH_TOP_TEN_REQUEST,
     FETCH_TOP_TEN_SUCCESS,
@@ -14,11 +14,11 @@ import {
     RECEIVE_TICKERS,
     RECEIVE_COIN_DATA,
     RECEIVE_MARKET_OVERVIEW_DATA,
-} from './actionTypes';
+} from '../actionTypes';
 
 import {
     mock, mockStore
-} from './setupAsyncTests'
+} from '../setupAsyncTests'
 
 describe('Test Async Actions', () => {
     let store = mockStore({api: []});

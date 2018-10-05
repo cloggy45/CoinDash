@@ -1,16 +1,16 @@
 import {
     fetchMarketOverview
-} from './marketOverview';
+} from '../marketOverview';
 
 import {
     FETCH_MARKET_OVERVIEW_FAILED,
     FETCH_MARKET_OVERVIEW_REQUEST,
     FETCH_MARKET_OVERVIEW_SUCCESS
-} from './actionTypes';
+} from '../actionTypes';
 
 import {
     mock, mockStore
-} from './setupAsyncTests'
+} from '../setupAsyncTests'
 
 describe('marketOverview actions', () => {
 
