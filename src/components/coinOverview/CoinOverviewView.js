@@ -9,9 +9,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 
 import isEmpty from 'lodash.isempty';
+import has from 'lodash.has';
 
 import Hero from './Hero';
 import Specific from './Specific';
+import {coinPriceInfo} from "../../reducers/coinPriceInfo/coinPriceInfo";
 
 
 export const styles = {
@@ -64,9 +66,14 @@ class CoinOverview extends React.Component {
 
     // TODO Refactor
     renderCoinOverview = () => {
-        const {uid, isAuthorised, coinMetaInfo, selectedCoin, coinList, isFetchingMetaInfo} = this.props;
+        const {uid, isAuthorised, coinMetaInfo, selectedCoin, coinList, isFetchingMetaInfo, coinPriceInfo, coinPriceInfoErrorMessage } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
 
+        let price = 0;
+
+        if(!isFetchingMetaInfo) {
+            price = has(coinPriceInfo, 'DISPLAY') ? coinPriceInfo['DISPLAY'][selectedCoin]['USD']['PRICE'] : 'No price data available...';
+        }
 
         if(!isEmpty(coinList)) {
              coinLogoUrl = coinList[selectedCoin].ImageUrl;
@@ -126,7 +133,7 @@ class CoinOverview extends React.Component {
                 <Grid item xs={9}>
                     <Grid container spacing={0} alignItems="center" justify={"flex-end"}>
                         <Grid item xs>
-                            <Specific content={"$100"} variant={"display1"} headerType={"h2"}/>
+                            <Specific content={price} variant={"display1"} headerType={"h2"}/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -135,7 +142,7 @@ class CoinOverview extends React.Component {
     };
 
     render() {
-        const {classes, isFetchingMetaInfo} = this.props;
+        const {classes} = this.props;
         return (
             <div>
                 <Card className={classes.card}>
