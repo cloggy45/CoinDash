@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import PropTypes from 'prop-types';
-
+import map from 'lodash.map';
 
 export const styles = {
     flex: {
@@ -12,7 +12,8 @@ export const styles = {
 
 export class Options extends React.Component {
     state = {
-        selectedOption: "BTC"
+        selectedOption: "BTC",
+        selectedId: 0
     };
 
     componentDidMount() {
@@ -21,20 +22,21 @@ export class Options extends React.Component {
     }
 
     handleChange = selectedOption => {
-        this.setState({selectedOption: selectedOption.value}, () => {
+        console.log(selectedOption);
+        this.setState({selectedOption: selectedOption.symbol, selectedId: selectedOption.value}, () => {
             this.props.setOption(this.state.selectedOption);
         });
     };
 
-    formatOptions = (options = []) => {
-        return options.map(option => {
-            return {value: option.symbol, label: option.name};
+    formatOptions = (options={}) => {
+        return map(options, (coin) => {
+            return {value: coin.Id, label: coin.CoinName, symbol: coin.Symbol}
         });
     };
 
     render() {
         const {options, classes} = this.props;
-        const {selectedOption} = this.state;
+        const {selectedId} = this.state;
 
         if (options === null) {
             return <p>Loading....</p>
@@ -43,7 +45,7 @@ export class Options extends React.Component {
                 <Select
                     className={`${classes.flex}`}
                     name="Search Currency"
-                    value={selectedOption}
+                    value={selectedId}
                     onChange={this.handleChange}
                     options={this.formatOptions(options)}
                     clearable={false}

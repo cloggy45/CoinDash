@@ -1,7 +1,5 @@
 export const api = (currentState = {
-  tickers: {
-    data: null
-  },
+  tickers: [],
 
 }, action) => {
   switch (action.type) {
@@ -27,5 +25,5 @@ export const api = (currentState = {
 };
 
 export function getTickers(store) {
-  return store.tickers.data
+  return store.tickers
 }

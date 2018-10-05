@@ -17,7 +17,11 @@ import CoinOverview from './coinOverview/CoinOverview';
 
 import Graph from './graph/Graph'
 
+global.fetch = require('node-fetch');
+
 class App extends Component {
+
+
     render() {
         return (
             <React.Fragment>

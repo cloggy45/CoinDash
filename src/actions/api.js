@@ -11,6 +11,9 @@ import {
 } from './actionTypes';
 
 
+const cc = require('cryptocompare');
+
+
 export const receiveCoinData = json => {
     return {
         type: RECEIVE_COIN_DATA,
@@ -25,13 +28,12 @@ export const receiveTickers = json => {
     };
 };
 
-// Documentation https://coinmarketcap.com/api/#endpoint_listings
+// endpoint https://min-api.cryptocompare.com/data/all/coinlist
 export function fetchTickers() {
     return dispatch => {
-        return axios
-            .get(`https://api.coinmarketcap.com/v2/listings/`)
+        return cc.coinList()
             .then(response => {
-                dispatch(receiveTickers(response.data));
+                dispatch(receiveTickers(response.Data));
             })
             .catch(error => {
                 console.log(error);

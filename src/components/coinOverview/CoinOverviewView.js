@@ -39,6 +39,7 @@ export const styles = {
     },
 };
 
+// TODO Add Specifics into their relative place
 
 class CoinOverview extends React.Component {
     componentDidMount() {
