@@ -8,6 +8,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import PropTypes from 'prop-types';
 
+import isEmpty from 'lodash.isempty';
+
 import Hero from './Hero';
 import Price from './Price';
 import Specific from './Specific';
@@ -49,7 +51,6 @@ class CoinOverview extends React.Component {
 
     componentDidMount() {
         this.props.fetchCoinMetaInfo(this.props.selectedCoinId);
-
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -76,13 +77,12 @@ class CoinOverview extends React.Component {
             }
         };
 
-        // TODO: Research alternative methods
-        if (coinMetaInfo !== null) {
-            overview.name = coinMetaInfo.General.Name;
+        if(!isEmpty(coinMetaInfo)) {
+            overview.symbol = coinMetaInfo.General.Name;
+            overview.name = coinMetaInfo.General.CoinName;
             overview.links.facebook = coinMetaInfo.Facebook.link;
             overview.links.reddit = coinMetaInfo.Reddit.link;
             overview.links.twitter = coinMetaInfo.Twitter.link;
-
         }
 
         return (
@@ -100,7 +100,9 @@ class CoinOverview extends React.Component {
                           justify="space-around"
                           alignItems="baseline">
                         <Grid item xs>
-                            <Specific title={overview.name} variant={"display1"} headerType={"h2"} classes={styles.bigAvatar}/>
+                            <Specific content={overview.name} variant={"display1"} headerType={"h1"} classes={styles.bigAvatar}/>
+                            <Specific content={overview.symbol} variant={"display5"} headerType={"h3"} classes={styles.bigAvatar}/>
+
                             <CardActions>
                                 <Button size="small" href={overview.links.reddit}>Reddit</Button>
                                 <Button size="small" href={overview.links.twitter}>Twitter</Button>
@@ -118,7 +120,7 @@ class CoinOverview extends React.Component {
                 <Grid item xs={9}>
                     <Grid container spacing={0} alignItems="center" justify={"flex-end"}>
                         <Grid item xs>
-                            <Price value={"$100"}/>
+                            <Specific content={"$100"} variant={"display1"} headerType={"h2"}/>
                         </Grid>
                     </Grid>
                 </Grid>

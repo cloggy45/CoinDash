@@ -40,7 +40,6 @@ export class Header extends Component {
     handleClick = event => {
         this.setState({anchorEl: event.currentTarget});
         this.props.fetchWatchList(this.props.userId);
-        console.log(this.props);
     };
 
     handleClose = () => {

@@ -8,6 +8,9 @@ import {
 } from "./actionTypes";
 
 export const fetchCoinPriceInfo = ticker => dispatch => {
+
+    console.log("FETCHCOINPRICEINFO", ticker);
+
     dispatch({
         type: FETCH_COIN_PRICE_INFO_REQUEST,
         isFetching: true
