@@ -15,40 +15,25 @@ import {
 const cc = require('cryptocompare');
 
 
-export const receiveCoinData = json => {
-    return {
-        type: RECEIVE_COIN_DATA,
-        payload: json
-    };
-};
+export const fetchCoinList = () => dispatch => {
+    const request = axios({
+        method: 'GET',
+        url: 'https://min-api.cryptocompare.com/data/all/coinlist',
+        header: []
+    });
 
-export const receiveTickers = json => {
-    return {
-        type: RECEIVE_TICKERS,
-        payload: json
-    };
-};
+    return request.then(response => {
+        dispatch({
+            type: RECEIVE_TICKERS,
+            payload: response.data
+        })
+        dispatch({
+            type: RECEIVE_COIN_LIST,
+            payload: response.data
+        })
+    }).catch(error => console.log(error));
 
-export const receiveCoinList = json => {
-    return {
-        type: RECEIVE_COIN_LIST,
-        payload: json
-    }
 };
-
-// endpoint https://min-api.cryptocompare.com/data/all/coinlist
-export function fetchCoinList() {
-    return dispatch => {
-        return cc.coinList()
-            .then(response => {
-                dispatch(receiveTickers(response.Data));
-                dispatch(receiveCoinList(response.Data));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-}
 
 export const fetchTopTen = () => dispatch => {
 
@@ -66,17 +51,17 @@ export const fetchTopTen = () => dispatch => {
 
     return request.then(
         response =>
-            dispatch({
-                type: FETCH_TOP_TEN_SUCCESS,
-                payload: response.data,
-                isFetching: false
-            }),
+        dispatch({
+            type: FETCH_TOP_TEN_SUCCESS,
+            payload: response.data,
+            isFetching: false
+        }),
         error =>
-            dispatch({
-                type: FETCH_TOP_TEN_FAILED,
-                payload: error || 'Failed to fetch top ten',
-                isFetching: false
-            })
+        dispatch({
+            type: FETCH_TOP_TEN_FAILED,
+            payload: error || 'Failed to fetch top ten',
+            isFetching: false
+        })
     );
 };
 
@@ -96,31 +81,35 @@ export const fetchCoinHistory = (ticker) => dispatch => {
 
     return request.then(
         response =>
-            dispatch({
-                type: FETCH_COIN_HISTORY_SUCCESS,
-                payload: response.data,
-                isFetching: false
-            }),
+        dispatch({
+            type: FETCH_COIN_HISTORY_SUCCESS,
+            payload: response.data,
+            isFetching: false
+        }),
         error =>
-            dispatch({
-                type: FETCH_COIN_HISTORY_FAILED,
-                payload: error,
-                isFetching: false
-            })
+        dispatch({
+            type: FETCH_COIN_HISTORY_FAILED,
+            payload: error,
+            isFetching: false
+        })
     )
 };
 
 // Documentation https://api.coinmarketcap.com/v2/ticker/?limit=10
-export function fetchCoinData() {
-    return dispatch => {
-        return axios
-            .get(`https://api.coinmarketcap.com/v2/ticker/`)
-            .then(response => {
-                dispatch(receiveCoinData(response.data));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-}
+export const fetchCoinData = () => dispatch => {
 
+    const request = axios({
+        method: 'GET',
+        url: 'https://api.coinmarketcap.com/v2/ticker/',
+        header: []
+    })
+    return request.then(
+        response => {
+            console.log(response)
+            dispatch({
+            type: RECEIVE_COIN_DATA,
+            payload: response.data
+        })},
+        error => console.log(error)
+    );
+}
