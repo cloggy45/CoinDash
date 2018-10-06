@@ -105,7 +105,6 @@ export const fetchCoinData = () => dispatch => {
     })
     return request.then(
         response => {
-            console.log(response)
             dispatch({
             type: RECEIVE_COIN_DATA,
             payload: response.data

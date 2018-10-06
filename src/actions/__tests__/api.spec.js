@@ -53,7 +53,6 @@ describe('Test Async Actions', () => {
     }
     
     mock.onGet(url).reply(200, payload);
-    console.log(mock);
     return store.dispatch(fetchCoinList()).then(() => {
       expect(store.getActions()).toEqual([receiveCoinListAction, receiveCoinTickersAction]);
     });
