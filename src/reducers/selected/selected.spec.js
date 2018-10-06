@@ -5,7 +5,9 @@ import { SELECT_COIN } from '../../actions/actionTypes';
 describe('Selected Reducer', () => {
     it('should return the initial state', () => {
         expect(selected(undefined, {})).toEqual({
-            selectedCoin: 'BTC'
+            selectedCoin: 'DOGE',
+            selectedId: 4432
+          
         })
     });
     it('should handle SELECT_COIN', () => {
