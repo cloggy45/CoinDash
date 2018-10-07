@@ -17,16 +17,16 @@ describe('SearchCurrency Component', () => {
 
     it('Should render without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<Options classes={styles} getTickers={getTickers} setSelectedCoin={setOptions}/>, div);
+        ReactDOM.render(<Options classes={styles} getTickers={getTickers} setSelectedCoin={setOptions} />, div);
     });
 
     it('Should call getTickers initially when loading', () => {
-        const component = shallow(<Options getTickers={getTickers}/>);
+        const component = shallow(<Options getTickers={getTickers} setSelectedCoin={setOptions}/>);
         expect(getTickers).toHaveBeenCalledTimes(1);
     });
 
     it('Should render loading if there are no options', () => {
-        const tree= renderer.create(<Options options={null} />).toJSON();
+        const tree= renderer.create(<Options options={null} setSelectedCoin={setOptions} />).toJSON();
         expect(tree).toMatchSnapshot();
 
     });

@@ -62,7 +62,6 @@ export class Options extends React.Component {
 
 Options.propTypes = {
     getTickers : PropTypes.func,
-    setSelectedCoin : PropTypes.func,
     options : PropTypes.array,
     classes : PropTypes.object
 };
