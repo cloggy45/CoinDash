@@ -139,7 +139,7 @@ class CoinOverview extends React.Component {
                             />
                             <Specific
                                 content={overview.symbol}
-                                variant={'display5'}
+                                variant={'display4'}
                                 headerType={'h3'}
                                 classes={styles.bigAvatar}
                             />
@@ -218,7 +218,7 @@ CoinOverview.propTypes = {
     uid: PropTypes.string,
     isAuthorised: PropTypes.bool,
     classes: PropTypes.object,
-    selectedCoinId: PropTypes.string,
+    selectedCoinId: PropTypes.number,
     coinMetaInfo: PropTypes.object,
     isFetchingMetaInfo: PropTypes.bool,
 };
@@ -227,7 +227,8 @@ CoinOverview.defaultProps = {
     uid: '',
     isAuthorised: false,
     classes: {},
-    selectedCoin: 'BTC',
+    selectedCoin: 'DOGE',
+    selectedCoinId: 4432,
     coinMetaInfo: {},
     isFetchingMetaInfo: true,
 };

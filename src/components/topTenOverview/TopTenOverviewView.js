@@ -36,8 +36,8 @@ export class TopTenOverview extends Component {
     componentDidMount() {
         this.props.fetch();
     }
-    isNegativePercent(percent) {
-        return Math.sign(percent) === -1 ? true : false;
+    static isNegativePercent(percent) {
+        return Math.sign(percent) === -1;
     }
     render() {
         const { classes, topTen, isFetching } = this.props;
@@ -68,7 +68,7 @@ export class TopTenOverview extends Component {
                                         <TableCell numeric>
                                             {formatter.format(USD.price)}
                                         </TableCell>
-                                        {this.isNegativePercent(
+                                        {TopTenOverview.isNegativePercent(
                                             USD.percent_change_24h
                                         ) ? (
                                             <TableCell

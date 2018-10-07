@@ -18,7 +18,7 @@ Specific.propTypes = {
 };
 
 Specific.defaultProps = {
-    variant: 'display 4',
+    variant: 'display4',
     headerType: 'h2',
     title: '',
 };
