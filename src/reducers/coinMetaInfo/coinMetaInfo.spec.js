@@ -11,7 +11,7 @@ import {
 describe('Coin Meta Info Reducer', () => {
     it('should return the initial state', () => {
         expect(coinMetaInfo(undefined, {})).toEqual({
-            isFetching: false,
+            isFetching: true,
             coinMetaInfo: null,
         });
     });

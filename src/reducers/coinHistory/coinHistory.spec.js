@@ -11,7 +11,7 @@ import {
 describe('Coin History Reducer', () => {
     it('should return the initial state', () => {
         expect(coinHistory(undefined, {})).toEqual({
-            isFetching: false,
+            isFetching: true,
             error: null,
             coinHistory: null,
         });

@@ -8,32 +8,34 @@ import { addToWatchList } from '../../actions/firebase';
 import { getUserID, getAuthStatus } from '../../reducers/auth/authSelectors';
 import { getCoinMetaInfo } from '../../reducers/coinMetaInfo/coinMetaInfoSelectors';
 
+import { getSelectedCoin, getSelectedCoinId } from '../../reducers/rootReducer';
+
 import {
-    getSelectedCoin,
-    getSelectedCoinId,
     getCoinList,
-} from '../../reducers/rootReducer';
+    getCoinListFetchStatus,
+} from '../../reducers/coinList/coinListSelectors';
+
 import { fetchCoinMetaInfo } from '../../actions/coinMetaInfo';
+
 import {
     getCoinPriceInfo,
     getCoinPriceInfoFetchStatus,
     getCoinPriceInfoError,
 } from '../../reducers/coinPriceInfo/coinPriceInfoSelectors';
 
-const mapStateToProps = store => {
-    return {
-        uid: getUserID(store),
-        isAuthorised: getAuthStatus(store),
-        isFetchingMetaInfo: getCoinPriceInfoFetchStatus(store),
-        coinMetaInfo: getCoinMetaInfo(store),
-        selectedCoin: getSelectedCoin(store),
-        selectedCoinId: getSelectedCoinId(store),
-        coinList: getCoinList(store),
-        coinPriceInfo: getCoinPriceInfo(store),
-        isFetchingCoinPriceInfo: getCoinPriceInfoFetchStatus(store),
-        coinPriceInfoErrorMessage: getCoinPriceInfoError(store),
-    };
-};
+const mapStateToProps = store => ({
+    uid: getUserID(store),
+    isAuthorised: getAuthStatus(store),
+    isFetchingMetaInfo: getCoinPriceInfoFetchStatus(store),
+    coinMetaInfo: getCoinMetaInfo(store),
+    selectedCoin: getSelectedCoin(store),
+    selectedCoinId: getSelectedCoinId(store),
+    coinList: getCoinList(store),
+    coinListFetchStatus: getCoinListFetchStatus(store),
+    coinPriceInfo: getCoinPriceInfo(store),
+    isFetchingCoinPriceInfo: getCoinPriceInfoFetchStatus(store),
+    coinPriceInfoErrorMessage: getCoinPriceInfoError(store),
+});
 
 const mapDispatchToProps = dispatch => ({
     fetchCoinMetaInfo: coin => dispatch(fetchCoinMetaInfo(coin)),

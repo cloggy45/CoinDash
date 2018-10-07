@@ -1,5 +1,5 @@
 const initialState = {
-    isFetching: false,
+    isFetching: true,
     error: null,
     coinHistory: null,
 };

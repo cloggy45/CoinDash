@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchUser } from '../actions/auth';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
 import { Switch, Route } from 'react-router-dom';
 
+// Components
 import Header from './header/Header';
 import MarketOverview from './marketOverview/MarketOverview';
 import TopTenOverview from './topTenOverview/TopTenOverview';
@@ -14,9 +14,14 @@ import CoinOverview from './coinOverview/CoinOverview';
 
 import Graph from './graph/Graph';
 
-global.fetch = require('node-fetch');
+// Actions
+import { fetchUser } from '../actions/auth';
+import { fetchCoinList } from '../actions/api';
 
 class App extends Component {
+    componentDidMount() {
+        this.props.fetchCoinList();
+    }
     render() {
         return (
             <React.Fragment>
@@ -51,6 +56,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
     fetchUser: dispatch(fetchUser()),
+    fetchCoinList: () => dispatch(fetchCoinList()),
 });
 
 export default withRouter(

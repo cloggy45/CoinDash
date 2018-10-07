@@ -11,7 +11,7 @@ export const styles = {
 };
 
 // TODO Set initial option state, maybe just use default props
-export class Options extends React.Component {
+export class SearchCurrency extends React.Component {
     state = {
         coinName: 'Doge Coin',
         coinSymbol: 'DOGE',
@@ -20,17 +20,16 @@ export class Options extends React.Component {
     };
 
     componentDidMount() {
-        this.props.getTickers();
         this.props.setSelectedCoin('DOGE', 4432);
     }
 
     handleChange = selectedOption => {
         const { value, label, symbol } = selectedOption;
-
         this.setState(
             { coinSymbol: symbol, coinId: value, coinName: label },
             () => {
                 this.props.setSelectedCoin(symbol, Number(value));
+                this.props.fetchCoinPriceInfo(symbol);
             }
         );
     };
@@ -46,10 +45,10 @@ export class Options extends React.Component {
     };
 
     render() {
-        const { options, classes } = this.props;
+        const { coinList, classes } = this.props;
         const { coinId } = this.state;
 
-        if (options === null) {
+        if (coinList === null) {
             return <p>Loading....</p>;
         } else {
             return (
@@ -58,7 +57,7 @@ export class Options extends React.Component {
                     name="Search Currency"
                     value={coinId}
                     onChange={this.handleChange}
-                    options={this.formatOptions(options)}
+                    options={this.formatOptions(coinList)}
                     clearable={false}
                     data-cy="select"
                 />
@@ -67,17 +66,15 @@ export class Options extends React.Component {
     }
 }
 
-Options.propTypes = {
+SearchCurrency.propTypes = {
     getTickers: PropTypes.func,
     options: PropTypes.array,
     classes: PropTypes.object,
 };
 
-Options.defaultProps = {
+SearchCurrency.defaultProps = {
     options: [],
     classes: {},
-    getTickers: () => {},
-    setOption: () => {},
 };
 
-export default Options;
+export default SearchCurrency;

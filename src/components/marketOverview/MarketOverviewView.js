@@ -44,7 +44,7 @@ const Overview = props => (
 
 class MarketOverview extends Component {
     componentDidMount() {
-        this.props.fetchOverview();
+        this.props.fetchCoinOverview('DOGE');
     }
 
     render() {

@@ -1,32 +1,31 @@
 import { connect } from 'react-redux';
 
 import { setSelectedCoin } from '../../../actions/selected';
-import { fetchCoinList } from '../../../actions/api';
 
-import { getTickers } from '../../../reducers/rootReducer';
+import {
+    getCoinList,
+    getCoinListFetchStatus,
+} from '../../../reducers/coinList/coinListSelectors';
+
+import { fetchCoinPriceInfo } from '../../../actions/coinPriceInfo';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import Options, { styles } from './SearchCurrencyView.js';
+import SearchCurrency, { styles } from './SearchCurrencyView.js';
 
-const mapStateToProps = state => {
-    return {
-        options: getTickers(state),
-    };
-};
+const mapStateToProps = state => ({
+    coinList: getCoinList(state),
+    coinListFetchStatus: getCoinListFetchStatus(state),
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        setSelectedCoin: (symbol, id) => {
-            dispatch(setSelectedCoin(symbol, id));
-        },
-        getTickers: () => {
-            dispatch(fetchCoinList());
-        },
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    setSelectedCoin: (symbol, id) => {
+        dispatch(setSelectedCoin(symbol, id));
+    },
+    fetchCoinPriceInfo: tickers => dispatch(fetchCoinPriceInfo(tickers)),
+});
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(Options));
+)(withStyles(styles)(SearchCurrency));

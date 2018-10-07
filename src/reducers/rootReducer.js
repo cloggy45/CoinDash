@@ -8,6 +8,7 @@ import * as fromMarketOverview from './marketOverview/marketOverview';
 import * as fromCoinHistory from './coinHistory/coinHistory';
 import * as fromCoinPriceInfo from './coinPriceInfo/coinPriceInfo';
 import * as fromCoinMetaInfo from './coinMetaInfo/coinMetaInfo';
+import * as fromCoinList from './coinList/coinList';
 import * as fromWatchList from './watchlist/watchlist';
 
 const API = 'API';
@@ -18,6 +19,7 @@ const SELECTED = 'SELECTED';
 const MARKET_OVERVIEW = 'MARKET_OVERVIEW';
 const COIN_META_INFO = 'COIN_META_INFO';
 const COIN_PRICE_INFO = 'COIN_PRICE_INFO';
+const COIN_LIST = 'COIN_LIST';
 const WATCHLIST_INFO = 'WATCHLIST_INFO';
 
 const rootReducer = combineReducers({
@@ -29,6 +31,7 @@ const rootReducer = combineReducers({
     [COIN_HISTORY]: fromCoinHistory.coinHistory,
     [COIN_PRICE_INFO]: fromCoinPriceInfo.coinPriceInfo,
     [COIN_META_INFO]: fromCoinMetaInfo.coinMetaInfo,
+    [COIN_LIST]: fromCoinList.coinList,
     [WATCHLIST_INFO]: fromWatchList.watchlist,
 });
 
@@ -40,16 +43,6 @@ export function getSelectedCoin(store) {
 
 export function getSelectedCoinId(store) {
     return fromSelected.selectedCoinId(store[SELECTED]);
-}
-
-// API Selectors
-
-export function getTickers(store) {
-    return fromApi.getTickers(store[API]);
-}
-
-export function getCoinList(store) {
-    return fromApi.getCoinList(store[API]);
 }
 
 export default rootReducer;

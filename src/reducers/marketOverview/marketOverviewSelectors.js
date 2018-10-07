@@ -2,14 +2,14 @@ import * as fromMarketOverview from './marketOverview';
 
 const MARKET_OVERVIEW = 'MARKET_OVERVIEW';
 
-export function fetchStatus(store) {
+export function marketOverviewFetchStatus(store) {
     return fromMarketOverview.isFetching(store[MARKET_OVERVIEW]);
 }
 
-export function getErrorMessage(store) {
+export function marketOverviewErrorMessage(store) {
     return fromMarketOverview.error(store[MARKET_OVERVIEW]);
 }
 
-export function getMarketOverview(store) {
+export function marketOverviewCurrentState(store) {
     return fromMarketOverview.currentMarketOverview(store[MARKET_OVERVIEW]);
 }

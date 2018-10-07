@@ -4,6 +4,7 @@ import {
     fetchCoinHistory,
     fetchCoinList,
 } from '../api';
+
 import {
     FETCH_TOP_TEN_REQUEST,
     FETCH_TOP_TEN_SUCCESS,
@@ -14,7 +15,6 @@ import {
     FETCH_COIN_LIST_REQUEST,
     FETCH_COIN_LIST_SUCCESS,
     RECEIVE_COIN_DATA,
-    RECEIVE_MARKET_OVERVIEW_DATA,
 } from '../actionTypes';
 
 import { mock, mockStore } from '../setupAsyncTests';

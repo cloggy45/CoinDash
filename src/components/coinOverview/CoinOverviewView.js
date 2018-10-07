@@ -69,13 +69,14 @@ class CoinOverview extends React.Component {
             selectedCoin,
             coinList,
             isFetchingMetaInfo,
+            isFetchingCoinPriceInfo,
             coinPriceInfo,
         } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
 
         let price = 0;
 
-        if (!isFetchingMetaInfo) {
+        if (!isFetchingCoinPriceInfo) {
             price = has(coinPriceInfo, 'DISPLAY')
                 ? coinPriceInfo['DISPLAY'][selectedCoin]['USD']['PRICE']
                 : 'No price data available...';
