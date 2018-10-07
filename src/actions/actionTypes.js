@@ -27,7 +27,8 @@ export const RECEIVE_COIN_DATA = 'RECEIVE_COIN_DATA';
 export const RECEIVE_MARKET_OVERVIEW_DATA = 'RECEIVE_MARKET_OVERVIEW_DATA';
 
 // TODO refactor this, make each step explicit, reuesting, successful, failed
-export const RECEIVE_COIN_LIST = 'RECEIVE_COIN_LIST';
+export const FETCH_COIN_LIST_REQUEST = 'FETCH_COIN_LIST_REQUEST';
+export const FETCH_COIN_LIST_SUCCESS = 'FETCH_COIN_LIST_SUCCESS';
 
 // Option Action Types
 export const SELECT_COIN = 'SELECT_COIN';

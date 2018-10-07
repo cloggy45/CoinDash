@@ -82,7 +82,9 @@ class CoinOverview extends React.Component {
         }
 
         if (!isEmpty(coinList)) {
-            coinLogoUrl = coinList[selectedCoin].ImageUrl;
+            coinLogoUrl = has(coinList, selectedCoin)
+                ? coinList[selectedCoin].ImageUrl
+                : 'Loading';
         }
 
         const overview = {

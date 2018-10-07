@@ -6,13 +6,17 @@ import {
     FETCH_COIN_HISTORY_REQUEST,
     FETCH_COIN_HISTORY_SUCCESS,
     FETCH_COIN_HISTORY_FAILED,
-    RECEIVE_TICKERS,
     RECEIVE_COIN_DATA,
-    RECEIVE_COIN_LIST,
+    FETCH_COIN_LIST_REQUEST,
+    FETCH_COIN_LIST_SUCCESS,
 } from './actionTypes';
 
-
 export const fetchCoinList = () => dispatch => {
+    dispatch({
+        type: FETCH_COIN_LIST_REQUEST,
+        isFetching: true,
+    });
+
     const request = axios({
         method: 'GET',
         url: 'https://min-api.cryptocompare.com/data/all/coinlist',
@@ -22,12 +26,9 @@ export const fetchCoinList = () => dispatch => {
     return request
         .then(response => {
             dispatch({
-                type: RECEIVE_TICKERS,
-                payload: response.data,
-            });
-            dispatch({
-                type: RECEIVE_COIN_LIST,
-                payload: response.data,
+                type: FETCH_COIN_LIST_SUCCESS,
+                payload: response.data.Data,
+                isFetching: false,
             });
         })
         .catch(error => console.log(error));
