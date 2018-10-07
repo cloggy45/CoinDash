@@ -1,6 +1,6 @@
-import * as fromTopTen from "./topTen";
+import * as fromTopTen from './topTen';
 
-const TOP_TEN = "TOP_TEN";
+const TOP_TEN = 'TOP_TEN';
 
 export function getTopTen(store) {
     return fromTopTen.getTopTen(store[TOP_TEN]);

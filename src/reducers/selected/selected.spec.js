@@ -6,17 +6,16 @@ describe('Selected Reducer', () => {
     it('should return the initial state', () => {
         expect(selected(undefined, {})).toEqual({
             selectedCoin: 'DOGE',
-            selectedId: 4432
-          
-        })
+            selectedId: 4432,
+        });
     });
     it('should handle SELECT_COIN', () => {
         const action = {
-            type:SELECT_COIN,
-            payload: 'DOGE'
+            type: SELECT_COIN,
+            payload: 'DOGE',
         };
         expect(selected({}, action)).toEqual({
-            selectedCoin: 'DOGE'
-        })
-    })
+            selectedCoin: 'DOGE',
+        });
+    });
 });

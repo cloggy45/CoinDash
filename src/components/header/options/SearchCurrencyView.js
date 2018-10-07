@@ -1,22 +1,22 @@
-import React from "react";
-import Select from "react-select";
-import "react-select/dist/react-select.css";
+import React from 'react';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import PropTypes from 'prop-types';
 import map from 'lodash.map';
 
 export const styles = {
     flex: {
-        flexGrow: 1
-    }
+        flexGrow: 1,
+    },
 };
 
 // TODO Set initial option state, maybe just use default props
 export class Options extends React.Component {
     state = {
-        coinName: "Doge Coin",
-        coinSymbol: "DOGE",
+        coinName: 'Doge Coin',
+        coinSymbol: 'DOGE',
         coinId: 4432,
-        selectedOption: 4432
+        selectedOption: 4432,
     };
 
     componentDidMount() {
@@ -25,25 +25,32 @@ export class Options extends React.Component {
     }
 
     handleChange = selectedOption => {
-        const {value, label, symbol} = selectedOption;
+        const { value, label, symbol } = selectedOption;
 
-        this.setState({coinSymbol: symbol, coinId: value, coinName: label }, () => {
-            this.props.setSelectedCoin(symbol, Number(value));
-        });
+        this.setState(
+            { coinSymbol: symbol, coinId: value, coinName: label },
+            () => {
+                this.props.setSelectedCoin(symbol, Number(value));
+            }
+        );
     };
 
-    formatOptions = (options={}) => {
-        return map(options, (coin) => {
-            return {value: coin.Id, label: coin.CoinName, symbol: coin.Symbol}
+    formatOptions = (options = {}) => {
+        return map(options, coin => {
+            return {
+                value: coin.Id,
+                label: coin.CoinName,
+                symbol: coin.Symbol,
+            };
         });
     };
 
     render() {
-        const {options, classes} = this.props;
-        const {coinId} = this.state;
+        const { options, classes } = this.props;
+        const { coinId } = this.state;
 
         if (options === null) {
-            return <p>Loading....</p>
+            return <p>Loading....</p>;
         } else {
             return (
                 <Select
@@ -61,16 +68,16 @@ export class Options extends React.Component {
 }
 
 Options.propTypes = {
-    getTickers : PropTypes.func,
-    options : PropTypes.array,
-    classes : PropTypes.object
+    getTickers: PropTypes.func,
+    options: PropTypes.array,
+    classes: PropTypes.object,
 };
 
 Options.defaultProps = {
-    options : [],
-    classes : {},
+    options: [],
+    classes: {},
     getTickers: () => {},
-    setOption : () => {}
+    setOption: () => {},
 };
 
 export default Options;

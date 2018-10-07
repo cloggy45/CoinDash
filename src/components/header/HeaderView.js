@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -22,14 +22,18 @@ export const styles = {
         marginRight: 20,
     },
     avatar: {
-        margin: 10
-    }
+        margin: 10,
+    },
 };
 
 export const MenuItems = props => {
     return props.items.map((item, index) => {
-        return <MenuItem key={index} onClick={props.handleClose}>{item}</MenuItem>
-    })
+        return (
+            <MenuItem key={index} onClick={props.handleClose}>
+                {item}
+            </MenuItem>
+        );
+    });
 };
 
 export class Header extends Component {
@@ -38,12 +42,12 @@ export class Header extends Component {
     };
 
     handleClick = event => {
-        this.setState({anchorEl: event.currentTarget});
+        this.setState({ anchorEl: event.currentTarget });
         this.props.fetchWatchList(this.props.userId);
     };
 
     handleClose = () => {
-        this.setState({anchorEl: null});
+        this.setState({ anchorEl: null });
     };
 
     handleLoginClick = () => {
@@ -55,51 +59,72 @@ export class Header extends Component {
     };
 
     renderLoggedOutMenu = () => (
-        <Button onClick={this.handleLoginClick} color="inherit" name="Login">Login</Button>
+        <Button onClick={this.handleLoginClick} color="inherit" name="Login">
+            Login
+        </Button>
     );
 
     renderLoggedInMenu = () => {
-        const {userProfile, classes} = this.props;
-        const {anchorEl} = this.state;
-        return (<React.Fragment>
-            <Button
-                aria-owns={anchorEl ? 'simple-menu' : null}
-                aria-haspopup="true"
-                onClick={this.handleClick}
-                color="inherit"
-            >
-                View Watchlist
-            </Button>
-            <Avatar
-                alt="Users Icon"
-                src={userProfile.profile.picture}
-                className={classes.avatar}
-            />
-            <Button color="inherit" onClick={this.handleLogoutClick} name="logout">Log Out</Button>
-        </React.Fragment>)
+        const { userProfile, classes } = this.props;
+        const { anchorEl } = this.state;
+        return (
+            <React.Fragment>
+                <Button
+                    aria-owns={anchorEl ? 'simple-menu' : null}
+                    aria-haspopup="true"
+                    onClick={this.handleClick}
+                    color="inherit"
+                >
+                    View Watchlist
+                </Button>
+                <Avatar
+                    alt="Users Icon"
+                    src={userProfile.profile.picture}
+                    className={classes.avatar}
+                />
+                <Button
+                    color="inherit"
+                    onClick={this.handleLogoutClick}
+                    name="logout"
+                >
+                    Log Out
+                </Button>
+            </React.Fragment>
+        );
     };
 
     render() {
-        const {classes, isAuthorisedUser, userWatchList} = this.props;
-        const {anchorEl} = this.state;
+        const { classes, isAuthorisedUser, userWatchList } = this.props;
+        const { anchorEl } = this.state;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="title" color="inherit" className={classes.flex}>
+                        <Typography
+                            variant="title"
+                            color="inherit"
+                            className={classes.flex}
+                        >
                             Coin Dash
                         </Typography>
-                        <Options className={classes.flex}/>
-                        {
-                            isAuthorisedUser === true ? this.renderLoggedInMenu() : this.renderLoggedOutMenu()
-                        }
+                        <Options className={classes.flex} />
+                        {isAuthorisedUser === true
+                            ? this.renderLoggedInMenu()
+                            : this.renderLoggedOutMenu()}
                         <Menu
                             id="simple-menu"
                             anchorEl={anchorEl}
                             open={Boolean(anchorEl)}
                             onClose={this.handleClose}
                         >
-                            <MenuItems onClick={this.handleClose} items={isEmpty(userWatchList) ? ['Loading..'] : Object.values(userWatchList)}/>
+                            <MenuItems
+                                onClick={this.handleClose}
+                                items={
+                                    isEmpty(userWatchList)
+                                        ? ['Loading..']
+                                        : Object.values(userWatchList)
+                                }
+                            />
                         </Menu>
                     </Toolbar>
                 </AppBar>
@@ -119,24 +144,19 @@ Header.propTypes = {
     logon: PropTypes.func,
     fetchUser: PropTypes.func,
     fetchWatchList: PropTypes.func,
-
 };
 
 Header.defaultProps = {
     isAuthorisedUser: false,
     classes: {},
     userProfile: {},
-    watchListErrorMessage: "",
+    watchListErrorMessage: '',
     watchListFetchStatus: true,
     userWatchList: {},
-    logout: () => {
-    },
-    logon: () => {
-    },
-    fetchUser: () => {
-    },
-    fetchWatchList: () => {
-    }
+    logout: () => {},
+    logon: () => {},
+    fetchUser: () => {},
+    fetchWatchList: () => {},
 };
 
 export default Header;

@@ -1,16 +1,15 @@
 import axios from 'axios';
 
-
 import {
     FETCH_COIN_PRICE_INFO_FAILED,
     FETCH_COIN_PRICE_INFO_SUCCESS,
-    FETCH_COIN_PRICE_INFO_REQUEST
-} from "./actionTypes";
+    FETCH_COIN_PRICE_INFO_REQUEST,
+} from './actionTypes';
 
 export const fetchCoinPriceInfo = ticker => dispatch => {
     dispatch({
         type: FETCH_COIN_PRICE_INFO_REQUEST,
-        isFetching: true
+        isFetching: true,
     });
 
     const request = axios({
@@ -23,13 +22,13 @@ export const fetchCoinPriceInfo = ticker => dispatch => {
             dispatch({
                 type: FETCH_COIN_PRICE_INFO_SUCCESS,
                 payload: response.data,
-                isFetching: false
+                isFetching: false,
             }),
         error =>
             dispatch({
                 type: FETCH_COIN_PRICE_INFO_FAILED,
                 payload: error || 'Failed to fetch coin price info',
-                isFetching: false
+                isFetching: false,
             })
-    )
+    );
 };

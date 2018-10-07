@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -14,7 +14,7 @@ import { formatter } from '../../misc/helpers';
 export const styles = {
     root: {
         flexGrow: 1,
-        marginTop: '1em'
+        marginTop: '1em',
     },
     card: {
         minWidth: 275,
@@ -39,9 +39,7 @@ const Overview = props => (
             <Typography className={props.classes.title} color="textSecondary">
                 {props.title}
             </Typography>
-            <Typography variant="headline">
-                {props.data}
-            </Typography>
+            <Typography variant="headline">{props.data}</Typography>
         </CardContent>
     </Card>
 );
@@ -52,19 +50,26 @@ class MarketOverview extends Component {
     }
 
     render() {
-        const {classes, coinPriceInfo, isFetchingCoinPriceInfo, selectedCoin} = this.props;
+        const {
+            classes,
+            coinPriceInfo,
+            isFetchingCoinPriceInfo,
+            selectedCoin,
+        } = this.props;
         let prices;
 
         const error = 'No Info Available...';
         const priceInformation = new Map();
 
-        if(!isFetchingCoinPriceInfo) {
-            if(has(coinPriceInfo, 'DISPLAY')) {
-                foreach(coinPriceInfo['DISPLAY'][selectedCoin]['USD'], (value, key) => {
-                    priceInformation.set(key, value);
-                });
+        if (!isFetchingCoinPriceInfo) {
+            if (has(coinPriceInfo, 'DISPLAY')) {
+                foreach(
+                    coinPriceInfo['DISPLAY'][selectedCoin]['USD'],
+                    (value, key) => {
+                        priceInformation.set(key, value);
+                    }
+                );
             } else {
-
             }
         }
 
@@ -73,16 +78,34 @@ class MarketOverview extends Component {
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Volume 24 Hour"} data={priceInformation.get('TOTALVOLUME24H') || error}/>
+                        <Overview
+                            {...this.props}
+                            title={'Volume 24 Hour'}
+                            data={
+                                priceInformation.get('TOTALVOLUME24H') || error
+                            }
+                        />
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Market Cap"} data={priceInformation.get('MKTCAP') || error}/>
+                        <Overview
+                            {...this.props}
+                            title={'Market Cap'}
+                            data={priceInformation.get('MKTCAP') || error}
+                        />
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Supply"} data={priceInformation.get('SUPPLY') || error}/>
+                        <Overview
+                            {...this.props}
+                            title={'Supply'}
+                            data={priceInformation.get('SUPPLY') || error}
+                        />
                     </Grid>
                     <Grid item xs>
-                        <Overview {...this.props} title={"Highest Price (Today)"} data={priceInformation.get('HIGHDAY') || error}/>
+                        <Overview
+                            {...this.props}
+                            title={'Highest Price (Today)'}
+                            data={priceInformation.get('HIGHDAY') || error}
+                        />
                     </Grid>
                 </Grid>
             </div>
@@ -91,16 +114,17 @@ class MarketOverview extends Component {
 }
 
 MarketOverview.propTypes = {
-  classes: PropTypes.object,
-  overview: PropTypes.object,
-  fetchOverview: PropTypes.func
-}
+    classes: PropTypes.object,
+    overview: PropTypes.object,
+    fetchOverview: PropTypes.func,
+};
 
 MarketOverview.defaultProps = {
-  classes: {},
-  overview: {},
-  fetchOverview: () => { return; }
-}
+    classes: {},
+    overview: {},
+    fetchOverview: () => {
+        return;
+    },
+};
 
-
-export default MarketOverview
+export default MarketOverview;

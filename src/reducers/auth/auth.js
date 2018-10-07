@@ -1,45 +1,48 @@
-export const auth = (currentState = {
-    user: {
-        additionalUserInfo: {},
+export const auth = (
+    currentState = {
         user: {
-            uid: null
-        }
+            additionalUserInfo: {},
+            user: {
+                uid: null,
+            },
+        },
+        isAuthorised: false,
+        isLoading: false,
+        error: null,
     },
-    isAuthorised: false,
-    isLoading: false,
-    error: null,
-}, action) => {
+    action
+) => {
     switch (action.type) {
-        case "LOGIN_REQUESTED":
+        case 'LOGIN_REQUESTED':
             return {
                 ...currentState,
-                isLoading: true
-            }
-        case "LOGIN_SUCCESSFUL":
+                isLoading: true,
+            };
+        case 'LOGIN_SUCCESSFUL':
             return {
                 ...currentState,
                 user: action.payload,
                 isAuthorised: true,
-                isLoading: false
+                isLoading: false,
             };
-        case "LOGIN_FAILED":
+        case 'LOGIN_FAILED':
             return {
                 ...currentState,
                 error: action.error,
                 isAuthorised: false,
-                isLoading: false
+                isLoading: false,
             };
-        case "LOGOUT_SUCCESSFUL":
+        case 'LOGOUT_SUCCESSFUL':
             return {
                 ...currentState,
                 user: {
                     additionalUserInfo: {},
                     user: {
-                        uid: null
-                    }
+                        uid: null,
+                    },
                 },
                 isAuthorised: false,
-                isLoading: false
+                isLoading: false,
             };
         default:
             return currentState;
@@ -47,7 +50,7 @@ export const auth = (currentState = {
 };
 
 export function userid(store) {
-    return store.user.user.uid
+    return store.user.user.uid;
 }
 
 export function user(store) {

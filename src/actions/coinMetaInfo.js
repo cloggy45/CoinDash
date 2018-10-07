@@ -4,23 +4,25 @@ import {
     FETCH_COIN_META_INFO_FAILED,
     FETCH_COIN_META_INFO_SUCCESS,
     FETCH_COIN_META_INFO_REQUEST,
-} from "./actionTypes";
+} from './actionTypes';
 
 export const fetchCoinMetaInfo = id => dispatch => {
     dispatch({
         type: FETCH_COIN_META_INFO_REQUEST,
-        isFetching: true
+        isFetching: true,
     });
 
-    const corsProxy = "https://cors-anywhere.herokuapp.com/";
+    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
     const request = axios({
         method: 'GET',
-        url: corsProxy+`https://www.cryptocompare.com/api/data/socialstats/?id=${id}`,
+        url:
+            corsProxy +
+            `https://www.cryptocompare.com/api/data/socialstats/?id=${id}`,
         headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": true
-        }
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+        },
     });
 
     return request.then(
@@ -28,13 +30,13 @@ export const fetchCoinMetaInfo = id => dispatch => {
             dispatch({
                 type: FETCH_COIN_META_INFO_SUCCESS,
                 payload: response.data,
-                isFetching: false
+                isFetching: false,
             }),
         error =>
             dispatch({
                 type: FETCH_COIN_META_INFO_FAILED,
                 payload: error || 'Failed to fetch coin meta info',
-                isFetching: false
+                isFetching: false,
             })
-    )
+    );
 };

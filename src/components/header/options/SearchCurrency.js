@@ -1,23 +1,17 @@
-import {
-    connect
-} from "react-redux";
+import { connect } from 'react-redux';
 
-import {
-    setSelectedCoin
-} from "../../../actions/selected";
-import {
-    fetchCoinList,
-} from "../../../actions/api";
+import { setSelectedCoin } from '../../../actions/selected';
+import { fetchCoinList } from '../../../actions/api';
 
-import {getTickers } from "../../../reducers/rootReducer";
+import { getTickers } from '../../../reducers/rootReducer';
 
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import Options, {styles} from './SearchCurrencyView.js';
+import Options, { styles } from './SearchCurrencyView.js';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        options: getTickers(state)
+        options: getTickers(state),
     };
 };
 
@@ -28,8 +22,11 @@ const mapDispatchToProps = dispatch => {
         },
         getTickers: () => {
             dispatch(fetchCoinList());
-        }
+        },
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Options));
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withStyles(styles)(Options));

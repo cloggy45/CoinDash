@@ -1,9 +1,9 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {createShallow} from '@material-ui/core/test-utils';
+import { createShallow } from '@material-ui/core/test-utils';
 
-Enzyme.configure({adapter: new Adapter()});
+Enzyme.configure({ adapter: new Adapter() });
 
 const styles = {
     avatar: {
@@ -18,7 +18,7 @@ describe('Hero Component', () => {
     let renderedComponent;
 
     beforeAll(() => {
-        shallow = createShallow({dive: true});
+        shallow = createShallow({ dive: true });
     });
 
     beforeEach(() => {
@@ -30,8 +30,9 @@ describe('Hero Component', () => {
     });
 
     it('Should render avatar', () => {
-       renderedComponent = shallow(<Hero src={"Some Image"} />);
-       expect(renderedComponent.find('WithStyles(Avatar)').exists()).toBe(true);
+        renderedComponent = shallow(<Hero src={'Some Image'} />);
+        expect(renderedComponent.find('WithStyles(Avatar)').exists()).toBe(
+            true
+        );
     });
 });
-

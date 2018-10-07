@@ -1,21 +1,21 @@
 const initState = {
     isFetching: true,
     list: null,
-    errorMessage: undefined
+    errorMessage: undefined,
 };
 
 export const watchlist = (currentState = initState, action) => {
     switch (action.type) {
-        case "FETCH_WATCHLIST_REQUEST":
+        case 'FETCH_WATCHLIST_REQUEST':
             return {
                 ...currentState,
-                isFetching: true
+                isFetching: true,
             };
-        case "FETCH_WATCHLIST_SUCCESS":
+        case 'FETCH_WATCHLIST_SUCCESS':
             return {
                 ...currentState,
                 isFetching: false,
-                list: action.payload
+                list: action.payload,
             };
         default:
             return currentState;

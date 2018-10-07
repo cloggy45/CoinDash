@@ -6,6 +6,15 @@
   "repository": "https://github.com/cloggy45/CoinDash",
   "homepage": "https://codesandbox.io/s/new",
   "main": "src/index.js",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true
+  },
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "axios": "0.18.0",
@@ -36,19 +45,20 @@
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --env=jsdom --coverage",
     "cypress:open": "npx cypress open",
-    "heroku-postbuild": "npm run build"
+    "pretty": "prettier --single-quote --trailing-comma es5 --write src/**"
   },
   "devDependencies": {
-    "redux-logger": "3.0.6",
-    "redux-mock-store": "1.5.1",
     "axios-mock-adapter": "1.15.0",
     "cypress": "^3.1.0",
-    "expect": "22.4.3",
     "enzyme": "^3.5.0",
     "enzyme-adapter-react-16": "^1.3.0",
     "enzyme-to-json": "^3.3.4",
+    "expect": "22.4.3",
     "jest-dom": "^1.12.0",
+    "prettier": "^1.14.3",
     "prop-types": "^15.6.2",
-    "react-testing-library": "^5.0.0"
+    "react-testing-library": "^5.0.0",
+    "redux-logger": "3.0.6",
+    "redux-mock-store": "1.5.1"
   }
 }

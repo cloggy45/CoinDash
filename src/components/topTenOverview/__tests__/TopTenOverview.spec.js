@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 
-Enzyme.configure({adapter: new Adapter()});
+Enzyme.configure({ adapter: new Adapter() });
 
-import {TopTenOverview, styles} from '../TopTenOverviewView';
+import { TopTenOverview, styles } from '../TopTenOverviewView';
 
 describe('TopTenOverview Component', () => {
     let addFavouritesMock, fetchMock;
@@ -32,10 +32,10 @@ describe('TopTenOverview Component', () => {
                             market_cap: 140716539461.0,
                             percent_change_1h: 0.03,
                             percent_change_24h: 0.06,
-                            percent_change_7d: 9.56
-                        }
+                            percent_change_7d: 9.56,
+                        },
                     },
-                    last_updated: 1532888969
+                    last_updated: 1532888969,
                 },
                 '1027': {
                     id: 1027,
@@ -53,12 +53,12 @@ describe('TopTenOverview Component', () => {
                             market_cap: 47005631825.0,
                             percent_change_1h: 0.11,
                             percent_change_24h: -0.11,
-                            percent_change_7d: 0.15
-                        }
+                            percent_change_7d: 0.15,
+                        },
                     },
-                    last_updated: 1532888988
-                }
-            }
+                    last_updated: 1532888988,
+                },
+            },
         };
     });
 
@@ -69,22 +69,40 @@ describe('TopTenOverview Component', () => {
 
     it('Should render', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<TopTenOverview classes={styles} topTen={[]} fetch={fetchMock}/>, div);
+        ReactDOM.render(
+            <TopTenOverview classes={styles} topTen={[]} fetch={fetchMock} />,
+            div
+        );
     });
 
     it('Should call fetchData on load', () => {
-        const component = shallow(<TopTenOverview classes={styles} topTen={[]} fetch={fetchMock}/>);
+        const component = shallow(
+            <TopTenOverview classes={styles} topTen={[]} fetch={fetchMock} />
+        );
         expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
     it('Should render Circular progress bar when there is no top ten data', () => {
-        const tree = renderer.create(<TopTenOverview classes={styles} isFetching={false} topTen={[]}
-                                                     fetch={fetchMock}/>);
+        const tree = renderer.create(
+            <TopTenOverview
+                classes={styles}
+                isFetching={false}
+                topTen={[]}
+                fetch={fetchMock}
+            />
+        );
         expect(tree).toMatchSnapshot();
     });
 
     it('Should render Circular progress bar when fetching data', () => {
-        const tree = renderer.create(<TopTenOverview classes={styles} isFetching={true} topTen={[payload]} fetch={fetchMock}/>);
+        const tree = renderer.create(
+            <TopTenOverview
+                classes={styles}
+                isFetching={true}
+                topTen={[payload]}
+                fetch={fetchMock}
+            />
+        );
         expect(tree).toMatchSnapshot();
     });
 });

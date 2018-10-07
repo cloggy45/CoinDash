@@ -1,26 +1,26 @@
 const intialState = {
-  isFetching: false,
-  coinMetaInfo: null
+    isFetching: false,
+    coinMetaInfo: null,
 };
 
 export const coinMetaInfo = (currentState = intialState, action) => {
     switch (action.type) {
-        case "FETCH_COIN_META_INFO_REQUEST":
+        case 'FETCH_COIN_META_INFO_REQUEST':
             return {
                 ...currentState,
-                isFetching: true
+                isFetching: true,
             };
-        case "FETCH_COIN_META_INFO_SUCCESS":
+        case 'FETCH_COIN_META_INFO_SUCCESS':
             return {
                 ...currentState,
                 coinMetaInfo: action.payload.Data,
-                isFetching: false
+                isFetching: false,
             };
-        case "FETCH_COIN_META_INFO_FAILED":
+        case 'FETCH_COIN_META_INFO_FAILED':
             return {
                 ...currentState,
                 coinMetaInfo: action.payload,
-                isFetching: false
+                isFetching: false,
             };
         default:
             return currentState;

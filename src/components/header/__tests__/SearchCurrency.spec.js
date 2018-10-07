@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Options, styles  } from '../options/SearchCurrencyView';
+import { Options, styles } from '../options/SearchCurrencyView';
 import renderer from 'react-test-renderer';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -17,17 +17,27 @@ describe('SearchCurrency Component', () => {
 
     it('Should render without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<Options classes={styles} getTickers={getTickers} setSelectedCoin={setOptions} />, div);
+        ReactDOM.render(
+            <Options
+                classes={styles}
+                getTickers={getTickers}
+                setSelectedCoin={setOptions}
+            />,
+            div
+        );
     });
 
     it('Should call getTickers initially when loading', () => {
-        const component = shallow(<Options getTickers={getTickers} setSelectedCoin={setOptions}/>);
+        const component = shallow(
+            <Options getTickers={getTickers} setSelectedCoin={setOptions} />
+        );
         expect(getTickers).toHaveBeenCalledTimes(1);
     });
 
     it('Should render loading if there are no options', () => {
-        const tree= renderer.create(<Options options={null} setSelectedCoin={setOptions} />).toJSON();
+        const tree = renderer
+            .create(<Options options={null} setSelectedCoin={setOptions} />)
+            .toJSON();
         expect(tree).toMatchSnapshot();
-
     });
 });

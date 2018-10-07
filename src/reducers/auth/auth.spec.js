@@ -1,11 +1,12 @@
 import expect from 'expect';
 
-import {auth} from './auth';
+import { auth } from './auth';
 
 import {
     LOGIN_REQUESTED,
     LOGIN_SUCCESSFUL,
-    LOGIN_FAILED, LOGOUT_SUCCESSFUL
+    LOGIN_FAILED,
+    LOGOUT_SUCCESSFUL,
 } from '../../actions/actionTypes';
 
 describe('Auth reducer', () => {
@@ -14,8 +15,8 @@ describe('Auth reducer', () => {
             user: {
                 additionalUserInfo: {},
                 user: {
-                    uid: null
-                }
+                    uid: null,
+                },
             },
             isAuthorised: false,
             isLoading: false,
@@ -24,61 +25,80 @@ describe('Auth reducer', () => {
     });
 
     it('should handle LOGIN_REQUESTED', () => {
-        expect(auth({}, {
-            type: LOGIN_REQUESTED,
-            isLoading: true
-        })).toEqual({
-            isLoading: true
-        })
+        expect(
+            auth(
+                {},
+                {
+                    type: LOGIN_REQUESTED,
+                    isLoading: true,
+                }
+            )
+        ).toEqual({
+            isLoading: true,
+        });
     });
 
     it('should handle LOGIN_SUCCESSFUL', () => {
-        expect(auth({}, {
-            type: LOGIN_SUCCESSFUL,
-            payload: {
-                    additionalUserInfo: {},
-                    user: {
-                        uid: null
-                    }
-                },
-            isAuthorised: true,
-            isLoading: false
-        })).toEqual({
+        expect(
+            auth(
+                {},
+                {
+                    type: LOGIN_SUCCESSFUL,
+                    payload: {
+                        additionalUserInfo: {},
+                        user: {
+                            uid: null,
+                        },
+                    },
+                    isAuthorised: true,
+                    isLoading: false,
+                }
+            )
+        ).toEqual({
             user: {
                 additionalUserInfo: {},
                 user: {
-                    uid: null
-                }
+                    uid: null,
+                },
             },
             isAuthorised: true,
-            isLoading: false
-        })
+            isLoading: false,
+        });
     });
 
     it('should handle LOGIN_FAILED', () => {
-        expect(auth({}, {
-            type: LOGIN_FAILED,
-            error: "Some Error"
-        })).toEqual({
-            error: "Some Error",
+        expect(
+            auth(
+                {},
+                {
+                    type: LOGIN_FAILED,
+                    error: 'Some Error',
+                }
+            )
+        ).toEqual({
+            error: 'Some Error',
             isAuthorised: false,
-            isLoading: false
-        })
+            isLoading: false,
+        });
     });
 
     it('should handle LOGOUT_SUCCESSFUL', () => {
-        expect(auth({}, {
-            type: LOGOUT_SUCCESSFUL,
-
-        })).toEqual({
+        expect(
+            auth(
+                {},
+                {
+                    type: LOGOUT_SUCCESSFUL,
+                }
+            )
+        ).toEqual({
             user: {
                 additionalUserInfo: {},
                 user: {
-                    uid: null
-                }
+                    uid: null,
+                },
             },
             isAuthorised: false,
-            isLoading: false
-        })
-    })
+            isLoading: false,
+        });
+    });
 });

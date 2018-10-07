@@ -2,13 +2,10 @@ import {
     FETCH_USER,
     LOGIN_SUCCESSFUL,
     LOGIN_FAILED,
-    LOGOUT_SUCCESSFUL
+    LOGOUT_SUCCESSFUL,
 } from './actionTypes';
 
-import {
-    authRef,
-    provider
-} from "../firebase";
+import { authRef, provider } from '../firebase';
 
 export const fetchUser = () => dispatch => {
     authRef.onAuthStateChanged(user => {
@@ -16,13 +13,13 @@ export const fetchUser = () => dispatch => {
             dispatch({
                 type: FETCH_USER,
                 payload: user,
-                isAuthorised: true
+                isAuthorised: true,
             });
         } else {
             dispatch({
                 type: FETCH_USER,
                 payload: null,
-                isAuthorised: false
+                isAuthorised: false,
             });
         }
     });
@@ -35,28 +32,26 @@ export const signIn = () => {
             .then(result => {
                 dispatch({
                     type: LOGIN_SUCCESSFUL,
-                    payload: result
-                })
+                    payload: result,
+                });
             })
             .catch(error => {
                 dispatch({
                     type: LOGIN_FAILED,
                     error: error,
-                    isLoading: false
-                })
+                    isLoading: false,
+                });
             });
-    }
-}
+    };
+};
 
 export const signOut = () => {
     return dispatch => {
-        authRef
-            .signOut()
-            .then(() =>
-                dispatch({
-                    type: LOGOUT_SUCCESSFUL,
-                    isAuthorised: false
-                })
-            );
-    }
+        authRef.signOut().then(() =>
+            dispatch({
+                type: LOGOUT_SUCCESSFUL,
+                isAuthorised: false,
+            })
+        );
+    };
 };

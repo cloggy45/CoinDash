@@ -11,104 +11,100 @@ import {
     RECEIVE_COIN_LIST,
 } from './actionTypes';
 
-
 const cc = require('cryptocompare');
-
 
 export const fetchCoinList = () => dispatch => {
     const request = axios({
         method: 'GET',
         url: 'https://min-api.cryptocompare.com/data/all/coinlist',
-        header: []
+        header: [],
     });
 
-    return request.then(response => {
-        dispatch({
-            type: RECEIVE_TICKERS,
-            payload: response.data
+    return request
+        .then(response => {
+            dispatch({
+                type: RECEIVE_TICKERS,
+                payload: response.data,
+            });
+            dispatch({
+                type: RECEIVE_COIN_LIST,
+                payload: response.data,
+            });
         })
-        dispatch({
-            type: RECEIVE_COIN_LIST,
-            payload: response.data
-        })
-    }).catch(error => console.log(error));
-
+        .catch(error => console.log(error));
 };
 
 export const fetchTopTen = () => dispatch => {
-
     dispatch({
         type: FETCH_TOP_TEN_REQUEST,
-        isFetching: true
+        isFetching: true,
     });
-
 
     const request = axios({
         method: 'GET',
         url: 'https://api.coinmarketcap.com/v2/ticker/?limit=10',
-        header: []
+        header: [],
     });
 
     return request.then(
         response =>
-        dispatch({
-            type: FETCH_TOP_TEN_SUCCESS,
-            payload: response.data,
-            isFetching: false
-        }),
+            dispatch({
+                type: FETCH_TOP_TEN_SUCCESS,
+                payload: response.data,
+                isFetching: false,
+            }),
         error =>
-        dispatch({
-            type: FETCH_TOP_TEN_FAILED,
-            payload: error || 'Failed to fetch top ten',
-            isFetching: false
-        })
+            dispatch({
+                type: FETCH_TOP_TEN_FAILED,
+                payload: error || 'Failed to fetch top ten',
+                isFetching: false,
+            })
     );
 };
 
 // Documentation  https://min-api.cryptocompare.com/
-export const fetchCoinHistory = (ticker) => dispatch => {
-
+export const fetchCoinHistory = ticker => dispatch => {
     dispatch({
         type: FETCH_COIN_HISTORY_REQUEST,
-        isFetching: true
+        isFetching: true,
     });
 
     const request = axios({
         method: 'GET',
         url: `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=USD&limit=60&aggregate=3&e=CCCAGG`,
-        header: []
+        header: [],
     });
 
     return request.then(
         response =>
-        dispatch({
-            type: FETCH_COIN_HISTORY_SUCCESS,
-            payload: response.data,
-            isFetching: false
-        }),
+            dispatch({
+                type: FETCH_COIN_HISTORY_SUCCESS,
+                payload: response.data,
+                isFetching: false,
+            }),
         error =>
-        dispatch({
-            type: FETCH_COIN_HISTORY_FAILED,
-            payload: error,
-            isFetching: false
-        })
-    )
+            dispatch({
+                type: FETCH_COIN_HISTORY_FAILED,
+                payload: error,
+                isFetching: false,
+            })
+    );
 };
 
 // Documentation https://api.coinmarketcap.com/v2/ticker/?limit=10
 export const fetchCoinData = () => dispatch => {
-
     const request = axios({
         method: 'GET',
         url: 'https://api.coinmarketcap.com/v2/ticker/',
-        header: []
-    })
+        header: [],
+    });
     return request.then(
         response => {
             dispatch({
-            type: RECEIVE_COIN_DATA,
-            payload: response.data
-        })},
+                type: RECEIVE_COIN_DATA,
+                payload: response.data,
+            });
+        },
         error => console.log(error)
     );
-}
+};

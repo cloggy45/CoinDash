@@ -1,27 +1,27 @@
 const initState = {
     isFetching: true,
     coinPriceInfo: null,
-    error: null
+    error: null,
 };
 
 export const coinPriceInfo = (currentState = initState, action) => {
-    switch(action.type) {
-        case "FETCH_COIN_PRICE_INFO_REQUEST":
+    switch (action.type) {
+        case 'FETCH_COIN_PRICE_INFO_REQUEST':
             return {
                 ...currentState,
-                isFetching: true
+                isFetching: true,
             };
-        case "FETCH_COIN_PRICE_INFO_SUCCESS":
+        case 'FETCH_COIN_PRICE_INFO_SUCCESS':
             return {
                 ...currentState,
                 isFetching: false,
-                coinPriceInfo: action.payload
+                coinPriceInfo: action.payload,
             };
-        case "FETCH_COIN_PRICE_INFO_FAILED":
+        case 'FETCH_COIN_PRICE_INFO_FAILED':
             return {
                 ...currentState,
                 isFetching: false,
-                error: action.payload
+                error: action.payload,
             };
         default:
             return currentState;

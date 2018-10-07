@@ -1,6 +1,6 @@
-import * as fromCoinHistory from "./coinHistory";
+import * as fromCoinHistory from './coinHistory';
 
-const COIN_HISTORY = "COIN_HISTORY";
+const COIN_HISTORY = 'COIN_HISTORY';
 
 export function getCoinHistory(store) {
     return fromCoinHistory.getCoinHistory(store[COIN_HISTORY]);

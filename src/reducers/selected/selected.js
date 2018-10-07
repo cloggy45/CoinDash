@@ -1,13 +1,16 @@
-export const selected = (currentState = {
-    selectedCoin: 'DOGE',
-    selectedId: 4432
-}, action) => {
+export const selected = (
+    currentState = {
+        selectedCoin: 'DOGE',
+        selectedId: 4432,
+    },
+    action
+) => {
     switch (action.type) {
-        case "SELECT_COIN":
+        case 'SELECT_COIN':
             return {
                 ...currentState,
                 selectedCoin: action.payload,
-                selectedId: action.id
+                selectedId: action.id,
             };
         default:
             return currentState;

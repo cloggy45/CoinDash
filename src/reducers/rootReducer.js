@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import * as fromApi from './api';
 import * as fromTopTen from './topTen/topTen';
 import * as fromAuth from './auth/auth';
@@ -20,19 +20,17 @@ const COIN_META_INFO = 'COIN_META_INFO';
 const COIN_PRICE_INFO = 'COIN_PRICE_INFO';
 const WATCHLIST_INFO = 'WATCHLIST_INFO';
 
-
 const rootReducer = combineReducers({
     [AUTH]: fromAuth.auth,
     [API]: fromApi.api,
     [TOP_TEN]: fromTopTen.topTen,
-    [SELECTED] : fromSelected.selected,
-    [MARKET_OVERVIEW] : fromMarketOverview.marketOverview,
+    [SELECTED]: fromSelected.selected,
+    [MARKET_OVERVIEW]: fromMarketOverview.marketOverview,
     [COIN_HISTORY]: fromCoinHistory.coinHistory,
-    [COIN_PRICE_INFO] : fromCoinPriceInfo.coinPriceInfo,
-    [COIN_META_INFO] : fromCoinMetaInfo.coinMetaInfo,
-    [WATCHLIST_INFO] : fromWatchList.watchlist,
+    [COIN_PRICE_INFO]: fromCoinPriceInfo.coinPriceInfo,
+    [COIN_META_INFO]: fromCoinMetaInfo.coinMetaInfo,
+    [WATCHLIST_INFO]: fromWatchList.watchlist,
 });
-
 
 // Selected Selectors
 
