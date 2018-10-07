@@ -6,7 +6,6 @@ import connect from 'react-redux/es/connect/connect';
 
 import {
     getCoinPriceInfo,
-    getCoinPriceInfoError,
     getCoinPriceInfoFetchStatus,
 } from '../../reducers/coinPriceInfo/coinPriceInfoSelectors';
 

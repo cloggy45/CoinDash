@@ -11,7 +11,6 @@ import {
     RECEIVE_COIN_LIST,
 } from './actionTypes';
 
-const cc = require('cryptocompare');
 
 export const fetchCoinList = () => dispatch => {
     const request = axios({

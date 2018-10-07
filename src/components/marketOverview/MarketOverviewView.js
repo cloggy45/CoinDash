@@ -6,10 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 
 import has from 'lodash.has';
-import map from 'lodash.map';
 import foreach from 'lodash.foreach';
-
-import { formatter } from '../../misc/helpers';
 
 export const styles = {
     root: {
@@ -56,7 +53,6 @@ class MarketOverview extends Component {
             isFetchingCoinPriceInfo,
             selectedCoin,
         } = this.props;
-        let prices;
 
         const error = 'No Info Available...';
         const priceInformation = new Map();
@@ -122,9 +118,7 @@ MarketOverview.propTypes = {
 MarketOverview.defaultProps = {
     classes: {},
     overview: {},
-    fetchOverview: () => {
-        return;
-    },
+    fetchOverview: () => {},
 };
 
 export default MarketOverview;

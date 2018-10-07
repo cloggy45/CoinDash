@@ -13,7 +13,6 @@ import has from 'lodash.has';
 
 import Hero from './Hero';
 import Specific from './Specific';
-import { coinPriceInfo } from '../../reducers/coinPriceInfo/coinPriceInfo';
 
 export const styles = {
     card: {
@@ -71,7 +70,6 @@ class CoinOverview extends React.Component {
             coinList,
             isFetchingMetaInfo,
             coinPriceInfo,
-            coinPriceInfoErrorMessage,
         } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
 
