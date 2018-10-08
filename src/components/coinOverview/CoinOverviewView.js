@@ -134,18 +134,26 @@ class CoinOverview extends React.Component {
                         alignItems="baseline"
                     >
                         <Grid item xs>
-                            <Specific
-                                content={overview.name}
-                                variant={'display1'}
-                                headerType={'h1'}
-                                classes={styles.bigAvatar}
-                            />
-                            <Specific
-                                content={overview.symbol}
-                                variant={'display4'}
-                                headerType={'h3'}
-                                classes={styles.bigAvatar}
-                            />
+                            {isFetchingMetaInfo ? (
+                                <CircularProgress />
+                            ) : (
+                                <Specific
+                                    content={overview.name}
+                                    variant={'display1'}
+                                    headerType={'h1'}
+                                    classes={styles.bigAvatar}
+                                />
+                            )}
+                            {isFetchingMetaInfo ? (
+                                <CircularProgress />
+                            ) : (
+                                <Specific
+                                    content={overview.symbol}
+                                    variant={'display4'}
+                                    headerType={'h3'}
+                                    classes={styles.bigAvatar}
+                                />
+                            )}
 
                             <CardActions>
                                 <Button
