@@ -5,14 +5,29 @@ import {
 
 import { watchListRef } from '../firebase.js';
 
-export const addToWatchList = (coin, uid) => {
-    return dispatch => {
+export const addToWatchList = (coin, uid) => () =>
+    watchListRef
+        .child(uid)
+        .child(coin)
+        .set(coin);
+
+export const removeFromWatchList = (coin, uid) => {
+    return () => {
         watchListRef
             .child(uid)
-            .push()
-            .set(coin);
+            .child(coin)
+            .set(null);
     };
 };
+
+// export const addToWatchList = (coin, uid) => {
+//     return () => {
+//         watchListRef
+//             .child(uid)
+//             .push()
+//             .set(coin);
+//     };
+// };
 
 export const fetchWatchList = uid => {
     return dispatch => {

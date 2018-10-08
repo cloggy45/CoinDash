@@ -27,9 +27,18 @@ export const styles = {
 };
 
 export const MenuItems = props => {
-    return props.items.map((item, index) => {
+    let { items, clickHandler } = props;
+    if (items.length === 1) {
+        clickHandler = () => {};
+    }
+
+    return items.map((item, index) => {
         return (
-            <MenuItem key={index} onClick={props.handleClose}>
+            <MenuItem
+                key={index}
+                id={item}
+                onClick={event => clickHandler(event)}
+            >
                 {item}
             </MenuItem>
         );
@@ -93,6 +102,11 @@ export class Header extends Component {
         );
     };
 
+    handleMenuItemClick = event => {
+        const selectedCoin = event.target.attributes.id.value;
+        this.props.removeFromWatchList(selectedCoin, this.props.userId);
+    };
+
     render() {
         const { classes, isAuthorisedUser, userWatchList } = this.props;
         const { anchorEl } = this.state;
@@ -118,10 +132,10 @@ export class Header extends Component {
                             onClose={this.handleClose}
                         >
                             <MenuItems
-                                onClick={this.handleClose}
+                                clickHandler={this.handleMenuItemClick}
                                 items={
                                     isEmpty(userWatchList)
-                                        ? ['Loading..']
+                                        ? ['Nothing added to watchlist...']
                                         : Object.values(userWatchList)
                                 }
                             />

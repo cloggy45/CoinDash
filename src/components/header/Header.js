@@ -18,7 +18,7 @@ import {
     getWatchListFetchStatus,
 } from '../../reducers/watchlist/watchlistSelectors';
 
-import { fetchWatchList } from '../../actions/firebase';
+import { fetchWatchList, removeFromWatchList } from '../../actions/firebase';
 
 const mapStateToProps = store => {
     return {
@@ -37,6 +37,8 @@ const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(signOut()),
     fetchUser: () => dispatch(fetchUser()),
     fetchWatchList: uid => dispatch(fetchWatchList(uid)),
+    removeFromWatchList: (coin, uid) =>
+        dispatch(removeFromWatchList(coin, uid)),
 });
 
 export default withRouter(
