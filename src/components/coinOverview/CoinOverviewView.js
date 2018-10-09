@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 import isEmpty from 'lodash.isempty';
@@ -60,7 +60,7 @@ class CoinOverview extends React.Component {
         }
     }
 
-    renderCoinPrice() {
+    renderCoinInfomation(propertyName) {
         const {
             coinPriceInfo,
             isFetchingCoinPriceInfo,
@@ -72,7 +72,8 @@ class CoinOverview extends React.Component {
         let content;
 
         if (!isFetchingCoinPriceInfo && !coinPriceHasError) {
-            content = coinPriceInfo['DISPLAY'][selectedCoin]['USD']['PRICE'];
+            content =
+                coinPriceInfo['DISPLAY'][selectedCoin]['USD'][propertyName];
         } else {
             content = coinPriceErrorMessage;
         }
@@ -83,6 +84,20 @@ class CoinOverview extends React.Component {
                 variant={'display1'}
                 headerType={'h2'}
             />
+        );
+    }
+
+    renderButton(link, title) {
+        const isDisabled = link === undefined;
+        return (
+            <Button
+                disabled={isDisabled}
+                variant={'outlined'}
+                size="small"
+                href={link}
+            >
+                {title}
+            </Button>
         );
     }
 
@@ -123,12 +138,12 @@ class CoinOverview extends React.Component {
 
         return (
             <React.Fragment>
-                <Grid item xs={12}>
+                <Grid item xs={4}>
                     <Grid
                         container
                         spacing={0}
-                        alignItems="center"
-                        justify={'flex-start'}
+                        alignItems="flex-end"
+                        justify="center"
                     >
                         <Grid item xs={2}>
                             {isFetchingMetaInfo ? (
@@ -142,11 +157,11 @@ class CoinOverview extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={4}>
                     <Grid
                         container
                         direction="column"
-                        justify="space-around"
+                        justify="flex-end"
                         alignItems="baseline"
                     >
                         <Grid item xs>
@@ -155,7 +170,7 @@ class CoinOverview extends React.Component {
                             ) : (
                                 <Specific
                                     content={overview.name}
-                                    variant={'display1'}
+                                    variant={'display2'}
                                     headerType={'h1'}
                                     classes={styles.bigAvatar}
                                 />
@@ -165,34 +180,32 @@ class CoinOverview extends React.Component {
                             ) : (
                                 <Specific
                                     content={overview.symbol}
-                                    variant={'display4'}
-                                    headerType={'h3'}
+                                    variant={'display1'}
+                                    headerType={'h4'}
                                     classes={styles.bigAvatar}
                                 />
                             )}
-
+                        </Grid>
+                        <Grid item xs>
                             <CardActions>
-                                <Button
-                                    size="small"
-                                    href={overview.links.reddit}
-                                >
-                                    Reddit
-                                </Button>
-                                <Button
-                                    size="small"
-                                    href={overview.links.twitter}
-                                >
-                                    Twitter
-                                </Button>
-                                <Button
-                                    size="small"
-                                    href={overview.links.facebook}
-                                >
-                                    Facebook
-                                </Button>
+                                {this.renderButton(
+                                    overview.links.reddit,
+                                    'Reddit'
+                                )}
+                                {this.renderButton(
+                                    overview.links.twitter,
+                                    'Twitter'
+                                )}
+                                {this.renderButton(
+                                    overview.links.facebook,
+                                    'Facebook'
+                                )}
+
                                 {isAuthorised && (
                                     <Button
                                         size="small"
+                                        variant={'outlined'}
+                                        color={'primary'}
                                         onClick={() =>
                                             this.props.addCoinToWatchList(
                                                 selectedCoin,
@@ -207,15 +220,25 @@ class CoinOverview extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={9}>
-                    <Grid
-                        container
-                        spacing={0}
-                        alignItems="center"
-                        justify={'flex-end'}
-                    >
+                <Grid item xs={4}>
+                    <Grid container direction="column" alignItems="flex-start">
                         <Grid item xs>
-                            {this.renderCoinPrice()}
+                            {this.renderCoinInfomation('PRICE')}
+                        </Grid>
+                        <Grid item container xs>
+                            <Grid item>
+                                {this.renderCoinInfomation('CHANGEPCT24HOUR')}
+                            </Grid>
+                            <Grid
+                                item
+                                direction={'row'}
+                                justify={'center'}
+                                alignItems={'center'}
+                            >
+                                <Typography variant={'subheading'}>
+                                    Change (24 Hours)
+                                </Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

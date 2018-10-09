@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const Hero = props => (
     <CardContent>
-        <Avatar alt={props.alt} src={props.src} className={props.classes} />
+        <img src={props.src} alt={props.alt} height={100} width={100} />
     </CardContent>
 );
 

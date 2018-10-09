@@ -29,10 +29,8 @@ describe('Hero Component', () => {
         expect(renderedComponent.length).toEqual(1);
     });
 
-    it('Should render avatar', () => {
+    it('Should render img', () => {
         renderedComponent = shallow(<Hero src={'Some Image'} />);
-        expect(renderedComponent.find('WithStyles(Avatar)').exists()).toBe(
-            true
-        );
+        expect(renderedComponent.find('img').exists()).toBe(true);
     });
 });
