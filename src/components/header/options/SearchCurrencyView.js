@@ -3,6 +3,7 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import PropTypes from 'prop-types';
 import map from 'lodash.map';
+import isEmpty from 'lodash.isempty';
 
 export const styles = {
     flex: {
@@ -24,14 +25,16 @@ export class SearchCurrency extends React.Component {
     }
 
     handleChange = selectedOption => {
-        const { value, label, symbol } = selectedOption;
-        this.setState(
-            { coinSymbol: symbol, coinId: value, coinName: label },
-            () => {
-                this.props.setSelectedCoin(symbol, Number(value));
-                this.props.fetchCoinPriceInfo(symbol);
-            }
-        );
+        if (!isEmpty(selectedOption)) {
+            const { value, label, symbol } = selectedOption;
+            this.setState(
+                { coinSymbol: symbol, coinId: value, coinName: label },
+                () => {
+                    this.props.setSelectedCoin(symbol, Number(value));
+                    this.props.fetchCoinPriceInfo(symbol);
+                }
+            );
+        }
     };
 
     formatOptions = (options = {}) => {
