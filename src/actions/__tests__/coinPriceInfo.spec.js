@@ -98,6 +98,7 @@ describe('coinPriceInfo actions', () => {
         type: FETCH_COIN_PRICE_INFO_FAILED,
         payload: new Error('Network Error'),
         isFetching: false,
+        hasError: true,
     };
 
     const actionRequest = {
@@ -109,6 +110,7 @@ describe('coinPriceInfo actions', () => {
         type: FETCH_COIN_PRICE_INFO_SUCCESS,
         payload: payload,
         isFetching: false,
+        hasError: false,
     };
 
     it('should fail to fetch coin price info', () => {

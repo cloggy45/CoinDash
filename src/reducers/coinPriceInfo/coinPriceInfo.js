@@ -1,7 +1,8 @@
 const initState = {
     isFetching: true,
     coinPriceInfo: null,
-    error: null,
+    errorMessage: null,
+    hasError: false,
 };
 
 export const coinPriceInfo = (currentState = initState, action) => {
@@ -10,18 +11,21 @@ export const coinPriceInfo = (currentState = initState, action) => {
             return {
                 ...currentState,
                 isFetching: true,
+                hasError: false,
             };
         case 'FETCH_COIN_PRICE_INFO_SUCCESS':
             return {
                 ...currentState,
                 isFetching: false,
+                hasError: false,
                 coinPriceInfo: action.payload,
             };
         case 'FETCH_COIN_PRICE_INFO_FAILED':
             return {
                 ...currentState,
                 isFetching: false,
-                error: action.payload,
+                errorMessage: action.payload,
+                hasError: true,
             };
         default:
             return currentState;
@@ -30,4 +34,5 @@ export const coinPriceInfo = (currentState = initState, action) => {
 
 export const isFetching = store => store.isFetching;
 export const currentCoinPriceInfo = store => store.coinPriceInfo;
-export const error = store => store.error;
+export const errorMessage = store => store.errorMessage;
+export const hasError = store => store.hasError;

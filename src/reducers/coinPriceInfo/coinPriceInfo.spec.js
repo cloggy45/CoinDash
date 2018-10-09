@@ -11,7 +11,8 @@ describe('Coin Specific Info Reducer', () => {
         expect(coinPriceInfo(undefined, {})).toEqual({
             isFetching: true,
             coinPriceInfo: null,
-            error: null,
+            hasError: false,
+            errorMessage: null,
         });
     });
 
@@ -20,10 +21,12 @@ describe('Coin Specific Info Reducer', () => {
             coinPriceInfo(undefined, {
                 type: FETCH_COIN_PRICE_INFO_REQUEST,
                 isFetching: true,
+                hasError: false,
             })
         ).toEqual({
             isFetching: true,
-            error: null,
+            hasError: false,
+            errorMessage: null,
             coinPriceInfo: null,
         });
     });
@@ -33,11 +36,14 @@ describe('Coin Specific Info Reducer', () => {
             coinPriceInfo(undefined, {
                 type: FETCH_COIN_PRICE_INFO_SUCCESS,
                 isFetching: false,
+                errorMessage: null,
+                hasError: false,
                 payload: { SOME: 'DATA' },
             })
         ).toEqual({
             isFetching: false,
-            error: null,
+            hasError: false,
+            errorMessage: null,
             coinPriceInfo: { SOME: 'DATA' },
         });
     });
@@ -52,7 +58,8 @@ describe('Coin Specific Info Reducer', () => {
         ).toEqual({
             isFetching: false,
             coinPriceInfo: null,
-            error: 'SOME ERROR',
+            hasError: true,
+            errorMessage: 'SOME ERROR',
         });
     });
 });

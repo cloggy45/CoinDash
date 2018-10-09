@@ -102,44 +102,58 @@ export class Header extends Component {
         );
     };
 
+    renderLogo() {
+        const { classes } = this.props;
+        return (
+            <Typography
+                variant="title"
+                color="inherit"
+                className={classes.flex}
+            >
+                Coin Dash
+            </Typography>
+        );
+    }
+
+    renderWatchList() {
+        const { userWatchList } = this.props;
+        const { anchorEl } = this.state;
+        return (
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={this.handleClose}
+            >
+                <MenuItems
+                    clickHandler={this.handleMenuItemClick}
+                    items={
+                        isEmpty(userWatchList)
+                            ? ['Nothing added to watchlist...']
+                            : Object.values(userWatchList)
+                    }
+                />
+            </Menu>
+        );
+    }
+
     handleMenuItemClick = event => {
         const selectedCoin = event.target.attributes.id.value;
         this.props.removeFromWatchList(selectedCoin, this.props.userId);
     };
 
     render() {
-        const { classes, isAuthorisedUser, userWatchList } = this.props;
-        const { anchorEl } = this.state;
+        const { classes, isAuthorisedUser } = this.props;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography
-                            variant="title"
-                            color="inherit"
-                            className={classes.flex}
-                        >
-                            Coin Dash
-                        </Typography>
+                        {this.renderLogo()}
                         <Options className={classes.flex} />
                         {isAuthorisedUser === true
                             ? this.renderLoggedInMenu()
                             : this.renderLoggedOutMenu()}
-                        <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItems
-                                clickHandler={this.handleMenuItemClick}
-                                items={
-                                    isEmpty(userWatchList)
-                                        ? ['Nothing added to watchlist...']
-                                        : Object.values(userWatchList)
-                                }
-                            />
-                        </Menu>
+                        {this.renderWatchList()}
                     </Toolbar>
                 </AppBar>
             </div>

@@ -60,6 +60,32 @@ class CoinOverview extends React.Component {
         }
     }
 
+    renderCoinPrice() {
+        const {
+            coinPriceInfo,
+            isFetchingCoinPriceInfo,
+            coinPriceErrorMessage,
+            coinPriceHasError,
+            selectedCoin,
+        } = this.props;
+
+        let content;
+
+        if (!isFetchingCoinPriceInfo && !coinPriceHasError) {
+            content = coinPriceInfo['DISPLAY'][selectedCoin]['USD']['PRICE'];
+        } else {
+            content = coinPriceErrorMessage;
+        }
+
+        return (
+            <Specific
+                content={content}
+                variant={'display1'}
+                headerType={'h2'}
+            />
+        );
+    }
+
     // TODO Refactor
     renderCoinOverview = () => {
         const {
@@ -69,18 +95,8 @@ class CoinOverview extends React.Component {
             selectedCoin,
             coinList,
             isFetchingMetaInfo,
-            isFetchingCoinPriceInfo,
-            coinPriceInfo,
         } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
-
-        let price = 0;
-
-        if (!isFetchingCoinPriceInfo) {
-            price = has(coinPriceInfo, 'DISPLAY')
-                ? coinPriceInfo['DISPLAY'][selectedCoin]['USD']['PRICE']
-                : 'No price data available...';
-        }
 
         if (!isEmpty(coinList)) {
             coinLogoUrl = has(coinList, selectedCoin)
@@ -199,11 +215,7 @@ class CoinOverview extends React.Component {
                         justify={'flex-end'}
                     >
                         <Grid item xs>
-                            <Specific
-                                content={price}
-                                variant={'display1'}
-                                headerType={'h2'}
-                            />
+                            {this.renderCoinPrice()}
                         </Grid>
                     </Grid>
                 </Grid>

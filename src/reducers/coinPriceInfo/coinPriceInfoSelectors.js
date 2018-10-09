@@ -8,5 +8,8 @@ export const getCoinPriceInfoFetchStatus = store =>
 export const getCoinPriceInfo = store =>
     fromPriceInfo.currentCoinPriceInfo(store[COIN_PRICE_INFO]);
 
-export const getCoinPriceInfoError = store =>
-    fromPriceInfo.error(store[COIN_PRICE_INFO]);
+export const getCoinPriceErrorMessage = store =>
+    fromPriceInfo.errorMessage(store[COIN_PRICE_INFO]);
+
+export const getCoinPriceErrorStatus = store =>
+    fromPriceInfo.hasError(store[COIN_PRICE_INFO]);

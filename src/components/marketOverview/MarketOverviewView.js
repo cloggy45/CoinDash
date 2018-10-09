@@ -5,9 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 
-import has from 'lodash.has';
-import foreach from 'lodash.foreach';
-
 export const styles = {
     root: {
         flexGrow: 1,
@@ -47,62 +44,51 @@ class MarketOverview extends Component {
         this.props.fetchCoinOverview('DOGE');
     }
 
-    render() {
+    renderPriceInformation(title, propertyOnResponseObject) {
         const {
-            classes,
             coinPriceInfo,
             isFetchingCoinPriceInfo,
+            coinPriceHasError,
+            coinPriceErrorMessage,
             selectedCoin,
         } = this.props;
 
-        const error = 'No Info Available...';
-        const priceInformation = new Map();
+        let data;
 
-        if (!isFetchingCoinPriceInfo) {
-            if (has(coinPriceInfo, 'DISPLAY')) {
-                foreach(
-                    coinPriceInfo['DISPLAY'][selectedCoin]['USD'],
-                    (value, key) => {
-                        priceInformation.set(key, value);
-                    }
-                );
-            } else {
-            }
+        if (!isFetchingCoinPriceInfo && !coinPriceHasError) {
+            data =
+                coinPriceInfo['DISPLAY'][selectedCoin]['USD'][
+                    propertyOnResponseObject
+                ];
+        } else {
+            data = coinPriceErrorMessage;
         }
 
-        // TODO refactor
+        return <Overview {...this.props} title={title} data={data} />;
+    }
+
+    render() {
+        const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Grid item xs>
-                        <Overview
-                            {...this.props}
-                            title={'Volume 24 Hour'}
-                            data={
-                                priceInformation.get('TOTALVOLUME24H') || error
-                            }
-                        />
+                        {this.renderPriceInformation(
+                            'Volume (24 Hours)',
+                            'VOLUME24HOUR'
+                        )}
                     </Grid>
                     <Grid item xs>
-                        <Overview
-                            {...this.props}
-                            title={'Market Cap'}
-                            data={priceInformation.get('MKTCAP') || error}
-                        />
+                        {this.renderPriceInformation('Market Cap', 'MKTCAP')}
                     </Grid>
                     <Grid item xs>
-                        <Overview
-                            {...this.props}
-                            title={'Supply'}
-                            data={priceInformation.get('SUPPLY') || error}
-                        />
+                        {this.renderPriceInformation('Supply', 'SUPPLY')}
                     </Grid>
                     <Grid item xs>
-                        <Overview
-                            {...this.props}
-                            title={'Highest Price (Today)'}
-                            data={priceInformation.get('HIGHDAY') || error}
-                        />
+                        {this.renderPriceInformation(
+                            'Highest Price (Today)',
+                            'HIGHDAY'
+                        )}
                     </Grid>
                 </Grid>
             </div>

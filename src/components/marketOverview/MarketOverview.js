@@ -6,6 +6,8 @@ import connect from 'react-redux/es/connect/connect';
 import {
     getCoinPriceInfo,
     getCoinPriceInfoFetchStatus,
+    getCoinPriceErrorStatus,
+    getCoinPriceErrorMessage,
 } from '../../reducers/coinPriceInfo/coinPriceInfoSelectors';
 
 import { fetchCoinPriceInfo } from '../../actions/coinPriceInfo';
@@ -25,6 +27,8 @@ const mapStateToProps = store => {
         selectedCoin: getSelectedCoin(store),
         isFetching: marketOverviewFetchStatus(store),
         isFetchingCoinPriceInfo: getCoinPriceInfoFetchStatus(store),
+        coinPriceHasError: getCoinPriceErrorStatus(store),
+        coinPriceErrorMessage: getCoinPriceErrorMessage(store),
     };
 };
 

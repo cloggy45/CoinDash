@@ -23,7 +23,8 @@ import { fetchCoinMetaInfo } from '../../actions/coinMetaInfo';
 import {
     getCoinPriceInfo,
     getCoinPriceInfoFetchStatus,
-    getCoinPriceInfoError,
+    getCoinPriceErrorMessage,
+    getCoinPriceErrorStatus,
 } from '../../reducers/coinPriceInfo/coinPriceInfoSelectors';
 
 const mapStateToProps = store => ({
@@ -36,8 +37,9 @@ const mapStateToProps = store => ({
     coinList: getCoinList(store),
     coinListFetchStatus: getCoinListFetchStatus(store),
     coinPriceInfo: getCoinPriceInfo(store),
+    coinPriceHasError: getCoinPriceErrorStatus(store),
     isFetchingCoinPriceInfo: getCoinPriceInfoFetchStatus(store),
-    coinPriceInfoErrorMessage: getCoinPriceInfoError(store),
+    coinPriceErrorMessage: getCoinPriceErrorMessage(store),
 });
 
 const mapDispatchToProps = dispatch => ({
