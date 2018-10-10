@@ -6,6 +6,7 @@ import {
 } from './actionTypes';
 
 import { authRef, provider } from '../firebase';
+import { toast } from 'react-toastify';
 
 export const fetchUser = () => dispatch => {
     authRef.onAuthStateChanged(user => {
@@ -30,12 +31,14 @@ export const signIn = () => {
         authRef
             .signInWithPopup(provider)
             .then(result => {
+                toast.success('Logged in successfully');
                 dispatch({
                     type: LOGIN_SUCCESSFUL,
                     payload: result,
                 });
             })
             .catch(error => {
+                toast.error('Failed to login');
                 dispatch({
                     type: LOGIN_FAILED,
                     error: error,
@@ -47,11 +50,12 @@ export const signIn = () => {
 
 export const signOut = () => {
     return dispatch => {
-        authRef.signOut().then(() =>
+        authRef.signOut().then(() => {
+            toast.info('Logged out successfully');
             dispatch({
                 type: LOGOUT_SUCCESSFUL,
                 isAuthorised: false,
-            })
-        );
+            });
+        });
     };
 };
