@@ -9,6 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
 import Options from './options/SearchCurrency';
+import IconButton from '@material-ui/core/IconButton';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
 
 export const styles = {
     root: {
@@ -34,12 +36,11 @@ export const MenuItems = props => {
 
     return items.map((item, index) => {
         return (
-            <MenuItem
-                key={index}
-                id={item}
-                onClick={event => clickHandler(event)}
-            >
+            <MenuItem key={index} id={item} onClick={() => {}}>
                 {item}
+                <IconButton onClick={() => clickHandler(item)}>
+                    <RemoveCircle />
+                </IconButton>
             </MenuItem>
         );
     });
@@ -65,6 +66,10 @@ export class Header extends Component {
 
     handleLogoutClick = () => {
         this.props.logout();
+    };
+
+    handleMenuItemClick = event => {
+        this.props.removeFromWatchList(event, this.props.userId);
     };
 
     renderLoggedOutMenu = () => (
@@ -114,7 +119,6 @@ export class Header extends Component {
             </Typography>
         );
     }
-
     renderWatchList() {
         const { userWatchList } = this.props;
         const { anchorEl } = this.state;
@@ -136,11 +140,6 @@ export class Header extends Component {
             </Menu>
         );
     }
-
-    handleMenuItemClick = event => {
-        const selectedCoin = event.target.attributes.id.value;
-        this.props.removeFromWatchList(selectedCoin, this.props.userId);
-    };
 
     render() {
         const { classes, isAuthorisedUser } = this.props;
