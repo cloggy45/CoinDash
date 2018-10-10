@@ -6,6 +6,9 @@ import Grid from '@material-ui/core/Grid';
 
 import { Switch, Route } from 'react-router-dom';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 // Components
 import Header from './header/Header';
 import MarketOverview from './marketOverview/MarketOverview';
@@ -25,6 +28,7 @@ class App extends Component {
     render() {
         return (
             <React.Fragment>
+                <ToastContainer autoClose={1500} />
                 <Header />
                 <CoinOverview />
                 <MarketOverview />
