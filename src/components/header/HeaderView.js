@@ -30,20 +30,20 @@ export const styles = {
 
 export const MenuItems = props => {
     let { items, clickHandler } = props;
-    if (items.length === 1) {
-        clickHandler = () => {};
+    if (items[0] === 'Nothing added to watchlist...') {
+        return <MenuItem onClick={() => {}}>{items[0]}</MenuItem>;
+    } else {
+        return items.map((item, index) => {
+            return (
+                <MenuItem key={index} id={item} onClick={() => {}}>
+                    {item}
+                    <IconButton onClick={() => clickHandler(item)}>
+                        <RemoveCircle />
+                    </IconButton>
+                </MenuItem>
+            );
+        });
     }
-
-    return items.map((item, index) => {
-        return (
-            <MenuItem key={index} id={item} onClick={() => {}}>
-                {item}
-                <IconButton onClick={() => clickHandler(item)}>
-                    <RemoveCircle />
-                </IconButton>
-            </MenuItem>
-        );
-    });
 };
 
 export class Header extends Component {
