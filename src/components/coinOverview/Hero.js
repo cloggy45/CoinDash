@@ -1,5 +1,4 @@
 import CardContent from '@material-ui/core/CardContent/CardContent';
-import Avatar from '@material-ui/core/Avatar/Avatar';
 import React from 'react';
 import PropTypes from 'prop-types';
 

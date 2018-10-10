@@ -110,6 +110,7 @@ class CoinOverview extends React.Component {
             selectedCoin,
             coinList,
             isFetchingMetaInfo,
+            watchList,
         } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
 
@@ -204,7 +205,8 @@ class CoinOverview extends React.Component {
                                 {isAuthorised && (
                                     <Button
                                         size="small"
-                                        variant={'outlined'}
+                                        disabled={has(watchList, selectedCoin)}
+                                        variant={'contained'}
                                         color={'primary'}
                                         onClick={() =>
                                             this.props.addCoinToWatchList(
