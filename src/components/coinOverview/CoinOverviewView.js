@@ -138,113 +138,67 @@ class CoinOverview extends React.Component {
         }
 
         return (
-            <React.Fragment>
-                <Grid item xs={4}>
-                    <Grid
-                        container
-                        spacing={0}
-                        alignItems="flex-end"
-                        justify="center"
-                    >
-                        <Grid item xs={2}>
-                            {isFetchingMetaInfo ? (
-                                <CircularProgress />
-                            ) : (
-                                <Hero
-                                    alt={'logo'}
-                                    src={imageBaseUrl + coinLogoUrl}
-                                />
-                            )}
-                        </Grid>
-                    </Grid>
+            <Grid container justify={"center"}>
+                <Grid item xs={2} justify={'center'} alignItems={'center'}>
+                    {isFetchingMetaInfo ? (
+                        <CircularProgress />
+                    ) : (
+                        <Hero
+                            alt={'logo'}
+                            src={imageBaseUrl + coinLogoUrl}
+                            height={100}
+                            width={100}
+                        />
+                    )}
                 </Grid>
                 <Grid item xs={4}>
-                    <Grid
-                        container
-                        direction="column"
-                        justify="flex-end"
-                        alignItems="baseline"
-                    >
-                        <Grid item xs>
-                            {isFetchingMetaInfo ? (
-                                <CircularProgress />
-                            ) : (
-                                <Specific
-                                    content={overview.name}
-                                    variant={'display2'}
-                                    headerType={'h1'}
-                                    classes={styles.bigAvatar}
-                                />
-                            )}
-                            {isFetchingMetaInfo ? (
-                                <CircularProgress />
-                            ) : (
-                                <Specific
-                                    content={overview.symbol}
-                                    variant={'display1'}
-                                    headerType={'h4'}
-                                    classes={styles.bigAvatar}
-                                />
-                            )}
-                        </Grid>
-                        <Grid item xs>
-                            <CardActions>
-                                {this.renderButton(
-                                    overview.links.reddit,
-                                    'Reddit'
-                                )}
-                                {this.renderButton(
-                                    overview.links.twitter,
-                                    'Twitter'
-                                )}
-                                {this.renderButton(
-                                    overview.links.facebook,
-                                    'Facebook'
-                                )}
+                    {isFetchingMetaInfo ? (
+                        <CircularProgress />
+                    ) : (
+                        <Specific
+                            content={overview.name}
+                            variant={'display2'}
+                            headerType={'h1'}
+                            classes={styles.bigAvatar}
+                        />
+                    )}
+                    <CardActions>
+                        {this.renderButton(overview.links.reddit, 'Reddit')}
+                        {this.renderButton(overview.links.twitter, 'Twitter')}
+                        {this.renderButton(overview.links.facebook, 'Facebook')}
 
-                                {isAuthorised && (
-                                    <Button
-                                        size="small"
-                                        disabled={has(watchList, selectedCoin)}
-                                        variant={'contained'}
-                                        color={'primary'}
-                                        onClick={() =>
-                                            this.props.addCoinToWatchList(
-                                                selectedCoin,
-                                                uid
-                                            )
-                                        }
-                                    >
-                                        Add to Watchlist
-                                    </Button>
-                                )}
-                            </CardActions>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                    <Grid container direction="column" alignItems="flex-start">
-                        <Grid item xs>
-                            {this.renderCoinInfomation('PRICE')}
-                        </Grid>
-                        <Grid item container xs>
-                            <Grid item>
-                                {this.renderCoinInfomation('CHANGEPCT24HOUR')}
-                            </Grid>
-                            <Grid
-                                item
-                                direction={'row'}
-                                justify={'center'}
-                                alignItems={'center'}
+                        {isAuthorised && (
+                            <Button
+                                size="small"
+                                disabled={has(watchList, selectedCoin)}
+                                variant={'contained'}
+                                color={'primary'}
+                                onClick={() =>
+                                    this.props.addCoinToWatchList(
+                                        selectedCoin,
+                                        uid
+                                    )
+                                }
                             >
-                                <Typography variant={'subheading'}>
-                                    Change (24 Hours)
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                                Add to Watchlist
+                            </Button>
+                        )}
+                    </CardActions>
                 </Grid>
-            </React.Fragment>
+                <Grid item xs={5} alignItems={"center"} container justify={"flex-end"} >
+                    {this.renderCoinInfomation('PRICE')}
+                </Grid>
+                {/*<Grid item xs={2} container direction={"column"} alignItems={"center"}>*/}
+                    {/*<Grid item>*/}
+                        {/*{this.renderCoinInfomation('CHANGEPCT24HOUR')}*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item justify={"center"}>*/}
+                        {/*<Typography variant={'caption'}>*/}
+                            {/*Change (24 Hours)*/}
+                        {/*</Typography>*/}
+                    {/*</Grid>*/}
+                {/*</Grid>*/}
+            </Grid>
         );
     };
 

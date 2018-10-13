@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
 
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
@@ -21,18 +22,31 @@ import Graph from './graph/Graph';
 import { fetchUser } from '../actions/auth';
 import { fetchCoinList } from '../actions/api';
 
+const styles = {
+    container: {
+        margin: '0em 7em'
+    },
+};
+
 class App extends Component {
     componentDidMount() {
         this.props.fetchCoinList();
     }
     render() {
+        const { classes } = this.props;
         return (
-            <React.Fragment>
+            <div className={classes.container}>
                 <ToastContainer autoClose={1500} />
-                <Header />
-                <CoinOverview />
-                <MarketOverview />
                 <Grid container spacing={24}>
+                    <Grid item xs={12}>
+                        <Header />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CoinOverview />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <MarketOverview />
+                    </Grid>
                     <Grid item xs={12} sm={6}>
                         <Graph
                             title={'Highest Price'}
@@ -47,13 +61,13 @@ class App extends Component {
                             graphType={'Line'}
                         />
                     </Grid>
+                    <Grid item xs={12}>
+                        <Switch>
+                            <Route exact path="/" component={TopTenOverview} />
+                        </Switch>
+                    </Grid>
                 </Grid>
-                <Switch>
-                    <Route exact path="/" component={TopTenOverview} />
-                    {/*<Route exact path="/logout" render={() => <h1>Logout</h1>}/>*/}
-                    {/*<Route exact path="/favourites" render={() => <h1>Favourites</h1>}/>*/}
-                </Switch>
-            </React.Fragment>
+            </div>
         );
     }
 }
@@ -67,5 +81,5 @@ export default withRouter(
     connect(
         null,
         mapDispatchToProps
-    )(App)
+    )(withStyles(styles)(App))
 );
