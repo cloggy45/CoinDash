@@ -6,6 +6,8 @@ import {
     FETCH_COIN_PRICE_INFO_REQUEST,
 } from './actionTypes';
 
+import baseUrl from '../config';
+
 import has from 'lodash.has';
 
 export const fetchCoinPriceInfo = ticker => dispatch => {
@@ -16,7 +18,7 @@ export const fetchCoinPriceInfo = ticker => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${ticker}&tsyms=USD`,
+        url: `${baseUrl}price/${ticker}/USD`,
     });
 
     return request.then(

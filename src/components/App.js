@@ -24,7 +24,7 @@ import { fetchCoinList } from '../actions/api';
 
 const styles = {
     container: {
-        margin: '0em 7em'
+        margin: '0em 7em',
     },
 };
 

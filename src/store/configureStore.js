@@ -6,16 +6,19 @@ import rootReducer from '../reducers/rootReducer';
 export default function configureStore(preloadedState) {
     const middleware = [thunkMiddleware];
     let composeEnhancers;
-
-    if (process.env.NODE_ENV !== 'production') {
+    let enhancer;
+    if (process.env.NODE_ENV === 'development') {
         console.log('Development Mode Engaged');
         composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
             ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
             : compose;
-        middleware.push(logger);
-    }
 
-    const enhancer = composeEnhancers(applyMiddleware(...middleware));
+        middleware.push(logger);
+        enhancer = composeEnhancers(applyMiddleware(...middleware));
+    } else {
+        console.log('Production Mode Engaged');
+        enhancer = applyMiddleware(...middleware);
+    }
 
     const store = createStore(rootReducer, preloadedState, enhancer);
 

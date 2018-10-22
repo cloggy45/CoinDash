@@ -6,23 +6,20 @@ import {
     FETCH_COIN_META_INFO_REQUEST,
 } from './actionTypes';
 
+import baseUrl from '../config';
+
 export const fetchCoinMetaInfo = id => dispatch => {
     dispatch({
         type: FETCH_COIN_META_INFO_REQUEST,
         isFetching: true,
     });
 
-    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    console.log(process.env.NODE_ENV);
 
     const request = axios({
         method: 'GET',
-        url:
-            corsProxy +
-            `https://www.cryptocompare.com/api/data/socialstats/?id=${id}`,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true,
-        },
+        url: `${baseUrl}meta/${id}`,
+        header: {},
     });
 
     return request.then(

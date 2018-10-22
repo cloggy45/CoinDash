@@ -1,17 +1,7 @@
-/**
- * React Select
- * ============
- * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
- * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
- * MIT License: https://github.com/JedWatson/react-select
-*/
 .Select {
     position: relative;
 }
-.Select input::-webkit-contacts-auto-fill-button,
-.Select input::-webkit-credentials-auto-fill-button {
-    display: none !important;
-}
+
 .Select input::-ms-clear {
     display: none !important;
 }

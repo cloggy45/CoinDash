@@ -5,7 +5,6 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 import isEmpty from 'lodash.isempty';
@@ -138,7 +137,7 @@ class CoinOverview extends React.Component {
         }
 
         return (
-            <Grid container justify={"center"}>
+            <Grid container justify={'center'}>
                 <Grid item xs={2} justify={'center'} alignItems={'center'}>
                     {isFetchingMetaInfo ? (
                         <CircularProgress />
@@ -185,18 +184,24 @@ class CoinOverview extends React.Component {
                         )}
                     </CardActions>
                 </Grid>
-                <Grid item xs={5} alignItems={"center"} container justify={"flex-end"} >
+                <Grid
+                    item
+                    xs={5}
+                    alignItems={'center'}
+                    container
+                    justify={'flex-end'}
+                >
                     {this.renderCoinInfomation('PRICE')}
                 </Grid>
                 {/*<Grid item xs={2} container direction={"column"} alignItems={"center"}>*/}
-                    {/*<Grid item>*/}
-                        {/*{this.renderCoinInfomation('CHANGEPCT24HOUR')}*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item justify={"center"}>*/}
-                        {/*<Typography variant={'caption'}>*/}
-                            {/*Change (24 Hours)*/}
-                        {/*</Typography>*/}
-                    {/*</Grid>*/}
+                {/*<Grid item>*/}
+                {/*{this.renderCoinInfomation('CHANGEPCT24HOUR')}*/}
+                {/*</Grid>*/}
+                {/*<Grid item justify={"center"}>*/}
+                {/*<Typography variant={'caption'}>*/}
+                {/*Change (24 Hours)*/}
+                {/*</Typography>*/}
+                {/*</Grid>*/}
                 {/*</Grid>*/}
             </Grid>
         );
