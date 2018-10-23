@@ -9,8 +9,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
 import Options from './options/SearchCurrency';
-import IconButton from '@material-ui/core/IconButton';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export const styles = {
     root: {
@@ -36,10 +37,10 @@ export const MenuItems = props => {
         return items.map((item, index) => {
             return (
                 <MenuItem key={index} id={item} onClick={() => {}}>
-                    {item}
-                    <IconButton onClick={() => clickHandler(item)}>
+                    <ListItemText>{item}</ListItemText>
+                    <ListItemIcon onClick={() => clickHandler(item)}>
                         <RemoveCircle />
-                    </IconButton>
+                    </ListItemIcon>
                 </MenuItem>
             );
         });
