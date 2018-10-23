@@ -6,6 +6,7 @@ import {
 
 import { mock, mockStore } from '../setupAsyncTests';
 import { fetchCoinPriceInfo } from '../coinPriceInfo';
+import baseUrl from '../../config';
 
 describe('coinPriceInfo actions', () => {
     let store = mockStore({ coinPriceInfo: [] });
@@ -18,8 +19,7 @@ describe('coinPriceInfo actions', () => {
         mock.restore();
     });
 
-    const url =
-        'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD';
+    const url = `${baseUrl}price/BTC/USD`;
 
     const payload = [
         {

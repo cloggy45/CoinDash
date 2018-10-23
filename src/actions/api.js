@@ -11,6 +11,8 @@ import {
     FETCH_COIN_LIST_SUCCESS,
 } from './actionTypes';
 
+import baseUrl from '../config';
+
 export const fetchCoinList = () => dispatch => {
     dispatch({
         type: FETCH_COIN_LIST_REQUEST,
@@ -19,7 +21,7 @@ export const fetchCoinList = () => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: 'https://min-api.cryptocompare.com/data/all/coinlist',
+        url: `${baseUrl}list`,
         header: [],
     });
 
@@ -71,7 +73,7 @@ export const fetchCoinHistory = ticker => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `https://min-api.cryptocompare.com/data/histoday?fsym=${ticker}&tsym=USD&limit=60&aggregate=3&e=CCCAGG`,
+        url: `${baseUrl}history/${ticker}/USD`,
         header: [],
     });
 

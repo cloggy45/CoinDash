@@ -7,6 +7,7 @@ import {
 } from '../actionTypes';
 
 import { mock, mockStore } from '../setupAsyncTests';
+import baseUrl from '../../config';
 
 describe('coinMetaInfo actions', () => {
     let store = mockStore({ coinOverview: [] });
@@ -20,11 +21,10 @@ describe('coinMetaInfo actions', () => {
         mock.restore();
     });
 
-    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    const url = `${baseUrl}meta/4412`;
 
-    const url =
-        corsProxy +
-        'https://www.cryptocompare.com/api/data/socialstats/?id=1182';
+    console.log('EXAMPLE', url);
+
     const payload = [
         {
             Response: 'Success',
@@ -272,14 +272,14 @@ describe('coinMetaInfo actions', () => {
 
     it('should fail to fetch coin meta info', () => {
         mock.onGet(url).networkError();
-        return store.dispatch(fetchCoinMetaInfo(1182)).then(() => {
+        return store.dispatch(fetchCoinMetaInfo(4412)).then(() => {
             expect(store.getActions()).toEqual([actionRequest, actionFailed]);
         });
     });
 
     it('should successfully fetch coin meta info', () => {
         mock.onGet(url).reply(200, payload);
-        return store.dispatch(fetchCoinMetaInfo(1182)).then(() => {
+        return store.dispatch(fetchCoinMetaInfo(4412)).then(() => {
             expect(store.getActions()).toEqual([actionRequest, actionSuccess]);
         });
     });

@@ -19,6 +19,8 @@ import {
 
 import { mock, mockStore } from '../setupAsyncTests';
 
+import baseUrl from '../../config';
+
 describe('Test Async Actions', () => {
     let store = mockStore({
         api: [],
@@ -34,7 +36,8 @@ describe('Test Async Actions', () => {
     });
 
     it('Fetch coin list', () => {
-        const url = `https://min-api.cryptocompare.com/data/all/coinlist`;
+        const url = `${baseUrl}list`;
+
         const payload = {
             Data: {
                 '42': {
@@ -239,7 +242,7 @@ describe('Test Async Actions', () => {
     });
 
     describe('Fetch history data', () => {
-        const url = `https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG`;
+        const url = `${baseUrl}history/BTC/USD`;
         const payload = [
             {
                 Response: 'Success',
