@@ -17,11 +17,11 @@ export const addToWatchList = (coinName, coinId, uid) => {
             .catch(err => toast.error(err));
     };
 };
-export const removeFromWatchList = (coin, uid) => {
+export const removeFromWatchList = (coinName, uid) => {
     return () => {
         watchListRef
             .child(uid)
-            .child(coin)
+            .child(coinName)
             .set(null);
     };
 };

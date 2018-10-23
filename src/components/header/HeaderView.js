@@ -5,15 +5,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
-import map from 'lodash.map';
-import RemoveCircle from '@material-ui/icons/RemoveCircle';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
 import Options from './options/SearchCurrency';
+import WatchListItems from './watchListItems/WatchListItems';
+
 export const styles = {
     root: {
         flexGrow: 1,
@@ -30,34 +27,6 @@ export const styles = {
     },
 };
 
-export const MenuItems = props => {
-    let { items, clickHandler, loadCoinHandler } = props;
-
-    if (items.length === 0) {
-        return (
-            <MenuItem onClick={() => {}}>
-                <ListItemText>Nothing added</ListItemText>
-            </MenuItem>
-        );
-    } else {
-        return map(items, (coinId, coinName, currentCoin) => {
-            console.log(coinId, coinName, currentCoin);
-            return (
-                <MenuItem key={coinId} id={coinId}>
-                    <ListItemText
-                        onClick={() => loadCoinHandler(coinName, coinId)}
-                    >
-                        {coinName}
-                    </ListItemText>
-                    <ListItemIcon onClick={() => clickHandler(coinName)}>
-                        <RemoveCircle />
-                    </ListItemIcon>
-                </MenuItem>
-            );
-        });
-    }
-};
-
 export class Header extends Component {
     state = {
         anchorEl: null,
@@ -70,12 +39,6 @@ export class Header extends Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null });
-    };
-
-    handleLoadCoinInformation = (coinName, coinId) => {
-        this.props.setSelectedCoin(coinName, coinId);
-        this.props.fetchCoinPriceInfo(coinName);
-        this.props.fetchCoinMetaInfo(coinId);
     };
 
     handleLoginClick = () => {
@@ -147,14 +110,8 @@ export class Header extends Component {
                 open={Boolean(anchorEl)}
                 onClose={this.handleClose}
             >
-                <MenuItems
-                    clickHandler={this.handleMenuItemClick}
-                    loadCoinHandler={this.handleLoadCoinInformation}
-                    items={
-                        isEmpty(userWatchList)
-                            ? ['Nothing added to watchlist...']
-                            : userWatchList
-                    }
+                <WatchListItems
+                    items={isEmpty(userWatchList) ? {} : userWatchList}
                 />
             </Menu>
         );

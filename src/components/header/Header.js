@@ -18,11 +18,7 @@ import {
     getWatchListFetchStatus,
 } from '../../reducers/watchlist/watchlistSelectors';
 
-import { setSelectedCoin } from '../../actions/selected';
-
-import { fetchWatchList, removeFromWatchList } from '../../actions/firebase';
-import { fetchCoinPriceInfo } from '../../actions/coinPriceInfo';
-import { fetchCoinMetaInfo } from '../../actions/coinMetaInfo';
+import { fetchWatchList } from '../../actions/firebase';
 
 const mapStateToProps = store => {
     return {
@@ -41,12 +37,6 @@ const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(signOut()),
     fetchUser: () => dispatch(fetchUser()),
     fetchWatchList: uid => dispatch(fetchWatchList(uid)),
-    fetchCoinPriceInfo: coinName => dispatch(fetchCoinPriceInfo(coinName)),
-    fetchCoinMetaInfo: coinId => dispatch(fetchCoinMetaInfo(coinId)),
-    setSelectedCoin: (coinName, coinId) =>
-        dispatch(setSelectedCoin(coinName, coinId)),
-    removeFromWatchList: (coin, uid) =>
-        dispatch(removeFromWatchList(coin, uid)),
 });
 
 export default withRouter(
