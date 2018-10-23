@@ -107,6 +107,7 @@ class CoinOverview extends React.Component {
             isAuthorised,
             coinMetaInfo,
             selectedCoin,
+            selectedCoinId,
             coinList,
             isFetchingMetaInfo,
             watchList,
@@ -135,7 +136,6 @@ class CoinOverview extends React.Component {
             overview.links.reddit = coinMetaInfo.Reddit.link;
             overview.links.twitter = coinMetaInfo.Twitter.link;
         }
-
         return (
             <Grid container justify={'center'}>
                 <Grid item xs={2} justify={'center'} alignItems={'center'}>
@@ -175,6 +175,7 @@ class CoinOverview extends React.Component {
                                 onClick={() =>
                                     this.props.addCoinToWatchList(
                                         selectedCoin,
+                                        selectedCoinId,
                                         uid
                                     )
                                 }
@@ -193,16 +194,6 @@ class CoinOverview extends React.Component {
                 >
                     {this.renderCoinInfomation('PRICE')}
                 </Grid>
-                {/*<Grid item xs={2} container direction={"column"} alignItems={"center"}>*/}
-                {/*<Grid item>*/}
-                {/*{this.renderCoinInfomation('CHANGEPCT24HOUR')}*/}
-                {/*</Grid>*/}
-                {/*<Grid item justify={"center"}>*/}
-                {/*<Typography variant={'caption'}>*/}
-                {/*Change (24 Hours)*/}
-                {/*</Typography>*/}
-                {/*</Grid>*/}
-                {/*</Grid>*/}
             </Grid>
         );
     };

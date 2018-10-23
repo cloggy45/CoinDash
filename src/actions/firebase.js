@@ -7,14 +7,16 @@ import { watchListRef } from '../firebase.js';
 
 import { toast } from 'react-toastify';
 
-export const addToWatchList = (coin, uid) => () =>
-    watchListRef
-        .child(uid)
-        .child(coin)
-        .set(coin)
-        .then(() => toast.success(`${coin} added to watchlist!`))
-        .catch(err => toast.error(err));
-
+export const addToWatchList = (coinName, coinId, uid) => {
+    return () => {
+        watchListRef
+            .child(uid)
+            .child(coinName)
+            .set(coinId)
+            .then(() => toast.success(`${coinName} added to watchlist!`))
+            .catch(err => toast.error(err));
+    };
+};
 export const removeFromWatchList = (coin, uid) => {
     return () => {
         watchListRef
