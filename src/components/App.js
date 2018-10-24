@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 // Components
 import Header from './header/Header';
 import MarketOverview from './marketOverview/MarketOverview';
-import TopTenOverview from './topTenOverview/TopTenOverview';
+import TopTenOverview from './coinListOverview/coinListOverview';
 import CoinOverview from './coinOverview/CoinOverview';
 
 import Graph from './graph/Graph';

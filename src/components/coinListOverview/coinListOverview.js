@@ -1,27 +1,27 @@
 import { connect } from 'react-redux';
 import { fetchTopTen } from '../../actions/api';
 import { withStyles } from '@material-ui/core/styles';
-import TopTenOverview, { styles } from './TopTenOverviewView';
+import CustomPaginationActionsTable, { styles } from './coinListOverviewView';
 
 import {
-    getTopTen,
-    isFetchingTopTenList,
+    getCoinList,
+    isFetchingCoinListSegment,
     getErrorMessage,
 } from '../../reducers/topTen/topTenSelectors';
 
 function mapStateToProps(store) {
     return {
-        topTen: getTopTen(store),
-        isFetching: isFetchingTopTenList(store),
+        coinListSegment: getCoinList(store),
+        isFetching: isFetchingCoinListSegment(store),
         errorMessage: getErrorMessage(store),
     };
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetch: () => dispatch(fetchTopTen()),
+    fetchCoinList: (start, limit) => dispatch(fetchTopTen(start, limit)),
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(TopTenOverview));
+)(withStyles(styles)(CustomPaginationActionsTable));

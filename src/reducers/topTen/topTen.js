@@ -31,11 +31,11 @@ export const topTen = (currentState = initState, action) => {
     }
 };
 
-export function isFetchingTopTen(store) {
+export function isFetchingCoinListSegment(store) {
     return store.isFetching;
 }
 
-export function getTopTen(store) {
+export function getCoinListSegment(store) {
     return store.list;
 }
 
