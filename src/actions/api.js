@@ -44,9 +44,10 @@ export const fetchTopTen = (start=0, limit=5) => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `https://api.coinmarketcap.com/v2/ticker/?start=${start}1&limit=${limit}`,
+        url: `https://api.coinmarketcap.com/v2/ticker/?start=${start}&limit=${limit}&sort=rank`,
         header: [],
     });
+
 
     return request.then(
         response =>

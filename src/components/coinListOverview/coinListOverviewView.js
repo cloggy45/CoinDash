@@ -13,7 +13,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-
+import TableHead from '@material-ui/core/TableHead';
 const actionsStyles = theme => ({
     root: {
         flexShrink: 0,
@@ -93,11 +93,6 @@ const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: tru
     TablePaginationActions,
 );
 
-let counter = 0;
-function createData(name, rank ) {
-    counter += 1;
-    return { id: counter, name, rank};
-}
 
 export const styles = theme => ({
     root: {
@@ -127,10 +122,6 @@ class CustomPaginationActionsTable extends React.Component {
     handleChangePage = (event, page) => {
         this.setState({ page }, () => {
             const offset = page * this.state.rowsPerPage;
-
-            console.log('PAGE', page);
-            console.log('RowsPerPage', this.state.rowsPerPage);
-            console.log('offset', offset)
             this.props.fetchCoinList(offset, this.state.rowsPerPage)
             this.setState({offset: offset});
         });
@@ -150,26 +141,32 @@ class CustomPaginationActionsTable extends React.Component {
     render() {
         const { classes, coinListSegment } = this.props;
         const { rowsPerPage, page } = this.state;
-        const rows = coinListSegment;
         const totalAmountOfRows = 2000;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalAmountOfRows - page * rowsPerPage);
-
-        console.log('RENDER', rows);
-        console.log('RENDER: Empty Rows', emptyRows);
 
         return (
             <Paper className={classes.root}>
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table}>
+                        <TableHead>
+                            
+                            <TableRow>
+                                <TableCell>Rank</TableCell>
+                                <TableCell >Name</TableCell>
+                                <TableCell numeric>Market Cap</TableCell>
+                                <TableCell numeric>Price</TableCell>
+                                <TableCell numeric>Volume (24 Hours) </TableCell>
+                            </TableRow>
+                        </TableHead>
                         <TableBody>
                             {coinListSegment.map(row => {
                                 return (
                                     <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell numeric>{row.calories}</TableCell>
-                                        <TableCell numeric>{row.fat}</TableCell>
+                                        <TableCell>{row.rank}</TableCell>
+                                        <TableCell>{row.name}</TableCell>
+                                        <TableCell numeric>{row.circulating_supply}</TableCell>
+                                        <TableCell numeric>{row.total_supply}</TableCell>
+                                        <TableCell numeric>{row.max_supply}</TableCell>
                                     </TableRow>
                                 );
                             })}
