@@ -14,6 +14,9 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
+import Typography from "@material-ui/core/Typography";
+import Toolbar from '@material-ui/core/Toolbar';
+
 const actionsStyles = theme => ({
     root: {
         flexShrink: 0,
@@ -146,16 +149,19 @@ class CustomPaginationActionsTable extends React.Component {
 
         return (
             <Paper className={classes.root}>
+                <Toolbar>
+                    <Typography variant="h6" color="inherit">
+                        Cryptocurrencies Listings
+                    </Typography>
+                </Toolbar>
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table}>
                         <TableHead>
-                            
                             <TableRow>
                                 <TableCell>Rank</TableCell>
                                 <TableCell >Name</TableCell>
-                                <TableCell numeric>Market Cap</TableCell>
-                                <TableCell numeric>Price</TableCell>
-                                <TableCell numeric>Volume (24 Hours) </TableCell>
+                                <TableCell numeric>Circulating Supply</TableCell>
+                                <TableCell numeric>Total Supply</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -166,7 +172,6 @@ class CustomPaginationActionsTable extends React.Component {
                                         <TableCell>{row.name}</TableCell>
                                         <TableCell numeric>{row.circulating_supply}</TableCell>
                                         <TableCell numeric>{row.total_supply}</TableCell>
-                                        <TableCell numeric>{row.max_supply}</TableCell>
                                     </TableRow>
                                 );
                             })}
