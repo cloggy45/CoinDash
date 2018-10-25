@@ -2,7 +2,6 @@
 
 [![CircleCI](https://circleci.com/gh/cloggy45/CoinDash.svg?style=svg)](https://circleci.com/gh/cloggy45/CoinDash)
 
-[![codecov](https://codecov.io/gh/cloggy45/CoinDash/branch/master/graph/badge.svg)](https://codecov.io/gh/cloggy45/CoinDash)
 
 ##### To install
 - Run `npm install`
