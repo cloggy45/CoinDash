@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CoinOverview, { styles } from './CoinOverviewView';
 
-import { addToWatchList } from '../../actions/firebase';
+import { addToWatchList, removeFromWatchList } from '../../actions/firebase';
 import { getUserID, getAuthStatus } from '../../reducers/auth/authSelectors';
 import {
     getCoinMetaInfo,
@@ -49,6 +49,7 @@ const mapDispatchToProps = dispatch => ({
     fetchCoinMetaInfo: coin => dispatch(fetchCoinMetaInfo(coin)),
     addCoinToWatchList: (coinName, coinId, uid) =>
         dispatch(addToWatchList(coinName, coinId, uid)),
+    removeFromWatchList: (coinName, uid) => dispatch(removeFromWatchList(coinName, uid))
 });
 
 export default withRouter(

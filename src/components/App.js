@@ -47,14 +47,14 @@ class App extends Component {
                     <Grid item xs={12}>
                         <MarketOverview />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12} md={6}>
                         <Graph
                             title={'Highest Price'}
                             filter={'high'}
                             graphType={'Bar'}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12} md={6}>
                         <Graph
                             title={'Lowest Price'}
                             filter={'low'}

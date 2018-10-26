@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
+import Hidden from '@material-ui/core/Hidden';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import isEmpty from 'lodash.isempty';
 import has from 'lodash.has';
@@ -59,7 +62,7 @@ class CoinOverview extends React.Component {
         }
     }
 
-    renderCoinInfomation(propertyName) {
+    getCoinInfomation(propertyName) {
         const {
             coinPriceInfo,
             isFetchingCoinPriceInfo,
@@ -77,13 +80,7 @@ class CoinOverview extends React.Component {
             content = coinPriceErrorMessage;
         }
 
-        return (
-            <Specific
-                content={content}
-                variant={'display1'}
-                headerType={'h2'}
-            />
-        );
+        return content;
     }
 
     renderButton(link, title) {
@@ -92,14 +89,87 @@ class CoinOverview extends React.Component {
             <Button
                 disabled={isDisabled}
                 variant={'outlined'}
-                size="small"
                 href={link}
             >
                 {title}
             </Button>
         );
     }
+    
+    renderActions(overview) {
+        const { watchList, selectedCoin, isAuthorised, uid, selectedCoinId } = this.props
+        const isOnWatchList = has(watchList, selectedCoin);
+        
+        return (
+            <CardActions>
+                        {this.renderButton(overview.links.reddit, 'Reddit')}
+                        {this.renderButton(overview.links.twitter, 'Twitter')}
+                        {this.renderButton(overview.links.facebook, 'Facebook')}
 
+                        {isAuthorised && (
+                            <Button
+                                size={"small"}
+                                color={'primary'}
+                                onClick={() => 
+                                {
+                                    if(!isOnWatchList) {
+                                    this.props.addCoinToWatchList(
+                                        selectedCoin,
+                                        selectedCoinId,
+                                        uid )
+                                    }
+                                     else { 
+                                        this.props.removeFromWatchList(selectedCoin, uid);
+                                     }
+                                    }
+                                }
+                            >
+                                { isOnWatchList ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)  }
+                                
+                            </Button>
+                        )}
+                    </CardActions>
+            )
+    }
+    
+    createOverviewInformation () {
+        const { coinMetaInfo } = this.props;
+        
+        const overview = {
+            name: '',
+            links: {
+                facebook: '',
+                reddit: '',
+                twitter: '',
+            },
+        };
+        
+        if (!isEmpty(coinMetaInfo)) {
+            overview.symbol = coinMetaInfo.General.Name;
+            overview.name = coinMetaInfo.General.CoinName;
+            overview.links.facebook = coinMetaInfo.Facebook.link;
+            overview.links.reddit = coinMetaInfo.Reddit.link;
+            overview.links.twitter = coinMetaInfo.Twitter.link;
+        } 
+        
+        return overview;
+    }
+    
+    renderSpecificInformation(content, variant='display2', headerType='h1') {
+        const {isFetchingMetaInfo} = this.props;
+            if(isFetchingMetaInfo) {
+                return <CircularProgress />
+            } else {
+               return <Specific
+                content={content}
+                variant={variant}
+                headerType={headerType}
+                classes={styles.bigAvatar}
+                />
+             
+            }
+    }
+    
     // TODO Refactor
     renderCoinOverview = () => {
         const {
@@ -120,25 +190,11 @@ class CoinOverview extends React.Component {
                 : 'Loading';
         }
 
-        const overview = {
-            name: '',
-            links: {
-                facebook: '',
-                reddit: '',
-                twitter: '',
-            },
-        };
-
-        if (!isEmpty(coinMetaInfo)) {
-            overview.symbol = coinMetaInfo.General.Name;
-            overview.name = coinMetaInfo.General.CoinName;
-            overview.links.facebook = coinMetaInfo.Facebook.link;
-            overview.links.reddit = coinMetaInfo.Reddit.link;
-            overview.links.twitter = coinMetaInfo.Twitter.link;
-        }
+       const overview = this.createOverviewInformation();
+       
         return (
-            <Grid container justify={'center'}>
-                <Grid item xs={2} justify={'center'} alignItems={'center'}>
+            <Grid container justify={'center'} >
+                <Grid item container xs={4} md={2} justify={'center'} alignItems={'center'} >
                     {isFetchingMetaInfo ? (
                         <CircularProgress />
                     ) : (
@@ -150,56 +206,35 @@ class CoinOverview extends React.Component {
                         />
                     )}
                 </Grid>
-                <Grid item xs={4}>
-                    {isFetchingMetaInfo ? (
-                        <CircularProgress />
-                    ) : (
-                        <Specific
-                            content={overview.name}
-                            variant={'display2'}
-                            headerType={'h1'}
-                            classes={styles.bigAvatar}
-                        />
-                    )}
-                    <CardActions>
-                        {this.renderButton(overview.links.reddit, 'Reddit')}
-                        {this.renderButton(overview.links.twitter, 'Twitter')}
-                        {this.renderButton(overview.links.facebook, 'Facebook')}
 
-                        {isAuthorised && (
-                            <Button
-                                size="small"
-                                disabled={has(watchList, selectedCoin)}
-                                variant={'contained'}
-                                color={'primary'}
-                                onClick={() =>
-                                    this.props.addCoinToWatchList(
-                                        selectedCoin,
-                                        selectedCoinId,
-                                        uid
-                                    )
-                                }
-                            >
-                                Add to Watchlist
-                            </Button>
-                        )}
-                    </CardActions>
-                </Grid>
+                <Grid item container xs={8} md={6} justify={'flex-start'} alignItems={'center'}>
+                    <Grid item>
+                    {this.renderSpecificInformation(overview.name)}
+                    </Grid>
+                    <Hidden xsDown>
+                        <Grid item>
+                        {this.renderActions(overview)}
+                        </Grid>
+                    </Hidden>
+                    </Grid>
+                <Hidden smDown>
                 <Grid
                     item
-                    xs={5}
-                    alignItems={'center'}
                     container
+                    md={4}
+                    alignItems={'center'}
                     justify={'flex-end'}
                 >
-                    {this.renderCoinInfomation('PRICE')}
+                    {this.renderSpecificInformation(`Current Price: ${this.getCoinInfomation('PRICE')}`, 'headline',)}
                 </Grid>
+                </Hidden>
             </Grid>
         );
     };
 
     render() {
         const { classes } = this.props;
+        const overview = this.createOverviewInformation();
         return (
             <div>
                 <Card className={classes.card}>
@@ -207,6 +242,11 @@ class CoinOverview extends React.Component {
                         {this.renderCoinOverview()}
                     </Grid>
                 </Card>
+                <Hidden smUp>
+                <Card className={classes.card}>
+                {this.renderActions(overview)}
+                </Card>
+                </Hidden>
             </div>
         );
     }

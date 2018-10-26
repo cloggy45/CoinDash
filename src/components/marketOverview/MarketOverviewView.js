@@ -73,24 +73,24 @@ class MarketOverview extends Component {
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
-                    <Hidden smUp>
-                    <Grid item xs={12}>
-                        {this.renderPriceInformation('Price', 'PRICE' )}
+                    <Hidden mdUp>
+                    <Grid item xs={12} sm={6}>
+                        {this.renderPriceInformation('Current Price', 'PRICE' )}
                     </Grid>
                     </Hidden>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={6} md={6} lg={3}>
                         {this.renderPriceInformation(
                             'Volume (24 Hours)',
                             'VOLUME24HOUR'
                         )}
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={4} md={6} lg={3}>
                         {this.renderPriceInformation('Market Cap', 'MKTCAP')}
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={8} md={6} lg={3}>
                         {this.renderPriceInformation('Supply', 'SUPPLY')}
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} md={6} lg={3}>
                         {this.renderPriceInformation(
                             'Highest Price (Today)',
                             'HIGHDAY'
