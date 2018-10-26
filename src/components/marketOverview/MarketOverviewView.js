@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import Hidden from '@material-ui/core/Hidden';
 
 export const styles = {
     root: {
@@ -72,19 +73,24 @@ class MarketOverview extends Component {
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
-                    <Grid item xs>
+                    <Hidden smUp>
+                    <Grid item xs={12}>
+                        {this.renderPriceInformation('Price', 'PRICE' )}
+                    </Grid>
+                    </Hidden>
+                    <Grid item xs={12}>
                         {this.renderPriceInformation(
                             'Volume (24 Hours)',
                             'VOLUME24HOUR'
                         )}
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={12}>
                         {this.renderPriceInformation('Market Cap', 'MKTCAP')}
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={12}>
                         {this.renderPriceInformation('Supply', 'SUPPLY')}
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={12}>
                         {this.renderPriceInformation(
                             'Highest Price (Today)',
                             'HIGHDAY'

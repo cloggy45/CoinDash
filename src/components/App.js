@@ -35,9 +35,9 @@ class App extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.container}>
+            <Grid container>
                 <ToastContainer autoClose={1500} position={"bottom-right"} />
-                <Grid container spacing={24}>
+                <Grid container spacing={8}>
                     <Grid item xs={12}>
                         <Header />
                     </Grid>
@@ -67,7 +67,7 @@ class App extends Component {
                         </Switch>
                     </Grid>
                 </Grid>
-            </div>
+            </Grid>
         );
     }
 }
