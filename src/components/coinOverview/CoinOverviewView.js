@@ -225,7 +225,7 @@ class CoinOverview extends React.Component {
                     alignItems={'center'}
                     justify={'flex-end'}
                 >
-                    {this.renderSpecificInformation(`Current Price: ${this.getCoinInfomation('PRICE')}`, 'headline',)}
+                    {this.renderSpecificInformation(`Current Price: ${this.getCoinInfomation('PRICE')}`, 'headline')}
                 </Grid>
                 </Hidden>
             </Grid>

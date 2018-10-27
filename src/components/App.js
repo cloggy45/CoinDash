@@ -12,6 +12,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 // Components
 import Header from './header/Header';
+import Hidden from '@material-ui/core/Hidden';
+
+import Options from './header/options/SearchCurrency';
 import MarketOverview from './marketOverview/MarketOverview';
 import TopTenOverview from './coinListOverview/coinListOverview';
 import CoinOverview from './coinOverview/CoinOverview';
@@ -41,6 +44,11 @@ class App extends Component {
                     <Grid item xs={12}>
                         <Header />
                     </Grid>
+                    <Hidden smUp>
+                        <Grid item xs={12}>
+                            <Options />
+                        </Grid>
+                    </Hidden>
                     <Grid item xs={12}>
                         <CoinOverview />
                     </Grid>

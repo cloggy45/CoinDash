@@ -11,6 +11,9 @@ import isEmpty from 'lodash.isempty';
 import Options from './options/SearchCurrency';
 import WatchListItems from './watchListItems/WatchListItems';
 
+import Hidden from '@material-ui/core/Hidden';
+
+
 export const styles = {
     root: {
         flexGrow: 1,
@@ -124,7 +127,9 @@ export class Header extends Component {
                 <AppBar position="static">
                     <Toolbar>
                         {this.renderLogo()}
-                        <Options className={classes.flex} />
+                        <Hidden xsDown>
+                            <Options className={classes.flex} />
+                        </Hidden>
                         {isAuthorisedUser === true
                             ? this.renderLoggedInMenu()
                             : this.renderLoggedOutMenu()}

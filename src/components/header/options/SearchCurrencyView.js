@@ -13,17 +13,6 @@ export const styles = {
 
 // TODO Set initial option state, maybe just use default props
 export class SearchCurrency extends React.Component {
-    state = {
-        coinName: 'Doge Coin',
-        coinSymbol: 'DOGE',
-        coinId: 4432,
-        selectedOption: 4432,
-    };
-
-    componentDidMount() {
-        this.props.setSelectedCoin('DOGE', 4432);
-    }
-
     handleChange = selectedOption => {
         if (!isEmpty(selectedOption)) {
             const { value, label, symbol } = selectedOption;
@@ -49,7 +38,6 @@ export class SearchCurrency extends React.Component {
 
     render() {
         const { coinList, classes } = this.props;
-        const { coinId } = this.state;
 
         if (coinList === null) {
             return <p>Loading....</p>;
@@ -58,7 +46,7 @@ export class SearchCurrency extends React.Component {
                 <Select
                     className={`${classes.flex}`}
                     name="Search Currency"
-                    value={coinId}
+                    placeholde={'Search Currency'}
                     onChange={this.handleChange}
                     options={this.formatOptions(coinList)}
                     clearable={false}
