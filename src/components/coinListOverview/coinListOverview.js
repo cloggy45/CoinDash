@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchTopTen } from '../../actions/api';
+import { fetchPaginatedCoinList } from '../../actions/api';
 import { withStyles } from '@material-ui/core/styles';
 import CustomPaginationActionsTable, { styles } from './coinListOverviewView';
 
@@ -18,7 +18,7 @@ function mapStateToProps(store) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchCoinList: (start, limit) => dispatch(fetchTopTen(start, limit)),
+    fetchCoinList: (start, limit) => dispatch(fetchPaginatedCoinList(start, limit)),
 });
 
 export default connect(

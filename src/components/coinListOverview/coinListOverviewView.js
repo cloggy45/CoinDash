@@ -139,20 +139,22 @@ class CustomPaginationActionsTable extends React.Component {
         this.props.fetchCoinList(0, this.state.rowsPerPage);
     }
 
-    // TODO REFACTOR
+    getCurrentOffset() {
+        const { page, rowsPerPage } = this.state;
+        return page * rowsPerPage;
+    }
+
     handleChangePage = (event, page) => {
         this.setState({ page }, () => {
-            const offset = page * this.state.rowsPerPage;
+            const offset = this.getCurrentOffset();
             this.props.fetchCoinList(offset, this.state.rowsPerPage);
-            this.setState({ offset: offset });
         });
     };
 
-    //TODO REFACTOR
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value }, () => {
-            const { page, rowsPerPage } = this.state;
-            const offset = page * rowsPerPage;
+            const {rowsPerPage } = this.state;
+            const offset = this.getCurrentOffset();
             this.props.fetchCoinList(offset, rowsPerPage);
         });
     };

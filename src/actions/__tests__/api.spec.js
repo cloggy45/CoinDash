@@ -1,5 +1,5 @@
 import {
-    fetchTopTen,
+    fetchPaginatedCoinList,
     fetchCoinData,
     fetchCoinHistory,
     fetchCoinList,

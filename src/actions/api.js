@@ -36,7 +36,7 @@ export const fetchCoinList = () => dispatch => {
         .catch(error => console.log(error));
 };
 
-export const fetchTopTen = (start = 0, limit = 5) => dispatch => {
+export const fetchPaginatedCoinList = (start = 0, limit = 5, sort='rank', convert='USD') => dispatch => {
     dispatch({
         type: FETCH_TOP_TEN_REQUEST,
         isFetching: true,
@@ -44,7 +44,7 @@ export const fetchTopTen = (start = 0, limit = 5) => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `https://api.coinmarketcap.com/v2/ticker/?start=${start}&limit=${limit}&sort=rank`,
+        url: `https://api.coinmarketcap.com/v2/ticker/?start=${start}&limit=${limit}&sort=${sort}&convert=${convert}`,
         header: [],
     });
 
