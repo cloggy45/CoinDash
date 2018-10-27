@@ -1,5 +1,8 @@
-import * as firebase from 'firebase';
-import { FirebaseConfig } from './firebase-config';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+
+import {FirebaseConfig} from './firebase-config';
 
 firebase.initializeApp(FirebaseConfig);
 
