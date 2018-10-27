@@ -170,7 +170,7 @@ class CustomPaginationActionsTable extends React.Component {
         return (
             <Paper className={classes.root}>
                 <Toolbar>
-                    <Typography variant="h6" color="inherit">
+                    <Typography variant="subheading" color="inherit">
                         Cryptocurrencies Listings
                     </Typography>
                 </Toolbar>

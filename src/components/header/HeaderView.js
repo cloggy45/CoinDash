@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
 
 import Options from './options/SearchCurrency';
+
 import WatchListItems from './watchListItems/WatchListItems';
 
 import Hidden from '@material-ui/core/Hidden';
