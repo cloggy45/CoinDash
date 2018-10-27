@@ -2,6 +2,7 @@ export const selected = (
     currentState = {
         selectedCoin: 'DOGE',
         selectedId: 4432,
+        selectedCurrency: 'USD'
     },
     action
 ) => {
@@ -11,6 +12,11 @@ export const selected = (
                 ...currentState,
                 selectedCoin: action.payload,
                 selectedId: action.id,
+            };
+        case 'SELECT_CURRENCY':
+            return {
+                ...currentState,
+                selectedCurrency: action.payload
             };
         default:
             return currentState;
@@ -23,4 +29,8 @@ export function selectedCoin(store) {
 
 export function selectedCoinId(store) {
     return store.selectedId;
+}
+
+export function selectedCurrency(store) {
+    return store.selectedCurrency;
 }

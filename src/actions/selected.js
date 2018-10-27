@@ -1,9 +1,13 @@
-import { SELECT_COIN } from './actionTypes';
+import { SELECT_COIN, SELECT_CURRENCY } from './actionTypes';
 
-export const setSelectedCoin = (symbol, id) => {
-    return {
-        type: SELECT_COIN,
-        payload: symbol,
-        id: id,
-    };
-};
+export const setSelectedCoin = (symbol, id) => ({
+    type: SELECT_COIN,
+    payload: symbol,
+    id: id,
+
+});
+
+export const setSelectedCurrency = (currency) => ({
+    type: SELECT_CURRENCY,
+    payload: currency,
+});

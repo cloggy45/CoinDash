@@ -45,4 +45,8 @@ export function getSelectedCoinId(store) {
     return fromSelected.selectedCoinId(store[SELECTED]);
 }
 
+export function getSelectedCurrency(store) {
+    return fromSelected.selectedCurrency(store[SELECTED]);
+}
+
 export default rootReducer;
