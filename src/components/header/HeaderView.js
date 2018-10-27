@@ -13,7 +13,6 @@ import WatchListItems from './watchListItems/WatchListItems';
 
 import Hidden from '@material-ui/core/Hidden';
 
-
 export const styles = {
     root: {
         flexGrow: 1,

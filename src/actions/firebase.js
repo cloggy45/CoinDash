@@ -22,7 +22,9 @@ export const removeFromWatchList = (coinName, uid) => {
         watchListRef
             .child(uid)
             .child(coinName)
-            .set(null).then(() => toast.success(`${coinName} has been removed`)).catch(err => toast.error(err));
+            .set(null)
+            .then(() => toast.success(`${coinName} has been removed`))
+            .catch(err => toast.error(err));
     };
 };
 

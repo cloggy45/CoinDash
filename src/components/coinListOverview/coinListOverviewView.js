@@ -14,7 +14,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 
 const actionsStyles = theme => ({
@@ -41,7 +41,10 @@ class TablePaginationActions extends React.Component {
     handleLastPageButtonClick = event => {
         this.props.onChangePage(
             event,
-            Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1),
+            Math.max(
+                0,
+                Math.ceil(this.props.count / this.props.rowsPerPage) - 1
+            )
         );
     };
 
@@ -55,28 +58,44 @@ class TablePaginationActions extends React.Component {
                     disabled={page === 0}
                     aria-label="First Page"
                 >
-                    {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+                    {theme.direction === 'rtl' ? (
+                        <LastPageIcon />
+                    ) : (
+                        <FirstPageIcon />
+                    )}
                 </IconButton>
                 <IconButton
                     onClick={this.handleBackButtonClick}
                     disabled={page === 0}
                     aria-label="Previous Page"
                 >
-                    {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                    {theme.direction === 'rtl' ? (
+                        <KeyboardArrowRight />
+                    ) : (
+                        <KeyboardArrowLeft />
+                    )}
                 </IconButton>
                 <IconButton
                     onClick={this.handleNextButtonClick}
                     disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                     aria-label="Next Page"
                 >
-                    {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                    {theme.direction === 'rtl' ? (
+                        <KeyboardArrowLeft />
+                    ) : (
+                        <KeyboardArrowRight />
+                    )}
                 </IconButton>
                 <IconButton
                     onClick={this.handleLastPageButtonClick}
                     disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                     aria-label="Last Page"
                 >
-                    {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+                    {theme.direction === 'rtl' ? (
+                        <FirstPageIcon />
+                    ) : (
+                        <LastPageIcon />
+                    )}
                 </IconButton>
             </div>
         );
@@ -92,10 +111,9 @@ TablePaginationActions.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
-    TablePaginationActions,
-);
-
+const TablePaginationActionsWrapped = withStyles(actionsStyles, {
+    withTheme: true,
+})(TablePaginationActions);
 
 export const styles = theme => ({
     root: {
@@ -114,7 +132,7 @@ class CustomPaginationActionsTable extends React.Component {
     state = {
         page: 0,
         rowsPerPage: 5,
-        offSet: 0
+        offSet: 0,
     };
 
     componentDidMount() {
@@ -125,8 +143,8 @@ class CustomPaginationActionsTable extends React.Component {
     handleChangePage = (event, page) => {
         this.setState({ page }, () => {
             const offset = page * this.state.rowsPerPage;
-            this.props.fetchCoinList(offset, this.state.rowsPerPage)
-            this.setState({offset: offset});
+            this.props.fetchCoinList(offset, this.state.rowsPerPage);
+            this.setState({ offset: offset });
         });
     };
 
@@ -139,13 +157,13 @@ class CustomPaginationActionsTable extends React.Component {
         });
     };
 
-
-
     render() {
         const { classes, coinListSegment } = this.props;
         const { rowsPerPage, page } = this.state;
         const totalAmountOfRows = 2000;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalAmountOfRows - page * rowsPerPage);
+        const emptyRows =
+            rowsPerPage -
+            Math.min(rowsPerPage, totalAmountOfRows - page * rowsPerPage);
 
         return (
             <Paper className={classes.root}>
@@ -159,8 +177,10 @@ class CustomPaginationActionsTable extends React.Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Rank</TableCell>
-                                <TableCell >Name</TableCell>
-                                <TableCell numeric>Circulating Supply</TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell numeric>
+                                    Circulating Supply
+                                </TableCell>
                                 <TableCell numeric>Total Supply</TableCell>
                             </TableRow>
                         </TableHead>
@@ -170,8 +190,12 @@ class CustomPaginationActionsTable extends React.Component {
                                     <TableRow key={row.id}>
                                         <TableCell>{row.rank}</TableCell>
                                         <TableCell>{row.name}</TableCell>
-                                        <TableCell numeric>{row.circulating_supply}</TableCell>
-                                        <TableCell numeric>{row.total_supply}</TableCell>
+                                        <TableCell numeric>
+                                            {row.circulating_supply}
+                                        </TableCell>
+                                        <TableCell numeric>
+                                            {row.total_supply}
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}
@@ -189,8 +213,12 @@ class CustomPaginationActionsTable extends React.Component {
                                     rowsPerPage={rowsPerPage}
                                     page={page}
                                     onChangePage={this.handleChangePage}
-                                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                                    ActionsComponent={TablePaginationActionsWrapped}
+                                    onChangeRowsPerPage={
+                                        this.handleChangeRowsPerPage
+                                    }
+                                    ActionsComponent={
+                                        TablePaginationActionsWrapped
+                                    }
                                 />
                             </TableRow>
                         </TableFooter>

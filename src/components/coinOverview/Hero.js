@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 
 const Hero = props => (
     <CardContent>
-        <img src={props.src} alt={props.alt} height={props.height} width={props.width} />
+        <img
+            src={props.src}
+            alt={props.alt}
+            height={props.height}
+            width={props.width}
+        />
     </CardContent>
 );
 
@@ -13,7 +18,7 @@ Hero.propTyes = {
     src: PropTypes.string,
     classes: PropTypes.object,
     height: PropTypes.number,
-    width: PropTypes.number
+    width: PropTypes.number,
 };
 
 Hero.defaultProps = {

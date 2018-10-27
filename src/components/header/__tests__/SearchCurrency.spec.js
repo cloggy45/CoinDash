@@ -27,16 +27,6 @@ describe('SearchCurrency Component', () => {
         );
     });
 
-    it('Should call setSelectedCoin initially when loading', () => {
-        const component = shallow(
-            <SearchCurrency
-                getCoinList={getCoinList}
-                setSelectedCoin={setOptions}
-            />
-        );
-        expect(setOptions).toHaveBeenCalledTimes(1);
-    });
-
     it('Should render loading if there are no options', () => {
         const tree = renderer
             .create(

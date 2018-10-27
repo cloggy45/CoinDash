@@ -36,7 +36,7 @@ export const fetchCoinList = () => dispatch => {
         .catch(error => console.log(error));
 };
 
-export const fetchTopTen = (start=0, limit=5) => dispatch => {
+export const fetchTopTen = (start = 0, limit = 5) => dispatch => {
     dispatch({
         type: FETCH_TOP_TEN_REQUEST,
         isFetching: true,
@@ -47,7 +47,6 @@ export const fetchTopTen = (start=0, limit=5) => dispatch => {
         url: `https://api.coinmarketcap.com/v2/ticker/?start=${start}&limit=${limit}&sort=rank`,
         header: [],
     });
-
 
     return request.then(
         response =>

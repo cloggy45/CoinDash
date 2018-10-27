@@ -74,9 +74,12 @@ class MarketOverview extends Component {
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <Hidden mdUp>
-                    <Grid item xs={12} sm={6}>
-                        {this.renderPriceInformation('Current Price', 'PRICE' )}
-                    </Grid>
+                        <Grid item xs={12} sm={6}>
+                            {this.renderPriceInformation(
+                                'Current Price',
+                                'PRICE'
+                            )}
+                        </Grid>
                     </Hidden>
                     <Grid item xs={12} sm={6} md={6} lg={3}>
                         {this.renderPriceInformation(

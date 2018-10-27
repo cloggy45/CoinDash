@@ -316,8 +316,6 @@ describe('Test Async Actions', () => {
         });
     });
 
- 
-
     it('Fetch Coin Data', () => {
         const url = `https://api.coinmarketcap.com/v2/ticker/`;
 

@@ -49,7 +49,8 @@ const mapDispatchToProps = dispatch => ({
     fetchCoinMetaInfo: coin => dispatch(fetchCoinMetaInfo(coin)),
     addCoinToWatchList: (coinName, coinId, uid) =>
         dispatch(addToWatchList(coinName, coinId, uid)),
-    removeFromWatchList: (coinName, uid) => dispatch(removeFromWatchList(coinName, uid))
+    removeFromWatchList: (coinName, uid) =>
+        dispatch(removeFromWatchList(coinName, uid)),
 });
 
 export default withRouter(

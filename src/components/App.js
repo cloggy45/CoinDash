@@ -38,7 +38,7 @@ class App extends Component {
     render() {
         return (
             <Grid container>
-                <ToastContainer autoClose={1500} position={"bottom-right"} />
+                <ToastContainer autoClose={1500} position={'bottom-right'} />
                 <Grid container spacing={8}>
                     <Grid item xs={12}>
                         <Header />

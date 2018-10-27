@@ -86,55 +86,61 @@ class CoinOverview extends React.Component {
     renderButton(link, title) {
         const isDisabled = link === undefined;
         return (
-            <Button
-                disabled={isDisabled}
-                variant={'outlined'}
-                href={link}
-            >
+            <Button disabled={isDisabled} variant={'outlined'} href={link}>
                 {title}
             </Button>
         );
     }
-    
+
     renderActions(overview) {
-        const { watchList, selectedCoin, isAuthorised, uid, selectedCoinId } = this.props
+        const {
+            watchList,
+            selectedCoin,
+            isAuthorised,
+            uid,
+            selectedCoinId,
+        } = this.props;
         const isOnWatchList = has(watchList, selectedCoin);
-        
+
         return (
             <CardActions>
-                        {this.renderButton(overview.links.reddit, 'Reddit')}
-                        {this.renderButton(overview.links.twitter, 'Twitter')}
-                        {this.renderButton(overview.links.facebook, 'Facebook')}
+                {this.renderButton(overview.links.reddit, 'Reddit')}
+                {this.renderButton(overview.links.twitter, 'Twitter')}
+                {this.renderButton(overview.links.facebook, 'Facebook')}
 
-                        {isAuthorised && (
-                            <Button
-                                size={"small"}
-                                color={'primary'}
-                                onClick={() => 
-                                {
-                                    if(!isOnWatchList) {
-                                    this.props.addCoinToWatchList(
-                                        selectedCoin,
-                                        selectedCoinId,
-                                        uid )
-                                    }
-                                     else { 
-                                        this.props.removeFromWatchList(selectedCoin, uid);
-                                     }
-                                    }
-                                }
-                            >
-                                { isOnWatchList ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)  }
-                                
-                            </Button>
+                {isAuthorised && (
+                    <Button
+                        size={'small'}
+                        color={'primary'}
+                        onClick={() => {
+                            if (!isOnWatchList) {
+                                this.props.addCoinToWatchList(
+                                    selectedCoin,
+                                    selectedCoinId,
+                                    uid
+                                );
+                            } else {
+                                this.props.removeFromWatchList(
+                                    selectedCoin,
+                                    uid
+                                );
+                            }
+                        }}
+                    >
+                        {isOnWatchList ? (
+                            <FavoriteIcon />
+                        ) : (
+                            <FavoriteBorderIcon />
                         )}
-                    </CardActions>
-            )
+                    </Button>
+                )}
+            </CardActions>
+        );
     }
-    
-    createOverviewInformation () {
+
+    createOverviewInformation() {
         const { coinMetaInfo } = this.props;
-        
+
         const overview = {
             name: '',
             links: {
@@ -143,40 +149,41 @@ class CoinOverview extends React.Component {
                 twitter: '',
             },
         };
-        
+
         if (!isEmpty(coinMetaInfo)) {
             overview.symbol = coinMetaInfo.General.Name;
             overview.name = coinMetaInfo.General.CoinName;
             overview.links.facebook = coinMetaInfo.Facebook.link;
             overview.links.reddit = coinMetaInfo.Reddit.link;
             overview.links.twitter = coinMetaInfo.Twitter.link;
-        } 
-        
+        }
+
         return overview;
     }
-    
-    renderSpecificInformation(content, variant='display2', headerType='h1') {
-        const {isFetchingMetaInfo} = this.props;
-            if(isFetchingMetaInfo) {
-                return <CircularProgress />
-            } else {
-               return <Specific
-                content={content}
-                variant={variant}
-                headerType={headerType}
-                classes={styles.bigAvatar}
+
+    renderSpecificInformation(
+        content,
+        variant = 'display2',
+        headerType = 'h1'
+    ) {
+        const { isFetchingMetaInfo } = this.props;
+        if (isFetchingMetaInfo) {
+            return <CircularProgress />;
+        } else {
+            return (
+                <Specific
+                    content={content}
+                    variant={variant}
+                    headerType={headerType}
+                    classes={styles.bigAvatar}
                 />
-             
-            }
+            );
+        }
     }
-    
+
     // TODO Refactor
     renderCoinOverview = () => {
-        const {
-            selectedCoin,
-            coinList,
-            isFetchingMetaInfo,
-        } = this.props;
+        const { selectedCoin, coinList, isFetchingMetaInfo } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
 
         if (!isEmpty(coinList)) {
@@ -185,11 +192,18 @@ class CoinOverview extends React.Component {
                 : 'Loading';
         }
 
-       const overview = this.createOverviewInformation();
-       
+        const overview = this.createOverviewInformation();
+
         return (
-            <Grid container justify={'center'} >
-                <Grid item container xs={4} md={2} justify={'center'} alignItems={'center'} >
+            <Grid container justify={'center'}>
+                <Grid
+                    item
+                    container
+                    xs={4}
+                    md={2}
+                    justify={'center'}
+                    alignItems={'center'}
+                >
                     {isFetchingMetaInfo ? (
                         <CircularProgress />
                     ) : (
@@ -202,26 +216,34 @@ class CoinOverview extends React.Component {
                     )}
                 </Grid>
 
-                <Grid item container xs={8} md={6} justify={'flex-start'} alignItems={'center'}>
-                    <Grid item>
-                    {this.renderSpecificInformation(overview.name)}
-                    </Grid>
-                    <Hidden xsDown>
-                        <Grid item>
-                        {this.renderActions(overview)}
-                        </Grid>
-                    </Hidden>
-                    </Grid>
-                <Hidden smDown>
                 <Grid
                     item
                     container
-                    md={4}
+                    xs={8}
+                    md={6}
+                    justify={'flex-start'}
                     alignItems={'center'}
-                    justify={'flex-end'}
                 >
-                    {this.renderSpecificInformation(`Current Price: ${this.getCoinInfomation('PRICE')}`, 'headline')}
+                    <Grid item>
+                        {this.renderSpecificInformation(overview.name)}
+                    </Grid>
+                    <Hidden xsDown>
+                        <Grid item>{this.renderActions(overview)}</Grid>
+                    </Hidden>
                 </Grid>
+                <Hidden smDown>
+                    <Grid
+                        item
+                        container
+                        md={4}
+                        alignItems={'center'}
+                        justify={'flex-end'}
+                    >
+                        {this.renderSpecificInformation(
+                            `Current Price: ${this.getCoinInfomation('PRICE')}`,
+                            'headline'
+                        )}
+                    </Grid>
                 </Hidden>
             </Grid>
         );
@@ -238,9 +260,9 @@ class CoinOverview extends React.Component {
                     </Grid>
                 </Card>
                 <Hidden smUp>
-                <Card className={classes.card}>
-                {this.renderActions(overview)}
-                </Card>
+                    <Card className={classes.card}>
+                        {this.renderActions(overview)}
+                    </Card>
                 </Hidden>
             </div>
         );
