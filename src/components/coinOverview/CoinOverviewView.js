@@ -173,14 +173,9 @@ class CoinOverview extends React.Component {
     // TODO Refactor
     renderCoinOverview = () => {
         const {
-            uid,
-            isAuthorised,
-            coinMetaInfo,
             selectedCoin,
-            selectedCoinId,
             coinList,
             isFetchingMetaInfo,
-            watchList,
         } = this.props;
         let { imageBaseUrl, coinLogoUrl } = this.state;
 

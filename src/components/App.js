@@ -36,7 +36,6 @@ class App extends Component {
         this.props.fetchCoinList();
     }
     render() {
-        const { classes } = this.props;
         return (
             <Grid container>
                 <ToastContainer autoClose={1500} position={"bottom-right"} />
