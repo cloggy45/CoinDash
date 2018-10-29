@@ -44,7 +44,7 @@ export class Header extends Component {
         this.setState({ anchorEl: null });
     };
 
-    handleLoginClick = () => {
+    handleLoginClick = async () => {
         this.props.logon();
     };
 
