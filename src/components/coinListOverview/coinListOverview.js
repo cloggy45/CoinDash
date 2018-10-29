@@ -18,7 +18,8 @@ function mapStateToProps(store) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchCoinList: (start, limit) => dispatch(fetchPaginatedCoinList(start, limit)),
+    fetchCoinList: (start, limit) =>
+        dispatch(fetchPaginatedCoinList(start, limit)),
 });
 
 export default connect(

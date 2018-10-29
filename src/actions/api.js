@@ -36,7 +36,12 @@ export const fetchCoinList = () => dispatch => {
         .catch(error => console.log(error));
 };
 
-export const fetchPaginatedCoinList = (start = 0, limit = 5, sort='rank', convert='USD') => dispatch => {
+export const fetchPaginatedCoinList = (
+    start = 0,
+    limit = 5,
+    sort = 'rank',
+    convert = 'USD'
+) => dispatch => {
     dispatch({
         type: FETCH_TOP_TEN_REQUEST,
         isFetching: true,
@@ -73,7 +78,7 @@ export const fetchCoinHistory = ticker => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `${baseUrl}history/${ticker}/USD`,
+        url: `${baseUrl}price/history/${ticker}/USD`,
         header: [],
     });
 

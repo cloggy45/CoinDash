@@ -11,6 +11,8 @@ import baseUrl from '../config';
 import has from 'lodash.has';
 
 export const fetchCoinPriceInfo = ticker => dispatch => {
+    const url = `${baseUrl}price/${ticker}/USD`;
+
     dispatch({
         type: FETCH_COIN_PRICE_INFO_REQUEST,
         isFetching: true,
@@ -18,8 +20,11 @@ export const fetchCoinPriceInfo = ticker => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `${baseUrl}price/${ticker}/USD`,
+        url: url,
     });
+
+    console.log('FETCH PRICE INFO', url);
+
     return request.then(
         response => {
             has(response.data, 'Response')
