@@ -242,7 +242,7 @@ describe('Test Async Actions', () => {
     });
 
     describe('Fetch history data', () => {
-        const url = `${baseUrl}history/BTC/USD`;
+        const url = `${baseUrl}price/history/BTC/USD`;
         const payload = [
             {
                 Response: 'Success',
