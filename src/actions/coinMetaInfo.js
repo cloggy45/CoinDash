@@ -14,8 +14,6 @@ export const fetchCoinMetaInfo = id => dispatch => {
         isFetching: true,
     });
 
-    console.log(process.env.NODE_ENV);
-
     const request = axios({
         method: 'GET',
         url: `${baseUrl}meta/${id}`,

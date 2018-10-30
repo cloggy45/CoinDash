@@ -23,8 +23,6 @@ export const fetchCoinPriceInfo = ticker => dispatch => {
         url: url,
     });
 
-    console.log('FETCH PRICE INFO', url);
-
     return request.then(
         response => {
             has(response.data, 'Response')
