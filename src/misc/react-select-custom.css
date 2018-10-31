@@ -35,7 +35,8 @@
 }
 .Select.is-open > .Select-control .Select-arrow {
     top: -2px;
-    border-color: transparent transparent #999;
+    /*border-color: transparent transparent #999;*/
+    border-color: red;
     border-width: 0 5px 5px;
 }
 .Select.is-searchable.is-open > .Select-control {

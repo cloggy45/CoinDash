@@ -1,6 +1,9 @@
 import React from 'react';
-import Select from 'react-select';
+import Select from 'react-virtualized-select';
+
 import 'react-select/dist/react-select.css';
+import 'react-virtualized-select/styles.css';
+
 import PropTypes from 'prop-types';
 import map from 'lodash.map';
 import isEmpty from 'lodash.isempty';
@@ -8,6 +11,9 @@ import isEmpty from 'lodash.isempty';
 export const styles = {
     flex: {
         flexGrow: 1,
+    },
+    input: {
+        color: 'black',
     },
 };
 
@@ -47,9 +53,9 @@ export class SearchCurrency extends React.Component {
         } else {
             return (
                 <Select
-                    className={`${classes.flex}`}
+                    className={`${classes.flex} ${classes.input}`}
                     name="Search Currency"
-                    placeholde={'Search Currency'}
+                    placeholder={'Search Currency'}
                     onChange={this.handleChange}
                     options={this.formatOptions(coinList)}
                     clearable={false}
