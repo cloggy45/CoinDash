@@ -4,7 +4,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import { Graph, styles, GraphHolder } from '../GraphView';
+import { GraphHolder } from '../GraphHolder';
+import { Graph, styles } from '../GraphView';
 
 describe('Graph Component', () => {
     function setupComponent(type = '') {

@@ -2,11 +2,9 @@ import { Component } from 'react';
 import moment from 'moment';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
+import { GraphHolder } from './GraphHolder';
 
 export const styles = {
     card: {
@@ -18,16 +16,6 @@ export const styles = {
         fontSize: 14,
     },
 };
-
-// TODO Move to own file
-export const GraphHolder = props => (
-    <Card className={props.classes.card}>
-        <CardContent>
-            <Typography variant={'subheading'}>{props.title}</Typography>
-            {props.children}
-        </CardContent>
-    </Card>
-);
 
 export class Graph extends Component {
     componentDidMount() {
