@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
     setSelectedCoin: (symbol, id) => {
         dispatch(setSelectedCoin(symbol, id));
     },
+
     fetchCoinPriceInfo: tickers => dispatch(fetchCoinPriceInfo(tickers)),
 });
 

@@ -2,17 +2,23 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 
 import { setSelectedCurrency } from '../../../actions/selected';
-import { getSelectedCurrency} from '../../../reducers/rootReducer';
-
+import {
+    getSelectedCryptoCoin,
+    getSelectedFiatCurrency,
+} from '../../../reducers/rootReducer';
 
 import SelectCurrency, { styles } from './SelectFiatCurrencyView';
+import { fetchCoinPriceInfo } from '../../../actions/coinPriceInfo';
 
 const mapStateToProps = store => ({
-    selectedCurrency: getSelectedCurrency(store)
+    selectedFiat: getSelectedFiatCurrency(store),
+    selectedCrypto: getSelectedCryptoCoin(store),
 });
 
 const mapDispatchToProps = dispatch => ({
-    setSelectedCurrency: (currency) => dispatch(setSelectedCurrency(currency))
+    setSelectedCurrency: currency => dispatch(setSelectedCurrency(currency)),
+    fetchCoinPriceInfo: (cryptoTicker, fiatTicker) =>
+        dispatch(fetchCoinPriceInfo(cryptoTicker, fiatTicker)),
 });
 
 export default connect(

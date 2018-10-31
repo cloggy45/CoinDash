@@ -27,7 +27,11 @@ import {
     getCoinPriceErrorStatus,
 } from '../../reducers/coinPriceInfo/coinPriceInfoSelectors';
 
-import { getSelectedCoin, getSelectedCoinId } from '../../reducers/rootReducer';
+import {
+    getSelectedCryptoCoin,
+    getSelectedCoinId,
+    getSelectedFiatCurrency,
+} from '../../reducers/rootReducer';
 
 const mapStateToProps = store => ({
     watchList: getWatchList(store),
@@ -35,7 +39,8 @@ const mapStateToProps = store => ({
     isAuthorised: getAuthStatus(store),
     isFetchingMetaInfo: getCoinMetaInfoFetchStatus(store),
     coinMetaInfo: getCoinMetaInfo(store),
-    selectedCoin: getSelectedCoin(store),
+    selectedCoin: getSelectedCryptoCoin(store),
+    selectedFiatCurrency: getSelectedFiatCurrency(store),
     selectedCoinId: getSelectedCoinId(store),
     coinList: getCoinList(store),
     coinListFetchStatus: getCoinListFetchStatus(store),

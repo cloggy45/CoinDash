@@ -42,7 +42,8 @@ const Overview = props => (
 
 class MarketOverview extends Component {
     componentDidMount() {
-        this.props.fetchCoinOverview('DOGE');
+        const { selectedCoin, selectedFiatCurrency } = this.props;
+        this.props.fetchCoinOverview(selectedCoin, selectedFiatCurrency);
     }
 
     renderPriceInformation(title, propertyOnResponseObject) {
@@ -52,13 +53,14 @@ class MarketOverview extends Component {
             coinPriceHasError,
             coinPriceErrorMessage,
             selectedCoin,
+            selectedFiat,
         } = this.props;
 
         let data;
 
         if (!isFetchingCoinPriceInfo && !coinPriceHasError) {
             data =
-                coinPriceInfo['DISPLAY'][selectedCoin]['USD'][
+                coinPriceInfo['DISPLAY'][selectedCoin][selectedFiat][
                     propertyOnResponseObject
                 ];
         } else {

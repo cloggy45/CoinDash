@@ -16,33 +16,44 @@ export const styles = {
         minWidth: 120,
     },
     selectEmpty: {
-        marginTop: '1em'
+        marginTop: '1em',
     },
 };
 
-const SelectCurrency = props => (
-    <FormControl className={props.classes.formControl}>
-        <InputLabel htmlFor="currency">Fiat Currency</InputLabel>
-        <Select
-            value={props.selectedCurrency}
-            onChange={(event) => props.setSelectedCurrency(event.target.value)}
-            inputProps={{
-                name: 'currency',
-                id: 'select-currency',
-            }}
-        >
-            <MenuItem value="">
-                <em>None</em>
-            </MenuItem>
-            <MenuItem value={'USD'}>USD</MenuItem>
-            <MenuItem value={'EUR'}>EUR</MenuItem>
-        </Select>
-    </FormControl>
-);
+class SelectCurrency extends React.Component {
+    handleSetSelectedCurrencyChange = event => {
+        const newSelectedFiatCurrency = event.target.value;
+        const { selectedCrypto } = this.props;
+
+        this.props.setSelectedCurrency(newSelectedFiatCurrency);
+        this.props.fetchCoinPriceInfo(selectedCrypto, newSelectedFiatCurrency);
+    };
+
+    render() {
+        const { classes, selectedFiat } = this.props;
+        return (
+            <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="currency">Fiat Currency</InputLabel>
+                <Select
+                    value={selectedFiat}
+                    onChange={event =>
+                        this.handleSetSelectedCurrencyChange(event)
+                    }
+                    inputProps={{
+                        name: 'currency',
+                        id: 'select-currency',
+                    }}
+                >
+                    <MenuItem value={'USD'}>USD</MenuItem>
+                    <MenuItem value={'EUR'}>EUR</MenuItem>
+                </Select>
+            </FormControl>
+        );
+    }
+}
 
 SelectCurrency.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 
 export default SelectCurrency;

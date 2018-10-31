@@ -6,7 +6,7 @@ import {
     getError,
     getLoadingStatus,
 } from '../../reducers/coinHistory/coinHistorySelectors';
-import { getSelectedCoin } from '../../reducers/rootReducer';
+import { getSelectedCryptoCoin } from '../../reducers/rootReducer';
 import { fetchCoinHistory } from '../../actions/api';
 
 const mapStateToProps = store => {
@@ -14,7 +14,7 @@ const mapStateToProps = store => {
         coinHistory: getCoinHistory(store),
         error: getError(store),
         isLoading: getLoadingStatus(store),
-        selectedCoin: getSelectedCoin(store),
+        selectedCoin: getSelectedCryptoCoin(store),
     };
 };
 

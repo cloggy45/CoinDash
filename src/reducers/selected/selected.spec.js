@@ -7,7 +7,7 @@ describe('Selected Reducer', () => {
         expect(selected(undefined, {})).toEqual({
             selectedCoin: 'DOGE',
             selectedId: 4432,
-            selectedCurrency: 'USD'
+            selectedFiat: 'USD',
         });
     });
     it('should handle SELECT_COIN', () => {

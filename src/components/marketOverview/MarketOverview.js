@@ -17,14 +17,18 @@ import {
     marketOverviewErrorMessage,
     marketOverviewCurrentState,
 } from '../../reducers/marketOverview/marketOverviewSelectors';
-import { getSelectedCoin } from '../../reducers/rootReducer';
+import {
+    getSelectedCryptoCoin,
+    getSelectedFiatCurrency,
+} from '../../reducers/rootReducer';
 
 const mapStateToProps = store => {
     return {
         overview: marketOverviewCurrentState(store),
         errorMessage: marketOverviewErrorMessage(store),
         coinPriceInfo: getCoinPriceInfo(store),
-        selectedCoin: getSelectedCoin(store),
+        selectedCoin: getSelectedCryptoCoin(store),
+        selectedFiat: getSelectedFiatCurrency(store),
         isFetching: marketOverviewFetchStatus(store),
         isFetchingCoinPriceInfo: getCoinPriceInfoFetchStatus(store),
         coinPriceHasError: getCoinPriceErrorStatus(store),

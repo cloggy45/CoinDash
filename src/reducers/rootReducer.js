@@ -37,7 +37,7 @@ const rootReducer = combineReducers({
 
 // Selected Selectors
 
-export function getSelectedCoin(store) {
+export function getSelectedCryptoCoin(store) {
     return fromSelected.selectedCoin(store[SELECTED]);
 }
 
@@ -45,7 +45,7 @@ export function getSelectedCoinId(store) {
     return fromSelected.selectedCoinId(store[SELECTED]);
 }
 
-export function getSelectedCurrency(store) {
+export function getSelectedFiatCurrency(store) {
     return fromSelected.selectedCurrency(store[SELECTED]);
 }
 
