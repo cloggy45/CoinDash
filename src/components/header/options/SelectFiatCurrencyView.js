@@ -21,6 +21,42 @@ export const styles = {
 };
 
 class SelectCurrency extends React.Component {
+    state = {
+        fiatCurrencies: [
+            'AUD',
+            'BRL',
+            'CAD',
+            'CHF',
+            'CLP',
+            'CNY',
+            'CZK',
+            'DKK',
+            'EUR',
+            'GBP',
+            'HKD',
+            'HUF',
+            'IDR',
+            'ILS',
+            'INR',
+            'JPY',
+            'KRW',
+            'MXN',
+            'MYR',
+            'NOK',
+            'NZD',
+            'PHP',
+            'PKR',
+            'PLN',
+            'RUB',
+            'SEK',
+            'SGD',
+            'THB',
+            'TRY',
+            'TWD',
+            'ZAR',
+            'USD',
+        ],
+    };
     handleSetSelectedCurrencyChange = event => {
         const newSelectedFiatCurrency = event.target.value;
         const { selectedCrypto } = this.props;
@@ -31,6 +67,7 @@ class SelectCurrency extends React.Component {
 
     render() {
         const { classes, selectedFiat } = this.props;
+
         return (
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="currency">Fiat Currency</InputLabel>
@@ -44,8 +81,9 @@ class SelectCurrency extends React.Component {
                         id: 'select-currency',
                     }}
                 >
-                    <MenuItem value={'USD'}>USD</MenuItem>
-                    <MenuItem value={'EUR'}>EUR</MenuItem>
+                    {this.state.fiatCurrencies.map(fiat => {
+                        return <MenuItem value={fiat}>{fiat}</MenuItem>;
+                    })}
                 </Select>
             </FormControl>
         );
