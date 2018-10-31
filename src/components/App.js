@@ -78,6 +78,10 @@ class App extends Component {
         );
     }
 }
+//
+// const mapPropsToState = store = ({
+//
+// });
 
 const mapDispatchToProps = dispatch => ({
     fetchUser: dispatch(fetchUser()),

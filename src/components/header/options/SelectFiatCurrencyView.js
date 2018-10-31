@@ -57,6 +57,9 @@ class SelectCurrency extends React.Component {
             'USD',
         ],
     };
+
+    componentDidMount() {}
+
     handleSetSelectedCurrencyChange = event => {
         const newSelectedFiatCurrency = event.target.value;
         const { selectedCrypto } = this.props;
