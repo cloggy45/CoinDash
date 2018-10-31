@@ -10,8 +10,8 @@ import baseUrl from '../config';
 
 import has from 'lodash.has';
 
-export const fetchCoinPriceInfo = ticker => dispatch => {
-    const url = `${baseUrl}price/${ticker}/USD`;
+export const fetchCoinPriceInfo = (ticker, fiatCurrencySymbol) => dispatch => {
+    const url = `${baseUrl}price/${ticker}/${fiatCurrencySymbol}`;
 
     dispatch({
         type: FETCH_COIN_PRICE_INFO_REQUEST,

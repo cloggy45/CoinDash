@@ -115,14 +115,14 @@ describe('coinPriceInfo actions', () => {
 
     it('should fail to fetch coin price info', () => {
         mock.onGet(url).networkError();
-        return store.dispatch(fetchCoinPriceInfo('BTC')).then(() => {
+        return store.dispatch(fetchCoinPriceInfo('BTC', 'USD')).then(() => {
             expect(store.getActions()).toEqual([actionRequest, actionFailed]);
         });
     });
 
     it('should successfully fetch coin price info', () => {
         mock.onGet(url).reply(200, payload);
-        return store.dispatch(fetchCoinPriceInfo('BTC')).then(() => {
+        return store.dispatch(fetchCoinPriceInfo('BTC', 'USD')).then(() => {
             expect(store.getActions()).toEqual([actionRequest, actionSuccess]);
         });
     });

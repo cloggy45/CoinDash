@@ -33,7 +33,8 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchCoinOverview: ticker => dispatch(fetchCoinPriceInfo(ticker)),
+    fetchCoinOverview: (ticker, selectedFiatCurrency) =>
+        dispatch(fetchCoinPriceInfo(ticker, selectedFiatCurrency)),
 });
 
 export default withRouter(

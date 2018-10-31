@@ -15,6 +15,7 @@ import has from 'lodash.has';
 
 import Hero from './Hero';
 import Specific from './Specific';
+import SelectCurrency from '../header/options/SelectFiatCurrency';
 
 export const styles = {
     card: {
@@ -107,7 +108,7 @@ class CoinOverview extends React.Component {
                 {this.renderButton(overview.links.reddit, 'Reddit')}
                 {this.renderButton(overview.links.twitter, 'Twitter')}
                 {this.renderButton(overview.links.facebook, 'Facebook')}
-
+                <SelectCurrency />
                 {isAuthorised && (
                     <Button
                         size={'small'}
