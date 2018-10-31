@@ -11,6 +11,7 @@ import isEmpty from 'lodash.isempty';
 import Options from './options/SearchCurrency';
 
 import WatchListItems from './watchListItems/WatchListItems';
+import ListIcon from '@material-ui/icons/List';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -73,7 +74,7 @@ export class Header extends Component {
                     onClick={this.handleClick}
                     color="inherit"
                 >
-                    View Watchlist
+                    <ListIcon />
                 </Button>
                 <Avatar
                     alt="Users Icon"
