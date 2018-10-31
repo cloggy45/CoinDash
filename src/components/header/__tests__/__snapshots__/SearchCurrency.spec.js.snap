@@ -2,7 +2,7 @@
 
 exports[`SearchCurrency Component Should render loading if there are no options 1`] = `
 <div
-  className="Select undefined is-searchable Select--single"
+  className="Select undefined undefined is-searchable Select--single"
   style={undefined}
 >
   <div
@@ -21,7 +21,7 @@ exports[`SearchCurrency Component Should render loading if there are no options 
       <div
         className="Select-placeholder"
       >
-        Select...
+        Search Currency
       </div>
       <div
         className="Select-input"

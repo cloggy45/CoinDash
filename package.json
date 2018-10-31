@@ -19,6 +19,7 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "0.18.0",
     "chart.js": "2.7.2",
+    "currency-symbol-map": "^4.0.4",
     "firebase": "5.3.1",
     "history": "^4.7.2",
     "lodash.foreach": "^4.5.0",

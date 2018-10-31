@@ -297,7 +297,7 @@ describe('Test Async Actions', () => {
 
         it('should fetch coin history', () => {
             mock.onGet(url).reply(200, payload);
-            return store.dispatch(fetchCoinHistory('BTC')).then(() => {
+            return store.dispatch(fetchCoinHistory('BTC', 'USD')).then(() => {
                 expect(store.getActions()).toEqual([
                     actionRequest,
                     actionSuccess,
@@ -307,7 +307,7 @@ describe('Test Async Actions', () => {
 
         it('should fail to fetch coin history', () => {
             mock.onGet(url).networkError();
-            return store.dispatch(fetchCoinHistory('BTC')).then(() => {
+            return store.dispatch(fetchCoinHistory('BTC', 'USD')).then(() => {
                 expect(store.getActions()).toEqual([
                     actionRequest,
                     actionFailed,

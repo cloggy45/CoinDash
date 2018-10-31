@@ -6,7 +6,10 @@ import {
     getError,
     getLoadingStatus,
 } from '../../reducers/coinHistory/coinHistorySelectors';
-import { getSelectedCryptoCoin } from '../../reducers/rootReducer';
+import {
+    getSelectedCryptoCoin,
+    getSelectedFiatCurrency,
+} from '../../reducers/rootReducer';
 import { fetchCoinHistory } from '../../actions/api';
 
 const mapStateToProps = store => {
@@ -14,13 +17,15 @@ const mapStateToProps = store => {
         coinHistory: getCoinHistory(store),
         error: getError(store),
         isLoading: getLoadingStatus(store),
-        selectedCoin: getSelectedCryptoCoin(store),
+        selectedCryptoTicker: getSelectedCryptoCoin(store),
+        selectedFiatTicker: getSelectedFiatCurrency(store),
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchCoinHistory: ticker => dispatch(fetchCoinHistory(ticker)),
+        fetchCoinHistory: (cryptoTicker, fiatTicker) =>
+            dispatch(fetchCoinHistory(cryptoTicker, fiatTicker)),
     };
 };
 

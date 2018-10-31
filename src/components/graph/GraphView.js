@@ -5,6 +5,7 @@ import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import { GraphHolder } from './GraphHolder';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 export const styles = {
     card: {
@@ -19,12 +20,21 @@ export const styles = {
 
 export class Graph extends Component {
     componentDidMount() {
-        this.props.fetchCoinHistory(this.props.selectedCoin);
+        const { selectedCryptoTicker, selectedFiatTicker } = this.props;
+        this.props.fetchCoinHistory(selectedCryptoTicker, selectedFiatTicker);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.selectedCoin !== this.props.selectedCoin) {
-            this.props.fetchCoinHistory(this.props.selectedCoin);
+        const { selectedCryptoTicker, selectedFiatTicker } = this.props;
+
+        if (
+            prevProps.selectedCryptoTicker !== selectedCryptoTicker ||
+            prevProps.selectedFiatTicker !== selectedFiatTicker
+        ) {
+            this.props.fetchCoinHistory(
+                selectedCryptoTicker,
+                selectedFiatTicker
+            );
         }
     }
 
@@ -60,6 +70,9 @@ export class Graph extends Component {
     };
 
     setupOptions = () => {
+        const selectedFiatCurrencySymbol = getSymbolFromCurrency(
+            this.props.selectedFiatTicker
+        );
         return {
             legend: {},
             scales: {
@@ -70,7 +83,7 @@ export class Graph extends Component {
                             callback: function(value) {
                                 if (parseInt(value, 10) >= 1000) {
                                     return (
-                                        '$' +
+                                        selectedFiatCurrencySymbol +
                                         value
                                             .toString()
                                             .replace(
@@ -79,7 +92,7 @@ export class Graph extends Component {
                                             )
                                     );
                                 } else {
-                                    return '$' + value;
+                                    return selectedFiatCurrencySymbol + value;
                                 }
                             },
                         },
@@ -141,7 +154,8 @@ Graph.propTypes = {
     filter: PropTypes.string,
     title: PropTypes.string,
     coinHistory: PropTypes.array,
-    selectedCoin: PropTypes.string,
+    selectedCryptoTicker: PropTypes.string,
+    selectedFiatTicker: PropTypes.string,
 };
 
 Graph.defaultProps = {
@@ -150,7 +164,8 @@ Graph.defaultProps = {
     filter: 'close',
     title: 'Closing Specific',
     coinHistory: [],
-    selectedCoin: 'DOGE',
+    selectedCryptoTicker: 'DOGE',
+    selectedFiatTicker: 'USD',
 };
 
 export default Graph;

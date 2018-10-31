@@ -70,7 +70,7 @@ export const fetchPaginatedCoinList = (
 };
 
 // Documentation  https://min-api.cryptocompare.com/
-export const fetchCoinHistory = ticker => dispatch => {
+export const fetchCoinHistory = (cryptoSymbol, fiatSymbol) => dispatch => {
     dispatch({
         type: FETCH_COIN_HISTORY_REQUEST,
         isFetching: true,
@@ -78,7 +78,7 @@ export const fetchCoinHistory = ticker => dispatch => {
 
     const request = axios({
         method: 'GET',
-        url: `${baseUrl}price/history/${ticker}/USD`,
+        url: `${baseUrl}price/history/${cryptoSymbol}/${fiatSymbol}`,
         header: [],
     });
 
