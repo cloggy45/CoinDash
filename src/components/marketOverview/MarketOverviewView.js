@@ -42,8 +42,8 @@ const Overview = props => (
 
 class MarketOverview extends Component {
     componentDidMount() {
-        const { selectedCoin, selectedFiatCurrency } = this.props;
-        this.props.fetchCoinOverview(selectedCoin, selectedFiatCurrency);
+        const { selectedCoin, selectedFiat } = this.props;
+        this.props.fetchCoinOverview(selectedCoin, selectedFiat);
     }
 
     renderPriceInformation(title, propertyOnResponseObject) {

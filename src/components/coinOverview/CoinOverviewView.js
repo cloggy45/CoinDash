@@ -76,7 +76,6 @@ class CoinOverview extends React.Component {
         let content;
 
         if (!isFetchingCoinPriceInfo && !coinPriceHasError) {
-            debugger;
             content =
                 coinPriceInfo['DISPLAY'][selectedCoin][selectedFiat][
                     propertyName

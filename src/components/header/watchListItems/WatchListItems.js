@@ -7,16 +7,19 @@ import { removeFromWatchList } from '../../../actions/firebase';
 import { getUserID } from '../../../reducers/auth/authSelectors';
 
 import WatchListItems from './WatchListItemsView';
+import { getSelectedFiatCurrency } from '../../../reducers/rootReducer';
 
 const mapStateToProps = store => ({
     userId: getUserID(store),
+    selectedFiat: getSelectedFiatCurrency(store),
 });
 
 const mapDispatchToProps = dispatch => ({
-    handlerLoadCoinDashboard: function(coinName, coinId) {
+    handlerLoadCoinDashboard: function(coinName, coinId, fiatSymbol) {
         dispatch(setSelectedCoin(coinName, coinId));
         dispatch(fetchCoinMetaInfo(coinId));
-        dispatch(fetchCoinPriceInfo(coinName));
+        debugger;
+        dispatch(fetchCoinPriceInfo(coinName, fiatSymbol));
     },
     setSelectedCoin: (coinName, coinId) =>
         dispatch(setSelectedCoin(coinName, coinId)),

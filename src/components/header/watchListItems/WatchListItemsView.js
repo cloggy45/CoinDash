@@ -14,6 +14,7 @@ const WatchListItems = props => {
         handlerLoadCoinDashboard,
         userId,
         handlerRemoveFromWatchList,
+        selectedFiat,
     } = props;
 
     if (isEmpty(items)) {
@@ -28,7 +29,11 @@ const WatchListItems = props => {
                 <MenuItem key={coinId} id={coinId}>
                     <ListItemText
                         onClick={() =>
-                            handlerLoadCoinDashboard(coinName, coinId)
+                            handlerLoadCoinDashboard(
+                                coinName,
+                                coinId,
+                                selectedFiat
+                            )
                         }
                     >
                         {coinName}
