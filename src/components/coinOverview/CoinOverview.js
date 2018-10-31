@@ -40,7 +40,7 @@ const mapStateToProps = store => ({
     isFetchingMetaInfo: getCoinMetaInfoFetchStatus(store),
     coinMetaInfo: getCoinMetaInfo(store),
     selectedCoin: getSelectedCryptoCoin(store),
-    selectedFiatCurrency: getSelectedFiatCurrency(store),
+    selectedFiat: getSelectedFiatCurrency(store),
     selectedCoinId: getSelectedCoinId(store),
     coinList: getCoinList(store),
     coinListFetchStatus: getCoinListFetchStatus(store),

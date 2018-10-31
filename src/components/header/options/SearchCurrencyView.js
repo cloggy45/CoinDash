@@ -20,7 +20,10 @@ export class SearchCurrency extends React.Component {
                 { coinSymbol: symbol, coinId: value, coinName: label },
                 () => {
                     this.props.setSelectedCoin(symbol, Number(value));
-                    this.props.fetchCoinPriceInfo(symbol);
+                    this.props.fetchCoinPriceInfo(
+                        symbol,
+                        this.props.selectedFiat
+                    );
                 }
             );
         }

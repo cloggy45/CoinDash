@@ -70,14 +70,15 @@ class CoinOverview extends React.Component {
             coinPriceErrorMessage,
             coinPriceHasError,
             selectedCoin,
-            selectedFiatCurrency,
+            selectedFiat,
         } = this.props;
 
         let content;
 
         if (!isFetchingCoinPriceInfo && !coinPriceHasError) {
+            debugger;
             content =
-                coinPriceInfo['DISPLAY'][selectedCoin][selectedFiatCurrency][
+                coinPriceInfo['DISPLAY'][selectedCoin][selectedFiat][
                     propertyName
                 ];
         } else {

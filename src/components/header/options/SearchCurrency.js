@@ -12,9 +12,11 @@ import { fetchCoinPriceInfo } from '../../../actions/coinPriceInfo';
 import { withStyles } from '@material-ui/core/styles';
 
 import SearchCurrency, { styles } from './SearchCurrencyView.js';
+import { getSelectedFiatCurrency } from '../../../reducers/rootReducer';
 
 const mapStateToProps = state => ({
     coinList: getCoinList(state),
+    selectedFiat: getSelectedFiatCurrency(state),
     coinListFetchStatus: getCoinListFetchStatus(state),
 });
 
@@ -23,7 +25,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(setSelectedCoin(symbol, id));
     },
 
-    fetchCoinPriceInfo: tickers => dispatch(fetchCoinPriceInfo(tickers)),
+    fetchCoinPriceInfo: (cryptoSymbol, fiatSymbol) =>
+        dispatch(fetchCoinPriceInfo(cryptoSymbol, fiatSymbol)),
 });
 
 export default connect(
