@@ -67,7 +67,6 @@ class CoinOverview extends React.Component {
         const {
             coinPriceInfo,
             isFetchingCoinPriceInfo,
-            coinPriceErrorMessage,
             coinPriceHasError,
             selectedCoin,
             selectedFiat,
@@ -81,7 +80,7 @@ class CoinOverview extends React.Component {
                     propertyName
                 ];
         } else {
-            content = coinPriceErrorMessage;
+            content = "Loading...";
         }
 
         return content;

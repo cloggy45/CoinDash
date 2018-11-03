@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Hidden from '@material-ui/core/Hidden';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const styles = {
     root: {
@@ -51,7 +52,6 @@ class MarketOverview extends Component {
             coinPriceInfo,
             isFetchingCoinPriceInfo,
             coinPriceHasError,
-            coinPriceErrorMessage,
             selectedCoin,
             selectedFiat,
         } = this.props;
@@ -64,7 +64,7 @@ class MarketOverview extends Component {
                     propertyOnResponseObject
                 ];
         } else {
-            data = coinPriceErrorMessage;
+            data = <CircularProgress/>
         }
 
         return <Overview {...this.props} title={title} data={data} />;
