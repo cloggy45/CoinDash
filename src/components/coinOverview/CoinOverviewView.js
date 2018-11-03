@@ -228,7 +228,7 @@ class CoinOverview extends React.Component {
                     alignItems={'center'}
                 >
                     <Grid item>
-                        {this.renderSpecificInformation(overview.name)}
+                        {this.renderSpecificInformation(this.props.selectedCoin)}
                     </Grid>
                     <Hidden xsDown>
                         <Grid item>{this.renderActions(overview)}</Grid>
