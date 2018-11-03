@@ -20,11 +20,11 @@ export const topTen = (currentState = initState, action) => {
         case 'FETCH_TOP_TEN_FAILED':
             return Object.assign({}, currentState, {
                 errorMessage: action.payload,
-                isFetching: action.isFetching,
+                isFetching: false
             });
         case 'FETCH_TOP_TEN_REQUEST':
             return Object.assign({}, currentState, {
-                isFetching: action.payload,
+                isFetching: true
             });
         default:
             return currentState;

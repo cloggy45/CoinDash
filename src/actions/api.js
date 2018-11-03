@@ -42,14 +42,17 @@ export const fetchPaginatedCoinList = (
     sort = 'rank',
     convert = 'USD'
 ) => dispatch => {
+
+    const url = `https://api.coinmarketcap.com/v2/ticker/?start=${start}&limit=${limit}&sort=${sort}&convert=${convert}`;
+
     dispatch({
         type: FETCH_TOP_TEN_REQUEST,
         isFetching: true,
     });
 
     const request = axios({
+        url: url,
         method: 'GET',
-        url: `https://api.coinmarketcap.com/v2/ticker/?start=${start}&limit=${limit}&sort=${sort}&convert=${convert}`,
         header: [],
     });
 

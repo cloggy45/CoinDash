@@ -2,9 +2,15 @@
 
 exports[`SearchCurrency Component Should render loading if there are no options 1`] = `
 <div
-  className="Select undefined undefined is-searchable Select--single"
+  className="Select undefined undefined has-value is-searchable Select--single"
   style={undefined}
 >
+  <input
+    disabled={false}
+    name="Search Currency"
+    type="hidden"
+    value=""
+  />
   <div
     className="Select-control"
     onKeyDown={[Function]}
@@ -19,9 +25,16 @@ exports[`SearchCurrency Component Should render loading if there are no options 
       id="react-select-3--value"
     >
       <div
-        className="Select-placeholder"
+        className="Select-value"
+        style={undefined}
+        title={undefined}
       >
-        Search Currency
+        <span
+          aria-selected="true"
+          className="Select-value-label"
+          id="react-select-3--value-item"
+          role="option"
+        />
       </div>
       <div
         className="Select-input"

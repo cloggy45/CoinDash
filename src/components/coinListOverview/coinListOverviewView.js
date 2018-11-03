@@ -16,6 +16,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 
 const actionsStyles = theme => ({
     root: {
@@ -43,8 +44,8 @@ class TablePaginationActions extends React.Component {
             event,
             Math.max(
                 0,
-                Math.ceil(this.props.count / this.props.rowsPerPage) - 1
-            )
+                Math.ceil(this.props.count / this.props.rowsPerPage) - 1,
+            ),
         );
     };
 
@@ -59,9 +60,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="First Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <LastPageIcon />
+                        <LastPageIcon/>
                     ) : (
-                        <FirstPageIcon />
+                        <FirstPageIcon/>
                     )}
                 </IconButton>
                 <IconButton
@@ -70,9 +71,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="Previous Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <KeyboardArrowRight />
+                        <KeyboardArrowRight/>
                     ) : (
-                        <KeyboardArrowLeft />
+                        <KeyboardArrowLeft/>
                     )}
                 </IconButton>
                 <IconButton
@@ -81,9 +82,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="Next Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <KeyboardArrowLeft />
+                        <KeyboardArrowLeft/>
                     ) : (
-                        <KeyboardArrowRight />
+                        <KeyboardArrowRight/>
                     )}
                 </IconButton>
                 <IconButton
@@ -92,9 +93,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="Last Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <FirstPageIcon />
+                        <FirstPageIcon/>
                     ) : (
-                        <LastPageIcon />
+                        <LastPageIcon/>
                     )}
                 </IconButton>
             </div>
@@ -144,29 +145,30 @@ class CustomPaginationActionsTable extends React.Component {
         return page * rowsPerPage;
     }
 
+
     handleChangePage = (event, page) => {
         this.setState({ page }, () => {
             const offset = this.getCurrentOffset();
-            this.props.fetchCoinList(offset, this.state.rowsPerPage);
+            this.props.fetchCoinList(offset, this.state.rowsPerPage, "rank", this.props.selectedFiat);
         });
     };
 
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value }, () => {
-            const {rowsPerPage } = this.state;
+            const { selectedFiat } = this.props;
+            const { rowsPerPage } = this.state;
             const offset = this.getCurrentOffset();
-            this.props.fetchCoinList(offset, rowsPerPage);
+            this.props.fetchCoinList(offset, rowsPerPage, "rank", selectedFiat);
         });
     };
 
     render() {
-        const { classes, coinListSegment } = this.props;
+        const { classes, coinListSegment, selectedFiat, isFetching } = this.props;
         const { rowsPerPage, page } = this.state;
         const totalAmountOfRows = 2000;
         const emptyRows =
             rowsPerPage -
             Math.min(rowsPerPage, totalAmountOfRows - page * rowsPerPage);
-
         return (
             <Paper className={classes.root}>
                 <Toolbar>
@@ -181,17 +183,31 @@ class CustomPaginationActionsTable extends React.Component {
                                 <TableCell>Rank</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell numeric>
+                                    Price
+                                </TableCell>
+                                <TableCell numeric>
+                                    Market Cap
+                                </TableCell>
+                                <TableCell numeric>
                                     Circulating Supply
                                 </TableCell>
                                 <TableCell numeric>Total Supply</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {coinListSegment.map(row => {
+                            { isFetching === true ? <CircularProgress /> : coinListSegment.map(row => {
+                                const { quotes } = row;
+                                const { price, market_cap } = quotes[selectedFiat];
                                 return (
                                     <TableRow key={row.id}>
                                         <TableCell>{row.rank}</TableCell>
                                         <TableCell>{row.name}</TableCell>
+                                        <TableCell numeric>
+                                            {price}
+                                        </TableCell>
+                                        <TableCell numeric>
+                                            {market_cap}
+                                        </TableCell>
                                         <TableCell numeric>
                                             {row.circulating_supply}
                                         </TableCell>
@@ -203,7 +219,7 @@ class CustomPaginationActionsTable extends React.Component {
                             })}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 48 * emptyRows }}>
-                                    <TableCell colSpan={6} />
+                                    <TableCell colSpan={6}/>
                                 </TableRow>
                             )}
                         </TableBody>

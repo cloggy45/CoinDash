@@ -66,6 +66,7 @@ class SelectCurrency extends React.Component {
 
         this.props.setSelectedCurrency(newSelectedFiatCurrency);
         this.props.fetchCoinPriceInfo(selectedCrypto, newSelectedFiatCurrency);
+        this.props.fetchCoinList(newSelectedFiatCurrency);
     };
 
     render() {

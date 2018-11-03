@@ -8,9 +8,11 @@ import {
     isFetchingCoinListSegment,
     getErrorMessage,
 } from '../../reducers/topTen/topTenSelectors';
+import { getSelectedFiatCurrency } from '../../reducers/rootReducer';
 
 function mapStateToProps(store) {
     return {
+        selectedFiat: getSelectedFiatCurrency(store),
         coinListSegment: getCoinList(store),
         isFetching: isFetchingCoinListSegment(store),
         errorMessage: getErrorMessage(store),
@@ -18,8 +20,8 @@ function mapStateToProps(store) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchCoinList: (start, limit) =>
-        dispatch(fetchPaginatedCoinList(start, limit)),
+    fetchCoinList: (start, limit, sort, fiat) =>
+        dispatch(fetchPaginatedCoinList(start, limit, sort, fiat)),
 });
 
 export default connect(
