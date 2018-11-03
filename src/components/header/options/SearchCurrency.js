@@ -12,10 +12,11 @@ import { fetchCoinPriceInfo } from '../../../actions/coinPriceInfo';
 import { withStyles } from '@material-ui/core/styles';
 
 import SearchCurrency, { styles } from './SearchCurrencyView.js';
-import { getSelectedFiatCurrency } from '../../../reducers/rootReducer';
+import { getSelectedCryptoCoin, getSelectedFiatCurrency } from '../../../reducers/rootReducer';
 
 const mapStateToProps = state => ({
     coinList: getCoinList(state),
+    selectedCrypto: getSelectedCryptoCoin(state),
     selectedFiat: getSelectedFiatCurrency(state),
     coinListFetchStatus: getCoinListFetchStatus(state),
 });

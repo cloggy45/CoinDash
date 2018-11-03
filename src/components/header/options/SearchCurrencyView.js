@@ -46,7 +46,7 @@ export class SearchCurrency extends React.Component {
     };
 
     render() {
-        const { coinList, classes } = this.props;
+        const { coinList, classes, selectedCrypto } = this.props;
 
         if (coinList === null) {
             return <p>Loading....</p>;
@@ -55,6 +55,7 @@ export class SearchCurrency extends React.Component {
                 <Select
                     className={`${classes.flex} ${classes.input}`}
                     name="Search Currency"
+                    value={{value: selectedCrypto, label: selectedCrypto}}
                     placeholder={'Search Currency'}
                     onChange={this.handleChange}
                     options={this.formatOptions(coinList)}
