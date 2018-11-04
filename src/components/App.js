@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import Header from './header/Header';
 import Hidden from '@material-ui/core/Hidden';
 
-import Options from './header/options/SearchCurrency';
+import Options from './header/Selects/SearchCurrency';
 import MarketOverview from './marketOverview/MarketOverview';
 import TopTenOverview from './coinListOverview/coinListOverview';
 import CoinOverview from './coinOverview/CoinOverview';

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { SearchCurrency, styles } from '../options/SearchCurrencyView';
+import { SearchCurrency, styles } from '../Selects/SearchCurrencyView';
 import renderer from 'react-test-renderer';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -27,7 +27,7 @@ describe('SearchCurrency Component', () => {
         );
     });
 
-    it('Should render loading if there are no options', () => {
+    it('Should render loading if there are no Selects', () => {
         const tree = renderer
             .create(
                 <SearchCurrency options={null} setSelectedCoin={setOptions} />

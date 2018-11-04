@@ -8,12 +8,13 @@ import Menu from '@material-ui/core/Menu';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
 
-import Options from './options/SearchCurrency';
+import Options from './Selects/SearchCurrency';
 
-import WatchListItems from './watchListItems/WatchListItems';
+import WatchListItems from './WatchListMenu/WatchListMenu';
 import ListIcon from '@material-ui/icons/List';
 
 import Hidden from '@material-ui/core/Hidden';
+import MainMenu from './MainMenu/MainMenu';
 
 export const styles = {
     root: {
@@ -49,14 +50,6 @@ export class Header extends Component {
         this.props.logon();
     };
 
-    handleLogoutClick = () => {
-        this.props.logout();
-    };
-
-    handleMenuItemClick = event => {
-        this.props.removeFromWatchList(event, this.props.userId);
-    };
-
     renderLoggedOutMenu = () => (
         <Button onClick={this.handleLoginClick} color="inherit" name="Login">
             Login
@@ -76,18 +69,7 @@ export class Header extends Component {
                 >
                     <ListIcon />
                 </Button>
-                <Avatar
-                    alt="Users Icon"
-                    src={userProfile.profile.picture}
-                    className={classes.avatar}
-                />
-                <Button
-                    color="inherit"
-                    onClick={this.handleLogoutClick}
-                    name="logout"
-                >
-                    Log Out
-                </Button>
+                <MainMenu />
             </React.Fragment>
         );
     };

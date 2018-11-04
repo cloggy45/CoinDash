@@ -8,7 +8,7 @@ import { signIn, signOut, fetchUser } from '../../actions/auth';
 
 import {
     getAuthStatus,
-    getLoadingStatus,
+    getAuthLoadingStatus,
     getUserProfile,
     getUserID,
 } from '../../reducers/auth/authSelectors';
@@ -25,18 +25,13 @@ const mapStateToProps = store => {
         userId: getUserID(store),
         userProfile: getUserProfile(store),
         isAuthorisedUser: getAuthStatus(store),
-        isLoading: getLoadingStatus(store),
-        userWatchList: getWatchList(store),
-        watchListFetchStatus: getWatchListFetchStatus(store),
-        watchListErrorMessage: getWatchListErrorMessage(store),
+        isLoading: getAuthLoadingStatus(store),
     };
 };
 
 const mapDispatchToProps = dispatch => ({
     logon: () => dispatch(signIn()),
-    logout: () => dispatch(signOut()),
-    fetchUser: () => dispatch(fetchUser()),
-    fetchWatchList: uid => dispatch(fetchWatchList(uid)),
+    fetchUser: () => dispatch(fetchUser())
 });
 
 export default withRouter(

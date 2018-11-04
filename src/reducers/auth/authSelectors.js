@@ -10,7 +10,7 @@ export function getUserProfile(store) {
     return fromAuth.user(store[AUTH]);
 }
 
-export function getLoadingStatus(store) {
+export function getAuthLoadingStatus(store) {
     return fromAuth.loadingStatus(store[AUTH]);
 }
 export function getAuthStatus(store) {

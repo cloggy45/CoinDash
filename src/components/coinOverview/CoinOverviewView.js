@@ -15,7 +15,7 @@ import has from 'lodash.has';
 
 import Hero from './Hero';
 import Specific from './Specific';
-import SelectCurrency from '../header/options/SelectFiatCurrency';
+import SelectCurrency from '../header/Selects/SelectFiatCurrency';
 
 export const styles = {
     card: {

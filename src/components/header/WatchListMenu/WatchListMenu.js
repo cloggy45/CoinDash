@@ -3,24 +3,32 @@ import { connect } from 'react-redux';
 import { fetchCoinPriceInfo } from '../../../actions/coinPriceInfo';
 import { fetchCoinMetaInfo } from '../../../actions/coinMetaInfo';
 import { setSelectedCoin } from '../../../actions/selected';
-import { removeFromWatchList } from '../../../actions/firebase';
+import { fetchWatchList, removeFromWatchList } from '../../../actions/firebase';
 import { getUserID } from '../../../reducers/auth/authSelectors';
 
-import WatchListItems from './WatchListItemsView';
+import WatchListItems from './WatchListMenuView';
 import { getSelectedFiatCurrency } from '../../../reducers/rootReducer';
+import {
+    getWatchList,
+    getWatchListErrorMessage,
+    getWatchListFetchStatus,
+} from '../../../reducers/watchlist/watchlistSelectors';
 
 const mapStateToProps = store => ({
     userId: getUserID(store),
     selectedFiat: getSelectedFiatCurrency(store),
+    userWatchList: getWatchList(store),
+    watchListFetchStatus: getWatchListFetchStatus(store),
+    watchListErrorMessage: getWatchListErrorMessage(store),
 });
 
 const mapDispatchToProps = dispatch => ({
-    handlerLoadCoinDashboard: function(coinName, coinId, fiatSymbol) {
+    handlerLoadCoinDashboard: (coinName, coinId, fiatSymbol) => {
         dispatch(setSelectedCoin(coinName, coinId));
         dispatch(fetchCoinMetaInfo(coinId));
-        debugger;
         dispatch(fetchCoinPriceInfo(coinName, fiatSymbol));
     },
+    fetchWatchList: uid => dispatch(fetchWatchList(uid)),
     setSelectedCoin: (coinName, coinId) =>
         dispatch(setSelectedCoin(coinName, coinId)),
     handlerRemoveFromWatchList: (coinName, uid) =>
