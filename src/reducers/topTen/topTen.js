@@ -13,7 +13,7 @@ export const topTen = (currentState = initState, action) => {
                         return datum[1];
                     })
                     .sort((a, b) => {
-                        return a.rank > b.rank;
+                        return a.rank - b.rank;
                     }),
                 isFetching: action.isFetching,
             });

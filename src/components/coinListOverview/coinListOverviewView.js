@@ -16,7 +16,11 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
+import getSymbolFromCurrency from 'currency-symbol-map';
+import format from 'number-format.js';
+import { getSelectedFiatCurrency } from '../../reducers/rootReducer';
+import { formatterFactory } from '../../misc/helpers';
 
 const actionsStyles = theme => ({
     root: {
@@ -162,13 +166,26 @@ class CustomPaginationActionsTable extends React.Component {
         });
     };
 
+    getFiatSymbol (fiatName) {
+        return getSymbolFromCurrency(fiatName);
+    }
+
+    isNegativePercent = percent => {
+        return Math.sign(percent) === -1;
+    };
+
     render() {
-        const { classes, coinListSegment, selectedFiat, isFetching } = this.props;
+        const { classes, coinListSegment, selectedFiat, isFetching, selectedCrypto } = this.props;
         const { rowsPerPage, page } = this.state;
+
         const totalAmountOfRows = 2000;
         const emptyRows =
             rowsPerPage -
             Math.min(rowsPerPage, totalAmountOfRows - page * rowsPerPage);
+
+        const fiatSym = this.getFiatSymbol(selectedFiat);
+        const formatter = formatterFactory('currency', selectedFiat);
+
         return (
             <Paper className={classes.root}>
                 <Toolbar>
@@ -183,37 +200,45 @@ class CustomPaginationActionsTable extends React.Component {
                                 <TableCell>Rank</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell numeric>
-                                    Price
+                                    {`Price (${fiatSym})`}
                                 </TableCell>
                                 <TableCell numeric>
-                                    Market Cap
+                                    {`Market Cap (${fiatSym})`}
                                 </TableCell>
-                                <TableCell numeric>
-                                    Circulating Supply
-                                </TableCell>
-                                <TableCell numeric>Total Supply</TableCell>
+
+                                <TableCell numeric>{`Total Supply`}</TableCell>
+                                <TableCell numeric>{'Percentage Change (24 hours)'}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             { isFetching === true ? <CircularProgress /> : coinListSegment.map(row => {
                                 const { quotes } = row;
-                                const { price, market_cap } = quotes[selectedFiat];
+                                const { price, market_cap, percent_change_24h } = quotes[selectedFiat];
+
                                 return (
                                     <TableRow key={row.id}>
                                         <TableCell>{row.rank}</TableCell>
                                         <TableCell>{row.name}</TableCell>
                                         <TableCell numeric>
-                                            {price}
+                                            {format(`${fiatSym} #,##0.####`, price)}
                                         </TableCell>
                                         <TableCell numeric>
-                                            {market_cap}
+                                            {formatter.format(market_cap)}
                                         </TableCell>
                                         <TableCell numeric>
-                                            {row.circulating_supply}
+                                            {format("#,##0.####",row.total_supply)}
                                         </TableCell>
-                                        <TableCell numeric>
-                                            {row.total_supply}
-                                        </TableCell>
+                                        {
+                                            this.isNegativePercent(percent_change_24h) ? (
+                                                <TableCell style={{color: 'red'}} numeric>
+                                                    {percent_change_24h}%
+                                                </TableCell>
+                                            ) : (
+                                                <TableCell style={{color: 'green'}} numeric>
+                                                    {percent_change_24h}%
+                                                </TableCell>
+                                            )
+                                        }
                                     </TableRow>
                                 );
                             })}
