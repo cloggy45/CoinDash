@@ -7,12 +7,11 @@ export default function configureStore(preloadedState) {
     const middleware = [thunkMiddleware];
     let composeEnhancers;
     let enhancer;
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.BUILD_ENV === 'development') {
         console.log('Development Mode Engaged');
         composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
             ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
             : compose;
-
         middleware.push(logger);
         enhancer = composeEnhancers(applyMiddleware(...middleware));
     } else {
