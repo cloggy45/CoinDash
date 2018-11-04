@@ -5,6 +5,7 @@
   "keywords": [],
   "repository": "https://github.com/cloggy45/CoinDash",
   "main": "src/index.js",
+  "private": true,
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -49,6 +50,7 @@
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --env=jsdom --coverage",
     "cypress:open": "npx cypress open",
+    "heroku-postbuild": "npm run build",
     "pretty": "prettier --single-quote --trailing-comma es5 --write src/**"
   },
   "devDependencies": {
