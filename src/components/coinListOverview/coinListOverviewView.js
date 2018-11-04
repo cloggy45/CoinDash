@@ -18,8 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import getSymbolFromCurrency from 'currency-symbol-map';
-import format from 'number-format.js';
-import { formatterFactory } from '../../misc/helpers';
+import NumberFormat from 'react-number-format';
 
 const actionsStyles = theme => ({
     root: {
@@ -177,6 +176,17 @@ class CustomPaginationActionsTable extends React.Component {
         return Math.sign(percent) === -1;
     };
 
+    renderNumber = (value, prefix = '', suffix = '') => (
+        <NumberFormat
+            displayType={'text'}
+            decimalScale={2}
+            thousandSeparator={true}
+            prefix={prefix}
+            suffix={suffix}
+            value={value}
+        />
+    );
+
     render() {
         const {
             classes,
@@ -192,7 +202,6 @@ class CustomPaginationActionsTable extends React.Component {
             Math.min(rowsPerPage, totalAmountOfRows - page * rowsPerPage);
 
         const fiatSym = this.getFiatSymbol(selectedFiat);
-        const formatter = formatterFactory('currency', selectedFiat);
 
         return (
             <Paper className={classes.root}>
@@ -237,18 +246,22 @@ class CustomPaginationActionsTable extends React.Component {
                                             <TableCell>{row.rank}</TableCell>
                                             <TableCell>{row.name}</TableCell>
                                             <TableCell numeric>
-                                                {format(
-                                                    `${fiatSym} #,##0.####`,
-                                                    price
+                                                {this.renderNumber(
+                                                    price,
+                                                    fiatSym
                                                 )}
                                             </TableCell>
                                             <TableCell numeric>
-                                                {formatter.format(market_cap)}
+                                                {this.renderNumber(
+                                                    market_cap,
+                                                    fiatSym
+                                                )}
                                             </TableCell>
                                             <TableCell numeric>
-                                                {format(
-                                                    '#,##0.####',
-                                                    row.total_supply
+                                                {this.renderNumber(
+                                                    row.total_supply,
+                                                    '',
+                                                    ` ${row.symbol}`
                                                 )}
                                             </TableCell>
                                             {this.isNegativePercent(
