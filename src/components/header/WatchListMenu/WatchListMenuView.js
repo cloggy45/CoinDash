@@ -6,8 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
+import ListIcon from '@material-ui/icons/List';
 
 class WatchListMenu extends React.Component {
     state = {
@@ -15,7 +16,7 @@ class WatchListMenu extends React.Component {
     };
 
     componentDidMount() {
-        this.props.fetchWatchList(this.props.userId);
+        this.props.fetchUserWatchList(this.props.userId);
     }
 
     handleClick = event => {
@@ -37,11 +38,12 @@ class WatchListMenu extends React.Component {
         } = this.props;
         let menuItems;
 
-
         if (isEmpty(userWatchList)) {
-            menuItems = <MenuItem onClick={() => {}}>
-                <ListItemText>Nothing added</ListItemText>
-                    </MenuItem>;
+            menuItems = (
+                <MenuItem onClick={() => {}}>
+                    <ListItemText>Nothing added</ListItemText>
+                </MenuItem>
+            );
         } else {
             menuItems = map(userWatchList, (coinId, coinName) => {
                 return (
@@ -51,7 +53,7 @@ class WatchListMenu extends React.Component {
                                 handlerLoadCoinDashboard(
                                     coinName,
                                     coinId,
-                                    selectedFiat,
+                                    selectedFiat
                                 )
                             }
                         >
@@ -62,15 +64,23 @@ class WatchListMenu extends React.Component {
                                 handlerRemoveFromWatchList(coinName, userId)
                             }
                         >
-                            <RemoveCircle/>
+                            <RemoveCircle />
                         </ListItemIcon>
                     </MenuItem>
                 );
             });
-        };
+        }
 
         return (
-            <React.Fragment>
+            <div>
+                <IconButton
+                    aria-owns={anchorEl ? 'simple-menu' : null}
+                    aria-haspopup="true"
+                    onClick={this.handleClick}
+                    color={'inherit'}
+                >
+                    <ListIcon />
+                </IconButton>
                 <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
@@ -79,7 +89,7 @@ class WatchListMenu extends React.Component {
                 >
                     {menuItems}
                 </Menu>
-            </React.Fragment>
+            </div>
         );
     }
 }

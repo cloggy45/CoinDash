@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Header, { styles } from './HeaderView';
 
-import { signIn, signOut, fetchUser } from '../../actions/auth';
+import { signIn, fetchUser } from '../../actions/auth';
 
 import {
     getAuthStatus,
@@ -12,13 +12,6 @@ import {
     getUserProfile,
     getUserID,
 } from '../../reducers/auth/authSelectors';
-import {
-    getWatchList,
-    getWatchListErrorMessage,
-    getWatchListFetchStatus,
-} from '../../reducers/watchlist/watchlistSelectors';
-
-import { fetchWatchList } from '../../actions/firebase';
 
 const mapStateToProps = store => {
     return {
@@ -31,7 +24,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => ({
     logon: () => dispatch(signIn()),
-    fetchUser: () => dispatch(fetchUser())
+    fetchUser: () => dispatch(fetchUser()),
 });
 
 export default withRouter(

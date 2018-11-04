@@ -3,18 +3,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import Menu from '@material-ui/core/Menu';
 import PropTypes from 'prop-types';
-import isEmpty from 'lodash.isempty';
 
 import Options from './Selects/SearchCurrency';
 
-import WatchListItems from './WatchListMenu/WatchListMenu';
-import ListIcon from '@material-ui/icons/List';
-
 import Hidden from '@material-ui/core/Hidden';
 import MainMenu from './MainMenu/MainMenu';
+import WatchListMenu from './WatchListMenu/WatchListMenu';
 
 export const styles = {
     root: {
@@ -37,15 +32,6 @@ export class Header extends Component {
         anchorEl: null,
     };
 
-    handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
-        this.props.fetchWatchList(this.props.userId);
-    };
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
-
     handleLoginClick = async () => {
         this.props.logon();
     };
@@ -58,18 +44,13 @@ export class Header extends Component {
 
     renderLoggedInMenu = () => {
         const { userProfile, classes } = this.props;
-        const { anchorEl } = this.state;
         return (
             <React.Fragment>
-                <Button
-                    aria-owns={anchorEl ? 'simple-menu' : null}
-                    aria-haspopup="true"
-                    onClick={this.handleClick}
-                    color="inherit"
-                >
-                    <ListIcon />
-                </Button>
-                <MainMenu />
+                <WatchListMenu />
+                <MainMenu
+                    avatar={userProfile.profile.picture}
+                    classes={classes.avatar}
+                />
             </React.Fragment>
         );
     };
@@ -86,22 +67,6 @@ export class Header extends Component {
             </Typography>
         );
     }
-    renderWatchList() {
-        const { userWatchList } = this.props;
-        const { anchorEl } = this.state;
-        return (
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={this.handleClose}
-            >
-                <WatchListItems
-                    items={isEmpty(userWatchList) ? {} : userWatchList}
-                />
-            </Menu>
-        );
-    }
 
     render() {
         const { classes, isAuthorisedUser } = this.props;
@@ -116,7 +81,6 @@ export class Header extends Component {
                         {isAuthorisedUser === true
                             ? this.renderLoggedInMenu()
                             : this.renderLoggedOutMenu()}
-                        {this.renderWatchList()}
                     </Toolbar>
                 </AppBar>
             </div>

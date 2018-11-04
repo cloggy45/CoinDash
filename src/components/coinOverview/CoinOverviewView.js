@@ -80,7 +80,7 @@ class CoinOverview extends React.Component {
                     propertyName
                 ];
         } else {
-            content = "Loading...";
+            content = 'Loading...';
         }
 
         return content;
@@ -228,7 +228,9 @@ class CoinOverview extends React.Component {
                     alignItems={'center'}
                 >
                     <Grid item>
-                        {this.renderSpecificInformation(this.props.selectedCoin)}
+                        {this.renderSpecificInformation(
+                            this.props.selectedCoin
+                        )}
                     </Grid>
                     <Hidden xsDown>
                         <Grid item>{this.renderActions(overview)}</Grid>

@@ -16,10 +16,9 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import format from 'number-format.js';
-import { getSelectedFiatCurrency } from '../../reducers/rootReducer';
 import { formatterFactory } from '../../misc/helpers';
 
 const actionsStyles = theme => ({
@@ -48,8 +47,8 @@ class TablePaginationActions extends React.Component {
             event,
             Math.max(
                 0,
-                Math.ceil(this.props.count / this.props.rowsPerPage) - 1,
-            ),
+                Math.ceil(this.props.count / this.props.rowsPerPage) - 1
+            )
         );
     };
 
@@ -64,9 +63,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="First Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <LastPageIcon/>
+                        <LastPageIcon />
                     ) : (
-                        <FirstPageIcon/>
+                        <FirstPageIcon />
                     )}
                 </IconButton>
                 <IconButton
@@ -75,9 +74,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="Previous Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <KeyboardArrowRight/>
+                        <KeyboardArrowRight />
                     ) : (
-                        <KeyboardArrowLeft/>
+                        <KeyboardArrowLeft />
                     )}
                 </IconButton>
                 <IconButton
@@ -86,9 +85,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="Next Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <KeyboardArrowLeft/>
+                        <KeyboardArrowLeft />
                     ) : (
-                        <KeyboardArrowRight/>
+                        <KeyboardArrowRight />
                     )}
                 </IconButton>
                 <IconButton
@@ -97,9 +96,9 @@ class TablePaginationActions extends React.Component {
                     aria-label="Last Page"
                 >
                     {theme.direction === 'rtl' ? (
-                        <FirstPageIcon/>
+                        <FirstPageIcon />
                     ) : (
-                        <LastPageIcon/>
+                        <LastPageIcon />
                     )}
                 </IconButton>
             </div>
@@ -149,11 +148,15 @@ class CustomPaginationActionsTable extends React.Component {
         return page * rowsPerPage;
     }
 
-
     handleChangePage = (event, page) => {
         this.setState({ page }, () => {
             const offset = this.getCurrentOffset();
-            this.props.fetchCoinList(offset, this.state.rowsPerPage, "rank", this.props.selectedFiat);
+            this.props.fetchCoinList(
+                offset,
+                this.state.rowsPerPage,
+                'rank',
+                this.props.selectedFiat
+            );
         });
     };
 
@@ -162,11 +165,11 @@ class CustomPaginationActionsTable extends React.Component {
             const { selectedFiat } = this.props;
             const { rowsPerPage } = this.state;
             const offset = this.getCurrentOffset();
-            this.props.fetchCoinList(offset, rowsPerPage, "rank", selectedFiat);
+            this.props.fetchCoinList(offset, rowsPerPage, 'rank', selectedFiat);
         });
     };
 
-    getFiatSymbol (fiatName) {
+    getFiatSymbol(fiatName) {
         return getSymbolFromCurrency(fiatName);
     }
 
@@ -175,7 +178,12 @@ class CustomPaginationActionsTable extends React.Component {
     };
 
     render() {
-        const { classes, coinListSegment, selectedFiat, isFetching, selectedCrypto } = this.props;
+        const {
+            classes,
+            coinListSegment,
+            selectedFiat,
+            isFetching,
+        } = this.props;
         const { rowsPerPage, page } = this.state;
 
         const totalAmountOfRows = 2000;
@@ -207,44 +215,66 @@ class CustomPaginationActionsTable extends React.Component {
                                 </TableCell>
 
                                 <TableCell numeric>{`Total Supply`}</TableCell>
-                                <TableCell numeric>{'Percentage Change (24 hours)'}</TableCell>
+                                <TableCell numeric>
+                                    {'Percentage Change (24 hours)'}
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            { isFetching === true ? <CircularProgress /> : coinListSegment.map(row => {
-                                const { quotes } = row;
-                                const { price, market_cap, percent_change_24h } = quotes[selectedFiat];
+                            {isFetching === true ? (
+                                <CircularProgress />
+                            ) : (
+                                coinListSegment.map(row => {
+                                    const { quotes } = row;
+                                    const {
+                                        price,
+                                        market_cap,
+                                        percent_change_24h,
+                                    } = quotes[selectedFiat];
 
-                                return (
-                                    <TableRow key={row.id}>
-                                        <TableCell>{row.rank}</TableCell>
-                                        <TableCell>{row.name}</TableCell>
-                                        <TableCell numeric>
-                                            {format(`${fiatSym} #,##0.####`, price)}
-                                        </TableCell>
-                                        <TableCell numeric>
-                                            {formatter.format(market_cap)}
-                                        </TableCell>
-                                        <TableCell numeric>
-                                            {format("#,##0.####",row.total_supply)}
-                                        </TableCell>
-                                        {
-                                            this.isNegativePercent(percent_change_24h) ? (
-                                                <TableCell style={{color: 'red'}} numeric>
+                                    return (
+                                        <TableRow key={row.id}>
+                                            <TableCell>{row.rank}</TableCell>
+                                            <TableCell>{row.name}</TableCell>
+                                            <TableCell numeric>
+                                                {format(
+                                                    `${fiatSym} #,##0.####`,
+                                                    price
+                                                )}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {formatter.format(market_cap)}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {format(
+                                                    '#,##0.####',
+                                                    row.total_supply
+                                                )}
+                                            </TableCell>
+                                            {this.isNegativePercent(
+                                                percent_change_24h
+                                            ) ? (
+                                                <TableCell
+                                                    style={{ color: 'red' }}
+                                                    numeric
+                                                >
                                                     {percent_change_24h}%
                                                 </TableCell>
                                             ) : (
-                                                <TableCell style={{color: 'green'}} numeric>
+                                                <TableCell
+                                                    style={{ color: 'green' }}
+                                                    numeric
+                                                >
                                                     {percent_change_24h}%
                                                 </TableCell>
-                                            )
-                                        }
-                                    </TableRow>
-                                );
-                            })}
+                                            )}
+                                        </TableRow>
+                                    );
+                                })
+                            )}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 48 * emptyRows }}>
-                                    <TableCell colSpan={6}/>
+                                    <TableCell colSpan={6} />
                                 </TableRow>
                             )}
                         </TableBody>

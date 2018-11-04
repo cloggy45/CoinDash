@@ -8,7 +8,10 @@ import {
     isFetchingCoinListSegment,
     getErrorMessage,
 } from '../../reducers/topTen/topTenSelectors';
-import { getSelectedCryptoCoin, getSelectedFiatCurrency } from '../../reducers/rootReducer';
+import {
+    getSelectedCryptoCoin,
+    getSelectedFiatCurrency,
+} from '../../reducers/rootReducer';
 
 function mapStateToProps(store) {
     return {

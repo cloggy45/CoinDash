@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Avatar from '@material-ui/core/Avatar';
 
 class MainMenu extends React.Component {
     state = {
@@ -18,7 +19,7 @@ class MainMenu extends React.Component {
 
     render() {
         const { anchorEl } = this.state;
-
+        debugger;
         return (
             <div>
                 <Button
@@ -26,7 +27,11 @@ class MainMenu extends React.Component {
                     aria-haspopup="true"
                     onClick={this.handleClick}
                 >
-                    Open Menu
+                    <Avatar
+                        alt="Users Icon"
+                        src={this.props.avatar}
+                        className={this.props.classes}
+                    />
                 </Button>
                 <Menu
                     id="simple-menu"

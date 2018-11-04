@@ -6,7 +6,8 @@ import { setSelectedCoin } from '../../../actions/selected';
 import { fetchWatchList, removeFromWatchList } from '../../../actions/firebase';
 import { getUserID } from '../../../reducers/auth/authSelectors';
 
-import WatchListItems from './WatchListMenuView';
+import WatchListMenu from './WatchListMenuView';
+
 import { getSelectedFiatCurrency } from '../../../reducers/rootReducer';
 import {
     getWatchList,
@@ -28,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(fetchCoinMetaInfo(coinId));
         dispatch(fetchCoinPriceInfo(coinName, fiatSymbol));
     },
-    fetchWatchList: uid => dispatch(fetchWatchList(uid)),
+    fetchUserWatchList: uid => dispatch(fetchWatchList(uid)),
     setSelectedCoin: (coinName, coinId) =>
         dispatch(setSelectedCoin(coinName, coinId)),
     handlerRemoveFromWatchList: (coinName, uid) =>
@@ -38,4 +39,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(WatchListItems);
+)(WatchListMenu);
