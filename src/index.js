@@ -14,11 +14,9 @@ export const store = configureStore();
 render(
     <Provider store={store}>
         <Router history={history}>
-            <React.StrictMode>
-                <ErrorBoundary render={() => <h3>Encountered Error...</h3>}>
-                    <App />
-                </ErrorBoundary>
-            </React.StrictMode>
+            <ErrorBoundary render={() => <h3>Encountered Error...</h3>}>
+                <App />
+            </ErrorBoundary>
         </Router>
     </Provider>,
     document.getElementById('root')

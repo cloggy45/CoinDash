@@ -231,7 +231,13 @@ class CustomPaginationActionsTable extends React.Component {
                         </TableHead>
                         <TableBody>
                             {isFetching === true ? (
-                                <CircularProgress />
+                                <TableRow>
+                                    <TableCell>
+                                        <React.Fragment>
+                                            <CircularProgress />
+                                        </React.Fragment>
+                                    </TableCell>
+                                </TableRow>
                             ) : (
                                 coinListSegment.map(row => {
                                     const { quotes } = row;

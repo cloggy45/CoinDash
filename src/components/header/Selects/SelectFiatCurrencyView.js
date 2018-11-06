@@ -81,12 +81,16 @@ class SelectCurrency extends React.Component {
                         this.handleSetSelectedCurrencyChange(event)
                     }
                     inputProps={{
-                        name: 'currency',
+                        name: 'select-fiat-currency',
                         id: 'select-currency',
                     }}
                 >
                     {this.state.fiatCurrencies.map(fiat => {
-                        return <MenuItem value={fiat}>{fiat}</MenuItem>;
+                        return (
+                            <MenuItem key={fiat} value={fiat}>
+                                {fiat}
+                            </MenuItem>
+                        );
                     })}
                 </Select>
             </FormControl>

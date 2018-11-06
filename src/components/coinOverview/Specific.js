@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Specific = props => (
-    <CardContent>
+    <CardContent data-cy={props.title}>
         <Typography variant={props.variant} component={props.headerType}>
             {props.content}
         </Typography>

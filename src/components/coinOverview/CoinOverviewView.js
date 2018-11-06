@@ -89,7 +89,12 @@ class CoinOverview extends React.Component {
     renderButton(link, title) {
         const isDisabled = link === undefined;
         return (
-            <Button disabled={isDisabled} variant={'outlined'} href={link}>
+            <Button
+                data-cy={title}
+                disabled={isDisabled}
+                variant={'outlined'}
+                href={link}
+            >
                 {title}
             </Button>
         );
