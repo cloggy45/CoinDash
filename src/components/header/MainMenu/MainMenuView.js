@@ -19,7 +19,6 @@ class MainMenu extends React.Component {
 
     render() {
         const { anchorEl } = this.state;
-        debugger;
         return (
             <div>
                 <Button
