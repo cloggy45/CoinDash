@@ -19,6 +19,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import NumberFormat from 'react-number-format';
+import 'core-js/es6/math';
 
 const actionsStyles = theme => ({
     root: {

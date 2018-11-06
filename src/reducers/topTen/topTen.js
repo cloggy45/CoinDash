@@ -1,3 +1,5 @@
+import 'core-js/modules/es7.object.entries';
+
 const initState = {
     isFetching: true,
     list: [],
@@ -20,11 +22,11 @@ export const topTen = (currentState = initState, action) => {
         case 'FETCH_TOP_TEN_FAILED':
             return Object.assign({}, currentState, {
                 errorMessage: action.payload,
-                isFetching: false
+                isFetching: false,
             });
         case 'FETCH_TOP_TEN_REQUEST':
             return Object.assign({}, currentState, {
-                isFetching: true
+                isFetching: true,
             });
         default:
             return currentState;
